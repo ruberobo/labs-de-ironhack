@@ -1,0 +1,501 @@
+
+
+
+
+Boosting (machine learning) - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Boosting (machine learning)
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+Method in machine learning
+Part of a series onMachine learninganddata mining
+Problems
+Classification
+Clustering
+Regression
+Anomaly detection
+AutoML
+Association rules
+Reinforcement learning
+Structured prediction
+Feature engineering
+Feature learning
+Online learning
+Semi-supervised learning
+Unsupervised learning
+Learning to rank
+Grammar induction
+
+
+Supervised learning(classification • regression) 
+Decision trees
+Ensembles
+Bagging
+Boosting
+Random forest
+k-NN
+Linear regression
+Naive Bayes
+Artificial neural networks
+Logistic regression
+Perceptron
+Relevance vector machine (RVM)
+Support vector machine (SVM)
+
+
+Clustering
+BIRCH
+CURE
+Hierarchical
+k-means
+Expectation–maximization (EM)
+DBSCAN
+OPTICS
+Mean-shift
+
+
+Dimensionality reduction
+Factor analysis
+CCA
+ICA
+LDA
+NMF
+PCA
+PGD
+t-SNE
+
+
+Structured prediction
+Graphical models
+Bayes net
+Conditional random field
+Hidden Markov
+
+
+Anomaly detection
+k-NN
+Local outlier factor
+
+
+Artificial neural network
+Autoencoder
+Deep learning
+DeepDream
+Multilayer perceptron
+RNN
+LSTM
+GRU
+Restricted Boltzmann machine
+GAN
+SOM
+Convolutional neural network
+U-Net
+
+
+Reinforcement learning
+Q-learning
+SARSA
+Temporal difference (TD)
+
+
+Theory
+Bias–variance dilemma
+Computational learning theory
+Empirical risk minimization
+Occam learning
+PAC learning
+Statistical learning
+VC theory
+
+
+Machine-learning venues
+NeurIPS
+ICML
+ML
+JMLR
+ArXiv:cs.LG
+
+
+Glossary of artificial intelligence
+Glossary of artificial intelligence
+
+
+Related articles
+List of datasets for machine-learning research
+Outline of machine learning
+
+vte
+In machine learning, boosting is an ensemble meta-algorithm for primarily reducing bias, and also variance[1] in supervised learning, and a family of machine learning algorithms that convert weak learners to strong ones.[2] Boosting is based on the question posed by Kearns and Valiant (1988, 1989):[3][4] "Can a set of weak learners create a single strong learner?" A weak learner is defined to be a classifier that is only slightly correlated with the true classification (it can label examples better than random guessing). In contrast, a strong learner is a classifier that is arbitrarily well-correlated with the true classification.
+Robert Schapire's affirmative answer in a 1990 paper[5] to the question of Kearns and Valiant has had significant ramifications in machine learning and statistics, most notably leading to the development of boosting.[6]
+When first introduced, the hypothesis boosting problem simply referred to the process of turning a weak learner into a strong learner. "Informally, [the hypothesis boosting] problem asks whether an efficient learning algorithm […] that outputs a hypothesis whose performance is only slightly better than random guessing [i.e. a weak learner] implies the existence of an efficient algorithm that outputs a hypothesis of arbitrary accuracy [i.e. a strong learner]."[3] Algorithms that achieve hypothesis boosting quickly became simply known as "boosting". Freund and Schapire's arcing (Adapt[at]ive Resampling and Combining),[7] as a general technique, is more or less synonymous with boosting.[8]
+
+Contents
+
+1 Boosting algorithms
+2 Object categorization in computer vision
+
+2.1 Problem of object categorization
+2.2 Status quo for object categorization
+2.3 Boosting for binary categorization
+2.4 Boosting for multi-class categorization
+
+
+3 Convex vs Non-Convex Boosting Algorithms
+4 See also
+5 Implementations
+6 Notes
+7 References
+8 Further reading
+9 External links
+
+
+Boosting algorithms[edit]
+While boosting is not algorithmically constrained, most boosting algorithms consist of iteratively learning weak classifiers with respect to a distribution and adding them to a final strong classifier. When they are added, they are weighted in a way that is related to the weak learners' accuracy.  After a weak learner is added, the data weights are readjusted, known as "re-weighting".  Misclassified input data gain a higher weight and examples that are classified correctly lose weight.[note 1] Thus, future weak learners focus more on the examples that previous weak learners misclassified.
+
+ An illustration presenting the intuition behind the boosting algorithm, consisting of the parallel learners and weighted dataset.
+There are many boosting algorithms.  The original ones, proposed by Robert Schapire (a recursive majority gate formulation)[5] and Yoav Freund (boost by majority)[9], were not adaptive and could not take full advantage of the weak learners.  Schapire and Freund then developed AdaBoost, an adaptive boosting algorithm that won the prestigious Gödel Prize.
+Only algorithms that are provable boosting algorithms in the probably approximately correct learning formulation can accurately be called boosting algorithms.  Other algorithms that are similar in spirit[clarification needed] to boosting algorithms are sometimes called "leveraging algorithms", although they are also sometimes incorrectly called boosting algorithms.[9]
+The main variation between many boosting algorithms is their method of weighting training data points and hypotheses.  AdaBoost is very popular and the most significant historically as it was the first algorithm that could adapt to the weak learners.  It is often the basis of introductory coverage of boosting in university machine learning courses.[10]  There are many more recent algorithms such as LPBoost, TotalBoost, BrownBoost, xgboost, MadaBoost, LogitBoost, and others.  Many boosting algorithms fit into the AnyBoost framework,[9] which shows that boosting performs gradient descent in a function space using a convex cost function.
+
+Object categorization in computer vision[edit]
+Main article: Object categorization from image search
+Given images containing various known objects in the world, a classifier can be learned from them to automatically classify the objects in future images.  Simple classifiers built based on some image feature of the object tend to be weak in categorization performance. Using boosting methods for object categorization is a way to unify the weak classifiers in a special way to boost the overall ability of categorization.
+
+Problem of object categorization[edit]
+Object categorization is a typical task of computer vision that involves determining whether or not an image contains some specific category of object.  The idea is closely related with recognition, identification, and detection.  Appearance based object categorization typically contains feature extraction, learning a classifier, and applying the classifier to new examples.  There are many ways to represent a category of objects, e.g. from shape analysis, bag of words models, or local descriptors such as SIFT, etc.  Examples of supervised classifiers are Naive Bayes classifiers, support vector machines, mixtures of Gaussians, and neural networks.  However, research[which?] has shown that object categories and their locations in images can be discovered in an unsupervised manner as well.[11]
+
+Status quo for object categorization[edit]
+The recognition of object categories in images is a challenging problem in computer vision, especially when the number of categories is large.  This is due to high intra class variability and the need for generalization across variations of objects within the same category. Objects within one category may look quite different. Even the same object may appear unalike under different viewpoint, scale, and illumination. Background clutter and partial occlusion add difficulties to recognition as well.[12]  Humans are able to recognize thousands of object types, whereas most of the existing object recognition systems are trained to recognize only a few,[quantify] e.g. human faces, cars, simple objects, etc.[13][needs update?]  Research has been very active on dealing with more categories and enabling incremental additions of new categories, and although the general problem remains unsolved, several multi-category objects detectors (for up to hundreds or thousands of categories[14]) have been developed.  One means is by feature sharing and boosting.
+
+Boosting for binary categorization[edit]
+AdaBoost can be used for face detection as an example of binary categorization. The two categories are faces versus background. The general algorithm is as follows:
+
+Form a large set of simple features
+Initialize weights for training images
+For T rounds
+Normalize the weights
+For available features from the set, train a classifier using a single feature and evaluate the training error
+Choose the classifier with the lowest error
+Update the weights of the training images: increase if classified wrongly by this classifier, decrease if correctly
+Form the final strong classifier as the linear combination of the T classifiers (coefficient larger if training error is small)
+After boosting, a classifier constructed from 200 features could yield a 95% detection rate under a 
+
+
+
+
+10
+
+−
+5
+
+
+
+
+{\displaystyle 10^{-5}}
+
+ false positive rate.[15]
+Another application of boosting for binary categorization is a system that detects pedestrians using patterns of motion and appearance.[16] This work is the first to combine both motion information and appearance information as features to detect a walking person. It takes a similar approach to the Viola-Jones object detection framework.
+
+Boosting for multi-class categorization[edit]
+Compared with binary categorization, multi-class categorization looks for common features that can be shared across the categories at the same time.  They turn to be more generic edge like features. During learning, the detectors for each category can be trained jointly. Compared with training separately, it generalizes better, needs less training data, and requires fewer features to achieve the same performance.
+The main flow of the algorithm is similar to the binary case. What is different is that a measure of the joint training error shall be defined in advance. During each iteration the algorithm chooses a classifier of a single feature (features that can be shared by more categories shall be encouraged). This can be done via converting multi-class classification into a binary one (a set of categories versus the rest),[17] or by introducing a penalty error from the categories that do not have the feature of the classifier.[18]
+In the paper "Sharing visual features for multiclass and multiview object detection", A. Torralba et al. used GentleBoost for boosting and showed that when training data is limited, learning via sharing features does a much better job than no sharing, given same boosting rounds. Also, for a given performance level, the total number of features required (and therefore the run time cost of the classifier) for the feature sharing detectors, is observed to scale approximately logarithmically with the number of class, i.e., slower than linear growth in the non-sharing case. Similar results are shown in the paper "Incremental learning of object detectors using a visual shape alphabet", yet the authors used AdaBoost for boosting.
+
+Convex vs Non-Convex Boosting Algorithms[edit]
+Boosting algorithms can be based on convex or non-convex optimization algorithms.  Convex algorithms, such as AdaBoost and LogitBoost, can be "defeated" by random  noise such that they can't learn basic and learnable combinations of weak hypotheses.[19][20] This limitation was pointed out by Long & Servedio in 2008.  However, by 2009, multiple authors demonstrated that  boosting algorithms based on non-convex optimization, such as BrownBoost, can learn from noisy datasets and can specifically learn the underlying classifier of the Long–Servedio dataset.
+
+See also[edit]
+
+AdaBoost
+Random forest
+Alternating decision tree
+Bootstrap aggregating (bagging)
+Cascading
+BrownBoost
+CoBoosting
+LPBoost
+Logistic regression
+Maximum entropy methods
+Neural networks
+Support vector machines
+Gradient boosting
+Margin classifiers
+Cross-validation
+Machine learning
+List of datasets for machine learning research
+
+Implementations[edit]
+Scikit-learn, an open source machine learning library for python
+Orange, a free data mining software suite, module Orange.ensemble
+Weka is a machine learning set of tools that offers variate implementations of boosting algorithms like AdaBoost and LogitBoost
+R package GBM (Generalized Boosted Regression Models) implements extensions to Freund and Schapire's AdaBoost algorithm and Friedman's gradient boosting machine.
+jboost; AdaBoost, LogitBoost, RobustBoost, Boostexter and alternating decision trees
+R package adabag: Applies Multiclass AdaBoost.M1, AdaBoost-SAMME and Bagging
+R package xgboost: An implementation of gradient boosting for linear and tree-based models.
+Notes[edit]
+
+
+^ Some boosting-based classification algorithms actually decrease the weight of repeatedly misclassified examples; for example boost by majority and BrownBoost.
+
+
+References[edit]
+
+
+^ Leo Breiman (1996). "BIAS, VARIANCE, AND ARCING CLASSIFIERS" (PDF). TECHNICAL REPORT. Archived from the original (PDF) on 2015-01-19. Retrieved 19 January 2015. Arcing [Boosting] is more successful than bagging in variance reduction
+
+^ Zhou Zhi-Hua (2012). Ensemble Methods: Foundations and Algorithms. Chapman and Hall/CRC. p. 23. ISBN 978-1439830031. The term boosting refers to a family of algorithms that are able to convert weak learners to strong learners
+
+^ a b Michael Kearns(1988); Thoughts on Hypothesis Boosting, Unpublished manuscript (Machine Learning class project, December 1988)
+
+^ Michael Kearns; Leslie Valiant (1989). Crytographic [sic] limitations on learning Boolean formulae and finite automata. Symposium on Theory of Computing. 21. ACM. pp. 433–444. doi:10.1145/73007.73049. ISBN 978-0897913072.
+
+^ a b Schapire, Robert E. (1990). "The Strength of Weak Learnability" (PDF). Machine Learning. 5 (2): 197–227. CiteSeerX 10.1.1.20.723. doi:10.1007/bf00116037. Archived from the original (PDF) on 2012-10-10. Retrieved 2012-08-23.
+
+^ Leo Breiman (1998). "Arcing classifier (with discussion and a rejoinder by the author)". Ann. Stat. 26 (3): 801–849. doi:10.1214/aos/1024691079. Schapire (1990) proved that boosting is possible. (Page 823)
+
+^ Yoav Freund and Robert E. Schapire (1997); A Decision-Theoretic Generalization of On-Line Learning and an Application to Boosting, Journal of Computer and System Sciences, 55(1):119-139
+
+^ Leo Breiman (1998); Arcing Classifier (with Discussion and a Rejoinder by the Author), Annals of Statistics, vol. 26, no. 3, pp. 801-849: "The concept of weak learning was introduced by Kearns and Valiant (1988, 1989), who left open the question of whether weak and strong learnability are equivalent. The question was termed the boosting problem since [a solution must] boost the low accuracy of a weak learner to the high accuracy of a strong learner. Schapire (1990) proved that boosting is possible. A boosting algorithm is a method that takes a weak learner and converts it into a strong learner. Freund and Schapire (1997) proved that an algorithm similar to arc-fs is boosting.
+
+^ a b c Llew Mason, Jonathan Baxter, Peter Bartlett, and Marcus Frean (2000); Boosting Algorithms as Gradient Descent, in S. A. Solla, T. K. Leen, and K.-R. Muller, editors, Advances in Neural Information Processing Systems 12, pp. 512-518, MIT Press
+
+^ Emer, Eric. "Boosting (AdaBoost algorithm)" (PDF). MIT. Retrieved 2018-10-10.
+
+^ Sivic, Russell, Efros, Freeman & Zisserman,  "Discovering objects and their location in images", ICCV 2005
+
+^ A. Opelt, A. Pinz, et al., "Generic Object Recognition with Boosting", IEEE Transactions on PAMI 2006
+
+^ M. Marszalek, "Semantic Hierarchies for Visual Object Recognition", 2007
+
+^ "Large Scale Visual Recognition Challenge". December 2017.
+
+^ P. Viola, M. Jones, "Robust Real-time Object Detection", 2001
+
+^ Viola, P.; Jones, M.; Snow, D. (2003). Detecting Pedestrians Using Patterns of Motion and Appearance (PDF). ICCV.
+
+^ A. Torralba, K. P. Murphy, et al., "Sharing visual features for multiclass and multiview object detection", IEEE Transactions on PAMI 2006
+
+^ A. Opelt, et al., "Incremental learning of object detectors using a visual shape alphabet", CVPR 2006
+
+^ P. Long and R. Servedio.  25th International Conference on Machine Learning (ICML), 2008, pp. 608--615.
+
+^ Long, Philip M.; Servedio, Rocco A. (March 2010). "Random classification noise defeats all convex potential boosters" (PDF). Machine Learning. 78 (3): 287–304. doi:10.1007/s10994-009-5165-z. Retrieved 2015-11-17.
+
+
+Further reading[edit]
+Yoav Freund and Robert E. Schapire (1997); A Decision-Theoretic Generalization of On-line Learning and an Application to Boosting, Journal of Computer and System Sciences, 55(1):119-139
+Robert E. Schapire and Yoram Singer (1999); Improved Boosting Algorithms Using Confidence-Rated Predictors, Machine Learning, 37(3):297-336
+External links[edit]
+Robert E. Schapire (2003); The Boosting Approach to Machine Learning: An Overview, MSRI (Mathematical Sciences Research Institute) Workshop on Nonlinear Estimation and Classification
+Zhou Zhi-Hua (2014) Boosting 25 years, CCL 2014 Keynote.
+Zhou, Zhihua (2008). "On the margin explanation of boosting algorithm" (PDF). In: Proceedings of the 21st Annual Conference on Learning Theory (COLT'08): 479–490.
+Zhou, Zhihua (2013). "On the doubt about margin explanation of boosting" (PDF). Artificial Intelligence. 203: 1–18. arXiv:1009.3613. doi:10.1016/j.artint.2013.07.002.
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Boosting_(machine_learning)&oldid=969062071"
+Categories: Classification algorithmsEnsemble learningLearning in computer visionObject recognition and categorizationHidden categories: Articles with short descriptionShort description matches WikidataWikipedia articles needing clarification from October 2018All articles with specifically marked weasel-worded phrasesArticles with specifically marked weasel-worded phrases from October 2018All articles with unsourced statementsArticles with unsourced statements from October 2018Wikipedia articles in need of updating from October 2018All Wikipedia articles in need of updating
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+DeutschEspañolفارسیFrançaisBahasa IndonesiaItaliano日本語РусскийУкраїнська中文
+Edit links
+
+
+
+
+
+
+ This page was last edited on 23 July 2020, at 05:02 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

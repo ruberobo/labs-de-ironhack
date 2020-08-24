@@ -1,0 +1,360 @@
+
+
+
+
+Data migration - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Data migration
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+Not to be confused with Schema migration.
+Data migration is the process of selecting, preparing, extracting, and transforming data and permanently transferring it from one computer storage system to another. Additionally, the validation of migrated data for completeness and the decommissioning of legacy data storage are considered part of the entire data migration process.[1][2] Data migration is a key consideration for any system implementation, upgrade, or consolidation, and it is typically performed in such a way as to be as automated as possible, freeing up human resources from tedious tasks. Data migration occurs for a variety of reasons, including server or storage equipment replacements, maintenance or upgrades, application migration, website consolidation, disaster recovery, and data center relocation.[2]
+
+Contents
+
+1 The standard phases
+
+1.1 Project versus process
+
+
+2 Categories
+
+2.1 Storage migration
+2.2 Database migration
+2.3 Application migration
+2.4 Business process migration
+
+
+3 Migration as a form of digital preservation
+
+3.1 Disadvantages
+
+
+4 See also
+5 References
+6 External links
+
+
+The standard phases[edit]
+As of 2011[update], "nearly 40 percent of data migration projects were over time, over budget, or failed entirely."[1][3] As such, to achieve an effective data migration, proper planning is critical. While the specifics of a data migration plan may vary—sometimes significantly—from project to project, the computing company IBM suggests there are three main phases to most any data migration project: planning, migration, and post-migration.[2] Each of those phases has its own steps. During planning, dependencies and requirements are analyzed, migration scenarios get developed and tested, and a project plan that incorporates the prior information is created. During the migration phase, the plan is enacted, and during post-migration, the completeness and thoroughness of the migration is validated, documented, closed out, including any necessary decommissioning of legacy systems.[2] For applications of moderate to high complexity, these data migration phases may be repeated several times before the new system is considered to be fully validated and deployed.
+Planning: The data, applications, etc. that will be migrated are selected based on business, project, and technical requirements and dependencies. Hardware and bandwidth requirements are analyzed. Feasible migration and back-out scenarios are developed, as well as the associated tests, automation scripts, mappings, and procedures. Data cleansing and transformation requirements are also gauged for data formats to improve data quality and to eliminate redundant or obsolete information. Migration architecture is decided on and developed, any necessary software licenses are obtained, and change management processes are started.[1][2]
+Migration: Hardware and software requirements are validated, and migration procedures are customized as necessary. Some sort of pre-validation testing may also occur to ensure requirements and customized settings function as expected. If all is deemed well, migration begins, including the primary acts of data extraction, where data is read from the old system, and data loading, where data is written to the new system. Additional verification steps ensure the developed migration plan was enacted in full.[1][2]
+Post-migration: After data migration, results are subjected to data verification to determine whether data was accurately translated, is complete, and supports processes in the new system. During verification, there may be a need for a parallel run of both systems to identify areas of disparity and forestall erroneous data loss. Additional documentation and reporting of the migration project is conducted, and once the migration is validated complete, legacy systems may also be decommissioned. Migration close-out meetings will officially end the migration process.[1][2]
+
+Project versus process[edit]
+There is a difference between data migration and data integration activities. Data migration is a project by means of which data will be moved or copied from one environment to another, and removed or decommissioned in the source. During the migration (which can take place over months or even years), data can flow in multiple directions, and there may be multiple migrations taking place simultaneously. The ETL (extract, transform, load) actions will be necessary, although the means of achieving these may not be those traditionally associated with the ETL acronym.
+Data integration, by contrast, is a permanent part of the IT architecture, and is responsible for the way data flows between the various applications and data stores—and is a process rather than a project activity. Standard ETL technologies designed to supply data from operational systems to data warehouses would fit within the latter category.[4]
+
+Categories[edit]
+Data is stored on various media in files or databases, and is generated and consumed by software applications, which in turn support business processes. The need to transfer and convert data can be driven by multiple business requirements, and the approach taken to the migration depends on those requirements. Four major migration categories are proposed on this basis.
+
+Storage migration[edit]
+A business may choose to rationalize the physical media to take advantage of more efficient storage technologies.[2] This will result in having to move physical blocks of data from one tape or disk to another, often using virtualization techniques. The data format and content itself will not usually be changed in the process and can normally be achieved with minimal or no impact to the layers above.[5]
+
+Database migration[edit]
+Main article: Schema migration
+Similarly, it may be necessary to move from one database vendor to another, or to upgrade the version of database software being used. The latter case is less likely to require a physical data migration, but this can happen with major upgrades. In these cases a physical transformation process may be required since the underlying data format can change significantly. This may or may not affect behavior in the applications layer, depending largely on whether the data manipulation language or protocol has changed.[6] However, some modern applications are written to be almost entirely agnostic to the database technology,[7] so a change from Sybase, MySQL, DB2 or SQL Server to Oracle should only require a testing cycle to be confident that both functional and non-functional performance has not been adversely affected.
+
+Application migration[edit]
+Changing application vendor—for instance a new CRM or ERP platform—will inevitably involve substantial transformation as almost every application or suite operates on its own specific data model and also interacts with other applications and systems within the enterprise application integration environment.[8] Furthermore, to allow the application to be sold to the widest possible market, commercial off-the-shelf packages are generally configured for each customer using metadata. Application programming interfaces (APIs) may be supplied by vendors to protect the integrity of the data they have to handle. It is also possible to script the web interfaces of vendors to automatically migrate data.[9]
+
+Business process migration[edit]
+Business processes operate through a combination of human and application systems actions, often orchestrated by business process management tools. When these change they can require the movement of data from one store, database or application to another to reflect the changes to the organization and information about customers, products and operations. Examples of such migration drivers are mergers and acquisitions, business optimization, and reorganization to attack new markets or respond to competitive threat.[10]
+The first two categories of migration are usually routine operational activities that the IT department takes care of without the involvement of the rest of the business. The last two categories directly affect the operational users of processes and applications, are necessarily complex, and delivering them without significant business downtime can be challenging. A highly adaptive approach, concurrent synchronization, a business-oriented audit capability, and clear visibility of the migration for stakeholders—through a project management office or data governance team—are likely to be key requirements in such migrations.[10]
+
+Migration as a form of digital preservation[edit]
+Migration, which focuses on the digital object itself, is the act of transferring, or rewriting data from an out-of-date medium to a current medium and has for many years been considered the only viable approach to long-term preservation of digital objects.[11] Reproducing brittle newspapers onto microfilm is an example of such migration.
+
+Disadvantages[edit]
+Migration addresses the possible obsolescence of the data carrier, but does not address the fact that certain technologies which run the data may be abandoned altogether, leaving migration useless.
+Time-consuming – migration is a continual process, which must be repeated every time a medium reaches obsolescence, for all data objects stored on a certain media.
+Costly – an institution must purchase additional data storage media at each migration.[12]
+See also[edit]
+Data conversion
+Data curation
+Data preservation
+Data transformation
+Digital Preservation
+Extract, transform, load
+System migration
+References[edit]
+
+
+^ a b c d e Morris, J. (2012). "Chapter 1: Data Migration: What's All the Fuss?". Practical Data Migration (2nd ed.). BCS Learning & Development Ltd. pp. 7–15. ISBN 9781906124847.
+
+^ a b c d e f g h Dufrasne, B.; Warmuth, A.; Appel, J.;  et al. (2017). "Chapter 1: Introducing disk data migration". DS8870 Data Migration Techniques. IBM Redbooks. pp. 1–16. ISBN 9780738440606.
+
+^ Howard, P. (23 August 2011). "Data Migration Report - 2011". Bloor Research International Limited. Retrieved 20 July 2018.
+
+^ King, T. (17 August 2016). "Data Integration vs. Data Migration; What's the Difference?". Solutions Review - Data Integration. LeadSpark, Inc. Retrieved 20 July 2018.
+
+^ Seiwert, C.; Klee, P.; Marinez, L.;  et al. (2012). "Chapter 2: Migration techniques and processes". Data Migration to IBM Disk Storage Systems. IBM Redbooks. pp. 7–30. ISBN 9780738436289.
+
+^ Fowler, M.; Beck, K.; Brant, J.;  et al. (2012). Refactoring: Improving the Design of Existing Code. Addison-Wesley. pp. 63–4. ISBN 9780133065268.
+
+^ Fronc, A. (1 March 2015). "Database-agnostic applications". DBA Presents. Retrieved 20 July 2018.
+
+^ Plivna, G. (1 July 2006). "Data migration from old to new application: An experience". gplivna.eu. Retrieved 20 July 2018.
+
+^ Ortac, Alper; Monperrus, Martin; Mezini, Mira (2015). "Abmash: mashing up legacy Web applications by automated imitation of human actions" (PDF). Software: Practice and Experience. 45 (5): 581–612. doi:10.1002/spe.2249. ISSN 0038-0644.
+
+^ a b Allen, M.; Cervo, D. (2015). Multi-Domain Master Data Management: Advanced MDM and Data Governance in Practice. Morgan Kaufmann. pp. 61–2. ISBN 9780128011478.
+
+^ van der Hoeven, Jeffrey; Bram Lohman; Remco Verdegem (2007). "Emulation for Digital Preservation in Practice: The Results". The International Journal of Digital Curation. 2 (2): 123–132. doi:10.2218/ijdc.v2i2.35.
+
+^ Muira, Gregory (2007). "Pushing the Boundaries of Traditional Heritage Policy: maintaining long-term access to multimedia content" (PDF). IFLA Journal. 33: 323–326.
+
+
+External links[edit]
+Azure Database Migration Service at Microsoft
+Data Migration at Curlie
+Authority control 
+GND: 4226008-5
+
+vteData
+Analysis
+Archaeology
+Cleansing
+Collection
+Compression
+Corruption
+Curation
+Degradation
+Editing
+ETL
+Farming
+Format management
+Fusion
+Integration
+Integrity
+Library
+Loss
+Management
+Migration
+Mining
+Pre-processing
+Preservation
+Protection (privacy)
+Recovery
+Reduction
+Retention
+Quality
+Science
+Scraping
+Scrubbing
+Security
+Stewardship
+Storage
+Validation
+Warehouse
+Wrangling/munging
+
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Data_migration&oldid=970471375"
+Categories: Data managementHidden categories: Articles containing potentially dated statements from 2011All articles containing potentially dated statementsArticles with Curlie linksWikipedia articles with GND identifiers
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+CatalàDeutschEspañolFrançaisBahasa IndonesiaItalianoमराठी日本語Norsk bokmålPolskiSimple English中文
+Edit links
+
+
+
+
+
+
+ This page was last edited on 31 July 2020, at 14:01 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

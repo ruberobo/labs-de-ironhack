@@ -1,0 +1,357 @@
+
+
+
+
+Data degradation - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Data degradation
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+Not to be confused with Software rot.
+This article has multiple issues. Please help improve it or discuss these issues on the talk page. (Learn how and when to remove these template messages)
+
+This article possibly contains original research. Please improve it by verifying the claims made and adding inline citations. Statements consisting only of original research should be removed. (April 2015) (Learn how and when to remove this template message)
+This article needs additional citations for verification. Please help improve this article by adding citations to reliable sources. Unsourced material may be challenged and removed.Find sources: "Data degradation" – news · newspapers · books · scholar · JSTOR (February 2018) (Learn how and when to remove this template message)
+
+ (Learn how and when to remove this template message)
+Data degradation is the gradual corruption of computer data due to an accumulation of non-critical failures in a data storage device. The phenomenon is also known as data decay, data rot or bit rot.
+
+Contents
+
+1 Visual example
+2 In RAM
+3 In storage
+4 Component and system failures
+5 See also
+6 References
+
+
+Visual example[edit]
+Below are several digital images illustrating data degradation, all consisting of 326,272 bits. The original photo is displayed on the left. In the next image to the right, a single bit was changed from 0 to 1. In the next two images, two and three bits were flipped. On Linux systems, the binary difference between files can be revealed using cmp command (e.g. cmp -b bitrot-original.jpg bitrot-1bit-changed.jpg).
+
+
+
+
+
+0 bits flipped
+
+
+
+
+
+
+1 bit flipped
+
+
+
+
+
+
+2 bits flipped
+
+
+
+
+
+
+3 bits flipped
+
+
+
+
+In RAM[edit]
+Data degradation in dynamic random-access memory (DRAM) can occur when the electric charge of a bit in DRAM disperses, possibly altering program code or stored data. DRAM may be altered by cosmic rays[1] or other high-energy particles. Such data degradation is known as a soft error.[2] ECC memory can be used to mitigate this type of data degradation.
+
+In storage[edit]
+Data degradation results from the gradual decay of storage media over the course of years or longer. Causes vary by medium:
+
+Solid-state media, such as EPROMs, flash memory and other solid-state drives, store data using electrical charges, which can slowly leak away due to imperfect insulation. The chip itself is not affected by this, so reprogramming it once per decade or so prevents decay. An undamaged copy of the master data is required for the reprogramming, which would not be possible if the data no longer existed on another device.
+Magnetic media, such as hard disk drives, floppy disks and magnetic tapes, may experience data decay as bits lose their magnetic orientation. Periodic refreshing by rewriting the data can alleviate this problem. In warm/humid conditions these media, especially those poorly protected against ambient air, are prone to the physical decomposition of the storage medium.[2]
+Optical media, such as CD-R, DVD-R and BD-R, may experience data decay from the breakdown of the storage medium. This can be mitigated by storing discs in a dark, cool, low humidity location. "Archival quality" discs are available with an extended lifetime, but are still not truly permanent. However, data integrity scanning that measures the rates of various types of errors is able to predict data decay on optical media well ahead of uncorrectable errors (data loss) occurring.[3]
+Paper media, such as punched cards and punched tape, may literally rot. Mylar punched tape is another approach that does not rely on electromagnetic stability.
+Component and system failures[edit]
+Most disk, disk controller and higher-level systems are subject to a slight chance of unrecoverable failure. With ever-growing disk capacities, file sizes, and increases in the amount of data stored on a disk, the likelihood of the occurrence of data decay and other forms of uncorrected and undetected data corruption increases.[4]
+Higher-level software systems may be employed to mitigate the risk of such underlying failures by increasing redundancy and implementing integrity checking and self-repairing algorithms.[5] The ZFS file system was designed to address many of these data corruption issues.[6] The Btrfs file system also includes data protection and recovery mechanisms,[7] as does ReFS.[8]
+
+See also[edit]
+
+Checksum
+Database integrity
+Data curation
+Data preservation
+Digital permanence
+Digital preservation
+Disc rot
+Error detection and correction
+Link rot
+Media preservation
+RAR archive file format has optional recovery
+PAR2 recovery file format
+
+References[edit]
+
+
+^ "The Invisible Neutron Threat | National Security Science Magazine | Los Alamos National Laboratory". www.lanl.gov. Retrieved 2020-03-13.
+
+^ a b O'Gorman, T. J.; Ross, J. M.; Taber, A. H.; Ziegler, J. F.; Muhlfeld, H. P.; Montrose, C. J.; Curtis, H. W.; Walsh, J. L. (January 1996). "Field testing for cosmic ray soft errors in semiconductor memories". IBM Journal of Research and Development. 40 (1): 41–50. doi:10.1147/rd.401.0041.
+
+^ "QPxTool glossary". qpxtool.sourceforge.io. QPxTool. 2008-08-01. Retrieved 22 July 2020.
+
+^ Gray, Jim; van Ingen, Catharine (December 2005). "Empirical Measurements of Disk Failure Rates and Error Rates" (PDF). Microsoft Research Technical Report MSR-TR-2005-166. Retrieved 4 March 2013.
+
+^ Salter, Jim (15 January 2014). "Bitrot and atomic COWs: Inside "next-gen" filesystems". Ars Technica. Archived from the original on 6 March 2015. Retrieved 15 January 2014.
+
+^ Bonwick, Jeff. "ZFS: The Last Word in File Systems" (PDF). Storage Networking Industry Association (SNIA). Archived from the original (PDF) on 21 September 2013. Retrieved 4 March 2013.
+
+^ "btrfs Wiki: Features". The btrfs Project. Retrieved 19 September 2013.
+
+^ Wlodarz, Derrick. "Windows Storage Spaces and ReFS: is it time to ditch RAID for good?". Betanews. Retrieved 2014-02-09.
+
+
+vteData
+Analysis
+Archaeology
+Cleansing
+Collection
+Compression
+Corruption
+Curation
+Degradation
+Editing
+ETL
+Farming
+Format management
+Fusion
+Integration
+Integrity
+Library
+Loss
+Management
+Migration
+Mining
+Pre-processing
+Preservation
+Protection (privacy)
+Recovery
+Reduction
+Retention
+Quality
+Science
+Scraping
+Scrubbing
+Security
+Stewardship
+Storage
+Validation
+Warehouse
+Wrangling/munging
+
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Data_degradation&oldid=973016258"
+Categories: Computer jargonData qualityHidden categories: Articles that may contain original research from April 2015All articles that may contain original researchArticles needing additional references from February 2018All articles needing additional referencesArticles with multiple maintenance issues
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+AfrikaansEspañol한국어HrvatskiעבריתNederlandsРусскийSvenskaУкраїнська
+Edit links
+
+
+
+
+
+
+ This page was last edited on 14 August 2020, at 23:01 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,387 @@
+
+
+
+
+Project Jupyter - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Project Jupyter
+
+From Wikipedia, the free encyclopedia
+  (Redirected from Jupyter Notebook)
+
+
+Jump to navigation
+Jump to search
+Nonprofit organization developing open-source software
+Project JupyterAbbreviationJupyterFormationFebruary 2015; 5 years ago (2015-02)Typenonprofit organizationPurposeTo support interactive data science and scientific computing across all programming languages.[1]Region served WorldwideOfficial language EnglishWebsitejupyter.org
+Project Jupyter (/ˈdʒuːpɪtər/ (listen)) is a nonprofit organization created to "develop open-source software, open-standards, and services for interactive computing across dozens of programming languages".  Spun-off from IPython in 2014 by Fernando Pérez, Project Jupyter supports execution environments in several dozen languages.  Project Jupyter's name is a reference to the three core programming languages supported by Jupyter, which are Julia, Python and R, and also a homage to Galileo's notebooks recording the discovery of the moons of Jupiter. Project Jupyter has developed and supported the interactive computing products Jupyter Notebook, JupyterHub, and JupyterLab, the next-generation version of Jupyter Notebook.
+
+Contents
+
+1 History
+2 Philosophy
+3 Products
+
+3.1 Jupyter Notebook
+3.2 Jupyter kernels
+3.3 JupyterHub
+3.4 JupyterLab
+
+
+4 Industry adoption
+
+4.1 Colaboratory
+
+
+5 Media coverage
+6 Grants and awards
+7 See also
+8 References
+9 External links
+
+
+History[edit]
+In 2014, Fernando Pérez announced a spin-off project from IPython called Project Jupyter.[2] IPython continues to exist as a Python shell and a kernel for Jupyter, while the notebook and other language-agnostic parts of IPython moved under the Jupyter name.[3][4] Jupyter is language agnostic and it supports execution environments (aka kernels) in several dozen languages among which are Julia, R, Haskell, Ruby, and of course Python (via the IPython kernel).[5]
+In 2015, GitHub and the Jupyter Project announced native rendering of Jupyter notebooks file format (.ipynb files) on the GitHub platform.[6][7]
+
+Philosophy[edit]
+Project Jupyter's operating philosophy is to support interactive data science and scientific computing across all programming languages via the development of open-source software.  According to the Project Jupyter website, "Jupyter will always be 100% open-source software, free for all to use and released under the liberal terms of the modified BSD license".[1]
+
+Products[edit]
+Jupyter Notebook[edit]
+Jupyter Notebook (formerly IPython Notebooks) is a web-based interactive computational environment for creating Jupyter notebook documents. The "notebook" term can colloquially make reference to many different entities, mainly the Jupyter web application, Jupyter Python web server, or Jupyter document format depending on context. A Jupyter Notebook document is a JSON document, following a versioned schema, and containing an ordered list of input/output cells which can contain code, text (using Markdown), mathematics, plots and rich media, usually ending with the ".ipynb" extension.
+A Jupyter Notebook can be converted to a number of open standard output formats (HTML, presentation slides, LaTeX, PDF, ReStructuredText, Markdown, Python) through "Download As" in the web interface, via the nbconvert library or "jupyter nbconvert" command line interface in a shell. To simplify visualisation of Jupyter notebook documents on the web, the nbconvert library is provided as a service through NbViewer which can take a URL to any publicly available notebook document, convert it to HTML on the fly and display it to the user.
+
+ Jupyter Notebook interface
+Jupyter Notebook provides a browser-based REPL built upon a number of popular open-source libraries:
+
+IPython
+ØMQ
+Tornado (web server)
+jQuery
+Bootstrap (front-end framework)
+MathJax
+Jupyter Notebook can connect to many kernels to allow programming in many languages. By default Jupyter Notebook ships with the IPython kernel. As of the 2.3 release[8][9] (October 2014), there are currently 49 Jupyter-compatible kernels for many programming languages, including Python, R, Julia and Haskell.[10]
+The Notebook interface was added to IPython in the 0.12 release[11] (December 2011), renamed to Jupyter notebook in 2015 (IPython 4.0 – Jupyter 1.0). Jupyter Notebook is similar to the notebook interface of other programs such as Maple, Mathematica, and SageMath, a computational interface style that originated with Mathematica in the 1980s.[12] According to The Atlantic, Jupyter interest overtook the popularity of the Mathematica notebook interface in early 2018.[12]
+
+Jupyter kernels[edit]
+A Jupyter kernel is a program responsible for handling various types of requests (code execution, code completions, inspection), and providing a reply. Kernels talk to the other components of Jupyter using ZeroMQ over the network, and thus can be on the same  or remote machines. Unlike many other Notebook-like interfaces, in Jupyter, kernels are not aware that they are attached to a specific document, and can be connected to many clients at once. Usually kernels allow execution of only a single language, but there are a couple of exceptions.
+
+JupyterHub[edit]
+JupyterHub[13] is a multi-user server for Jupyter Notebooks.  It is designed to support many users by spawning, managing, and proxying many singular Jupyter Notebook servers.[citation needed] While JupyterHub requires managing servers, third-party services like Jupyo[14] provide an alternative to JupyterHub by hosting and managing multi-user Jupyter notebooks in the cloud.
+
+JupyterLab[edit]
+JupyterLab is the next-generation user interface for Project Jupyter. It offers all the familiar building blocks of the classic Jupyter Notebook (notebook, terminal, text editor, file browser, rich outputs, etc.) in a flexible and powerful user interface. The first stable release was announced on February 20, 2018.[15]
+
+Industry adoption[edit]
+The Jupyter Notebook has become a popular user interface for cloud computing, and major cloud providers have adopted the Jupyter Notebook or derivative tools as a frontend interface for cloud users. Examples include Amazon's SageMaker Notebooks,[16] Google's Colaboratory[17] and Microsoft's Azure Notebook.[18]
+
+Colaboratory[edit]
+"Colaboratory" redirects here. It is not to be confused with Collaboratory.
+Colaboratory (also known as Colab) is a free Jupyter notebook environment that runs in the cloud and stores its notebooks on Google Drive.  Colab was originally an internal Google project; an attempt[19] was made to open source all the code and work more directly upstream, leading to the development of the "Open in Colab" Google Chrome extension,[20] but this eventually ended, and Colab development continued internally.  As of October 2019,[update] the Colaboratory UI only allows you to create notebooks with Python 2 and Python 3 kernels; however, if you have an existing notebook whose kernelspec is IR or Swift, that will work, since both R and Swift are installed in the container. Julia language can also work on Colab (with e.g. Python and GPUs; Google's tensor processing units also work with Julia on Colab[21]).[22][23]
+
+Media coverage[edit]
+On February 11, 2016, the LIGO collaboration announced the first observation of gravitational waves. The collaboration released the raw scientific data along with Jupyter Notebooks containing Python code to process the data and reproduce the figures from the discovery paper.[24]
+On April 5, 2018, The Atlantic published an article entitled The Scientific Paper Is Obsolete, which discussed the role of the Jupyter Notebook and the Mathematica notebook in the future of scientific publishing.[12] This article led to responses from prominent scientists and academics, including economist Paul Romer.[25]
+Grants and awards[edit]
+In 2012, Fernando Pérez received the Free Software Foundation Award for the Advancement of Free Software for his work on IPython, the precursor to Project Jupyter.
+In 2013, the IPython team received a $1.15 million grant from the Alfred P. Sloan Foundation[26][27] which funded early work that led to the creation of Project Jupyter.[28]
+In 2015, Project Jupyter was awarded a joint $6 million grant from The Leona M. and Harry B. Helmsley Charitable Trust, The Gordon and Betty Moore Foundation, and The Alfred P. Sloan Foundation, which funded work that led to expanded capabilities of the core Jupyter tools, as well as the creation of JupyterLab.[29]
+On May 2nd, 2018, the steering committee of Project Jupyter was awarded the 2017 ACM Software System Award, an annual award that honors people or an organization "for developing a software system that has had a lasting influence, reflected in contributions to concepts, in commercial acceptance, or both".[30]
+See also[edit]
+
+
+Free and open-source software portal
+GNU Octave
+IPython
+RStudio
+SageMath
+Scilab
+Spyder
+Wolfram Mathematica
+Binder Project and BinderHub
+List of free and open-source software packages
+Notebook interface
+References[edit]
+
+
+^ a b "Project Jupyter - About Us". 2018-04-20. Retrieved 2018-05-03.
+
+^ "Project Jupyter // Speaker Deck".
+
+^ "The Notebook, Qt console and a number of other pieces are now parts of Jupyter".
+
+^ "The Big Split™".
+
+^ "Project Jupyter | Home".
+
+^ sshirokov (2015-05-07). "GitHub + Jupyter Notebooks = <3". The GitHub Blog. Retrieved 2018-04-10.
+
+^ "Rendering Notebooks on GitHub – Jupyter Blog". Jupyter Blog. 2015-05-07. Retrieved 2018-04-10.
+
+^ "What's new in IPython > Issues closed in the 2.x development cycle".
+
+^ "What's new in IPython > 2.0 Series".
+
+^ "Jupyter kernels > List of (some) IPython compatible kernels".
+
+^ "Notebook's announcement- 0.12 release note".
+
+^ a b c Somers, James. "The Scientific Paper Is Obsolete". The Atlantic. Retrieved 2018-04-10.
+
+^ https://jupyter.org/hub
+
+^ "Jupyo | Jupyter notebooks for Python, R, Julia in the cloud". jupyo.com. Archived from the original on 2019-01-03. Retrieved 2019-01-02.
+
+^ "JupyterLab is Ready for Users – Jupyter Blog". Jupyter Blog. 2018-02-20. Retrieved 2018-05-04.
+
+^ "Amazon SageMaker on AWS". Amazon Web Services, Inc. Retrieved 2018-05-09.
+
+^ "Welcome to Colaboratory". research.google.com. Retrieved 2018-05-09.
+
+^ "Microsoft Azure Notebooks - Online Jupyter Notebooks". notebooks.azure.com. Retrieved 2018-05-09.
+
+^ "Nerds rejoice: Google just released its internal tool to collaborate on AI". Quartz. Retrieved 2018-09-06.
+
+^ "Open in Colab GitHub repository". GitHub. Retrieved 2018-09-06.
+
+^ Julia on TPUs, JuliaTPU, 2019-12-03, retrieved 2019-12-03
+
+^ "Google Colaboratory". colab.research.google.com. Retrieved 2019-12-06.
+
+^ "gpu - Julia in Google Colab". Stack Overflow. Retrieved 2019-12-06.
+
+^ "LIGO Open Science Center". losc.ligo.org. Retrieved 2018-05-04.
+
+^ "Jupyter, Mathematica, and the Future of the Research Paper – Paul Romer". paulromer.net. Retrieved 2018-04-15.
+
+^ "Sloan Foundation Grant — IPython". ipython.org. Retrieved 2018-05-03.
+
+^ "An Open Source Framework for Interactive, Collaborative and Reproducible Scientific Computing and EducationOpen Source Tools for Interactive, Collaborative and Reproducible Computing". ipython.org. Retrieved 2018-05-03.
+
+^ Perez, Fernando (December 28, 2015). "IPython 2015 Final Report - Sloan Foundation" (PDF). ipython.org. Retrieved May 3, 2018.
+
+^ "UC Berkeley and Cal Poly to Expand and Enhance Open-Source Software for Scientific Computing and Data Science | Helmsley Charitable Trust". helmsleytrust.org. Retrieved 2018-05-03.
+
+^ "Software System Award". ACM Awards. Association for Computing Machinery. Retrieved April 28, 2016.
+
+
+External links[edit]
+Official website
+Jupyter kernels
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Project_Jupyter&oldid=970285503#Jupyter_Notebook"
+Categories: Free and open-source software organizationsOrganizations established in 2015Hidden categories: Articles with short descriptionShort description is different from WikidataArticles with hAudio microformatsPages including recorded pronunciationsAll articles with unsourced statementsArticles with unsourced statements from October 2018Articles containing potentially dated statements from October 2019All articles containing potentially dated statements
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+In other projects
+
+
+
+
+Wikimedia Commons
+
+
+
+
+
+Languages
+
+
+
+
+DeutschEspañolفارسیFrançais한국어Português中文
+Edit links
+
+
+
+
+
+
+ This page was last edited on 30 July 2020, at 11:57 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

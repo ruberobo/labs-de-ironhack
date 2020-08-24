@@ -1,0 +1,2699 @@
+
+
+
+
+Autoencoder - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Autoencoder
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+Not to be confused with Autocoder or Autocode.
+
+
+Part of a series onMachine learninganddata mining
+Problems
+Classification
+Clustering
+Regression
+Anomaly detection
+AutoML
+Association rules
+Reinforcement learning
+Structured prediction
+Feature engineering
+Feature learning
+Online learning
+Semi-supervised learning
+Unsupervised learning
+Learning to rank
+Grammar induction
+
+
+Supervised learning(classification • regression) 
+Decision trees
+Ensembles
+Bagging
+Boosting
+Random forest
+k-NN
+Linear regression
+Naive Bayes
+Artificial neural networks
+Logistic regression
+Perceptron
+Relevance vector machine (RVM)
+Support vector machine (SVM)
+
+
+Clustering
+BIRCH
+CURE
+Hierarchical
+k-means
+Expectation–maximization (EM)
+DBSCAN
+OPTICS
+Mean-shift
+
+
+Dimensionality reduction
+Factor analysis
+CCA
+ICA
+LDA
+NMF
+PCA
+PGD
+t-SNE
+
+
+Structured prediction
+Graphical models
+Bayes net
+Conditional random field
+Hidden Markov
+
+
+Anomaly detection
+k-NN
+Local outlier factor
+
+
+Artificial neural network
+Autoencoder
+Deep learning
+DeepDream
+Multilayer perceptron
+RNN
+LSTM
+GRU
+Restricted Boltzmann machine
+GAN
+SOM
+Convolutional neural network
+U-Net
+
+
+Reinforcement learning
+Q-learning
+SARSA
+Temporal difference (TD)
+
+
+Theory
+Bias–variance dilemma
+Computational learning theory
+Empirical risk minimization
+Occam learning
+PAC learning
+Statistical learning
+VC theory
+
+
+Machine-learning venues
+NeurIPS
+ICML
+ML
+JMLR
+ArXiv:cs.LG
+
+
+Glossary of artificial intelligence
+Glossary of artificial intelligence
+
+
+Related articles
+List of datasets for machine-learning research
+Outline of machine learning
+
+vte
+An autoencoder is a type of artificial neural network used to learn efficient data codings in an unsupervised manner.[1] The aim of an autoencoder is to learn a representation (encoding) for a set of data, typically for dimensionality reduction, by training the network to ignore signal “noise”. Along with the reduction side, a reconstructing side is learnt, where the autoencoder tries to generate from the reduced encoding a representation as close as possible to its original input, hence its name. Several variants exist to the basic model, with the aim of forcing the learned representations of the input to assume useful properties.[2] Examples are the regularized autoencoders (Sparse, Denoising and Contractive autoencoders), proven effective in learning representations for subsequent classification tasks,[3] and Variational autoencoders, with their recent applications as generative models.[4] Autoencoders are effectively used for solving many applied problems, from face recognition[5] to acquiring the semantic meaning of words.[6][7]
+
+Contents
+
+1 Introduction
+2 Basic Architecture
+3 Variations
+
+3.1 Regularized Autoencoders
+
+3.1.1 Sparse autoencoder (SAE)
+3.1.2 Denoising autoencoder (DAE)
+3.1.3 Contractive autoencoder (CAE)
+
+
+3.2 Variational autoencoder (VAE)
+
+
+4 Advantages of Depth
+
+4.1 Training Deep Architectures
+
+
+5 Applications
+
+5.1 Dimensionality Reduction
+
+5.1.1 Relationship with principal component analysis (PCA)
+
+
+5.2 Information Retrieval
+5.3 Anomaly Detection
+5.4 Image Processing
+5.5 Drug discovery
+5.6 Population synthesis
+5.7 Popularity prediction
+5.8 Machine Translation
+
+
+6 See also
+7 References
+
+
+
+Introduction[edit]
+An autoencoder  is a neural network that learns to copy its input to its output. It has an internal (hidden) layer that describes a code used to represent the input, and it is constituted by two main parts: an encoder that maps the input into the code, and a decoder that maps the code to a reconstruction of the original input.
+Performing the copying task perfectly would simply duplicate the signal, and this is why autoencoders usually are restricted in ways that force them to reconstruct the input approximately, preserving only the most relevant aspects of the data in the copy.
+The idea of autoencoders has been popular in the field of neural networks for decades, and the first applications date back to the '80s.[2][8][9] Their most traditional application was dimensionality reduction or feature learning, but more recently the autoencoder concept has become more widely used for learning generative models of data.[10][11] Some of the most powerful AIs in the 2010s involved sparse autoencoders stacked inside of deep neural networks.[12]
+
+Basic Architecture[edit]
+ Schema of a basic AutoencoderThe simplest form of an autoencoder is a feedforward, non-recurrent neural network similar to single layer perceptrons that participate in multilayer perceptrons (MLP) – having an input layer, an output layer and one or more hidden layers connecting them – where the output layer has the same number of nodes (neurons) as the input layer, and with the purpose of reconstructing its inputs (minimizing the difference between the input and the output) instead of predicting the target value 
+
+
+
+Y
+
+
+{\displaystyle Y}
+
+ given inputs 
+
+
+
+X
+
+
+{\displaystyle X}
+
+. Therefore, autoencoders are unsupervised learning models (do not require labeled inputs to enable learning).
+An autoencoder consists of two parts, the encoder and the decoder, which can be defined as transitions 
+
+
+
+ϕ
+
+
+{\displaystyle \phi }
+
+ and 
+
+
+
+ψ
+,
+
+
+{\displaystyle \psi ,}
+
+ such that:
+
+
+
+
+
+ϕ
+:
+
+
+X
+
+
+→
+
+
+F
+
+
+
+
+{\displaystyle \phi :{\mathcal {X}}\rightarrow {\mathcal {F}}}
+
+
+
+
+
+
+ψ
+:
+
+
+F
+
+
+→
+
+
+X
+
+
+
+
+{\displaystyle \psi :{\mathcal {F}}\rightarrow {\mathcal {X}}}
+
+
+
+
+
+
+ϕ
+,
+ψ
+=
+
+
+
+a
+r
+g
+
+m
+i
+n
+
+
+ϕ
+,
+ψ
+
+
+
+
+‖
+X
+−
+(
+ψ
+∘
+ϕ
+)
+X
+
+‖
+
+2
+
+
+
+
+{\displaystyle \phi ,\psi ={\underset {\phi ,\psi }{\operatorname {arg\,min} }}\,\|X-(\psi \circ \phi )X\|^{2}}
+
+
+In the simplest case, given one hidden layer, the encoder stage of an autoencoder takes the input 
+
+
+
+
+x
+
+∈
+
+
+R
+
+
+d
+
+
+=
+
+
+X
+
+
+
+
+{\displaystyle \mathbf {x} \in \mathbb {R} ^{d}={\mathcal {X}}}
+
+ and maps it to 
+
+
+
+
+h
+
+∈
+
+
+R
+
+
+p
+
+
+=
+
+
+F
+
+
+
+
+{\displaystyle \mathbf {h} \in \mathbb {R} ^{p}={\mathcal {F}}}
+
+:
+
+
+
+
+
+
+h
+
+=
+σ
+(
+
+W
+x
+
++
+
+b
+
+)
+
+
+{\displaystyle \mathbf {h} =\sigma (\mathbf {Wx} +\mathbf {b} )}
+
+
+This image 
+
+
+
+
+h
+
+
+
+{\displaystyle \mathbf {h} }
+
+ is usually referred to as code, latent variables, or latent representation. Here, 
+
+
+
+σ
+
+
+{\displaystyle \sigma }
+
+ is an element-wise activation function such as a sigmoid function or a rectified linear unit.  
+
+
+
+
+W
+
+
+
+{\displaystyle \mathbf {W} }
+
+ is a weight matrix and 
+
+
+
+
+b
+
+
+
+{\displaystyle \mathbf {b} }
+
+ is a bias vector. Weights and biases are usually initialized randomly, and then updated iteratively during training through Backpropagation. After that, the decoder stage of the autoencoder maps 
+
+
+
+
+h
+
+
+
+{\displaystyle \mathbf {h} }
+
+ to the reconstruction 
+
+
+
+
+
+x
+′
+
+
+
+
+{\displaystyle \mathbf {x'} }
+
+ of the same shape as 
+
+
+
+
+x
+
+
+
+{\displaystyle \mathbf {x} }
+
+:
+
+
+
+
+
+
+
+x
+′
+
+
+=
+
+σ
+′
+
+(
+
+
+W
+′
+
+h
+
++
+
+
+b
+′
+
+
+)
+
+
+{\displaystyle \mathbf {x'} =\sigma '(\mathbf {W'h} +\mathbf {b'} )}
+
+
+where 
+
+
+
+
+
+σ
+′
+
+
+,
+
+
+W
+′
+
+
+,
+
+ and 
+
+
+
+b
+′
+
+
+
+
+{\displaystyle \mathbf {\sigma '} ,\mathbf {W'} ,{\text{ and }}\mathbf {b'} }
+
+ for the decoder may be unrelated to the corresponding 
+
+
+
+
+σ
+
+,
+
+W
+
+,
+
+ and 
+
+
+b
+
+
+
+{\displaystyle \mathbf {\sigma } ,\mathbf {W} ,{\text{ and }}\mathbf {b} }
+
+ for the encoder.
+Autoencoders are trained to minimise reconstruction errors (such as squared errors), often referred to as the "loss":
+
+
+
+
+
+
+
+L
+
+
+(
+
+x
+
+,
+
+
+x
+′
+
+
+)
+=
+‖
+
+x
+
+−
+
+
+x
+′
+
+
+
+‖
+
+2
+
+
+=
+‖
+
+x
+
+−
+
+σ
+′
+
+(
+
+
+W
+′
+
+
+(
+σ
+(
+
+W
+x
+
++
+
+b
+
+)
+)
++
+
+
+b
+′
+
+
+)
+
+‖
+
+2
+
+
+
+
+{\displaystyle {\mathcal {L}}(\mathbf {x} ,\mathbf {x'} )=\|\mathbf {x} -\mathbf {x'} \|^{2}=\|\mathbf {x} -\sigma '(\mathbf {W'} (\sigma (\mathbf {Wx} +\mathbf {b} ))+\mathbf {b'} )\|^{2}}
+
+
+where 
+
+
+
+
+x
+
+
+
+{\displaystyle \mathbf {x} }
+
+ is usually averaged over some input training set.
+As mentioned before, the training of an autoencoder is performed through Backpropagation of the error, just like a regular feedforward neural network.
+Should the feature space 
+
+
+
+
+
+F
+
+
+
+
+{\displaystyle {\mathcal {F}}}
+
+ have lower dimensionality than the input space 
+
+
+
+
+
+X
+
+
+
+
+{\displaystyle {\mathcal {X}}}
+
+, the feature vector 
+
+
+
+ϕ
+(
+x
+)
+
+
+{\displaystyle \phi (x)}
+
+ can be regarded as a compressed representation of the input 
+
+
+
+x
+
+
+{\displaystyle x}
+
+. This is the case of undercomplete autoencoders. If the hidden layers are larger than (overcomplete autoencoders), or equal to, the input layer, or the hidden units are given enough capacity, an autoencoder can potentially learn the identity function and become useless. However, experimental results have shown that autoencoders might still learn useful features in these cases.[13] In the ideal setting, one should be able to tailor the code dimension and the model capacity on the basis of the complexity of the data distribution to be modeled. One way to do so, is to exploit the model variants known as Regularized Autoencoders.[2]
+
+Variations[edit]
+Regularized Autoencoders[edit]
+Various techniques exist to prevent autoencoders from learning the identity function and to improve their ability to capture important information and learn richer representations.
+
+Sparse autoencoder (SAE)[edit]
+ Simple schema of a single-layer sparse autoencoder. The hidden nodes in bright yellow are activated, while the light yellow ones are inactive. The activation depends on the input.
+Recently, it has been observed that when representations are learnt in a way that encourages sparsity, improved performance is obtained on classification tasks.[14] Sparse autoencoder may include more (rather than fewer) hidden units than inputs, but only a small number of the hidden units are allowed to be active at once.[12] This sparsity constraint forces the model to respond to the unique statistical features of the input data used for training.
+Specifically, a sparse autoencoder is an autoencoder whose training criterion involves a sparsity penalty 
+
+
+
+Ω
+(
+
+h
+
+)
+
+
+{\displaystyle \Omega ({\boldsymbol {h}})}
+
+ on the code layer 
+
+
+
+
+h
+
+
+
+{\displaystyle {\boldsymbol {h}}}
+
+.
+
+
+
+
+
+
+L
+
+
+(
+
+x
+
+,
+
+
+x
+′
+
+
+)
++
+Ω
+(
+
+h
+
+)
+
+
+{\displaystyle {\mathcal {L}}(\mathbf {x} ,\mathbf {x'} )+\Omega ({\boldsymbol {h}})}
+
+
+Recalling that 
+
+
+
+
+h
+
+=
+f
+(
+
+W
+
+
+x
+
++
+
+b
+
+)
+
+
+{\displaystyle {\boldsymbol {h}}=f({\boldsymbol {W}}{\boldsymbol {x}}+{\boldsymbol {b}})}
+
+, the penalty encourages the model to activate (i.e. output value close to 1) some specific areas of the network on the basis of the input data, while forcing all other neurons to be inactive (i.e. to have an output value close to 0).[15]
+This sparsity of activation can be achieved by formulating the penalty terms in different ways.
+
+One way to do it, is by exploiting the Kullback-Leibler (KL) divergence.[14][15][16][17]  Let
+
+
+
+
+
+
+
+
+ρ
+
+j
+
+
+^
+
+
+
+=
+
+
+1
+m
+
+
+
+∑
+
+i
+=
+1
+
+
+m
+
+
+[
+
+h
+
+j
+
+
+(
+
+x
+
+i
+
+
+)
+]
+
+
+{\displaystyle {\hat {\rho _{j}}}={\frac {1}{m}}\sum _{i=1}^{m}[h_{j}(x_{i})]}
+
+
+be the average activation of the hidden unit 
+
+
+
+j
+
+
+{\displaystyle j}
+
+ (averaged over the  
+
+
+
+m
+
+
+{\displaystyle m}
+
+ training examples). Note that the notation 
+
+
+
+
+h
+
+j
+
+
+(
+
+x
+
+i
+
+
+)
+
+
+{\displaystyle h_{j}(x_{i})}
+
+ makes explicit what the input affecting the activation was, i.e. it identifies which input value the activation is function of. To encourage most of the neurons to be inactive, we would like 
+
+
+
+
+
+
+
+ρ
+
+j
+
+
+^
+
+
+
+
+
+{\displaystyle {\hat {\rho _{j}}}}
+
+ to be as close to 0 as possible. Therefore, this method enforces the constraint 
+
+
+
+
+
+
+
+ρ
+
+j
+
+
+^
+
+
+
+=
+ρ
+
+
+{\displaystyle {\hat {\rho _{j}}}=\rho }
+
+  where 
+
+
+
+ρ
+
+
+{\displaystyle \rho }
+
+ is the sparsity parameter, a value close to zero, leading the activation of the hidden units to be mostly zero as well. The penalty term 
+
+
+
+Ω
+(
+
+h
+
+)
+
+
+{\displaystyle \Omega ({\boldsymbol {h}})}
+
+ will then take a form that penalizes 
+
+
+
+
+
+
+
+ρ
+
+j
+
+
+^
+
+
+
+
+
+{\displaystyle {\hat {\rho _{j}}}}
+
+ for deviating significantly from 
+
+
+
+ρ
+
+
+{\displaystyle \rho }
+
+, exploiting the KL divergence:
+
+
+
+
+
+∑
+
+j
+=
+1
+
+
+s
+
+
+K
+L
+(
+ρ
+
+|
+
+
+|
+
+
+
+
+
+ρ
+
+j
+
+
+^
+
+
+
+)
+=
+
+∑
+
+j
+=
+1
+
+
+s
+
+
+
+[
+
+ρ
+log
+⁡
+
+
+ρ
+
+
+
+ρ
+
+j
+
+
+^
+
+
+
+
++
+(
+1
+−
+ρ
+)
+log
+⁡
+
+
+
+1
+−
+ρ
+
+
+1
+−
+
+
+
+
+ρ
+
+j
+
+
+^
+
+
+
+
+
+
+
+]
+
+
+
+{\displaystyle \sum _{j=1}^{s}KL(\rho ||{\hat {\rho _{j}}})=\sum _{j=1}^{s}\left[\rho \log {\frac {\rho }{\hat {\rho _{j}}}}+(1-\rho )\log {\frac {1-\rho }{1-{\hat {\rho _{j}}}}}\right]}
+
+  where 
+
+
+
+j
+
+
+{\displaystyle j}
+
+ is summing over the 
+
+
+
+s
+
+
+{\displaystyle s}
+
+ hidden nodes in the hidden layer, and 
+
+
+
+K
+L
+(
+ρ
+
+|
+
+
+|
+
+
+
+
+
+ρ
+
+j
+
+
+^
+
+
+
+)
+
+
+{\displaystyle KL(\rho ||{\hat {\rho _{j}}})}
+
+ is the KL-divergence between a Bernoulli random variable with mean 
+
+
+
+ρ
+
+
+{\displaystyle \rho }
+
+ and a Bernoulli random variable with mean 
+
+
+
+
+
+
+
+ρ
+
+j
+
+
+^
+
+
+
+
+
+{\displaystyle {\hat {\rho _{j}}}}
+
+.[15]
+
+Another way to achieve sparsity in the activation of the hidden unit, is by applying L1 or L2 regularization terms on the activation, scaled by a certain parameter 
+
+
+
+λ
+
+
+{\displaystyle \lambda }
+
+.[18] For instance, in the case of L1 the loss function would become
+
+
+
+
+
+
+L
+
+
+(
+
+x
+
+,
+
+
+x
+′
+
+
+)
++
+λ
+
+∑
+
+i
+
+
+
+|
+
+
+h
+
+i
+
+
+
+|
+
+
+
+{\displaystyle {\mathcal {L}}(\mathbf {x} ,\mathbf {x'} )+\lambda \sum _{i}|h_{i}|}
+
+
+
+A further proposed strategy to force sparsity in the model is that of manually zeroing all but the strongest hidden unit activations (k-sparse autoencoder).[19] The k-sparse autoencoder is based on a linear autoencoder (i.e. with linear activation function) and tied weights. The identification of the strongest activations can be achieved by sorting the activities and keeping only the first k values, or by using ReLU hidden units with thresholds that are adaptively adjusted until the k largest activities are identified. This selection acts like the previously mentioned regularization terms in that it prevents the model from reconstructing the input using too many neurons.[19]
+Denoising autoencoder (DAE)[edit]
+Differently from sparse autoencoders or undercomplete autoencoders that constrain representation, Denoising autoencoders (DAE) try to achieve a good representation by changing the reconstruction criterion.[2]
+Indeed, DAEs take a partially corrupted input and are trained to recover the original undistorted input.  In practice, the objective of denoising autoencoders is that of cleaning the corrupted input, or denoising. Two underlying assumptions are inherent to this approach:
+
+Higher level representations are relatively stable and robust to the corruption of the input;
+To perform denoising well, the model needs to extract features that capture useful structure in the distribution of the input.[3]
+In other words, denoising is advocated as a training criterion for learning to extract useful features that will constitute better higher level representations of the input.[3]
+The training process of a DAE works as follows:
+
+The initial input 
+
+
+
+x
+
+
+{\displaystyle x}
+
+ is corrupted into 
+
+
+
+
+
+
+x
+~
+
+
+
+
+
+{\displaystyle {\boldsymbol {\tilde {x}}}}
+
+ through stochastic mapping 
+
+
+
+
+
+
+x
+~
+
+
+
+∼
+
+q
+
+D
+
+
+(
+
+
+
+x
+~
+
+
+
+
+|
+
+
+x
+
+)
+
+
+{\displaystyle {\boldsymbol {\tilde {x}}}\thicksim q_{D}({\boldsymbol {\tilde {x}}}|{\boldsymbol {x}})}
+
+.
+The corrupted input 
+
+
+
+
+
+
+x
+~
+
+
+
+
+
+{\displaystyle {\boldsymbol {\tilde {x}}}}
+
+ is then mapped to a hidden representation with the same process of the standard autoencoder, 
+
+
+
+
+h
+
+=
+
+f
+
+θ
+
+
+(
+
+
+
+x
+~
+
+
+
+)
+=
+s
+(
+
+W
+
+
+
+
+x
+~
+
+
+
++
+
+b
+
+)
+
+
+{\displaystyle {\boldsymbol {h}}=f_{\theta }({\boldsymbol {\tilde {x}}})=s({\boldsymbol {W}}{\boldsymbol {\tilde {x}}}+{\boldsymbol {b}})}
+
+.
+From the hidden representation the model reconstructs 
+
+
+
+
+z
+
+=
+
+g
+
+
+θ
+′
+
+
+
+(
+
+h
+
+)
+
+
+{\displaystyle {\boldsymbol {z}}=g_{\theta '}({\boldsymbol {h}})}
+
+.[3]
+The model's parameters 
+
+
+
+θ
+
+
+{\displaystyle \theta }
+
+ and 
+
+
+
+
+θ
+′
+
+
+
+{\displaystyle \theta '}
+
+ are trained to minimize the average reconstruction error over the training data, specifically, minimizing the difference between 
+
+
+
+
+z
+
+
+
+{\displaystyle {\boldsymbol {z}}}
+
+ and the original uncorrupted input  
+
+
+
+
+x
+
+
+
+{\displaystyle {\boldsymbol {x}}}
+
+.[3] Note that each time a random example 
+
+
+
+
+x
+
+
+
+{\displaystyle {\boldsymbol {x}}}
+
+ is presented to the model, a new corrupted version is generated stochastically on the basis of 
+
+
+
+
+q
+
+D
+
+
+(
+
+
+
+x
+~
+
+
+
+
+|
+
+
+x
+
+)
+
+
+{\displaystyle q_{D}({\boldsymbol {\tilde {x}}}|{\boldsymbol {x}})}
+
+.
+The above-mentioned training process could be developed with any kind of corruption process. Some examples might be additive isotropic Gaussian noise, Masking noise (a fraction of the input chosen at random for each example is forced to 0) or Salt-and-pepper noise (a fraction of the input chosen at random for each example is set to its minimum or maximum value with uniform probability).[3]
+Finally, notice that the corruption of the input is performed only during the training phase of the DAE. Once the model has learnt the optimal parameters, in order to extract the representations from the original data no corruption is added.
+
+Contractive autoencoder (CAE)[edit]
+Contractive autoencoder adds an explicit regularizer in their objective function that forces the model to learn a function that is robust to slight variations of input values. This regularizer corresponds to the Frobenius norm of the Jacobian matrix of the encoder activations with respect to the input. Since the penalty is applied to training examples only, this term forces the model to learn useful information about the training distribution. The final objective function has the following form:
+
+
+
+
+
+
+
+L
+
+
+(
+
+x
+
+,
+
+
+x
+′
+
+
+)
++
+λ
+
+∑
+
+i
+
+
+
+|
+
+
+|
+
+
+∇
+
+x
+
+
+
+h
+
+i
+
+
+
+|
+
+
+
+|
+
+
+2
+
+
+
+
+{\displaystyle {\mathcal {L}}(\mathbf {x} ,\mathbf {x'} )+\lambda \sum _{i}||\nabla _{x}h_{i}||^{2}}
+
+
+The name contractive comes from the fact that the CAE is encouraged to map a neighborhood of input points to a smaller neighborhood of output points.[2]
+There is a connection between the denoising autoencoder (DAE) and the contractive autoencoder (CAE): in the limit of small Gaussian input noise, DAE make the reconstruction function resist small but finite-sized perturbations of the input, while CAE make the extracted features resist infinitesimal perturbations of the input.
+
+Variational autoencoder (VAE)[edit]
+It has been suggested that this section be split out  into another article titled Variational autoencoder. (Discuss) (May 2020)
+Unlike classical (sparse, denoising, etc.) autoencoders, Variational autoencoders (VAEs) are generative models, like Generative Adversarial Networks.[20] Their association with this group of models derives mainly from the architectural affinity with the basic autoencoder (the final training objective has an encoder and a decoder), but their mathematical formulation differs significantly.[21] VAEs are directed probabilistic graphical models (DPGM) whose posterior is approximated by a neural network, forming an autoencoder-like architecture.[20][22] Differently from discriminative modeling that aims to learn a predictor given the observation, generative modeling tries to simulate how the data is generated, in order to understand the underlying causal relations. Causal relations have indeed the great potential of being generalizable.[4]
+Variational autoencoder models make strong assumptions concerning the distribution of latent variables. They use a variational approach for latent representation learning, which results in an additional loss component and a specific estimator for the training algorithm called the Stochastic Gradient Variational Bayes (SGVB) estimator.[10] It assumes that the data is generated by a directed graphical model 
+
+
+
+
+p
+
+θ
+
+
+(
+
+x
+
+
+|
+
+
+h
+
+)
+
+
+{\displaystyle p_{\theta }(\mathbf {x} |\mathbf {h} )}
+
+ and that the encoder is learning an approximation 
+
+
+
+
+q
+
+ϕ
+
+
+(
+
+h
+
+
+|
+
+
+x
+
+)
+
+
+{\displaystyle q_{\phi }(\mathbf {h} |\mathbf {x} )}
+
+ to the posterior distribution 
+
+
+
+
+p
+
+θ
+
+
+(
+
+h
+
+
+|
+
+
+x
+
+)
+
+
+{\displaystyle p_{\theta }(\mathbf {h} |\mathbf {x} )}
+
+ where 
+
+
+
+
+ϕ
+
+
+
+{\displaystyle \mathbf {\phi } }
+
+ and 
+
+
+
+
+θ
+
+
+
+{\displaystyle \mathbf {\theta } }
+
+ denote the parameters of the encoder (recognition model) and decoder (generative model) respectively. The probability distribution of the latent vector of a VAE typically matches that of the training data much closer than a standard autoencoder. The objective of VAE has the following form:
+
+
+
+
+
+
+
+L
+
+
+(
+
+ϕ
+
+,
+
+θ
+
+,
+
+x
+
+)
+=
+
+D
+
+
+K
+L
+
+
+
+(
+
+q
+
+ϕ
+
+
+(
+
+h
+
+
+|
+
+
+x
+
+)
+‖
+
+p
+
+θ
+
+
+(
+
+h
+
+)
+)
+−
+
+
+E
+
+
+
+q
+
+ϕ
+
+
+(
+
+h
+
+
+|
+
+
+x
+
+)
+
+
+
+
+(
+
+
+log
+⁡
+
+p
+
+θ
+
+
+(
+
+x
+
+
+|
+
+
+h
+
+)
+
+
+)
+
+
+
+
+{\displaystyle {\mathcal {L}}(\mathbf {\phi } ,\mathbf {\theta } ,\mathbf {x} )=D_{\mathrm {KL} }(q_{\phi }(\mathbf {h} |\mathbf {x} )\Vert p_{\theta }(\mathbf {h} ))-\mathbb {E} _{q_{\phi }(\mathbf {h} |\mathbf {x} )}{\big (}\log p_{\theta }(\mathbf {x} |\mathbf {h} ){\big )}}
+
+
+Here, 
+
+
+
+
+D
+
+
+K
+L
+
+
+
+
+
+{\displaystyle D_{\mathrm {KL} }}
+
+ stands for the Kullback–Leibler divergence. The prior over the latent variables is usually set to be the centred isotropic multivariate Gaussian 
+
+
+
+
+p
+
+θ
+
+
+(
+
+h
+
+)
+=
+
+
+N
+
+
+(
+
+0
+,
+I
+
+)
+
+
+{\displaystyle p_{\theta }(\mathbf {h} )={\mathcal {N}}(\mathbf {0,I} )}
+
+; however, alternative configurations have been considered.[23]
+Commonly, the shape of the variational and the likelihood distributions are chosen such that they are factorized Gaussians:
+
+
+
+
+
+
+
+
+
+
+q
+
+ϕ
+
+
+(
+
+h
+
+
+|
+
+
+x
+
+)
+
+
+
+=
+
+
+N
+
+
+(
+
+ρ
+
+(
+
+x
+
+)
+,
+
+
+ω
+
+
+2
+
+
+(
+
+x
+
+)
+
+I
+
+)
+,
+
+
+
+
+
+p
+
+θ
+
+
+(
+
+x
+
+
+|
+
+
+h
+
+)
+
+
+
+=
+
+
+N
+
+
+(
+
+μ
+
+(
+
+h
+
+)
+,
+
+
+σ
+
+
+2
+
+
+(
+
+h
+
+)
+
+I
+
+)
+,
+
+
+
+
+
+
+{\displaystyle {\begin{aligned}q_{\phi }(\mathbf {h} |\mathbf {x} )&={\mathcal {N}}({\boldsymbol {\rho }}(\mathbf {x} ),{\boldsymbol {\omega }}^{2}(\mathbf {x} )\mathbf {I} ),\\p_{\theta }(\mathbf {x} |\mathbf {h} )&={\mathcal {N}}({\boldsymbol {\mu }}(\mathbf {h} ),{\boldsymbol {\sigma }}^{2}(\mathbf {h} )\mathbf {I} ),\end{aligned}}}
+
+
+where 
+
+
+
+
+ρ
+
+(
+
+x
+
+)
+
+
+{\displaystyle {\boldsymbol {\rho }}(\mathbf {x} )}
+
+ and  
+
+
+
+
+
+ω
+
+
+2
+
+
+(
+
+x
+
+)
+
+
+{\displaystyle {\boldsymbol {\omega }}^{2}(\mathbf {x} )}
+
+ are the encoder outputs, while 
+
+
+
+
+μ
+
+(
+
+h
+
+)
+
+
+{\displaystyle {\boldsymbol {\mu }}(\mathbf {h} )}
+
+ and  
+
+
+
+
+
+σ
+
+
+2
+
+
+(
+
+h
+
+)
+
+
+{\displaystyle {\boldsymbol {\sigma }}^{2}(\mathbf {h} )}
+
+ are the decoder outputs.
+This choice is justified by the simplifications[10] that it produces when evaluating both the KL divergence and the likelihood term in variational objective defined above.
+VAE have been criticized because they generate blurry images.[24] However, researchers employing this model were showing only the mean of the distributions, 
+
+
+
+
+μ
+
+(
+
+h
+
+)
+
+
+{\displaystyle {\boldsymbol {\mu }}(\mathbf {h} )}
+
+, rather than a sample of the learned Gaussian distribution
+
+
+
+
+
+
+x
+
+∼
+
+
+N
+
+
+(
+
+μ
+
+(
+
+h
+
+)
+,
+
+
+σ
+
+
+2
+
+
+(
+
+h
+
+)
+
+I
+
+)
+
+
+{\displaystyle \mathbf {x} \sim {\mathcal {N}}({\boldsymbol {\mu }}(\mathbf {h} ),{\boldsymbol {\sigma }}^{2}(\mathbf {h} )\mathbf {I} )}
+
+.
+These samples were shown to be overly noisy due to the choice of a factorized Gaussian distribution.[24][25] Employing a Gaussian distribution with a full covariance matrix,
+
+
+
+
+
+
+p
+
+θ
+
+
+(
+
+x
+
+
+|
+
+
+h
+
+)
+=
+
+
+N
+
+
+(
+
+μ
+
+(
+
+h
+
+)
+,
+
+Σ
+
+(
+
+h
+
+)
+)
+,
+
+
+{\displaystyle p_{\theta }(\mathbf {x} |\mathbf {h} )={\mathcal {N}}({\boldsymbol {\mu }}(\mathbf {h} ),{\boldsymbol {\Sigma }}(\mathbf {h} )),}
+
+
+could solve this issue, but is computationally intractable and numerically unstable, as it requires estimating a covariance matrix from a single data sample. However, later research[24][25] showed that a restricted approach where the inverse matrix 
+
+
+
+
+
+Σ
+
+
+−
+1
+
+
+(
+
+h
+
+)
+
+
+{\displaystyle {\boldsymbol {\Sigma }}^{-1}(\mathbf {h} )}
+
+ is sparse, could be tractably employed to generate images with high-frequency details.
+Large-scale VAE models have been developed in different domains to represent data in a compact probabilistic latent space. For example, VQ-VAE[26] for image generation and Optimus [27] for language modeling.
+
+Advantages of Depth[edit]
+ Schematic structure of an autoencoder with 3 fully connected hidden layers. The code (z, or h for reference in the text) is the most internal layer.
+Autoencoders are often trained with only a single layer encoder and a single layer decoder, but using deep encoders and decoders offers many advantages.[2]
+
+Depth can exponentially reduce the computational cost of representing some functions.[2]
+Depth can exponentially decrease the amount of training data needed to learn some functions.[2]
+Experimentally, deep autoencoders yield better compression compared to shallow or linear autoencoders.[28]
+Training Deep Architectures[edit]
+Geoffrey Hinton developed a pretraining technique for training many-layered deep autoencoders. This method involves treating each neighbouring set of two layers as a restricted Boltzmann machine so that the pretraining approximates a good solution, then using a backpropagation technique to fine-tune the results.[28] This model takes the name of deep belief network.
+Recently, researchers have debated whether joint training (i.e. training the whole architecture together with a single global reconstruction objective to optimize) would be better for deep auto-encoders.[29] A study published in 2015 empirically showed that the joint training method not only learns better data models, but also learned more representative features for classification as compared to the layerwise method.[29] However, their experiments highlighted how the success of joint training for deep autoencoder architectures depends heavily on the regularization strategies adopted in the modern variants of the model.[29][30]
+
+Applications[edit]
+The two main applications of autoencoders since the 80s have been dimensionality reduction and information retrieval,[2] but modern variations of the basic model were proven successful when applied to different domains and tasks.
+
+Dimensionality Reduction[edit]
+ Plot of the first two Principal Components (left) and a two-dimension hidden layer of a Linear Autoencoder (Right) applied to the Fashion MNIST dataset.[31] The two models being both linear learn to span the same subspace. The projection of the data points is indeed identical, apart from rotation of the subspace - to which PCA is invariant.Dimensionality Reduction was one of the first applications of deep learning, and one of the early motivations to study autoencoders.[2]  In a nutshell, the objective is to find a proper projection method, that maps data from high feature space to low feature space.[2]
+One milestone paper on the subject was that of Geoffrey Hinton with his publication in Science Magazine in 2006:[28] in that study, he pretrained a multi-layer autoencoder with a stack of RBMs and then used their weights to initialize a deep autoencoder with gradually smaller hidden layers until a bottleneck of 30 neurons. The resulting 30 dimensions of the code yielded a smaller reconstruction error compared to the first 30 principal components of a PCA, and learned a representation that was qualitatively easier to interpret, clearly separating clusters in the original data.[2][28]
+Representing data in a lower-dimensional space can improve performance on different tasks, such as classification.[2] Indeed, many forms of dimensionality reduction place semantically related examples near each other,[32] aiding generalization.
+
+Relationship with principal component analysis (PCA)[edit]
+ Reconstruction of 28x28pixel images by an Autoencoder with a code size of two (two-units hidden layer) and the reconstruction from the first two Principal Components of PCA. Images come from the Fashion MNIST dataset.[31]
+If linear activations are used, or only a single sigmoid hidden layer, then the optimal solution to an autoencoder is strongly related to principal component analysis (PCA).[33][34] The weights of an autoencoder with a single hidden layer of size 
+
+
+
+p
+
+
+{\displaystyle p}
+
+ (where 
+
+
+
+p
+
+
+{\displaystyle p}
+
+ is less than the size of the input) span the same vector subspace as the one spanned by the first 
+
+
+
+p
+
+
+{\displaystyle p}
+
+ principal components, and the output of the autoencoder is an orthogonal projection onto this subspace. The autoencoder weights are not equal to the principal components, and are generally not orthogonal, yet the principal components may be recovered from them using the singular value decomposition.[35]
+However, the potential of Autoencoders resides in their non-linearity, allowing the model to learn more powerful generalizations compared to PCA, and to reconstruct back the input with a significantly lower loss of information.[28]
+
+Information Retrieval[edit]
+Information Retrieval benefits particularly from dimensionality reduction in that search can become extremely efficient in certain kinds of low dimensional spaces. Autoencoders were indeed applied to semantic hashing, proposed by Salakhutdinov and Hinton in 2007.[32] In a nutshell, training the algorithm to produce a low-dimensional binary code, then all database entries could be stored in a hash table mapping binary code vectors to entries. This table would then allow to perform information retrieval by returning all entries with the same binary code as the query, or slightly less similar entries by flipping some bits from the encoding of the query.
+
+Anomaly Detection[edit]
+Another field of application for autoencoders is anomaly detection.[36][37][38][39] By learning to replicate the most salient features in the training data under some of the constraints described previously, the model is encouraged to learn how to precisely reproduce the most frequent characteristics of the observations. When facing anomalies, the model should worsen its reconstruction performance. In most cases, only data with normal instances are used to train the autoencoder; in others, the frequency of anomalies is so small compared to the whole population of observations, that its contribution to the representation learnt by the model could be ignored. After training, the autoencoder will reconstruct normal data very well, while failing to do so with anomaly data which the autoencoder has not encountered.[37] Reconstruction error of a data point, which is the error between the original data point and its low dimensional reconstruction, is used as an anomaly score to detect anomalies.[37]
+
+Image Processing[edit]
+The peculiar characteristics of autoencoders have rendered these model extremely useful in the processing of images for various tasks.
+One example can be found in lossy image compression task, where autoencoders demonstrated their potential by outperforming other approaches and being proven competitive against JPEG 2000.[40]
+Another useful application of autoencoders in the field of image preprocessing is image denoising.[41][42] The need for efficient image restoration methods has grown with the massive production of digital images and movies of all kinds, often taken in poor conditions.[43]
+Autoencoders are increasingly proving their ability even in more delicate contexts such as medical imaging. In this context, they have also been used for image denoising[44] as well as super-resolution.[45] In the field of image-assisted diagnosis, there exist some experiments using autoencoders for the detection of breast cancer[46] or even modelling the relation between the cognitive decline of Alzheimer's Disease and the latent features of an autoencoder trained with MRI[47]
+Lastly, other successful experiments have been carried out exploiting variations of the basic autoencoder for image super-resolution tasks.[48]
+
+Drug discovery[edit]
+In 2019 molecules generated with a special type of variational autoencoders were validated experimentally all the way into mice.[49][50]
+
+Population synthesis[edit]
+In 2019 a variational autoencoder framework was used to do population synthesis by approximating high-dimensional survey data.[51] By sampling agents from the approximated distribution new synthetic 'fake' populations, with similar statistical properties as those of the original population, were generated.
+
+Popularity prediction[edit]
+Recently, stacked autoencoder framework have shown promising results in predicting popularity of social media posts,[52] which is helpful for online advertisement strategies.
+
+Machine Translation[edit]
+Autoencoder has been successfully applied to the machine translation of human languages which is usually referred to as neural machine translation (NMT).[53][54] In NMT, the language texts are treated as sequences to be encoded into the learning procedure, while in the decoder side the target languages will be generated. Recent years also see the application of language specific autoencoders to incorporate the linguistic features into the learning procedure, such as Chinese decomposition features.[55]
+
+See also[edit]
+Representation learning
+Sparse dictionary learning
+Deep learning
+References[edit]
+
+
+^ Kramer, Mark A. (1991). "Nonlinear principal component analysis using autoassociative neural networks" (PDF). AIChE Journal. 37 (2): 233–243. doi:10.1002/aic.690370209.
+
+^ a b c d e f g h i j k l m Goodfellow, Ian; Bengio, Yoshua; Courville, Aaron (2016). Deep Learning. MIT Press. ISBN 978-0262035613.
+
+^ a b c d e f Vincent, Pascal; Larochelle, Hugo (2010). "Stacked Denoising Autoencoders: Learning Useful Representations in a Deep Network with a Local Denoising Criterion". Journal of Machine Learning Research. 11: 3371–3408.
+
+^ a b Welling, Max; Kingma, Diederik P. (2019). "An Introduction to Variational Autoencoders". Foundations and Trends in Machine Learning. 12 (4): 307–392. arXiv:1906.02691. Bibcode:2019arXiv190602691K. doi:10.1561/2200000056.
+
+^ Hinton GE, Krizhevsky A, Wang SD. Transforming auto-encoders. In International Conference on Artificial Neural Networks 2011 Jun 14 (pp. 44-51). Springer, Berlin, Heidelberg.
+
+^ Liou, Cheng-Yuan; Huang, Jau-Chi; Yang, Wen-Chie (2008). "Modeling word perception using the Elman network". Neurocomputing. 71 (16–18): 3150. doi:10.1016/j.neucom.2008.04.030.
+
+^ Liou, Cheng-Yuan; Cheng, Wei-Chen; Liou, Jiun-Wei; Liou, Daw-Ran (2014). "Autoencoder for words". Neurocomputing. 139: 84–96. doi:10.1016/j.neucom.2013.09.055.
+
+^ Schmidhuber, Jürgen (January 2015). "Deep learning in neural networks: An overview". Neural Networks. 61: 85–117. arXiv:1404.7828. doi:10.1016/j.neunet.2014.09.003. PMID 25462637.
+
+^ Hinton, G. E., & Zemel, R. S. (1994). Autoencoders, minimum description length and Helmholtz free energy. In Advances in neural information processing systems 6 (pp. 3-10).
+
+^ a b c Diederik P Kingma; Welling, Max (2013). "Auto-Encoding Variational Bayes". arXiv:1312.6114 [stat.ML].
+
+^ Generating Faces with Torch, Boesen A., Larsen L. and Sonderby S.K., 2015 torch.ch/blog/2015/11/13/gan.html
+
+^ a b Domingos, Pedro (2015). "4". The Master Algorithm: How the Quest for the Ultimate Learning Machine Will Remake Our World. Basic Books. "Deeper into the Brain" subsection. ISBN 978-046506192-1.
+
+^ Bengio, Y. (2009). "Learning Deep Architectures for AI" (PDF). Foundations and Trends in Machine Learning. 2 (8): 1795–7. CiteSeerX 10.1.1.701.9550. doi:10.1561/2200000006. PMID 23946944.
+
+^ a b Frey, Brendan; Makhzani, Alireza (2013-12-19). "k-Sparse Autoencoders". arXiv:1312.5663. Bibcode:2013arXiv1312.5663M. Cite journal requires |journal= (help)
+
+^ a b c Ng, A. (2011). Sparse autoencoder. CS294A Lecture notes, 72(2011), 1-19.
+
+^ Nair, Vinod; Hinton, Geoffrey E. (2009). "3D Object Recognition with Deep Belief Nets". Proceedings of the 22Nd International Conference on Neural Information Processing Systems. NIPS'09. USA: Curran Associates Inc.: 1339–1347. ISBN 9781615679119.
+
+^ Zeng, Nianyin; Zhang, Hong; Song, Baoye; Liu, Weibo; Li, Yurong; Dobaie, Abdullah M. (2018-01-17). "Facial expression recognition via learning deep sparse autoencoders". Neurocomputing. 273: 643–649. doi:10.1016/j.neucom.2017.08.043. ISSN 0925-2312.
+
+^ Arpit, Devansh; Zhou, Yingbo; Ngo, Hung; Govindaraju, Venu (2015). "Why Regularized Auto-Encoders learn Sparse Representation?". arXiv:1505.05561 [stat.ML].
+
+^ a b Makhzani, Alireza; Frey, Brendan (2013). "K-Sparse Autoencoders". arXiv:1312.5663 [cs.LG].
+
+^ a b An, J., & Cho, S. (2015). Variational autoencoder based anomaly detection using reconstruction probability. Special Lecture on IE, 2(1).
+
+^ Doersch, Carl (2016). "Tutorial on Variational Autoencoders". arXiv:1606.05908 [stat.ML].
+
+^ Khobahi, S.; Soltanalian, M. (2019). "Model-Aware Deep Architectures for One-Bit Compressive Variational Autoencoding". arXiv:1911.12410 [eess.SP].
+
+^ Partaourides, Harris; Chatzis, Sotirios P. (June 2017). "Asymmetric deep generative models". Neurocomputing. 241: 90–96. doi:10.1016/j.neucom.2017.02.028.
+
+^ a b c Dorta, Garoe; Vicente, Sara; Agapito, Lourdes; Campbell, Neill D. F.; Simpson, Ivor (2018). "Training VAEs Under Structured Residuals". arXiv:1804.01050 [stat.ML].
+
+^ a b Dorta, Garoe; Vicente, Sara; Agapito, Lourdes; Campbell, Neill D. F.; Simpson, Ivor (2018). "Structured Uncertainty Prediction Networks". arXiv:1802.07079 [stat.ML].
+
+^ Generating Diverse High-Fidelity Images with VQ-VAE-2 https://arxiv.org/abs/1906.00446
+
+^ Optimus: Organizing Sentences via Pre-trained Modeling of a Latent Space https://arxiv.org/abs/2004.04092
+
+^ a b c d e Hinton, G. E.; Salakhutdinov, R.R. (2006-07-28). "Reducing the Dimensionality of Data with Neural Networks". Science. 313 (5786): 504–507. Bibcode:2006Sci...313..504H. doi:10.1126/science.1127647. PMID 16873662.
+
+^ a b c Zhou, Yingbo; Arpit, Devansh; Nwogu, Ifeoma; Govindaraju, Venu (2014). "Is Joint Training Better for Deep Auto-Encoders?". arXiv:1405.1380 [stat.ML].
+
+^ R. Salakhutdinov and G. E. Hinton, “Deep boltzmann machines,” in
+
+AISTATS, 2009, pp. 448–455.
+
+^ a b "Fashion MNIST". 2019-07-12.
+
+^ a b Salakhutdinov, Ruslan; Hinton, Geoffrey (2009-07-01). "Semantic hashing". International Journal of Approximate Reasoning. Special Section on Graphical Models and Information Retrieval. 50 (7): 969–978. doi:10.1016/j.ijar.2008.11.006. ISSN 0888-613X.
+
+^ Bourlard, H.; Kamp, Y. (1988). "Auto-association by multilayer perceptrons and singular value decomposition". Biological Cybernetics. 59 (4–5): 291–294. doi:10.1007/BF00332918. PMID 3196773.
+
+^ Chicco, Davide; Sadowski, Peter; Baldi, Pierre (2014). "Deep autoencoder neural networks for gene ontology annotation predictions". Proceedings of the 5th ACM Conference on Bioinformatics, Computational Biology, and Health Informatics - BCB '14. p. 533. doi:10.1145/2649387.2649442. hdl:11311/964622. ISBN 9781450328944.
+
+^ Plaut, E (2018). "From Principal Subspaces to Principal Components with Linear Autoencoders". arXiv:1804.10253 [stat.ML].
+
+^ Sakurada, M., & Yairi, T. (2014, December). Anomaly detection using autoencoders with nonlinear dimensionality reduction. In Proceedings of the MLSDA 2014 2nd Workshop on Machine Learning for Sensory Data Analysis (p. 4). ACM.
+
+^ a b c An, J., & Cho, S. (2015). Variational autoencoder based anomaly detection using reconstruction probability. Special Lecture on IE, 2, 1-18.
+
+^ Zhou, C., & Paffenroth, R. C. (2017, August). Anomaly detection with robust deep autoencoders. In Proceedings of the 23rd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (pp. 665-674). ACM.
+
+^ Ribeiro, M., Lazzaretti, A. E., & Lopes, H. S. (2018). A study of deep convolutional auto-encoders for anomaly detection in videos. Pattern Recognition Letters, 105, 13-22.
+
+^ Theis, Lucas; Shi, Wenzhe; Cunningham, Andrew; Huszár, Ferenc (2017). "Lossy Image Compression with Compressive Autoencoders". arXiv:1703.00395 [stat.ML].
+
+^ Cho, K. (2013, February). Simple sparsification improves sparse denoising autoencoders in denoising highly corrupted images. In International Conference on Machine Learning (pp. 432-440).
+
+^ Cho, Kyunghyun (2013). "Boltzmann Machines and Denoising Autoencoders for Image Denoising". arXiv:1301.3468 [stat.ML].
+
+^ Antoni Buades, Bartomeu Coll, Jean-Michel Morel. A review of image denoising algorithms, with a new one. Multiscale Modeling and Simulation: A SIAM Interdisciplinary Journal, Society for Industrial and Applied Mathematics, 2005, 4 (2), pp.490-530. hal-00271141
+
+^ Gondara, Lovedeep (December 2016). "Medical Image Denoising Using Convolutional Denoising Autoencoders". 2016 IEEE 16th International Conference on Data Mining Workshops (ICDMW). Barcelona, Spain: IEEE: 241–246. arXiv:1608.04667. Bibcode:2016arXiv160804667G. doi:10.1109/ICDMW.2016.0041. ISBN 9781509059102.
+
+^ Tzu-Hsi, Song; Sanchez, Victor; Hesham, EIDaly; Nasir M., Rajpoot (2017). "Hybrid deep autoencoder with Curvature Gaussian for detection of various types of cells in bone marrow trephine biopsy images". 2017 IEEE 14th International Symposium on Biomedical Imaging (ISBI 2017): 1040–1043. doi:10.1109/ISBI.2017.7950694. ISBN 978-1-5090-1172-8.
+
+^ Xu, Jun; Xiang, Lei; Liu, Qingshan; Gilmore, Hannah; Wu, Jianzhong; Tang, Jinghai; Madabhushi, Anant (January 2016). "Stacked Sparse Autoencoder (SSAE) for Nuclei Detection on Breast Cancer Histopathology Images". IEEE Transactions on Medical Imaging. 35 (1): 119–130. doi:10.1109/TMI.2015.2458702. PMC 4729702. PMID 26208307.
+
+^ Martinez-Murcia, Francisco J.; Ortiz, Andres; Gorriz, Juan M.; Ramirez, Javier; Castillo-Barnes, Diego (2020). "Studying the Manifold Structure of Alzheimer's Disease: A Deep Learning Approach Using Convolutional Autoencoders". IEEE Journal of Biomedical and Health Informatics. 24 (1): 17–26. doi:10.1109/JBHI.2019.2914970. PMID 31217131. S2CID 195187846.
+
+^ Zeng, Kun; Yu, Jun; Wang, Ruxin; Li, Cuihua; Tao, Dacheng (January 2017). "Coupled Deep Autoencoder for Single Image Super-Resolution". IEEE Transactions on Cybernetics. 47 (1): 27–37. doi:10.1109/TCYB.2015.2501373. ISSN 2168-2267. PMID 26625442. S2CID 20787612.
+
+^ Zhavoronkov, Alex (2019). "Deep learning enables rapid identification of potent DDR1 kinase inhibitors". Nature Biotechnology. 37 (9): 1038–1040. doi:10.1038/s41587-019-0224-x. PMID 31477924. S2CID 201716327.
+
+^ Gregory, Barber. "A Molecule Designed By AI Exhibits 'Druglike' Qualities". Wired.
+
+^ Borysov, Stanislav S.; Rich, Jeppe; Pereira, Francisco C. (September 2019). "How to generate micro-agents? A deep generative modeling approach to population synthesis". Transportation Research Part C: Emerging Technologies. 106: 73–97. arXiv:1808.06910. doi:10.1016/j.trc.2019.07.006.
+
+^ De, Shaunak; Maity, Abhishek; Goel, Vritti; Shitole, Sanjay; Bhattacharya, Avik (2017). "Predicting the popularity of instagram posts for a lifestyle magazine using deep learning". 2017 2nd IEEE International Conference on Communication Systems, Computing and IT Applications (CSCITA). pp. 174–177. doi:10.1109/CSCITA.2017.8066548. ISBN 978-1-5090-4381-1. S2CID 35350962.
+
+^ Cho, Kyunghyun; Bart van Merrienboer; Bahdanau, Dzmitry; Bengio, Yoshua (2014). "On the Properties of Neural Machine Translation: Encoder-Decoder Approaches". arXiv:1409.1259 [cs.CL].
+
+^ Sutskever, Ilya; Vinyals, Oriol; Le, Quoc V. (2014). "Sequence to Sequence Learning with Neural Networks". arXiv:1409.3215 [cs.CL].
+
+^ Han, Lifeng; Kuang, Shaohui (2018). "Incorporating Chinese Radicals into Neural Machine Translation: Deeper Than Character Level". arXiv:1805.01565 [cs.CL].
+
+
+vteNoise (physics and telecommunications)General
+Acoustic quieting
+Distortion
+Noise cancellation
+Noise control
+Noise measurement
+Noise power
+Noise reduction
+Noise temperature
+Phase distortion
+Noise in...
+Audio
+Buildings
+Electronics
+Environment
+Government regulation
+Human health
+Images
+Radio
+Rooms
+Ships
+Sound masking
+Transportation
+Video
+Class of noise
+Additive white Gaussian noise (AWGN)
+Atmospheric noise
+Background noise
+Brownian noise
+Burst noise
+Cosmic noise
+Flicker noise
+Gaussian noise
+Grey noise
+Jitter
+Johnson–Nyquist noise (thermal noise)
+Pink noise
+Quantization error (or q. noise)
+Shot noise
+White noise
+Coherent noise
+Value noise
+Gradient noise
+Worley noise
+Engineering terms
+Channel noise level
+Circuit noise level
+Effective input noise temperature
+Equivalent noise resistance
+Equivalent pulse code modulation noise
+Impulse noise (audio)
+Noise figure
+Noise floor
+Noise shaping
+Noise spectral density
+Noise, vibration, and harshness (NVH)
+Phase noise
+Pseudorandom noise
+Statistical noise
+Ratios
+Carrier-to-noise ratio (C/N)
+Carrier-to-receiver noise density (C/kT)
+dBrnC
+Eb/N0 (energy per bit to noise density)
+Es/N0 (energy per symbol to noise density)
+Modulation error ratio (MER)
+Signal, noise and distortion (SINAD)
+Signal-to-interference ratio (S/I)
+Signal-to-noise ratio (S/N, SNR)
+Signal-to-noise ratio (imaging)
+Signal-to-interference-plus-noise ratio (SINR)
+Signal-to-quantization-noise ratio (SQNR)
+Contrast-to-noise ratio (CNR)
+Related topics
+List of noise topics
+Acoustics
+Colors of noise
+Interference (communication)
+Noise generator
+Spectrum analyzer
+Thermal radiation
+Denoise methodsGeneral
+Low-pass filter
+Median filter
+Total variation denoising
+Wavelet denoising
+2D (Image)
+Gaussian blur
+Anisotropic diffusion
+Bilateral filter
+Non-local means
+Block-matching and 3D filtering (BM3D)
+Shrinkage Fields
+Denoising autoencoder (DAE)
+Deep Image Prior
+
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Autoencoder&oldid=973684205"
+Categories: Artificial neural networksUnsupervised learningDimension reductionHidden categories: CS1 errors: missing periodicalUse dmy dates from March 2020Articles to be split from May 2020All articles to be split
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+DeutschفارسیFrançais日本語РусскийУкраїнська粵語中文
+Edit links
+
+
+
+
+
+
+ This page was last edited on 18 August 2020, at 16:44 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

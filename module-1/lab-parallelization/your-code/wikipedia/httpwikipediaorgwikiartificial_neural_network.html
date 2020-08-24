@@ -1,0 +1,2025 @@
+
+
+
+
+Artificial neural network - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Artificial neural network
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+Computational model used in machine learning, based on connected, hierarchical functions
+Part of a series onMachine learninganddata mining
+Problems
+Classification
+Clustering
+Regression
+Anomaly detection
+AutoML
+Association rules
+Reinforcement learning
+Structured prediction
+Feature engineering
+Feature learning
+Online learning
+Semi-supervised learning
+Unsupervised learning
+Learning to rank
+Grammar induction
+
+
+Supervised learning(classification • regression) 
+Decision trees
+Ensembles
+Bagging
+Boosting
+Random forest
+k-NN
+Linear regression
+Naive Bayes
+Artificial neural networks
+Logistic regression
+Perceptron
+Relevance vector machine (RVM)
+Support vector machine (SVM)
+
+
+Clustering
+BIRCH
+CURE
+Hierarchical
+k-means
+Expectation–maximization (EM)
+DBSCAN
+OPTICS
+Mean-shift
+
+
+Dimensionality reduction
+Factor analysis
+CCA
+ICA
+LDA
+NMF
+PCA
+PGD
+t-SNE
+
+
+Structured prediction
+Graphical models
+Bayes net
+Conditional random field
+Hidden Markov
+
+
+Anomaly detection
+k-NN
+Local outlier factor
+
+
+Artificial neural network
+Autoencoder
+Deep learning
+DeepDream
+Multilayer perceptron
+RNN
+LSTM
+GRU
+Restricted Boltzmann machine
+GAN
+SOM
+Convolutional neural network
+U-Net
+
+
+Reinforcement learning
+Q-learning
+SARSA
+Temporal difference (TD)
+
+
+Theory
+Bias–variance dilemma
+Computational learning theory
+Empirical risk minimization
+Occam learning
+PAC learning
+Statistical learning
+VC theory
+
+
+Machine-learning venues
+NeurIPS
+ICML
+ML
+JMLR
+ArXiv:cs.LG
+
+
+Glossary of artificial intelligence
+Glossary of artificial intelligence
+
+
+Related articles
+List of datasets for machine-learning research
+Outline of machine learning
+
+vte
+Part on a series onArtificial intelligence
+Major goals
+Knowledge reasoning
+Planning
+Machine learning
+Natural language processing
+Computer vision
+Robotics
+Artificial general intelligence
+
+Approaches
+Symbolic
+Deep learning
+Bayesian networks
+Evolutionary algorithms
+
+Philosophy
+Ethics
+Existential risk
+Turing test
+Chinese room
+Control problem
+Friendly AI
+
+History
+Timeline
+Progress
+AI winter
+
+Technology
+Applications
+Projects
+Programming languages
+
+Glossary
+Glossary
+vte
+Complex systems
+Topics
+
+Emergence
+Self-organization
+Collective behaviourSocial dynamics
+Collective intelligence
+Collective action
+Self-organized criticality
+Herd mentality
+Phase transition
+Agent-based modelling
+Synchronization
+Ant colony optimization
+Particle swarm optimization
+Swarm behaviour
+
+Collective consciousness
+
+NetworksScale-free networks
+Social network analysis
+Small-world networks
+Community identification
+Centrality
+Motifs
+Graph Theory
+Scaling
+Robustness
+Systems biology
+Dynamic networks
+
+Adaptive networks
+
+Evolution and adaptationArtificial neural network
+Evolutionary computation
+Genetic algorithms
+Genetic programming
+Artificial life
+Machine learning
+Evolutionary developmental biology
+Artificial intelligence
+Evolutionary robotics
+
+Evolvability
+
+Pattern formationSpatial fractals
+Reaction–diffusion systems
+Partial differential equations
+Dissipative structures
+Percolation
+Cellular automata
+Spatial ecology
+Self-replication
+Spatial evolutionary biology
+
+Geomorphology
+
+Systems theoryHomeostasis
+Operationalization
+Feedback
+Self-reference
+Goal-oriented
+System dynamics
+Sensemaking
+Entropy
+Cybernetics
+Autopoiesis
+Information theory
+Computation theory
+
+Complexity measurement
+
+Nonlinear dynamicsTime series analysis
+Ordinary differential equations
+Iterative maps
+Phase space
+Attractors
+Stability analysis
+Population dynamics
+Chaos
+Multistability
+Bifurcation
+
+Coupled map lattices
+
+Game theoryPrisoner's dilemma
+Rational choice theory
+Bounded rationality
+Irrational behaviour
+
+Evolutionary game theory
+vte
+Network science
+
+
+
+
+Theory
+Graph
+Complex network
+Contagion
+Small-world
+Scale-free
+Community structure
+Percolation
+Evolution
+Controllability
+Graph drawing
+Social capital
+Link analysis
+Optimization
+Reciprocity
+Closure
+Homophily
+Transitivity
+Preferential attachment
+Balance theory
+Network effect
+Social influence
+
+Network types
+Informational (computing)
+Telecommunication
+Transport
+Social
+Scientific collaboration
+Biological
+Artificial neural
+Interdependent
+Semantic
+Spatial
+Dependency
+Flow
+on-Chip
+
+Graphs
+
+Features
+Clique
+Component
+Cut
+Cycle
+Data structure
+Edge
+Loop
+Neighborhood
+Path
+Vertex
+Adjacency list / matrix
+Incidence list / matrix
+
+Types
+Bipartite
+Complete
+Directed
+Hyper
+Multi
+Random
+Weighted
+
+
+MetricsAlgorithms
+Centrality
+Degree
+Betweenness
+Closeness
+PageRank
+Motif
+Clustering
+Degree distribution
+Assortativity
+Distance
+Modularity
+Efficiency
+
+Models
+
+Topology
+Random graph
+Erdős–Rényi
+Barabási–Albert
+Fitness model
+Watts–Strogatz
+Exponential random (ERGM)
+Random geometric (RGG)
+Hyperbolic (HGN)
+Hierarchical
+Stochastic block
+Maximum entropy
+Soft configuration
+LFR Benchmark
+
+Dynamics
+Boolean network
+agent based
+Epidemic/SIR
+
+
+ListsCategories
+Topics
+Software
+Network scientists
+Category:Network theory
+Category:Graph theory
+vte
+
+
+ An artificial neural network is an interconnected group of  nodes, inspired by a simplification of neurons in a brain. Here, each circular node represents an artificial neuron and an arrow represents a connection from the output of one artificial neuron to the input of another.
+Artificial neural networks (ANNs), usually simply called neural networks (NNs), are computing systems vaguely inspired by the biological neural networks that constitute animal brains.[1]
+
+An ANN is based on a collection of connected units or nodes called artificial neurons, which loosely model the neurons in a biological brain. Each connection, like the synapses in a biological brain, can transmit a signal to other neurons. An artificial neuron that receives a signal then processes it and can signal neurons connected to it. The "signal" at a connection is a real number, and the output of each neuron is computed by some non-linear function of the sum of its inputs. The connections are called edges. Neurons and edges typically have a weight that adjusts as learning proceeds. The weight increases or decreases the strength of the signal at a connection. Neurons may have a threshold such that a signal is sent only if the aggregate signal crosses that threshold. Typically, neurons are aggregated into layers. Different layers may perform different transformations on their inputs. Signals travel from the first layer (the input layer), to the last layer (the output layer), possibly after traversing the layers multiple times.Contents
+
+1 Training
+2 History
+3 Models
+
+3.1 Components of ANNs
+
+3.1.1 Neurons
+3.1.2 Connections and weights
+3.1.3 Propagation function
+
+
+3.2 Organization
+3.3 Hyperparameter
+3.4 Learning
+
+3.4.1 Learning rate
+3.4.2 Cost function
+3.4.3 Backpropagation
+
+
+3.5 Learning paradigms
+
+3.5.1 Supervised learning
+3.5.2 Unsupervised learning
+3.5.3 Reinforcement learning
+3.5.4 Self learning
+
+
+3.6 Other
+
+3.6.1 Modes
+
+
+
+
+4 Types
+5 Network design
+6 Use
+7 Applications
+8 Theoretical properties
+
+8.1 Computational power
+8.2 Capacity
+8.3 Convergence
+8.4 Generalization and statistics
+
+
+9 Criticism
+
+9.1 Training
+9.2 Theory
+9.3 Hardware
+9.4 Practical counterexamples
+9.5 Hybrid approaches
+
+
+10 Gallery
+11 See also
+12 References
+13 Bibliography
+14 External links
+
+
+
+Training[edit]
+Neural networks learn (or are trained) by processing examples, each of which contains a known "input" and "result," forming probability-weighted associations between the two, which are stored within the data structure of the net itself. The training of a neural network from a given example is usually conducted by determining the difference between the processed output of the network (often a prediction) and a target output. This is the error. The network then adjusts its weighted associations according to a learning rule and using this error value. Successive adjustments will cause the neural network to produce output which is increasingly similar to the target output. After a sufficient number of these adjustments the training can be terminated based upon certain criteria. This is known as [[supervised learning]]. 
+Such systems "learn" to perform tasks by considering examples, generally without being programmed with task-specific rules. For example, in image recognition, they might learn to identify images that contain cats by analyzing example images that have been manually labeled as "cat" or "no cat" and using the results to identify cats in other images. They do this without any prior knowledge of cats, for example, that they have fur, tails, whiskers and cat-like faces. Instead, they automatically generate identifying characteristics from the examples that they process.
+
+History[edit]
+Main article: History of artificial neural networks
+Warren McCulloch and Walter Pitts[2] (1943) opened the subject by creating a computational model for neural networks.[3] In the late 1940s, D. O. Hebb[4] created a learning hypothesis based on the mechanism of neural plasticity that became known as Hebbian learning. Farley and Wesley A. Clark[5] (1954) first used computational machines, then called "calculators", to simulate a Hebbian network. Rosenblatt[6] (1958) created the perceptron.[7] The first functional networks with many layers were published by Ivakhnenko and Lapa in 1965, as the Group Method of Data Handling.[8][9][10] The basics of continuous backpropagation[8][11][12][13]  were derived in the context of control theory by Kelley[14] in 1960 and by Bryson in 1961,[15] using principles of dynamic programming.
+In 1970, Seppo Linnainmaa published the general method for automatic differentiation (AD) of discrete connected networks of nested differentiable functions.[16][17] In 1973, Dreyfus used backpropagation to adapt parameters of controllers in proportion to error gradients.[18] Werbos's (1975) backpropagation algorithm enabled practical training of multi-layer networks. In 1982, he applied Linnainmaa's AD method to neural networks in the way that became widely used.[11][19] Thereafter research stagnated following Minsky and Papert (1969),[20] who discovered that basic perceptrons were incapable of processing the exclusive-or circuit and that computers lacked sufficient power to process useful neural networks. 
+Increasing transistor count in digital electronics provided more processing power that enabled the development of practical artificial neural networks in the 1980s. 
+In 1992, max-pooling was introduced to help with least-shift invariance and tolerance to deformation to aid 3D object recognition.[21][22][23] Schmidhuber adopted a multi-level hierarchy of networks (1992) pre-trained one level at a time by unsupervised learning and fine-tuned by backpropagation.[24]
+Geoffrey Hinton et al. (2006) proposed learning a high-level representation using successive layers of binary or real-valued latent variables with a restricted Boltzmann machine[25] to model each layer. In 2012, Ng and Dean created a network that learned to recognize higher-level concepts, such as cats, only from watching unlabeled images.[26] Unsupervised pre-training and increased computing power from GPUs and distributed computing allowed the use of larger networks, particularly in image and visual recognition problems, which became known as "deep learning".[27]
+Ciresan and colleagues (2010)[28] showed that despite the vanishing gradient problem, GPUs make backpropagation feasible for many-layered feedforward neural networks.[29] Between 2009 and 2012, ANNs began winning prizes in ANN contests, approaching human level performance on various tasks, initially in pattern recognition and machine learning.[30][31] For example, the bi-directional and multi-dimensional long short-term memory (LSTM)[32][33][34][35] of Graves et al. won three competitions in connected handwriting recognition in 2009 without any prior knowledge about the three languages to be learned.[34][33]
+Ciresan and colleagues built the first pattern recognizers to achieve human-competitive/superhuman performance[36] on benchmarks such as traffic sign recognition (IJCNN 2012).
+
+Models[edit]
+This section may be confusing or unclear to readers. Please help us clarify the section. There might be a discussion about this on the talk page. (April 2017) (Learn how and when to remove this template message)Further information: Mathematics of artificial neural networks Neuron and myelinated axon, with signal flow from inputs at dendrites to outputs at axon terminals
+ANNs began as an attempt to exploit the architecture of the human brain to perform tasks that conventional algorithms had little success with. They soon reoriented towards improving empirical results, mostly abandoning attempts to remain true to their biological precursors. Neurons are connected to each other in various patterns, to allow the output of some neurons to become the input of others. The network forms a directed, weighted graph.[37]
+An artificial neural network consists of a collection of simulated neurons. Each neuron is a node which is connected to other nodes via links that correspond to biological axon-synapse-dendrite connections. Each link has a weight, which determines the strength of one node's influence on another.[38]
+
+Components of ANNs[edit]
+Neurons[edit]
+ANNs are composed of artificial neurons which are conceptually derived from biological neurons. Each artificial neuron has inputs and produce a single output which can be sent to multiple other neurons. The inputs can be the feature values of a sample of external data, such as images or documents, or they can be the outputs of other neurons. The outputs of the final output neurons of the neural net accomplish the task, such as recognizing an object in an image.
+To find the output of the neuron, first we take the weighted sum of all the inputs, weighted by the weights of the connections from the inputs to the neuron. We add a bias term to this sum. This weighted sum is sometimes called the activation. This weighted sum is then passed through a (usually nonlinear) activation function to produce the output. The initial inputs are external data, such as images and documents. The ultimate outputs accomplish the task, such as recognizing an object in an image.[39]
+
+Connections and weights[edit]
+The network consists of connections, each connection providing the output of one neuron as an input to another neuron. Each connection is assigned a weight that represents its relative importance.[37] A given neuron can have multiple input and output connections.[40]
+
+Propagation function[edit]
+The propagation function computes the input to a neuron from the outputs of its predecessor neurons and their connections as a weighted sum.[37] A bias term can be added to the result of the propagation.[41]
+
+Organization[edit]
+The neurons are typically organized into multiple layers, especially in deep learning. Neurons of one layer connect only to neurons of the immediately preceding and immediately following layers. The layer that receives external data is the input layer. The layer that produces the ultimate result is the output layer. In between them are zero or more hidden layers. Single layer and unlayered networks are also used. Between two layers, multiple connection patterns are possible. They can be fully connected, with every neuron in one layer connecting to every neuron in the next layer. They can be pooling, where a group of neurons in one layer connect to a single neuron in the next layer, thereby reducing the number of neurons in that layer.[42] Neurons with only such connections form a directed acyclic graph and are known as feedforward networks.[43] Alternatively, networks that allow connections between neurons in the same or previous layers are known as recurrent networks.[44]
+
+Hyperparameter[edit]
+Main article: Hyperparameter (machine learning)
+A hyperparameter is a constant parameter whose value is set before the learning process begins. The values of parameters are derived via learning. Examples of hyperparameters include learning rate, the number of hidden layers and batch size.[45] The values of some hyperparameters can be dependent on those of other hyperparameters. For example, the size of some layers can depend on the overall number of layers.
+
+Learning[edit]
+This section includes a list of references, related reading or external links, but its sources remain unclear because it lacks inline citations. Please help to improve this section by introducing more precise citations. (August 2019) (Learn how and when to remove this template message)See also: Mathematical optimization, Estimation theory, and Machine learning
+Learning is the adaptation of the network to better handle a task by considering sample observations. Learning involves adjusting the weights (and optional thresholds) of the network to improve the accuracy of the result. This is done by minimizing the observed errors. Learning is complete when examining additional observations does not usefully reduce the error rate. Even after learning, the error rate typically does not reach 0. If after learning, the error rate is too high, the network typically must be redesigned. Practically this is done by defining a cost function that is evaluated periodically during learning. As long as its output continues to decline, learning continues. The cost is frequently defined as a statistic whose value can only be approximated. The outputs are actually numbers, so when the error is low, the difference between the output (almost certainly a cat) and the correct answer (cat) is small. Learning attempts to reduce the total of the differences across the observations.[37] Most learning models can be viewed as a straightforward application of optimization theory and statistical estimation.
+
+Learning rate[edit]
+The learning rate defines the size of the corrective steps that the model takes to adjust for errors in each observation. A high learning rate shortens the training time, but with lower ultimate accuracy, while a lower learning rate takes longer, but with the potential for greater accuracy. Optimizations such as Quickprop are primarily aimed at speeding up error minimization, while other improvements mainly try to increase reliability. In order to avoid oscillation inside the network such as alternating connection weights, and to improve the rate of convergence, refinements use an adaptive learning rate that increases or decreases as appropriate.[46] The concept of momentum allows the balance between the gradient and the previous change to be weighted such that the weight adjustment depends to some degree on the previous change. A momentum close to 0 emphasizes the gradient, while a value close to 1 emphasizes the last change.
+
+Cost function[edit]
+While it is possible to define a cost function  ad hoc, frequently the choice is determined by the functions desirable properties (such as convexity) or because it arises from the model (e.g., in a probabilistic model the model's posterior probability can be used as an inverse cost).
+
+Backpropagation[edit]
+Main article: Backpropagation
+Backpropagation is a method to adjust the connection weights to compensate for each error found during learning. The error amount is effectively divided among the connections. Technically, backprop calculates the gradient (the derivative) of the cost function associated with a given state with respect to the weights. The weight updates can be done via stochastic gradient descent or other methods, such as Extreme Learning Machines,[47] "No-prop" networks,[48] training without backtracking,[49] "weightless" networks,[50][51] and non-connectionist neural networks.
+
+Learning paradigms[edit]
+This section includes a list of references, related reading or external links, but its sources remain unclear because it lacks inline citations. Please help to improve this section by introducing more precise citations. (August 2019) (Learn how and when to remove this template message)
+The three major learning paradigms are supervised learning, unsupervised learning and reinforcement learning. They each correspond to a particular learning task
+
+Supervised learning[edit]
+Supervised learning uses a set of paired inputs and desired outputs. The learning task is to produce the desired output for each input. In this case the cost function is related to eliminating incorrect deductions.[52] A commonly used cost is the mean-squared error, which tries to minimize the average squared error between the network's output and the desired output. Tasks suited for supervised learning are pattern recognition (also known as classification) and regression (also known as function approximation). Supervised learning is also applicable to sequential data (e.g., for hand writing, speech and gesture recognition). This can be thought of as learning with a "teacher", in the form of a function that provides continuous feedback on the quality of solutions obtained thus far.
+
+Unsupervised learning[edit]
+In unsupervised learning, input data is given along with the cost function, some function of the data 
+
+
+
+
+x
+
+
+
+{\displaystyle \textstyle x}
+
+ and the network's output. The cost function is dependent on the task (the model domain) and any a priori assumptions (the implicit properties of the model, its parameters and the observed variables). As a trivial example, consider the model 
+
+
+
+
+f
+(
+x
+)
+=
+a
+
+
+
+{\displaystyle \textstyle f(x)=a}
+
+ where 
+
+
+
+
+a
+
+
+
+{\displaystyle \textstyle a}
+
+ is a constant and the cost 
+
+
+
+
+C
+=
+E
+[
+(
+x
+−
+f
+(
+x
+)
+
+)
+
+2
+
+
+]
+
+
+
+{\displaystyle \textstyle C=E[(x-f(x))^{2}]}
+
+. Minimizing this cost produces a value of 
+
+
+
+
+a
+
+
+
+{\displaystyle \textstyle a}
+
+ that is equal to the mean of the data. The cost function can be much more complicated. Its form depends on the application: for example, in compression it could be related to the mutual information between 
+
+
+
+
+x
+
+
+
+{\displaystyle \textstyle x}
+
+ and 
+
+
+
+
+f
+(
+x
+)
+
+
+
+{\displaystyle \textstyle f(x)}
+
+, whereas in statistical modeling, it could be related to the posterior probability of the model given the data (note that in both of those examples those quantities would be maximized rather than minimized). Tasks that fall within the paradigm of unsupervised learning are in general estimation problems; the applications include clustering, the estimation of statistical distributions, compression and filtering.
+
+Reinforcement learning[edit]
+Main article: Reinforcement learning
+See also: Stochastic control
+In applications such as playing video games, an actor takes a string of actions, receiving a generally unpredictable response from the environment after each one. The goal is to win the game, i.e., generate the most positive (lowest cost) responses. In reinforcement learning, the aim is to weight the network (devise a policy) to perform actions that minimize long-term (expected cumulative) cost. At each point in time the agent performs an action and the environment generates an observation and an instantaneous cost, according to some (usually unknown) rules. The rules and the long-term cost usually only can be estimated. At any juncture, the agent decides whether to explore new actions to uncover their costs or to exploit prior learning to proceed more quickly.
+Formally the environment is modeled as a Markov decision process (MDP) with states 
+
+
+
+
+
+
+s
+
+1
+
+
+,
+.
+.
+.
+,
+
+s
+
+n
+
+
+
+∈
+S
+
+
+
+{\displaystyle \textstyle {s_{1},...,s_{n}}\in S}
+
+ and actions 
+
+
+
+
+
+
+a
+
+1
+
+
+,
+.
+.
+.
+,
+
+a
+
+m
+
+
+
+∈
+A
+
+
+
+{\displaystyle \textstyle {a_{1},...,a_{m}}\in A}
+
+. Because the state transitions are not known, probability distributions are used instead: the instantaneous cost distribution 
+
+
+
+
+P
+(
+
+c
+
+t
+
+
+
+|
+
+
+s
+
+t
+
+
+)
+
+
+
+{\displaystyle \textstyle P(c_{t}|s_{t})}
+
+, the observation distribution 
+
+
+
+
+P
+(
+
+x
+
+t
+
+
+
+|
+
+
+s
+
+t
+
+
+)
+
+
+
+{\displaystyle \textstyle P(x_{t}|s_{t})}
+
+ and the transition distribution 
+
+
+
+
+P
+(
+
+s
+
+t
++
+1
+
+
+
+|
+
+
+s
+
+t
+
+
+,
+
+a
+
+t
+
+
+)
+
+
+
+{\displaystyle \textstyle P(s_{t+1}|s_{t},a_{t})}
+
+, while a policy is defined as the conditional distribution over actions given the observations. Taken together, the two define a Markov chain (MC). The aim is to discover the lowest-cost MC.
+ANNs serve as the learning component in such applications.[53][54] Dynamic programming coupled with ANNs (giving neurodynamic programming)[55] has been applied to problems such as those involved in vehicle routing,[56] video games, natural resource management[57][58] and medicine[59] because of ANNs ability to mitigate losses of accuracy even when reducing the discretization grid density for numerically approximating the solution of control problems. Tasks that fall within the paradigm of reinforcement learning are control problems, games and other sequential decision making tasks.
+
+Self learning[edit]
+Self learning in neural networks was introduced in 1982 along with a neural network capable of self-learning  named Crossbar Adaptive Array (CAA).[60] It is a system with only one input, situation s, and only one output, action (or behavior) a. It has neither external advice input nor external reinforcement input from the environment. The CAA computes, in a crossbar fashion, both decisions about actions and emotions (feelings) about encountered situations. The system is driven by the interaction between cognition and emotion.[61] Given memory matrix W =||w(a,s)||, the crossbar self learning algorithm in each iteration performs the following computation:
+
+  In situation s perform action a;
+  Receive consequence situation s’;
+  Compute emotion of being in consequence situation v(s’);
+  Update crossbar memory  w’(a,s) = w(a,s) + v(s’).
+
+The backpropagated value (secondary reinforcement) is the emotion toward the consequence situation. The CAA exists in two environments, one is behavioral environment where it behaves, and the other is genetic environment, where from it initially and only once receives initial emotions about to be encountered situations in the behavioral environment. Having received the genome vector (species vector) from the genetic environment, the CAA will learn a goal-seeking behavior, in the behavioral environment that contains both desirable and undesirable situations.[62]
+
+Other[edit]
+In a Bayesian framework, a distribution over the set of allowed models is chosen to minimize the cost. Evolutionary methods,[63] gene expression programming,[64] simulated annealing,[65] expectation-maximization, non-parametric methods and particle swarm optimization[66] are other learning algorithms. Convergent recursion is a learning algorithm for cerebellar model articulation controller (CMAC) neural networks.[67][68]
+
+Modes[edit]
+This section includes a list of references, related reading or external links, but its sources remain unclear because it lacks inline citations. Please help to improve this section by introducing more precise citations. (August 2019) (Learn how and when to remove this template message)
+Two modes of learning are available: stochastic and batch. In stochastic learning, each input creates a weight adjustment. In batch learning weights are adjusted based on a batch of inputs, accumulating errors over the batch. Stochastic learning introduces "noise" into the process, using the local gradient calculated from one data point; this reduces the chance of the network getting stuck in local minima. However, batch learning typically yields a faster, more stable descent to a local minimum, since each update is performed in the direction of the batch's average error. A common compromise is to use "mini-batches", small batches with samples in each batch selected stochastically from the entire data set.
+
+Types[edit]
+Main article: Types of artificial neural networks
+ANNs have evolved into a broad family of techniques that have advanced the state of the art across multiple domains.  The simplest types have one or more static components, including number of units, number of layers, unit weights and topology. Dynamic types allow one or more of these to evolve via learning. The latter are much more complicated, but can shorten learning periods and produce better results. Some types allow/require learning to be "supervised" by the operator, while others operate independently. Some types operate purely in hardware, while others are purely software and run on general purpose computers.
+Some of the main breakthroughs include: convolutional neural networks that have proven particularly successful in processing visual and other two-dimensional data;[69][70] long short-term memory avoid the vanishing gradient problem[71] and can handle signals that have a mix of low and high frequency components aiding large-vocabulary speech recognition,[72][73] text-to-speech synthesis,[74][11][75] and photo-real talking heads;[76] competitive networks such as generative adversarial networks in which multiple networks (of varying structure) compete with each other, on tasks such as winning a game[77] or on deceiving the opponent about the authenticity of an input.[78]
+
+Network design[edit]
+Main article: Neural architecture search
+Neural architecture search (NAS) uses machine learning to automate ANN design. Various approaches to NAS have designed networks that compare well with hand-designed systems. The basic search algorithm is to propose a candidate model, evaluate it against a dataset and use the results as feedback to teach the NAS network.[79] Available systems include AutoML and AutoKeras.[80]
+Design issues include deciding the number, type and connectedness of network layers, as well as the size of each and the connection type (full, pooling, ...).
+Hyperparameters must also be defined as part of the design (they are not learned), governing matters such as how many neurons are in each layer, learning rate, step, stride, depth, receptive field and padding (for CNNs), etc.[81]
+
+Use[edit]
+This section includes a list of references, related reading or external links, but its sources remain unclear because it lacks inline citations. Please help to improve this section by introducing more precise citations. (August 2019) (Learn how and when to remove this template message)
+Using Artificial neural networks requires an understanding of their characteristics.
+
+Choice of model: This depends on the data representation and the application. Overly complex models slow learning.
+Learning algorithm: Numerous trade-offs exist between learning algorithms. Almost any algorithm will work well with the correct hyperparameters for training on a particular data set. However, selecting and tuning an algorithm for training on unseen data requires significant experimentation.
+Robustness: If the model, cost function and learning algorithm are selected appropriately, the resulting ANN can become robust.
+ANN capabilities fall within the following broad categories:[citation needed]
+
+Function approximation, or regression analysis, including time series prediction, fitness approximation and modeling.
+Classification, including pattern and sequence recognition, novelty detection and sequential decision making.
+Data processing, including filtering, clustering, blind source separation and compression.
+Robotics, including directing manipulators and prostheses.
+Control, including computer numerical control.
+Applications[edit]
+Because of their ability to reproduce and model nonlinear processes, Artificial neural networks have found applications in many disciplines. Application areas include system identification and control (vehicle control, trajectory prediction,[82] process control, natural resource management), quantum chemistry,[83] general game playing,[84] pattern recognition (radar systems, face identification, signal classification,[85] 3D reconstruction,[86] object recognition and more), sequence recognition (gesture, speech, handwritten and printed text recognition), medical diagnosis, finance[87] (e.g. automated trading systems), data mining, visualization, machine translation, social network filtering[88] and e-mail spam filtering. ANNs have been used to diagnose cancers, including lung cancer,[89] prostate cancer, colorectal cancer[90] and to distinguish highly invasive cancer cell lines from less invasive lines using only cell shape information.[91][92]
+ANNs have been used to accelerate reliability analysis of infrastructures subject to natural disasters[93][94] and to predict foundation settlements.[95] ANNs have also been used for building black-box models in geoscience: hydrology,[96][97] ocean modelling and coastal engineering,[98][99] and geomorphology.[100] ANNs have been employed in cybersecurity, with the objective to discriminate between legitimate activities and malicious ones. For example, machine learning has been used for classifying Android malware,[101] for identifying domains belonging to threat actors and for detecting URLs posing a security risk.[102] Research is underway on ANN systems designed for penetration testing, for detecting botnets,[103] credit cards frauds[104] and network intrusions.
+ANNs have been proposed as a tool to simulate the properties of many-body open quantum systems.[105][106][107][108] In brain research ANNs have studied short-term behavior of individual neurons,[109] the dynamics of neural circuitry arise from interactions between individual neurons and how behavior can arise from abstract neural modules that represent complete subsystems. Studies considered long-and short-term plasticity of neural systems and their relation to learning and memory from the individual neuron to the system level.
+
+Theoretical properties[edit]
+Computational power[edit]
+The multilayer perceptron is a universal function approximator, as proven by the universal approximation theorem. However, the proof is not constructive regarding the number of neurons required, the network topology, the weights and the learning parameters.
+A specific recurrent architecture with rational-valued weights (as opposed to full precision real number-valued weights) has the power of a universal Turing machine,[110] using a finite number of neurons and standard linear connections. Further, the use of irrational values for weights results in a machine with super-Turing power.[111]
+
+Capacity[edit]
+A model's "capacity" property corresponds to its ability to model any given function. It is related to the amount of information that can be stored in the network and to the notion of complexity.
+Two notions of capacity are known by the community. The information capacity and the VC Dimension. The information capacity of a perceptron is intensively discussed in Sir David MacKay's book [112] which summarizes work by Thomas Cover.[113] The capacity of a network of standard neurons (not convolutional) can be derived by four rules [114] that derive from understanding a neuron as an electrical element. The information capacity captures the functions modelable by the network given any data as input. The second notion, is the VC dimension. VC Dimension uses the principles of measure theory and finds the maximum capacity under the best possible circumstances. This is, given input data in a specific form.  As noted in [112], the VC Dimension for arbitrary inputs is half the information capacity of a Perceptron. The VC Dimension for arbitrary points is sometimes referred to as Memory Capacity.[115]
+
+Convergence[edit]
+Models may not consistently converge on a single solution, firstly because local minima may exist, depending on the cost function and the model. Secondly, the optimization method used might not guarantee to converge when it begins far from any local minimum. Thirdly, for sufficiently large data or parameters, some methods become impractical.
+The convergence behavior of certain types of ANN architectures are more understood than others. When the width of network approaches to infinity, the ANN is well described by its first order Taylor expansion throughout training, and so inherits the convergence behavior of affine models.[116][117] Another example is when parameters are small, it is observed that  ANNs often fits target functions from low to high frequencies.[118][119][120][121] This phenomenon is the opposite to the behavior of some well studied iterative numerical schemes such as Jacobi method.
+
+Generalization and statistics[edit]
+This section includes a list of references, related reading or external links, but its sources remain unclear because it lacks inline citations. Please help to improve this section by introducing more precise citations. (August 2019) (Learn how and when to remove this template message)
+Applications whose goal is to create a system that generalizes well to unseen examples, face the possibility of over-training. This arises in convoluted or over-specified systems when the network capacity significantly exceeds the needed free parameters. Two approaches address over-training. The first is to use cross-validation and similar techniques to check for the presence of over-training and to select hyperparameters to minimize the generalization error.
+The second is to use some form of regularization. This concept emerges in a probabilistic (Bayesian) framework, where regularization can be performed by selecting a larger prior probability over simpler models; but also in statistical learning theory, where the goal is to minimize over two quantities: the 'empirical risk' and the 'structural risk', which roughly corresponds to the error over the training set and the predicted error in unseen data due to overfitting.
+
+ Confidence analysis of a neural network
+Supervised neural networks that use a mean squared error (MSE) cost function can use formal statistical methods to determine the confidence of the trained model. The MSE on a validation set can be used as an estimate for variance. This value can then be used to calculate the confidence interval of network output, assuming a normal distribution. A confidence analysis made this way is statistically valid as long as the output probability distribution stays the same and the network is not modified.
+By assigning a softmax activation function, a generalization of the logistic function, on the output layer of the neural network (or a softmax component in a component-based network) for categorical target variables, the outputs can be interpreted as posterior probabilities. This is useful in classification as it gives a certainty measure on classifications.
+The softmax activation function is:
+
+
+
+
+
+
+y
+
+i
+
+
+=
+
+
+
+e
+
+
+x
+
+i
+
+
+
+
+
+
+∑
+
+j
+=
+1
+
+
+c
+
+
+
+e
+
+
+x
+
+j
+
+
+
+
+
+
+
+
+
+{\displaystyle y_{i}={\frac {e^{x_{i}}}{\sum _{j=1}^{c}e^{x_{j}}}}}
+
+
+
+
+Criticism[edit]
+Training[edit]
+A common criticism of neural networks, particularly in robotics, is that they require too much training for real-world operation.[citation needed] Potential solutions include randomly shuffling training examples, by using a numerical optimization algorithm that does not take too large steps when changing the network connections following an example, grouping examples in so-called mini-batches and/or introducing a recursive least squares algorithm for CMAC.[67]
+
+Theory[edit]
+A fundamental objection is that ANNs do not sufficiently reflect neuronal function. Backpropagation is a critical step, although no such mechanism exists in biological neural networks.[122] How information is coded by real neurons is not known. Sensor neurons fire action potentials more frequently with sensor activation and muscle cells pull more strongly when their associated motor neurons receive action potentials more frequently.[123] Other than the case of relaying information from a sensor neuron to a motor neuron, almost nothing of the principles of how information is handled by biological neural networks is known.
+A central claim of ANNs is that they embody new and powerful general principles for processing information. Unfortunately, these principles are ill-defined. It is often claimed that they are emergent from the network itself. This allows simple statistical association (the basic function of artificial neural networks) to be described as learning or recognition. Alexander Dewdney commented that, as a result, artificial neural networks have a "something-for-nothing quality, one that imparts a peculiar aura of laziness and a distinct lack of curiosity about just how good these computing systems are. No human hand (or mind) intervenes; solutions are found as if by magic; and no one, it seems, has learned anything".[124] One response to Dewdney is that neural networks handle many complex and diverse tasks, ranging from autonomously flying aircraft[125] to detecting credit card fraud to mastering the game of Go.
+Technology writer Roger Bridgman commented:
+
+Neural networks, for instance, are in the dock not only because they have been hyped to high heaven, (what hasn't?) but also because you could create a successful net without understanding how it worked: the bunch of numbers that captures its behaviour would in all probability be "an opaque, unreadable table...valueless as a scientific resource".
+In spite of his emphatic declaration that science is not technology, Dewdney seems here to pillory neural nets as bad science when most of those devising them are just trying to be good engineers. An unreadable table that a useful machine could read would still be well worth having.[126]
+
+
+Biological brains use both shallow and deep circuits as reported by brain anatomy,[127] displaying a wide variety of invariance. Weng[128] argued that the brain self-wires largely according to signal statistics and therefore, a serial cascade cannot catch all major statistical dependencies.
+
+Hardware[edit]
+Large and effective neural networks require considerable computing resources.[129] While the brain has hardware tailored to the task of processing signals through a graph of neurons, simulating even a simplified neuron on von Neumann architecture may consume vast amounts of memory and storage. Furthermore, the designer often needs to transmit signals through many of these connections and their associated neurons –  which require enormous CPU power and time.
+Schmidhuber noted that the resurgence of neural networks in the twenty-first century is largely attributable to advances in hardware: from 1991 to 2015, computing power, especially as delivered by GPGPUs (on GPUs), has increased around a million-fold, making the standard backpropagation algorithm feasible for training networks that are several layers deeper than before.[8] The use of accelerators such as FPGAs and GPUs can reduce training times from months to days.[130][129]
+Neuromorphic engineering addresses the hardware difficulty directly, by constructing non-von-Neumann chips to directly implement neural networks in circuitry. Another type of chip optimized for neural network processing is called a Tensor Processing Unit, or TPU.[131]
+
+Practical counterexamples[edit]
+Analyzing what has been learned by an ANN, is much easier than to analyze what has been learned by a biological neural network. Furthermore, researchers involved in exploring learning algorithms for neural networks are gradually uncovering general principles that allow a learning machine to be successful. For example, local vs. non-local learning and shallow vs. deep architecture.[132]
+
+Hybrid approaches[edit]
+Advocates of hybrid models (combining neural networks and symbolic approaches), claim that such a mixture can better capture the mechanisms of the human mind.[133][134]
+
+Gallery[edit]
+
+
+
+
+A single-layer feedforward artificial neural network. Arrows originating from 
+
+
+
+
+
+x
+
+2
+
+
+
+
+
+{\displaystyle \scriptstyle x_{2}}
+
+ are omitted for clarity. There are p inputs to this network and q outputs. In this system, the value of the qth output, 
+
+
+
+
+
+y
+
+q
+
+
+
+
+
+{\displaystyle \scriptstyle y_{q}}
+
+ would be calculated as 
+
+
+
+
+
+y
+
+q
+
+
+=
+K
+∗
+(
+∑
+(
+
+x
+
+i
+
+
+∗
+
+w
+
+i
+q
+
+
+)
+−
+
+b
+
+q
+
+
+)
+
+
+
+{\displaystyle \scriptstyle y_{q}=K*(\sum (x_{i}*w_{iq})-b_{q})}
+
+
+
+
+
+
+
+
+A two-layer feedforward artificial neural network.
+
+
+
+
+
+
+An artificial neural network.
+
+
+
+
+
+
+An ANN dependency graph.
+
+
+
+
+
+
+A single-layer feedforward artificial neural network with 4 inputs, 6 hidden and 2 outputs. Given position state and direction outputs wheel based control values.
+
+
+
+
+
+
+A two-layer feedforward artificial neural network with 8 inputs, 2x8 hidden and 2 outputs. Given position state, direction and other environment values outputs thruster based control values.
+
+
+
+
+
+
+Parallel pipeline structure of CMAC neural network. This learning algorithm can converge in one step.
+
+
+
+
+See also[edit]
+This "see also" section may contain an excessive number of suggestions. Please ensure that only the most relevant links are given, that they are not red links, and that any links are not already in this article. (March 2018) (Learn how and when to remove this template message)
+
+Large width limits of neural networks
+Hierarchical temporal memory
+20Q
+ADALINE
+Adaptive resonance theory
+Artificial life
+Associative memory
+Autoencoder
+BEAM robotics
+Biological cybernetics
+Biologically inspired computing
+Blue Brain Project
+Catastrophic interference
+Cerebellar Model Articulation Controller (CMAC)
+Cognitive architecture
+Cognitive science
+Convolutional neural network (CNN)
+Connectionist expert system
+Connectomics
+Cultured neuronal networks
+Deep learning
+Encog
+Fuzzy logic
+Gene expression programming
+Genetic algorithm
+Genetic programming
+Group method of data handling
+Habituation
+In Situ Adaptive Tabulation
+Machine learning concepts
+Models of neural computation
+Neuroevolution
+Neural coding
+Neural gas
+Neural machine translation
+Neural network software
+Neuroscience
+Nonlinear system identification
+Optical neural network
+Parallel Constraint Satisfaction Processes
+Parallel distributed processing
+Radial basis function network
+Recurrent neural networks
+Self-organizing map
+Spiking neural network
+Systolic array
+Tensor product network
+Time delay neural network (TDNN)
+
+References[edit]
+
+
+^ Chen, Yung-Yao; Lin, Yu-Hsiu; Kung, Chia-Ching; Chung, Ming-Han; Yen, I.-Hsuan (January 2019). "Design and Implementation of Cloud Analytics-Assisted Smart Power Meters Considering Advanced Artificial Intelligence as Edge Analytics in Demand-Side Management for Smart Homes". Sensors. 19 (9): 2047. doi:10.3390/s19092047. PMC 6539684. PMID 31052502.
+
+^ McCulloch, Warren; Walter Pitts (1943). "A Logical Calculus of Ideas Immanent in Nervous Activity". Bulletin of Mathematical Biophysics. 5 (4): 115–133. doi:10.1007/BF02478259.
+
+^ Kleene, S.C. (1956). "Representation of Events in Nerve Nets and Finite Automata". Annals of Mathematics Studies (34). Princeton University Press. pp. 3–41. Retrieved 17 June 2017.
+
+^ Hebb, Donald (1949). The Organization of Behavior. New York: Wiley. ISBN 978-1-135-63190-1.
+
+^ Farley, B.G.; W.A. Clark (1954). "Simulation of Self-Organizing Systems by Digital Computer". IRE Transactions on Information Theory. 4 (4): 76–84. doi:10.1109/TIT.1954.1057468.
+
+^ Rosenblatt, F. (1958). "The Perceptron: A Probabilistic Model For Information Storage And Organization In The Brain". Psychological Review. 65 (6): 386–408. CiteSeerX 10.1.1.588.3775. doi:10.1037/h0042519. PMID 13602029.
+
+^ Werbos, P.J. (1975). Beyond Regression: New Tools for Prediction and Analysis in the Behavioral Sciences.
+
+^ a b c Schmidhuber, J. (2015). "Deep Learning in Neural Networks: An Overview". Neural Networks. 61: 85–117. arXiv:1404.7828. doi:10.1016/j.neunet.2014.09.003. PMID 25462637.
+
+^ Ivakhnenko, A. G. (1973). Cybernetic Predicting Devices. CCM Information Corporation.
+
+^ Ivakhnenko, A. G.; Grigorʹevich Lapa, Valentin (1967). Cybernetics and forecasting techniques. American Elsevier Pub. Co.
+
+^ a b c Schmidhuber, Jürgen (2015). "Deep Learning". Scholarpedia. 10 (11): 85–117. Bibcode:2015SchpJ..1032832S. doi:10.4249/scholarpedia.32832.
+
+^ Dreyfus, Stuart E. (1 September 1990). "Artificial neural networks, back propagation, and the Kelley-Bryson gradient procedure". Journal of Guidance, Control, and Dynamics. 13 (5): 926–928. Bibcode:1990JGCD...13..926D. doi:10.2514/3.25422. ISSN 0731-5090.
+
+^ Mizutani, E.; Dreyfus, S.E.; Nishio, K. (2000). "On derivation of MLP backpropagation from the Kelley-Bryson optimal-control gradient formula and its application". Proceedings of the IEEE-INNS-ENNS International Joint Conference on Neural Networks. IJCNN 2000. Neural Computing: New Challenges and Perspectives for the New Millennium. IEEE: 167–172 vol.2. doi:10.1109/ijcnn.2000.857892. ISBN 0769506194.
+
+^ Kelley, Henry J. (1960). "Gradient theory of optimal flight paths". ARS Journal. 30 (10): 947–954. doi:10.2514/8.5282.
+
+^ "A gradient method for optimizing multi-stage allocation processes". Proceedings of the Harvard Univ. Symposium on digital computers and their applications. April 1961.
+
+^ Linnainmaa, Seppo (1970). The representation of the cumulative rounding error of an algorithm as a Taylor expansion of the local rounding errors (Masters) (in Finnish). University of Helsinki. pp. 6–7.
+
+^ Linnainmaa, Seppo (1976). "Taylor expansion of the accumulated rounding error". BIT Numerical Mathematics. 16 (2): 146–160. doi:10.1007/bf01931367.
+
+^ Dreyfus, Stuart (1973). "The computational solution of optimal control problems with time lag". IEEE Transactions on Automatic Control. 18 (4): 383–385. doi:10.1109/tac.1973.1100330.
+
+^ Werbos, Paul (1982). "Applications of advances in nonlinear sensitivity analysis" (PDF). System modeling and optimization. Springer. pp. 762–770.
+
+^ Minsky, Marvin; Papert, Seymour (1969). Perceptrons: An Introduction to Computational Geometry. MIT Press. ISBN 978-0-262-63022-1.
+
+^ J. Weng, N. Ahuja and T. S. Huang, "Cresceptron: a self-organizing neural network which grows adaptively," Proc. International Joint Conference on Neural Networks, Baltimore, Maryland, vol I, pp. 576–581, June, 1992.
+
+^ J. Weng, N. Ahuja and T. S. Huang, "Learning recognition and segmentation of 3-D objects from 2-D images," Proc. 4th International Conf. Computer Vision, Berlin, Germany, pp. 121–128, May, 1993.
+
+^ J. Weng, N. Ahuja and T. S. Huang, "Learning recognition and segmentation using the Cresceptron," International Journal of Computer Vision, vol. 25, no. 2, pp. 105–139, Nov. 1997.
+
+^ J. Schmidhuber., "Learning complex, extended sequences using the principle of history compression," Neural Computation, 4, pp. 234–242, 1992.
+
+^ Smolensky, P. (1986). "Information processing in dynamical systems: Foundations of harmony theory.".  In D. E. Rumelhart; J. L. McClelland; PDP Research Group (eds.). Parallel Distributed Processing: Explorations in the Microstructure of Cognition. 1. pp. 194–281. ISBN 9780262680530.
+
+^ Ng, Andrew; Dean, Jeff (2012). "Building High-level Features Using Large Scale Unsupervised Learning". arXiv:1112.6209 [cs.LG].
+
+^ Ian Goodfellow and Yoshua Bengio and Aaron Courville (2016). Deep Learning. MIT Press.
+
+^ Cireşan, Dan Claudiu; Meier, Ueli; Gambardella, Luca Maria; Schmidhuber, Jürgen (21 September 2010). "Deep, Big, Simple Neural Nets for Handwritten Digit Recognition". Neural Computation. 22 (12): 3207–3220. arXiv:1003.0358. doi:10.1162/neco_a_00052. ISSN 0899-7667. PMID 20858131.
+
+^ Dominik Scherer, Andreas C. Müller, and Sven Behnke: "Evaluation of Pooling Operations in Convolutional Architectures for Object Recognition," In 20th International Conference Artificial Neural Networks (ICANN), pp. 92–101, 2010. doi:10.1007/978-3-642-15825-4_10.
+
+^ 2012 Kurzweil AI Interview Archived 31 August 2018 at the Wayback Machine with Jürgen Schmidhuber on the eight competitions won by his Deep Learning team 2009–2012
+
+^ "How bio-inspired deep learning keeps winning competitions | KurzweilAI". www.kurzweilai.net. Archived from the original on 31 August 2018. Retrieved 16 June 2017.
+
+^ Graves, Alex; and Schmidhuber, Jürgen; Offline Handwriting Recognition with Multidimensional Recurrent Neural Networks, in Bengio, Yoshua; Schuurmans, Dale; Lafferty, John; Williams, Chris K. I.; and Culotta, Aron (eds.), Advances in Neural Information Processing Systems 22 (NIPS'22), 7–10 December 2009, Vancouver, BC, Neural Information Processing Systems (NIPS) Foundation, 2009, pp. 545–552.
+
+^ a b Graves, A.; Liwicki, M.; Fernandez, S.; Bertolami, R.; Bunke, H.; Schmidhuber, J. (2009). "A Novel Connectionist System for Improved Unconstrained Handwriting Recognition" (PDF). IEEE Transactions on Pattern Analysis and Machine Intelligence. 31 (5): 855–868. CiteSeerX 10.1.1.139.4502. doi:10.1109/tpami.2008.137. PMID 19299860.
+
+^ a b Graves, Alex; Schmidhuber, Jürgen (2009).  Bengio, Yoshua; Schuurmans, Dale; Lafferty, John; Williams, Chris editor-K. I.; Culotta, Aron (eds.). "Offline Handwriting Recognition with Multidimensional Recurrent Neural Networks". Neural Information Processing Systems (NIPS) Foundation. Curran Associates, Inc: 545–552.
+
+^ Graves, A.; Liwicki, M.; Fernández, S.; Bertolami, R.; Bunke, H.; Schmidhuber, J. (May 2009). "A Novel Connectionist System for Unconstrained Handwriting Recognition". IEEE Transactions on Pattern Analysis and Machine Intelligence. 31 (5): 855–868. CiteSeerX 10.1.1.139.4502. doi:10.1109/tpami.2008.137. ISSN 0162-8828. PMID 19299860.
+
+^ Ciresan, Dan; Meier, U.; Schmidhuber, J. (June 2012). Multi-column deep neural networks for image classification. 2012 IEEE Conference on Computer Vision and Pattern Recognition. pp. 3642–3649. arXiv:1202.2745. Bibcode:2012arXiv1202.2745C. CiteSeerX 10.1.1.300.3283. doi:10.1109/cvpr.2012.6248110. ISBN 978-1-4673-1228-8.
+
+^ a b c d Zell, Andreas (2003). "chapter 5.2". Simulation neuronaler Netze [Simulation of Neural Networks] (in German) (1st ed.). Addison-Wesley. ISBN 978-3-89319-554-1. OCLC 249017987.
+
+^ Artificial intelligence (3rd ed.). Addison-Wesley Pub. Co. 1992. ISBN 0-201-53377-4.
+
+^ "The Machine Learning Dictionary". www.cse.unsw.edu.au. Archived from the original on 26 August 2018. Retrieved 4 November 2009.
+
+^ Abbod, Maysam F (2007). "Application of Artificial Intelligence to the Management of Urological Cancer". The Journal of Urology. 178 (4): 1150–1156. doi:10.1016/j.juro.2007.05.122. PMID 17698099.
+
+^ DAWSON, CHRISTIAN W (1998). "An artificial neural network approach to rainfall-runoff modelling". Hydrological Sciences Journal. 43 (1): 47–66. doi:10.1080/02626669809492102.
+
+^ Ciresan, Dan; Ueli Meier; Jonathan Masci; Luca M. Gambardella; Jurgen Schmidhuber (2011). "Flexible, High Performance Convolutional Neural Networks for Image Classification" (PDF). Proceedings of the Twenty-Second International Joint Conference on Artificial Intelligence-Volume Volume Two. 2: 1237–1242. Retrieved 17 November 2013.
+
+^ Zell, Andreas (1994). Simulation Neuronaler Netze [Simulation of Neural Networks] (in German) (1st ed.). Addison-Wesley. p. 73. ISBN 3-89319-554-8.
+
+^ Miljanovic, Milos (February–March 2012). "Comparative analysis of Recurrent and Finite Impulse Response Neural Networks in Time Series Prediction" (PDF). Indian Journal of Computer and Engineering. 3 (1).
+
+^ Lau, Suki (10 July 2017). "A Walkthrough of Convolutional Neural Network — Hyperparameter Tuning". Medium. Retrieved 23 August 2019.
+
+^ Li, Y.; Fu, Y.; Li, H.; Zhang, S. W. (1 June 2009). The Improved Training Algorithm of Back Propagation Neural Network with Self-adaptive Learning Rate. 2009 International Conference on Computational Intelligence and Natural Computing. 1. pp. 73–76. doi:10.1109/CINC.2009.111. ISBN 978-0-7695-3645-3. S2CID 10557754.
+
+^ Huang, Guang-Bin; Zhu, Qin-Yu; Siew, Chee-Kheong (2006). "Extreme learning machine: theory and applications". Neurocomputing. 70 (1): 489–501. CiteSeerX 10.1.1.217.3692. doi:10.1016/j.neucom.2005.12.126.
+
+^ Widrow, Bernard;  et al. (2013). "The no-prop algorithm: A new learning algorithm for multilayer neural networks". Neural Networks. 37: 182–188. doi:10.1016/j.neunet.2012.09.020. PMID 23140797.
+
+^ Ollivier, Yann; Charpiat, Guillaume (2015). "Training recurrent networks without backtracking". arXiv:1507.07680 [cs.NE].
+
+^ ESANN. 2009
+
+^ Hinton, G. E. (2010). "A Practical Guide to Training Restricted Boltzmann Machines". Tech. Rep. UTML TR 2010-003.
+
+^ Ojha, Varun Kumar; Abraham, Ajith; Snášel, Václav (1 April 2017). "Metaheuristic design of feedforward neural networks: A review of two decades of research". Engineering Applications of Artificial Intelligence. 60: 97–116. arXiv:1705.05584. Bibcode:2017arXiv170505584O. doi:10.1016/j.engappai.2017.01.013.
+
+^ Dominic, S.; Das, R.; Whitley, D.; Anderson, C. (July 1991). "Genetic reinforcement learning for neural networks". IJCNN-91-Seattle International Joint Conference on Neural Networks. IJCNN-91-Seattle International Joint Conference on Neural Networks. Seattle, Washington, USA: IEEE. doi:10.1109/IJCNN.1991.155315. ISBN 0-7803-0164-1.
+
+^ Hoskins, J.C.; Himmelblau, D.M. (1992). "Process control via artificial neural networks and reinforcement learning". Computers & Chemical Engineering. 16 (4): 241–251. doi:10.1016/0098-1354(92)80045-B.
+
+^ Bertsekas, D.P.; Tsitsiklis, J.N. (1996). Neuro-dynamic programming. Athena Scientific. p. 512. ISBN 978-1-886529-10-6.
+
+^ Secomandi, Nicola (2000). "Comparing neuro-dynamic programming algorithms for the vehicle routing problem with stochastic demands". Computers & Operations Research. 27 (11–12): 1201–1225. CiteSeerX 10.1.1.392.4034. doi:10.1016/S0305-0548(99)00146-X.
+
+^ de Rigo, D.; Rizzoli, A. E.; Soncini-Sessa, R.; Weber, E.; Zenesi, P. (2001). "Neuro-dynamic programming for the efficient management of reservoir networks". Proceedings of MODSIM 2001, International Congress on Modelling and Simulation. MODSIM 2001, International Congress on Modelling and Simulation. Canberra, Australia: Modelling and Simulation Society of Australia and New Zealand. doi:10.5281/zenodo.7481. ISBN 0-867405252.
+
+^ Damas, M.; Salmeron, M.; Diaz, A.; Ortega, J.; Prieto, A.; Olivares, G. (2000). "Genetic algorithms and neuro-dynamic programming: application to water supply networks". Proceedings of 2000 Congress on Evolutionary Computation. 2000 Congress on Evolutionary Computation. La Jolla, California, USA: IEEE. doi:10.1109/CEC.2000.870269. ISBN 0-7803-6375-2.
+
+^ Deng, Geng; Ferris, M.C. (2008). Neuro-dynamic programming for fractionated radiotherapy planning. Springer Optimization and Its Applications. 12. pp. 47–70. CiteSeerX 10.1.1.137.8288. doi:10.1007/978-0-387-73299-2_3. ISBN 978-0-387-73298-5.
+
+^ Bozinovski, S. (1982). "A self learning system using secondary reinforcement". In R. Trappl (ed.) Cybernetics and Systems Research: Proceedings of the Sixth European Meeting on Cybernetics and Systems Research. North Holland. pp. 397–402. ISBN 978-0-444-86488-8.
+
+^ Bozinovski, S. (2014) "Modeling mechanisms of cognition-emotion interaction in artificial neural networks, since 1981." Procedia Computer Science p. 255-263
+
+^ Bozinovski, Stevo; Bozinovska, Liljana (2001). "Self-learning agents: A connectionist theory of emotion based on crossbar value judgment". Cybernetics and Systems. 32 (6): 637–667. doi:10.1080/01969720118145.
+
+^ de Rigo, D.; Castelletti, A.; Rizzoli, A. E.; Soncini-Sessa, R.; Weber, E. (January 2005). "A selective improvement technique for fastening Neuro-Dynamic Programming in Water Resources Network Management".  In Pavel Zítek (ed.). Proceedings of the 16th IFAC World Congress – IFAC-PapersOnLine. 16th IFAC World Congress. 16. Prague, Czech Republic: IFAC. doi:10.3182/20050703-6-CZ-1902.02172. ISBN 978-3-902661-75-3. Retrieved 30 December 2011.
+
+^ Ferreira, C. (2006). "Designing Neural Networks Using Gene Expression Programming" (PDF). In A. Abraham, B. de Baets, M. Köppen, and B. Nickolay, eds., Applied Soft Computing Technologies: The Challenge of Complexity, pages 517–536, Springer-Verlag.
+
+^ Da, Y.; Xiurun, G. (July 2005).  T. Villmann (ed.). An improved PSO-based ANN with simulated annealing technique. New Aspects in Neurocomputing: 11th European Symposium on Artificial Neural Networks. Elsevier. doi:10.1016/j.neucom.2004.07.002.
+
+^ Wu, J.; Chen, E. (May 2009).  Wang, H.; Shen, Y.; Huang, T.; Zeng, Z. (eds.). A Novel Nonparametric Regression Ensemble for Rainfall Forecasting Using Particle Swarm Optimization Technique Coupled with Artificial Neural Network. 6th International Symposium on Neural Networks, ISNN 2009. Springer. doi:10.1007/978-3-642-01513-7-6. ISBN 978-3-642-01215-0.
+
+^ a b Ting Qin, et al. "A learning algorithm of CMAC based on RLS." Neural Processing Letters 19.1 (2004): 49–61.
+
+^ Ting Qin, et al. "Continuous CMAC-QRLS and its systolic array." Neural Processing Letters 22.1 (2005): 1–16.
+
+^ LeCun et al., "Backpropagation Applied to Handwritten Zip Code Recognition," Neural Computation, 1, pp. 541–551, 1989.
+
+^ Yann LeCun (2016). Slides on Deep Learning Online
+
+^ Hochreiter, Sepp; Schmidhuber, Jürgen (1 November 1997). "Long Short-Term Memory". Neural Computation. 9 (8): 1735–1780. doi:10.1162/neco.1997.9.8.1735. ISSN 0899-7667. PMID 9377276. S2CID 1915014.
+
+^ Sak, Hasim; Senior, Andrew; Beaufays, Francoise (2014). "Long Short-Term Memory recurrent neural network architectures for large scale acoustic modeling" (PDF). Archived from the original (PDF) on 24 April 2018.
+
+^ Li, Xiangang; Wu, Xihong (15 October 2014). "Constructing Long Short-Term Memory based Deep Recurrent Neural Networks for Large Vocabulary Speech Recognition". arXiv:1410.4281 [cs.CL].
+
+^ Fan, Y.; Qian, Y.; Xie, F.; Soong, F. K. (2014). "TTS synthesis with bidirectional LSTM based Recurrent Neural Networks". Proceedings of the Annual Conference of the International Speech Communication Association, Interspeech: 1964–1968. Retrieved 13 June 2017.
+
+^ Zen, Heiga; Sak, Hasim (2015). "Unidirectional Long Short-Term Memory Recurrent Neural Network with Recurrent Output Layer for Low-Latency Speech Synthesis" (PDF). Google.com. ICASSP. pp. 4470–4474.
+
+^ Fan, Bo; Wang, Lijuan; Soong, Frank K.; Xie, Lei (2015). "Photo-Real Talking Head with Deep Bidirectional LSTM" (PDF). Proceedings of ICASSP.
+
+^ Silver, David; Hubert, Thomas; Schrittwieser, Julian; Antonoglou, Ioannis; Lai, Matthew; Guez, Arthur; Lanctot, Marc; Sifre, Laurent; Kumaran, Dharshan; Graepel, Thore; Lillicrap, Timothy; Simonyan, Karen; Hassabis, Demis (5 December 2017). "Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm". arXiv:1712.01815 [cs.AI].
+
+^ Goodfellow, Ian; Pouget-Abadie, Jean; Mirza, Mehdi; Xu, Bing; Warde-Farley, David; Ozair, Sherjil; Courville, Aaron; Bengio, Yoshua (2014). Generative Adversarial Networks (PDF). Proceedings of the International Conference on Neural Information Processing Systems (NIPS 2014). pp. 2672–2680.
+
+^ Zoph, Barret; Le, Quoc V. (4 November 2016). "Neural Architecture Search with Reinforcement Learning". arXiv:1611.01578 [cs.LG].
+
+^ "AutoKeras". autokeras.com. Retrieved 21 August 2019.
+
+^ "Claesen, Marc, and Bart De Moor. "Hyperparameter Search in Machine Learning." arXiv preprint arXiv:1502.02127 (2015)". arXiv:1502.02127. Bibcode:2015arXiv150202127C.
+
+^ Zissis, Dimitrios (October 2015). "A cloud based architecture capable of perceiving and predicting multiple vessel behaviour". Applied Soft Computing. 35: 652–661. doi:10.1016/j.asoc.2015.07.002.
+
+^ Roman M. Balabin; Ekaterina I. Lomakina (2009). "Neural network approach to quantum-chemistry data: Accurate prediction of density functional theory energies". J. Chem. Phys. 131 (7): 074104. Bibcode:2009JChPh.131g4104B. doi:10.1063/1.3206326. PMID 19708729.
+
+^ Silver, David;  et al. (2016). "Mastering the game of Go with deep neural networks and tree search" (PDF). Nature. 529 (7587): 484–9. Bibcode:2016Natur.529..484S. doi:10.1038/nature16961. PMID 26819042.
+
+^ Sengupta, Nandini; Sahidullah, Md; Saha, Goutam (August 2016). "Lung sound classification using cepstral-based statistical features". Computers in Biology and Medicine. 75 (1): 118–129. doi:10.1016/j.compbiomed.2016.05.013. PMID 27286184.
+
+^ Choy, Christopher B., et al. "3d-r2n2: A unified approach for single and multi-view 3d object reconstruction." European conference on computer vision. Springer, Cham, 2016.
+
+^ French, Jordan (2016). "The time traveller's CAPM". Investment Analysts Journal. 46 (2): 81–96. doi:10.1080/10293523.2016.1255469.
+
+^ Schechner, Sam (15 June 2017). "Facebook Boosts A.I. to Block Terrorist Propaganda". Wall Street Journal. ISSN 0099-9660. Retrieved 16 June 2017.
+
+^ Ganesan, N (2010). "Application of Neural Networks in Diagnosing Cancer Disease Using Demographic Data". International Journal of Computer Applications. 1 (26): 81–97. Bibcode:2010IJCA....1z..81G. doi:10.5120/476-783.
+
+^ Bottaci, Leonardo (1997). "Artificial Neural Networks Applied to Outcome Prediction for Colorectal Cancer Patients in Separate Institutions" (PDF). Lancet. The Lancet. 350 (9076): 469–72. doi:10.1016/S0140-6736(96)11196-X. PMID 9274582. Archived from the original (PDF) on 23 November 2018. Retrieved 2 May 2012.
+
+^ Alizadeh, Elaheh; Lyons, Samanthe M; Castle, Jordan M; Prasad, Ashok (2016). "Measuring systematic changes in invasive cancer cell shape using Zernike moments". Integrative Biology. 8 (11): 1183–1193. doi:10.1039/C6IB00100A. PMID 27735002.
+
+^ Lyons, Samanthe (2016). "Changes in cell shape are correlated with metastatic potential in murine". Biology Open. 5 (3): 289–299. doi:10.1242/bio.013409. PMC 4810736. PMID 26873952.
+
+^ Nabian, Mohammad Amin; Meidani, Hadi (28 August 2017). "Deep Learning for Accelerated Reliability Analysis of Infrastructure Networks". Computer-Aided Civil and Infrastructure Engineering. 33 (6): 443–458. arXiv:1708.08551. Bibcode:2017arXiv170808551N. doi:10.1111/mice.12359.
+
+^ Nabian, Mohammad Amin; Meidani, Hadi (2018). "Accelerating Stochastic Assessment of Post-Earthquake Transportation Network Connectivity via Machine-Learning-Based Surrogates". Transportation Research Board 97th Annual Meeting.
+
+^ Díaz, E.; Brotons, V.; Tomás, R. (September 2018). "Use of artificial neural networks to predict 3-D elastic settlement of foundations on soils with inclined bedrock". Soils and Foundations. 58 (6): 1414–1422. doi:10.1016/j.sandf.2018.08.001. hdl:10045/81208. ISSN 0038-0806.
+
+^ null null (1 April 2000). "Artificial Neural Networks in Hydrology. I: Preliminary Concepts". Journal of Hydrologic Engineering. 5 (2): 115–123. CiteSeerX 10.1.1.127.3861. doi:10.1061/(ASCE)1084-0699(2000)5:2(115).
+
+^ null null (1 April 2000). "Artificial Neural Networks in Hydrology. II: Hydrologic Applications". Journal of Hydrologic Engineering. 5 (2): 124–137. doi:10.1061/(ASCE)1084-0699(2000)5:2(124).
+
+^ Peres, D. J.; Iuppa, C.; Cavallaro, L.; Cancelliere, A.; Foti, E. (1 October 2015). "Significant wave height record extension by neural networks and reanalysis wind data". Ocean Modelling. 94: 128–140. Bibcode:2015OcMod..94..128P. doi:10.1016/j.ocemod.2015.08.002.
+
+^ Dwarakish, G. S.; Rakshith, Shetty; Natesan, Usha (2013). "Review on Applications of Neural Network in Coastal Engineering". Artificial Intelligent Systems and Machine Learning. 5 (7): 324–331.
+
+^ Ermini, Leonardo; Catani, Filippo; Casagli, Nicola (1 March 2005). "Artificial Neural Networks applied to landslide susceptibility assessment". Geomorphology. Geomorphological hazard and human impact in mountain environments. 66 (1): 327–343. Bibcode:2005Geomo..66..327E. doi:10.1016/j.geomorph.2004.09.025.
+
+^ Nix, R.; Zhang, J. (May 2017). "Classification of Android apps and malware using deep neural networks". 2017 International Joint Conference on Neural Networks (IJCNN): 1871–1878. doi:10.1109/IJCNN.2017.7966078. ISBN 978-1-5090-6182-2.
+
+^ "Detecting Malicious URLs". The systems and networking group at UCSD. Archived from the original on 14 July 2019. Retrieved 15 February 2019.
+
+^ Homayoun, Sajad; Ahmadzadeh, Marzieh; Hashemi, Sattar; Dehghantanha, Ali; Khayami, Raouf (2018),  Dehghantanha, Ali; Conti, Mauro; Dargahi, Tooska (eds.), "BoTShark: A Deep Learning Approach for Botnet Traffic Detection", Cyber Threat Intelligence, Advances in Information Security, Springer International Publishing, pp. 137–153, doi:10.1007/978-3-319-73951-9_7, ISBN 9783319739519
+
+^ and (January 1994). "Credit card fraud detection with a neural-network". 1994 Proceedings of the Twenty-Seventh Hawaii International Conference on System Sciences. 3: 621–630. doi:10.1109/HICSS.1994.323314. ISBN 978-0-8186-5090-1. S2CID 13260377.
+
+^ Nagy, Alexandra (28 June 2019). "Variational Quantum Monte Carlo Method with a Neural-Network Ansatz for Open Quantum Systems". Physical Review Letters. 122 (25): 250501. arXiv:1902.09483. Bibcode:2019PhRvL.122y0501N. doi:10.1103/PhysRevLett.122.250501. PMID 31347886.
+
+^ Yoshioka, Nobuyuki; Hamazaki, Ryusuke (28 June 2019). "Constructing neural stationary states for open quantum many-body systems". Physical Review B. 99 (21): 214306. arXiv:1902.07006. Bibcode:2019arXiv190207006Y. doi:10.1103/PhysRevB.99.214306.
+
+^ Hartmann, Michael J.; Carleo, Giuseppe (28 June 2019). "Neural-Network Approach to Dissipative Quantum Many-Body Dynamics". Physical Review Letters. 122 (25): 250502. arXiv:1902.05131. Bibcode:2019arXiv190205131H. doi:10.1103/PhysRevLett.122.250502. PMID 31347862.
+
+^ Vicentini, Filippo; Biella, Alberto; Regnault, Nicolas; Ciuti, Cristiano (28 June 2019). "Variational Neural-Network Ansatz for Steady States in Open Quantum Systems". Physical Review Letters. 122 (25): 250503. arXiv:1902.10104. Bibcode:2019arXiv190210104V. doi:10.1103/PhysRevLett.122.250503. PMID 31347877.
+
+^ Forrest MD (April 2015). "Simulation of alcohol action upon a detailed Purkinje neuron model and a simpler surrogate model that runs >400 times faster". BMC Neuroscience. 16 (27): 27. doi:10.1186/s12868-015-0162-6. PMC 4417229. PMID 25928094.
+
+^ Siegelmann, H.T.; Sontag, E.D. (1991). "Turing computability with neural nets" (PDF). Appl. Math. Lett. 4 (6): 77–80. doi:10.1016/0893-9659(91)90080-F.
+
+^ Balcázar, José (July 1997). "Computational Power of Neural Networks: A Kolmogorov Complexity Characterization". IEEE Transactions on Information Theory. 43 (4): 1175–1183. CiteSeerX 10.1.1.411.7782. doi:10.1109/18.605580.
+
+^ a b MacKay, David, J.C. (2003). Information Theory, Inference, and Learning Algorithms (PDF). Cambridge University Press. ISBN 9780521642989.CS1 maint: ref=harv (link)
+
+^ Cover, Thomas (1965). "Geometrical and Statistical Properties of Systems of Linear Inequalities with Applications in Pattern Recognition" (PDF). IEEE Transactions on Electronic Computers. IEEE (3): 326–334. doi:10.1109/PGEC.1965.264137.
+
+^ Gerald, Friedland (2019). "Reproducibility and Experimental Design for Machine Learning on Audio and Multimedia Data". MM '19: Proceedings of the 27th ACM International Conference on Multimedia. ACM: 2709–2710. doi:10.1145/3343031.3350545. ISBN 9781450368896.
+
+^ "The Tensorflow Meter".
+
+^ Lee, Jaehoon; Xiao, Lechao; Schoenholz, Samuel S.; Bahri, Yasaman; Novak, Roman; Sohl-Dickstein, Jascha; Pennington, Jeffrey (15 February 2018). "Wide Neural Networks of Any Depth Evolve as Linear Models Under Gradient Descent". arXiv:1902.06720. Cite journal requires |journal= (help)
+
+^ [1], Neural Tangent Kernel: Convergence and Generalization in Neural Networks.
+
+^ [2], Training Behavior of Deep Neural Network in Frequency Domain.
+
+^ [3], On the Spectral Bias of Neural Networks.
+
+^ [4], Frequency Principle: Fourier Analysis Sheds Light on Deep Neural Networks.
+
+^ [5], Theory of the Frequency Principle for General Deep Neural Networks.
+
+^ Crick, Francis (1989). "The recent excitement about neural networks". Nature. 337 (6203): 129–132. Bibcode:1989Natur.337..129C. doi:10.1038/337129a0. PMID 2911347. S2CID 5892527.
+
+^ Adrian, Edward D. (1926). "The impulses produced by sensory nerve endings". The Journal of Physiology. 61 (1): 49–72. doi:10.1113/jphysiol.1926.sp002273. PMC 1514809. PMID 16993776.
+
+^ Dewdney, A. K. (1 April 1997). Yes, we have no neutrons: an eye-opening tour through the twists and turns of bad science. Wiley. p. 82. ISBN 978-0-471-10806-1.
+
+^ NASA – Dryden Flight Research Center – News Room: News Releases: NASA NEURAL NETWORK PROJECT PASSES MILESTONE. Nasa.gov. Retrieved on 2013-11-20.
+
+^ "Roger Bridgman's defence of neural networks". Archived from the original on 19 March 2012. Retrieved 12 July 2010.
+
+^ D. J. Felleman and D. C. Van Essen, "Distributed hierarchical processing in the primate cerebral cortex," Cerebral Cortex, 1, pp. 1–47, 1991.
+
+^ J. Weng, "Natural and Artificial Intelligence: Introduction to Computational Brain-Mind," BMI Press, ISBN 978-0985875725, 2012.
+
+^ a b Edwards, Chris (25 June 2015). "Growing pains for deep learning". Communications of the ACM. 58 (7): 14–16. doi:10.1145/2771283. S2CID 11026540.
+
+^ "A Survey of FPGA-based Accelerators for Convolutional Neural Networks", NCAA, 2018
+
+^ Cade Metz (18 May 2016). "Google Built Its Very Own Chips to Power Its AI Bots". Wired.
+
+^ "Scaling Learning Algorithms towards {AI} - LISA - Publications - Aigaion 2.0". www.iro.umontreal.ca.
+
+^ Sun and Bookman (1990)
+
+^ Tahmasebi; Hezarkhani (2012). "A hybrid neural networks-fuzzy logic-genetic algorithm for grade estimation". Computers & Geosciences. 42: 18–27. Bibcode:2012CG.....42...18T. doi:10.1016/j.cageo.2012.02.004. PMC 4268588. PMID 25540468.
+
+
+Bibliography[edit]
+
+Bhadeshia H. K. D. H. (1999). "Neural Networks in Materials Science" (PDF). ISIJ International. 39 (10): 966–979. doi:10.2355/isijinternational.39.966.
+Bishop, Christopher M. (1995). Neural networks for pattern recognition. Clarendon Press. ISBN 978-0198538493. OCLC 33101074.
+Borgelt, Christian (2003). Neuro-Fuzzy-Systeme : von den Grundlagen künstlicher Neuronaler Netze zur Kopplung mit Fuzzy-Systemen. Vieweg. ISBN 9783528252656. OCLC 76538146.
+Cybenko, G.V. (2006). "Approximation by Superpositions of a Sigmoidal function".  In van Schuppen, Jan H. (ed.). Mathematics of Control, Signals, and Systems. Springer International. pp. 303–314. PDF
+Dewdney, A. K. (1997). Yes, we have no neutrons : an eye-opening tour through the twists and turns of bad science. New York: Wiley. ISBN 9780471108061. OCLC 35558945.
+Duda, Richard O.; Hart, Peter Elliot; Stork, David G. (2001). Pattern classification (2 ed.). Wiley. ISBN 978-0471056690. OCLC 41347061.
+Egmont-Petersen, M.; de Ridder, D.; Handels, H. (2002). "Image processing with neural networks – a review". Pattern Recognition. 35 (10): 2279–2301. CiteSeerX 10.1.1.21.5444. doi:10.1016/S0031-3203(01)00178-9.
+Fahlman, S.; Lebiere, C (1991). "The Cascade-Correlation Learning Architecture" (PDF).
+created for National Science Foundation, Contract Number EET-8716324, and Defense Advanced Research Projects Agency (DOD), ARPA Order No. 4976 under Contract F33615-87-C-1499.
+Gurney, Kevin (1997). An introduction to neural networks. UCL Press. ISBN 978-1857286731. OCLC 37875698.
+Haykin, Simon S. (1999). Neural networks : a comprehensive foundation. Prentice Hall. ISBN 978-0132733502. OCLC 38908586.
+Hertz, J.; Palmer, Richard G.; Krogh, Anders S. (1991). Introduction to the theory of neural computation. Addison-Wesley. ISBN 978-0201515602. OCLC 21522159.
+Information theory, inference, and learning algorithms. Cambridge University Press. 25 September 2003. Bibcode:2003itil.book.....M. ISBN 9780521642989. OCLC 52377690.
+Kruse, Rudolf; Borgelt, Christian; Klawonn, F.; Moewes, Christian; Steinbrecher, Matthias; Held, Pascal (2013). Computational intelligence : a methodological introduction. Springer. ISBN 9781447150121. OCLC 837524179.
+Lawrence, Jeanette (1994). Introduction to neural networks : design, theory and applications. California Scientific Software. ISBN 978-1883157005. OCLC 32179420.
+MacKay, David, J.C. (2003). Information Theory, Inference, and Learning Algorithms (PDF). Cambridge University Press. ISBN 9780521642989.CS1 maint: ref=harv (link)
+Masters, Timothy (1994). Signal and image processing with neural networks : a C++ sourcebook. J. Wiley. ISBN 978-0471049630. OCLC 29877717.
+Ripley, Brian D. (2007). Pattern Recognition and Neural Networks. Cambridge University Press. ISBN 978-0-521-71770-0.
+Siegelmann, H.T.; Sontag, Eduardo D. (1994). "Analog computation via neural networks". Theoretical Computer Science. 131 (2): 331–360. doi:10.1016/0304-3975(94)90178-3. S2CID 2456483.
+Smith, Murray (1993). Neural networks for statistical modeling. Van Nostrand Reinhold. ISBN 978-0442013103. OCLC 27145760.
+Wasserman, Philip D. (1993). Advanced methods in neural computing. Van Nostrand Reinhold. ISBN 978-0442004613. OCLC 27429729.
+Wilson, Halsey (2018). Artificial intelligence. Grey House Publishing. ISBN 978-1682178676.
+
+External links[edit]
+The Neural Network Zoo – a compilation of neural network types
+The Stilwell Brain – a Mind Field episode featuring an experiment in which humans act as individual neurons in a neural network that classifies handwritten digits
+Authority control 
+GND: 4226127-2
+LCCN: sh90001937
+NDL: 01165604
+
+vteComplex systemsBackground
+Emergence
+Self-Organization
+Collective Behaviour
+Social dynamics
+Collective intelligence
+Collective action
+Collective consciousness
+Self-organized criticality
+Herd mentality
+Phase transition
+Agent-based modelling
+Synchronization
+Ant colony optimization
+Particle swarm optimization
+Swarm behaviour
+Evolution & Adaptation
+Artificial neural network
+Evolutionary computation
+Genetic algorithms
+Genetic programming
+Artificial life
+Machine learning
+Evolutionary developmental biology
+Artificial intelligence
+Evolutionary robotics
+Evolvability
+Game Theory
+Prisoner's dilemma
+Rational choice theory
+Bounded rationality
+Irrational behaviour
+Evolutionary game theory
+Networks
+Social network analysis
+Small-world networks
+Community identification
+Centrality
+Motifs
+Graph Theory
+Scaling
+Robustness
+Systems biology
+Dynamic networks
+Adaptive networks
+Nonlinear Dynamics
+Time series analysis
+Ordinary differential equations
+Iterative maps
+Phase space
+Attractors
+Stability analysis
+Population dynamics
+Chaos
+Multistability
+Bifurcation
+Coupled map lattices
+Pattern formation
+Spatial fractals
+Reaction-diffusion systems
+Partial differential equations
+Dissipative structures
+Percolation
+Cellular automata
+Spatial ecology
+Self-replication
+Spatial evolutionary biology
+Geomorphology
+Systems Theory
+Homeostasis
+Operationalization
+Feedback
+Self-reference
+Goal-oriented
+System dynamics
+Sensemaking
+Entropy
+Cybernetics
+Autopoiesis
+Information theory
+Computation theory
+Complexity measurement
+
+vteControl theoryBranches
+Adaptive control
+Control Theory
+Digital control
+Energy-shaping control
+Fuzzy control
+Hybrid control
+Intelligent control
+Model predictive control
+Multivariable control
+Neural control
+Nonlinear control
+Optimal control
+Real-time control
+Robust control
+Stochastic control
+System Properties
+Bode plot
+Block diagram
+Closed-loop transfer function
+Controllability
+Fourier transform
+Frequency response
+Laplace transform
+Negative feedback
+Observability
+Performance
+Positive feedback
+Root Locus Method
+Servomechanism
+Signal-flow graph
+State space representation
+Stability Theory
+Steady State Analysis & design
+System Dynamics
+Transfer function
+Digital Control
+Discrete-time signal
+Digital signal processing
+Quantization
+Real Time Software
+Sampled Data
+System identification
+Z Transform
+Advanced Techniques
+Artificial neural network
+Coefficient diagram method
+Control reconfiguration
+Distributed parameter systems
+Fractional-order control
+Fuzzy logic
+H-infinity loop-shaping
+Hankel singular value
+Kalman filter
+Krener's theorem
+Least squares
+Lyapunov stability
+Minor loop feedback
+Perceptual control theory
+State observer
+Vector control
+Controllers
+Embedded controller
+Closed-loop controller
+Lead-lag compensator
+Numerical control
+PID controller
+Programmable logic controller
+Control Applications
+Automation and Remote Control
+Distributed Control System
+Electric motors
+Industrial Control Systems
+Mechatronics
+Motion control
+Process Control
+Robotics
+Supervisory control (SCADA)
+
+vteDifferentiable computingGeneral
+Differentiable programming
+Neural Turing machine
+Differentiable neural computer
+Automatic differentiation
+Neuromorphic engineering
+Concepts
+Gradient descent
+Cable theory
+Cluster analysis
+Regression analysis
+Pattern recognition
+Adversarial machine learning
+Computational learning theory
+Programming languages
+Python
+Julia
+Application
+Machine learning
+Artificial neural network
+Scientific computing
+Artificial Intelligence
+Hardware
+TPU
+VPU
+Memristor
+SpiNNaker
+Software library
+TensorFlow
+PyTorch
+ImplementationAudio-visual
+AlexNet
+WaveNet
+Human image synthesis
+HWR
+OCR
+Speech synthesis
+Speech recognition
+Facial recognition system
+Verbal
+Word2vec
+Transformer
+BERT
+NMT
+Project Debater
+Watson
+Decisional
+AlphaGo
+Q-learning
+SARSA
+OpenAI Five
+People
+Alex Graves
+Ian Goodfellow
+Yoshua Bengio
+Geoffrey Hinton
+Yann LeCun
+Andrew Ng
+Demis Hassabis
+
+ Portals
+Computer programming
+Technology
+ Category
+Artificial neural networks
+Machine learning
+
+vteNeuroscience
+Outline of neuroscience
+History of neuroscience
+Basicscience
+Behavioral epigenetics
+Behavioral genetics
+Cellular neuroscience
+Computational neuroscience
+Connectomics
+Imaging genetics
+Integrative neuroscience
+Molecular neuroscience
+Neural engineering
+Neuroanatomy
+Neurochemistry
+Neuroendocrinology
+Neurogenetics
+Neuroinformatics
+Neurometrics
+Neuromorphology
+Neurophysics
+Neurophysiology
+Systems neuroscience
+Clinicalneuroscience
+Behavioral neurology
+Clinical neurophysiology
+Neurocardiology
+Neuroepidemiology
+Neurogastroenterology
+Neuroimmunology
+Neurointensive care
+Neurology
+Neurooncology
+Neuro-ophthalmology
+Neuropathology
+Neuropharmacology
+Neuroprosthetics
+Neuropsychiatry
+Neuroradiology
+Neurorehabilitation
+Neurosurgery
+Neurotology
+Neurovirology
+Nutritional neuroscience
+Psychiatry
+Cognitiveneuroscience
+Affective neuroscience
+Behavioral neuroscience
+Chronobiology
+Molecular cellular cognition
+Motor control
+Neurolinguistics
+Neuropsychology
+Sensory neuroscience
+Social cognitive neuroscience
+Interdisciplinaryfields
+Consumer neuroscience
+Cultural neuroscience
+Educational neuroscience
+Evolutionary neuroscience
+Neuroanthropology
+Neurobioengineering
+Neurobiotics
+Neurocriminology
+Neuroeconomics
+Neuroepistemology
+Neuroesthetics
+Neuroethics
+Neuroethology
+Neurohistory
+Neurolaw
+Neuromarketing
+Neuromorphics
+Neurophenomenology
+Neurophilosophy
+Neuropolitics
+Neurorobotics
+Neurotheology
+Paleoneurobiology
+Social neuroscience
+Concepts
+Brain–computer interface
+Neural development
+Neural network (artificial)
+Neural network (biological)
+Detection theory
+Intraoperative neurophysiological monitoring
+Neurochip
+Neurodegeneration
+Neurodevelopmental disorder
+Neurodiversity
+Neurogenesis
+Neuroimaging
+Neuroimmune system
+Neuromanagement
+Neuromodulation
+Neuroplasticity
+Neurotechnology
+Neurotoxin
+
+ Book
+ Category
+
+vteSelf-driving cars and enabling technologiesOverview and context
+History of self-driving cars
+Intelligent transportation system
+Context-aware pervasive systems
+Mobile computing
+Smart, connected products
+Ubiquitous computing
+Ambient intelligence
+Internet of things
+SAE LevelsHuman driver monitors the driving environment(Levels 0,1,2)
+Lane departure warning system
+Automatic parking
+Collision avoidance system
+Cruise control
+Adaptive cruise control
+Advanced driver-assistance systems
+Driver drowsiness detection
+Intelligent speed adaptation
+Blind spot monitor
+System monitors the driving environment(Levels 3,4,5)
+Vehicular ad hoc network (V2V)
+Connected car
+Automotive navigation system
+VehiclesCars
+VaMP (1994)
+Spirit of Berlin (2007)
+General Motors EN-V (2010)
+MadeInGermany (2011)
+Waymo, formerly Google Car (2012)
+Tesla Model S with Autopilot (2015)
+LUTZ Pathfinder (2015)
+Yandex self-driving car (2017)
+Buses and commercial vehicles
+Automated guideway transit
+ParkShuttle
+Navia shuttle
+NuTonomy taxi
+Freightliner Inspiration
+Driverless tractor
+Mobility as a service
+Regulation
+Legislation
+IEEE 802.11p
+ Safe speed automotive common law
+Enabling technologies
+Radar
+Laser
+LIDAR
+Artificial neural network
+Computer stereo vision
+Image recognition
+Dedicated short-range communications
+Real-time Control System
+Eye tracking
+Radio-frequency identification
+Organizations, Projects & PeopleOrganizations, projects and events
+DAVI
+European Land-Robot Trial
+Navlab
+DARPA Grand Challenge
+VisLab Intercontinental Autonomous Challenge
+Eureka Prometheus Project
+IEEE Intelligent Transportation Systems Society
+People
+Harold Goddijn
+Alberto Broggi
+Anthony Levandowski
+
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Artificial_neural_network&oldid=972940778"
+Categories: Computational statisticsArtificial neural networksClassification algorithmsComputational neuroscienceMarket researchMarket segmentationMathematical psychologyMathematical and quantitative methods (economics)Hidden categories: CS1 Finnish-language sources (fi)Webarchive template wayback linksCS1 German-language sources (de)CS1 maint: ref=harvCS1 errors: missing periodicalArticles with short descriptionShort description matches WikidataUse dmy dates from June 2013Wikipedia articles needing clarification from April 2017All Wikipedia articles needing clarificationArticles lacking in-text citations from August 2019All articles lacking in-text citationsAll articles with unsourced statementsArticles with unsourced statements from June 2017Articles with unsourced statements from November 2014Articles with excessive see also sections from March 2018Wikipedia articles with GND identifiersWikipedia articles with LCCN identifiersWikipedia articles with NDL identifiers
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+In other projects
+
+
+
+
+Wikimedia Commons
+
+
+
+
+
+Languages
+
+
+
+
+العربيةAzərbaycancaবাংলাBân-lâm-gúБългарскиBosanskiCatalàČeštinaDanskDeutschEestiΕλληνικάEspañolEsperantoEuskaraفارسیFrançaisGaeilge한국어Հայերենहिन्दीHrvatskiBahasa IndonesiaÍslenskaItalianoעבריתქართულიLatinaLatviešuLietuviųMagyarМакедонскиMalagasyമലയാളംBahasa MelayuNederlands日本語Norsk bokmålNorsk nynorskଓଡ଼ିଆPolskiPortuguêsRomânăРусскийSimple EnglishСрпски / srpskiSuomiSvenskaதமிழ்ไทยTürkçeУкраїнськаاردوTiếng Việt粵語中文
+Edit links
+
+
+
+
+
+
+ This page was last edited on 14 August 2020, at 15:38 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

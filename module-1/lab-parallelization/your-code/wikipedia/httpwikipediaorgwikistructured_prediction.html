@@ -1,0 +1,642 @@
+
+
+
+
+Structured prediction - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Structured prediction
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+Part of a series onMachine learninganddata mining
+Problems
+Classification
+Clustering
+Regression
+Anomaly detection
+AutoML
+Association rules
+Reinforcement learning
+Structured prediction
+Feature engineering
+Feature learning
+Online learning
+Semi-supervised learning
+Unsupervised learning
+Learning to rank
+Grammar induction
+
+
+Supervised learning(classification • regression) 
+Decision trees
+Ensembles
+Bagging
+Boosting
+Random forest
+k-NN
+Linear regression
+Naive Bayes
+Artificial neural networks
+Logistic regression
+Perceptron
+Relevance vector machine (RVM)
+Support vector machine (SVM)
+
+
+Clustering
+BIRCH
+CURE
+Hierarchical
+k-means
+Expectation–maximization (EM)
+DBSCAN
+OPTICS
+Mean-shift
+
+
+Dimensionality reduction
+Factor analysis
+CCA
+ICA
+LDA
+NMF
+PCA
+PGD
+t-SNE
+
+
+Structured prediction
+Graphical models
+Bayes net
+Conditional random field
+Hidden Markov
+
+
+Anomaly detection
+k-NN
+Local outlier factor
+
+
+Artificial neural network
+Autoencoder
+Deep learning
+DeepDream
+Multilayer perceptron
+RNN
+LSTM
+GRU
+Restricted Boltzmann machine
+GAN
+SOM
+Convolutional neural network
+U-Net
+
+
+Reinforcement learning
+Q-learning
+SARSA
+Temporal difference (TD)
+
+
+Theory
+Bias–variance dilemma
+Computational learning theory
+Empirical risk minimization
+Occam learning
+PAC learning
+Statistical learning
+VC theory
+
+
+Machine-learning venues
+NeurIPS
+ICML
+ML
+JMLR
+ArXiv:cs.LG
+
+
+Glossary of artificial intelligence
+Glossary of artificial intelligence
+
+
+Related articles
+List of datasets for machine-learning research
+Outline of machine learning
+
+vte
+supervised machine learning techniques
+Structured prediction or structured (output) learning is an umbrella term for supervised machine learning techniques that involves predicting structured objects, rather than scalar discrete or real values.[1]
+Similar to commonly used supervised learning techniques, structured prediction models are typically trained by means of observed data in which the true prediction value is used to adjust model parameters. Due to the complexity of the model and the interrelations of predicted variables the process of prediction using a trained model and of training itself is often computationally infeasible and approximate inference and learning methods are used.
+
+Contents
+
+1 Applications
+
+1.1 Example: sequence tagging
+
+
+2 Techniques
+
+2.1 Structured perceptron
+
+
+3 References
+4 External links
+
+
+Applications[edit]
+For example, the problem of translating a natural language sentence into a syntactic representation such as a parse tree can be seen as a structured prediction problem[2] in which the structured output domain is the set of all possible parse trees.
+Structured prediction is also used in a wide variety of application domains including bioinformatics, natural language processing, speech recognition, and computer vision. 
+
+Example: sequence tagging[edit]
+Sequence tagging is a class of problems prevalent in natural language processing, where input data are often sequences (e.g. sentences of text). The sequence tagging problem appears in several guises, e.g. part-of-speech tagging and named entity recognition. In POS tagging, for example, each word in a sequence must receive a "tag" (class label) that expresses its "type" of word:
+
+
+
+This
+
+DT
+
+
+is
+
+VBZ
+
+
+a
+
+DT
+
+
+tagged
+
+JJ
+
+
+sentence
+
+NN
+
+
+.
+
+.
+
+The main challenge of this problem is to resolve ambiguity: the word "sentence" can also be a verb in English, and so can "tagged".
+While this problem can be solved by simply performing classification of individual tokens, that approach does not take into account the empirical fact that tags do not occur independently; instead, each tag displays a strong conditional dependence on the tag of the previous word. This fact can be exploited in a sequence model such as a hidden Markov model or conditional random field[2] that predicts the entire tag sequence for a sentence, rather than just individual tags, by means of the Viterbi algorithm.
+
+Techniques[edit]
+Probabilistic graphical models form a large class of structured prediction models. In particular, Bayesian networks and random fields are popular. Other algorithms and models for structured prediction include inductive logic programming, case-based reasoning, structured SVMs, Markov logic networks and constrained conditional models. Main techniques:
+
+Conditional random field
+Structured support vector machine
+Structured k-Nearest Neighbours
+Recurrent neural network, in particular Elman network
+Structured perceptron[edit]
+One of the easiest ways to understand algorithms for general structured prediction is the structured perceptron of Collins.[3]
+This algorithm combines the perceptron algorithm for learning linear classifiers with an inference algorithm (classically the Viterbi algorithm when used on sequence data) and can be described abstractly as follows. First define a "joint feature function" Φ(x, y) that maps a training sample x and a candidate prediction y to a vector of length n (x and y may have any structure; n is problem-dependent, but must be fixed for each model). Let GEN be a function that generates candidate predictions. Then:
+
+Let 
+
+
+
+w
+
+
+{\displaystyle w}
+
+ be a weight vector of length n
+For a pre-determined number of iterations:
+For each sample 
+
+
+
+x
+
+
+{\displaystyle x}
+
+ in the training set with true output 
+
+
+
+t
+
+
+{\displaystyle t}
+
+:
+Make a prediction 
+
+
+
+
+
+
+y
+^
+
+
+
+=
+
+
+a
+r
+g
+
+m
+a
+x
+
+
+
+{
+
+y
+
+∈
+
+G
+E
+N
+
+(
+
+x
+
+)
+}
+
+(
+
+
+w
+
+
+T
+
+
+
+ϕ
+(
+
+x
+
+,
+
+y
+
+)
+)
+
+
+{\displaystyle {\hat {y}}={\operatorname {arg\,max} }\,\{{y}\in {GEN}({x})\}\,({w}^{T}\,\phi ({x},{y}))}
+
+
+Update 
+
+
+
+w
+
+
+{\displaystyle w}
+
+, from 
+
+
+
+
+
+
+y
+^
+
+
+
+
+
+{\displaystyle {\hat {y}}}
+
+ to 
+
+
+
+t
+
+
+{\displaystyle t}
+
+:  
+
+
+
+
+w
+
+=
+
+w
+
++
+
+c
+
+(
+−
+ϕ
+(
+
+x
+
+,
+
+
+
+y
+^
+
+
+
+)
++
+ϕ
+(
+
+x
+
+,
+
+t
+
+)
+)
+
+
+{\displaystyle {w}={w}+{c}(-\phi ({x},{\hat {y}})+\phi ({x},{t}))}
+
+, 
+
+
+
+c
+
+
+{\displaystyle c}
+
+ is learning rate
+In practice, finding the argmax over 
+
+
+
+
+G
+E
+N
+
+(
+
+x
+
+)
+
+
+{\displaystyle {GEN}({x})}
+
+ will be done using an algorithm such as Viterbi or an algorithm such as max-sum, rather than an exhaustive search through an exponentially large set of candidates.
+The idea of learning is similar to multiclass perceptron.
+
+References[edit]
+
+^ Gökhan BakIr, Ben Taskar, Thomas Hofmann, Bernhard Schölkopf, Alex Smola and SVN Vishwanathan (2007), Predicting Structured Data, MIT Press.
+
+^ a b Lafferty, J., McCallum, A., Pereira, F. (2001). "Conditional random fields: Probabilistic models for segmenting and labeling sequence data" (PDF). Proc. 18th International Conf. on Machine Learning. pp. 282–289.CS1 maint: uses authors parameter (link)
+
+^ Collins, Michael (2002). Discriminative training methods for hidden Markov models: Theory and experiments with perceptron algorithms (PDF). Proc. EMNLP. 10.
+
+
+Noah Smith, Linguistic Structure Prediction, 2011.
+Michael Collins, Discriminative Training Methods for Hidden Markov Models, 2002.
+External links[edit]
+Implementation of Collins structured perceptron
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Structured_prediction&oldid=965415307"
+Categories: Structured predictionHidden categories: CS1 maint: uses authors parameterArticles with short descriptionShort description matches Wikidata
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+In other projects
+
+
+
+
+Wikimedia Commons
+
+
+
+
+
+Languages
+
+
+
+
+РусскийУкраїнськаTiếng Việt
+Edit links
+
+
+
+
+
+
+ This page was last edited on 1 July 2020, at 05:55 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

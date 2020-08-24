@@ -1,0 +1,566 @@
+
+
+
+
+State–action–reward–state–action - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+State–action–reward–state–action
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+For other uses, see Sarsa.
+Part of a series onMachine learninganddata mining
+Problems
+Classification
+Clustering
+Regression
+Anomaly detection
+AutoML
+Association rules
+Reinforcement learning
+Structured prediction
+Feature engineering
+Feature learning
+Online learning
+Semi-supervised learning
+Unsupervised learning
+Learning to rank
+Grammar induction
+
+
+Supervised learning(classification • regression) 
+Decision trees
+Ensembles
+Bagging
+Boosting
+Random forest
+k-NN
+Linear regression
+Naive Bayes
+Artificial neural networks
+Logistic regression
+Perceptron
+Relevance vector machine (RVM)
+Support vector machine (SVM)
+
+
+Clustering
+BIRCH
+CURE
+Hierarchical
+k-means
+Expectation–maximization (EM)
+DBSCAN
+OPTICS
+Mean-shift
+
+
+Dimensionality reduction
+Factor analysis
+CCA
+ICA
+LDA
+NMF
+PCA
+PGD
+t-SNE
+
+
+Structured prediction
+Graphical models
+Bayes net
+Conditional random field
+Hidden Markov
+
+
+Anomaly detection
+k-NN
+Local outlier factor
+
+
+Artificial neural network
+Autoencoder
+Deep learning
+DeepDream
+Multilayer perceptron
+RNN
+LSTM
+GRU
+Restricted Boltzmann machine
+GAN
+SOM
+Convolutional neural network
+U-Net
+
+
+Reinforcement learning
+Q-learning
+SARSA
+Temporal difference (TD)
+
+
+Theory
+Bias–variance dilemma
+Computational learning theory
+Empirical risk minimization
+Occam learning
+PAC learning
+Statistical learning
+VC theory
+
+
+Machine-learning venues
+NeurIPS
+ICML
+ML
+JMLR
+ArXiv:cs.LG
+
+
+Glossary of artificial intelligence
+Glossary of artificial intelligence
+
+
+Related articles
+List of datasets for machine-learning research
+Outline of machine learning
+
+vte
+State–action–reward–state–action (SARSA) is an algorithm for learning a Markov decision process policy, used in the reinforcement learning area of machine learning. It was proposed by Rummery and Niranjan in a technical note[1] with the name "Modified Connectionist Q-Learning" (MCQ-L). The alternative name SARSA, proposed by Rich Sutton, was only mentioned as a footnote.
+This name simply reflects the fact that the main function for updating the Q-value depends on the current state of the agent "S1", the action the agent chooses "A1", the reward "R" the agent gets for choosing this action, the state "S2" that the agent enters after taking that action, and finally the next action "A2" the agent chooses in its new state. The acronym for the quintuple (st, at, rt, st+1, at+1) is SARSA.[2] Some authors use a slightly different convention and write the quintuple (st, at, rt+1, st+1, at+1), depending to which time step the reward is formally assigned. The rest of the article uses the former convention.
+
+Contents
+
+1 Algorithm
+2 Hyperparameters
+
+2.1 Learning rate (alpha)
+2.2 Discount factor (gamma)
+2.3 Initial conditions (Q(s0, a0))
+
+
+3 References
+
+
+Algorithm[edit]
+
+
+
+
+Q
+(
+
+s
+
+t
+
+
+,
+
+a
+
+t
+
+
+)
+←
+Q
+(
+
+s
+
+t
+
+
+,
+
+a
+
+t
+
+
+)
++
+α
+
+[
+
+r
+
+t
++
+1
+
+
++
+γ
+
+Q
+(
+
+s
+
+t
++
+1
+
+
+,
+
+a
+
+t
++
+1
+
+
+)
+−
+Q
+(
+
+s
+
+t
+
+
+,
+
+a
+
+t
+
+
+)
+]
+
+
+{\displaystyle Q(s_{t},a_{t})\leftarrow Q(s_{t},a_{t})+\alpha \,[r_{t+1}+\gamma \,Q(s_{t+1},a_{t+1})-Q(s_{t},a_{t})]}
+
+
+A SARSA agent interacts with the environment and updates the policy based on actions taken, hence this is known as an on-policy learning algorithm. The Q value for a state-action is updated by an error, adjusted by the learning rate alpha. Q values represent the possible reward received in the next time step for taking action a in state s, plus the discounted future reward received from the next state-action observation.
+Watkin's Q-learning updates an estimate of the optimal state-action value function 
+
+
+
+
+Q
+
+∗
+
+
+
+
+{\displaystyle Q^{*}}
+
+ based on the maximum reward of available actions. While SARSA learns the Q values associated with taking the policy it follows itself, Watkin's Q-learning learns the Q values associated with taking the optimal policy while following an exploration/exploitation policy.
+Some optimizations of Watkin's Q-learning may be applied to SARSA.[3]
+
+Hyperparameters[edit]
+Learning rate (alpha)[edit]
+The learning rate determines to what extent newly acquired information overrides old information. A factor of 0 will make the agent not learn anything, while a factor of 1 would make the agent consider only the most recent information.
+
+Discount factor (gamma)[edit]
+The discount factor determines the importance of future rewards. A factor of 0 makes the agent "opportunistic" by only considering current rewards, while a factor approaching 1 will make it strive for a long-term high reward. If the discount factor meets or exceeds 1, the 
+
+
+
+Q
+
+
+{\displaystyle Q}
+
+ values may diverge.
+
+Initial conditions (Q(s0, a0))[edit]
+Since SARSA is an iterative algorithm, it implicitly assumes an initial condition before the first update occurs. A low (infinite) initial value, also known as "optimistic initial conditions",[4] can encourage exploration: no matter what action takes place, the update rule causes it to have higher values than the other alternative, thus increasing their choice probability. In 2013 it was suggested that the first reward r could be used to reset the initial conditions. According to this idea, the first time an action is taken the reward is used to set the value of Q. This allows immediate learning in case of fixed deterministic rewards. This resetting-of-initial-conditions (RIC) approach seems to be consistent with human behavior in repeated binary choice experiments.[5]
+
+References[edit]
+
+
+^ Online Q-Learning using Connectionist Systems" by Rummery & Niranjan (1994)
+
+^ Reinforcement Learning: An Introduction Richard S. Sutton and Andrew G. Barto (chapter 6.4)
+
+^ Wiering, Marco; Schmidhuber, Jürgen (1998-10-01). "Fast Online Q(λ)" (PDF). Machine Learning. 33 (1): 105–115. doi:10.1023/A:1007562800292. ISSN 0885-6125.
+
+^ "2.7 Optimistic Initial Values". incompleteideas.net. Retrieved 2018-02-28.
+
+^ Shteingart, H; Neiman, T; Loewenstein, Y (May 2013). "The Role of First Impression in Operant Learning" (PDF). J Exp Psychol Gen. 142 (2): 476–88. doi:10.1037/a0029550. PMID 22924882.
+
+
+vteDifferentiable computingGeneral
+Differentiable programming
+Neural Turing machine
+Differentiable neural computer
+Automatic differentiation
+Neuromorphic engineering
+Concepts
+Gradient descent
+Cable theory
+Cluster analysis
+Regression analysis
+Pattern recognition
+Adversarial machine learning
+Computational learning theory
+Programming languages
+Python
+Julia
+Application
+Machine learning
+Artificial neural network
+Scientific computing
+Artificial Intelligence
+Hardware
+TPU
+VPU
+Memristor
+SpiNNaker
+Software library
+TensorFlow
+PyTorch
+ImplementationAudio-visual
+AlexNet
+WaveNet
+Human image synthesis
+HWR
+OCR
+Speech synthesis
+Speech recognition
+Facial recognition system
+Verbal
+Word2vec
+Transformer
+BERT
+NMT
+Project Debater
+Watson
+Decisional
+AlphaGo
+Q-learning
+SARSA
+OpenAI Five
+People
+Alex Graves
+Ian Goodfellow
+Yoshua Bengio
+Geoffrey Hinton
+Yann LeCun
+Andrew Ng
+Demis Hassabis
+
+ Portals
+Computer programming
+Technology
+ Category
+Artificial neural networks
+Machine learning
+
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=State–action–reward–state–action&oldid=966441285"
+Categories: Machine learning algorithms
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+ItalianoУкраїнська
+Edit links
+
+
+
+
+
+
+ This page was last edited on 7 July 2020, at 04:05 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

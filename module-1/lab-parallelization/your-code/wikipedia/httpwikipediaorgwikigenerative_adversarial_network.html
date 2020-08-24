@@ -1,0 +1,565 @@
+
+
+
+
+Generative adversarial network - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Generative adversarial network
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+Not to be confused with Adversarial machine learning.
+Deep learning method
+Part of a series onMachine learninganddata mining
+Problems
+Classification
+Clustering
+Regression
+Anomaly detection
+AutoML
+Association rules
+Reinforcement learning
+Structured prediction
+Feature engineering
+Feature learning
+Online learning
+Semi-supervised learning
+Unsupervised learning
+Learning to rank
+Grammar induction
+
+
+Supervised learning(classification • regression) 
+Decision trees
+Ensembles
+Bagging
+Boosting
+Random forest
+k-NN
+Linear regression
+Naive Bayes
+Artificial neural networks
+Logistic regression
+Perceptron
+Relevance vector machine (RVM)
+Support vector machine (SVM)
+
+
+Clustering
+BIRCH
+CURE
+Hierarchical
+k-means
+Expectation–maximization (EM)
+DBSCAN
+OPTICS
+Mean-shift
+
+
+Dimensionality reduction
+Factor analysis
+CCA
+ICA
+LDA
+NMF
+PCA
+PGD
+t-SNE
+
+
+Structured prediction
+Graphical models
+Bayes net
+Conditional random field
+Hidden Markov
+
+
+Anomaly detection
+k-NN
+Local outlier factor
+
+
+Artificial neural network
+Autoencoder
+Deep learning
+DeepDream
+Multilayer perceptron
+RNN
+LSTM
+GRU
+Restricted Boltzmann machine
+GAN
+SOM
+Convolutional neural network
+U-Net
+
+
+Reinforcement learning
+Q-learning
+SARSA
+Temporal difference (TD)
+
+
+Theory
+Bias–variance dilemma
+Computational learning theory
+Empirical risk minimization
+Occam learning
+PAC learning
+Statistical learning
+VC theory
+
+
+Machine-learning venues
+NeurIPS
+ICML
+ML
+JMLR
+ArXiv:cs.LG
+
+
+Glossary of artificial intelligence
+Glossary of artificial intelligence
+
+
+Related articles
+List of datasets for machine-learning research
+Outline of machine learning
+
+vte
+A generative adversarial network (GAN) is a class of machine learning frameworks designed by Ian Goodfellow and his colleagues in 2014.[1] Two neural networks contest with each other in a game (in the sense of game theory, often but not always in the form of a zero-sum game). Given a training set, this technique learns to generate new data with the same statistics as the training set. For example, a GAN trained on photographs can generate new photographs that look at least superficially authentic to human observers, having many realistic characteristics. Though originally proposed as a form of generative model for unsupervised learning, GANs have also proven useful for semi-supervised learning,[2] fully supervised learning,[3] and reinforcement learning.[4]
+
+Contents
+
+1 Method
+2 Applications
+
+2.1 Fashion, art and advertising
+2.2 Science
+2.3 Video games
+2.4 Concerns about malicious applications
+2.5 Miscellaneous applications
+
+
+3 History
+4 Classification
+
+4.1 Bidirectional GAN
+
+
+5 References
+6 External links
+
+
+Method[edit]
+The generative network generates candidates while the discriminative network evaluates them.[1] The contest operates in terms of data distributions. Typically, the generative network learns to map from a latent space to a data distribution of interest, while the discriminative network distinguishes candidates produced by the generator from the true data distribution. The generative network's training objective is to increase the error rate of the discriminative network (i.e., "fool" the discriminator network by producing novel candidates that the discriminator thinks are not synthesized (are part of the true data distribution)).[1][5]
+A known dataset serves as the initial training data for the discriminator. Training it involves presenting it with samples from the training dataset, until it achieves acceptable accuracy. The generator trains based on whether it succeeds in fooling the discriminator. Typically the generator is seeded with randomized input that is sampled from a predefined latent space (e.g. a multivariate normal distribution). Thereafter, candidates synthesized by the generator are evaluated by the discriminator. Backpropagation is applied in both networks so that the generator produces better images, while the discriminator becomes more skilled at flagging synthetic images.[6] The generator is typically a deconvolutional neural network, and the discriminator is a convolutional neural network.
+GANs often suffer from a "mode collapse" where they fail to generalize properly, missing entire modes from the input data. For example, a GAN trained on the MNIST dataset containing many samples of each digit, might nevertheless timidly omit a subset of the digits from its output. Some researchers perceive the root problem to be a weak discriminative network that fails to notice the pattern of omission, while others assign blame to a bad choice of objective function. Many solutions have been proposed.[7]
+
+Applications[edit]
+GAN applications have increased rapidly.[8]
+
+Fashion, art and advertising[edit]
+GANs can be used to generate art; The Verge wrote in March 2019 that "The images created by GANs have become the defining look of contemporary AI art."[9] GANs can also be used to create photos of imaginary fashion models, with no need to hire a model, photographer or makeup artist, or pay for a studio and transportation.[10]
+
+Science[edit]
+GANs can improve astronomical images[11] and simulate gravitational lensing for dark matter research.[12][13][14] They were used in 2019 to successfully model the distribution of dark matter in a particular direction in space and to predict the gravitational lensing that will occur.[15][16]
+GANs have been proposed as a fast and accurate way of modeling high energy jet formation[17] and modeling showers through calorimeters of high-energy physics experiments.[18][19][20][21] GANs have also been trained to accurately approximate bottlenecks in computationally expensive simulations of particle physics experiments. Applications in the context of present and proposed CERN experiments have demonstrated the potential of these methods for accelerating simulation and/or improving simulation fidelity.[22][23]
+
+Video games[edit]
+In 2018, GANs reached the video game modding community, as a method of up-scaling low-resolution 2D textures in old video games by recreating them in 4k or higher resolutions via image training, and then down-sampling them to fit the game's native resolution (with results resembling the supersampling method of anti-aliasing).[24] With proper training, GANs provide a clearer and sharper 2D texture image magnitudes higher in quality than the original, while fully retaining the original's level of details, colors, etc. Known examples of extensive GAN usage include Final Fantasy VIII, Final Fantasy IX, Resident Evil REmake HD Remaster, and Max Payne.[citation needed]
+
+Concerns about malicious applications[edit]
+Main article: Deepfake
+ An image generated by a StyleGAN that looks deceptively like a photograph of a real person. This image was generated by a StyleGAN based on an analysis of portraits.
+Concerns have been raised about the potential use of GAN-based human image synthesis for sinister purposes, e.g., to produce fake, possibly incriminating, photographs and videos.[25]
+GANs can be used to generate unique, realistic profile photos of people who do not exist, in order to automate creation of fake social media profiles.[26]
+In 2019 the state of California considered[27] and passed on October 3, 2019 the bill AB-602, which bans the use of human image synthesis technologies to make fake pornography without the consent of the people depicted, and bill AB-730, which prohibits distribution of manipulated videos of a political candidate within 60 days of an election. Both bills were authored by Assembly member Marc Berman and signed by Governor Gavin Newsom. The laws will come into effect in 2020.[28]
+DARPA's Media Forensics program studies ways to counteract fake media, including fake media produced using GANs.[29]
+
+Miscellaneous applications[edit]
+GAN can be used to detect glaucomatous images helping the early diagnosis which is essential to avoid partial or total loss
+of vision.[30]
+GANs that produce photorealistic images can be used to visualize interior design, industrial design, shoes,[31] bags, and clothing items or items for computer games' scenes.[citation needed] Such networks were reported to be used by Facebook.[32]
+GANs can reconstruct 3D models of objects from images,[33] and model patterns of motion in video.[34]
+GANs can be used to age face photographs to show how an individual's appearance might change with age.[35]
+GANs can also be used to transfer map styles in cartography[36] or augment street view imagery.[37]
+A variation of the GANs is used in training a network to generate optimal control inputs to nonlinear dynamical systems. Where the discriminatory network is known as a critic that checks the optimality of the solution and the generative network is known as an Adaptive network that generates the optimal control. The critic and adaptive network train each other to approximate a nonlinear optimal control.[38]
+GANs have been used to visualize the effect that climate change will have on specific houses.[39]
+A GAN model called Speech2Face can reconstruct an image of a person's face after listening to their voice.[40]
+In 2016 GANs were used to generate new molecules for a variety of protein targets implicated in cancer, inflammation, and fibrosis. In 2019 GAN-generated molecules were validated experimentally all the way into mice.[41][42]
+
+History[edit]
+The most direct inspiration for GANs was noise-contrastive estimation,[43] which uses the same loss function as GANs and which Goodfellow studied during his PhD in 2010–2014.
+Other people had similar ideas but did not develop them similarly. An idea involving adversarial networks was published in a 2010 blog post by Olli Niemitalo.[44] This idea was never implemented and did not involve stochasticity in the generator and thus was not a generative model. It is now known as a conditional GAN or cGAN.[45] An idea similar to GANs was used to model animal behavior by Li, Gauci and Gross in 2013.[46]
+Adversarial machine learning has other uses besides generative modeling and can be applied to models other than neural networks. In control theory, adversarial learning based on neural networks was used in 2006 to train robust controllers in a game theoretic sense, by alternating the iterations between a minimizer policy, the controller, and a maximizer policy, the disturbance [47][48].
+In 2017, a GAN was used for image enhancement focusing on realistic textures rather than pixel-accuracy, producing a higher image quality at high magnification.[49] In 2017, the first faces were generated.[50] These were exhibited in February 2018 at the Grand Palais.[51][52] Faces generated by StyleGAN[53] in 2019 drew comparisons with deepfakes.[54][55][56]
+Beginning in 2017, GAN technology began to make its presence felt in the fine arts arena with the appearance of a newly developed implementation which was said to have crossed the threshold of being able to generate unique and appealing abstract paintings, and thus dubbed a "CAN", for "creative adversarial network".[57] A GAN system was used to create the 2018 painting Edmond de Belamy, which sold for US$432,500.[58] An early 2019 article by members of the original CAN team discussed further progress with that system, and gave consideration as well to the overall prospects for an AI-enabled art.[59]
+In May 2019, researchers at Samsung demonstrated a GAN-based system that produces videos of a person speaking, given only a single photo of that person.[60]
+In August 2019, a large dataset consisting of 12,197 MIDI songs each with paired lyrics and melody alignment was created for neural melody generation from lyrics using conditional GAN-LSTM (refer to sources at GitHub AI Melody Generation from Lyrics).[61]
+In May 2020, Nvidia researchers taught an AI system (termed "GameGAN") to recreate the game of Pac-Man simply by watching it being played.[62][63]
+
+Classification[edit]
+Bidirectional GAN[edit]
+Bidirectional GAN (BiGAN) aims to introduce a generator model to act as the discriminator, whereby the discriminator naturally considers the entire translation space so that the inadequate training problem can be alleviated. To satisfy this property, generator and discriminator are both designed to model the joint probability of sentence pairs, with the difference that, the generator decomposes the joint probability with a source language model and a source-to-target translation model, while the discriminator is formulated as a target language model and a target-to-source translation model. To further leverage the symmetry of them, an auxiliary GAN is introduced and adopts generator and discriminator models of original one as its own discriminator and generator respectively. Two GANs are alternately trained to update the parameters. The resulting learned feature representation is useful for auxiliary supervised discrimination tasks, competitive with contemporary approaches to unsupervised and self-supervised feature learning.[64]
+
+References[edit]
+
+
+^ a b c Goodfellow, Ian; Pouget-Abadie, Jean; Mirza, Mehdi; Xu, Bing; Warde-Farley, David; Ozair, Sherjil; Courville, Aaron; Bengio, Yoshua (2014). Generative Adversarial Networks (PDF). Proceedings of the International Conference on Neural Information Processing Systems (NIPS 2014). pp. 2672–2680.
+
+^ Salimans, Tim; Goodfellow, Ian; Zaremba, Wojciech; Cheung, Vicki; Radford, Alec; Chen, Xi (2016). "Improved Techniques for Training GANs". arXiv:1606.03498 [cs.LG].
+
+^ Isola, Phillip; Zhu, Jun-Yan; Zhou, Tinghui; Efros, Alexei (2017). "Image-to-Image Translation with Conditional Adversarial Nets". Computer Vision and Pattern Recognition.
+
+^ Ho, Jonathon; Ermon, Stefano (2016). "Generative Adversarial Imitation Learning". Advances in Neural Information Processing Systems: 4565–4573. arXiv:1606.03476. Bibcode:2016arXiv160603476H.
+
+^ Luc, Pauline; Couprie, Camille; Chintala, Soumith; Verbeek, Jakob (2016-11-25). "Semantic Segmentation using Adversarial Networks". NIPS Workshop on Adversarial Training, Dec, Barcelona, Spain. 2016. arXiv:1611.08408. Bibcode:2016arXiv161108408L.
+
+^ Andrej Karpathy; Pieter Abbeel; Greg Brockman; Peter Chen; Vicki Cheung; Rocky Duan; Ian Goodfellow; Durk Kingma; Jonathan Ho; Rein Houthooft; Tim Salimans; John Schulman; Ilya Sutskever; Wojciech Zaremba, Generative Models, OpenAI, retrieved April 7, 2016
+
+^ Lin, Zinan;  et al. (December 2018). "PacGAN: the power of two samples in generative adversarial networks". NIPS'18: Proceedings of the 32nd International Conference on Neural Information Processing Systems. pp. 1505–1514.  (also available arXiv:1712.04086 )
+
+^ Caesar, Holger (2019-03-01), A list of papers on Generative Adversarial (Neural) Networks: nightrome/really-awesome-gan, retrieved 2019-03-02
+
+^ Vincent, James (5 March 2019). "A never-ending stream of AI art goes up for auction". The Verge. Retrieved 13 June 2020.
+
+^ Wong, Ceecee. "The Rise of AI Supermodels". CDO Trends.
+
+^ Schawinski, Kevin; Zhang, Ce; Zhang, Hantian; Fowler, Lucas; Santhanam, Gokula Krishnan (2017-02-01). "Generative Adversarial Networks recover features in astrophysical images of galaxies beyond the deconvolution limit". Monthly Notices of the Royal Astronomical Society: Letters. 467 (1): L110–L114. arXiv:1702.00403. Bibcode:2017MNRAS.467L.110S. doi:10.1093/mnrasl/slx008.
+
+^ Kincade, Kathy. "Researchers Train a Neural Network to Study Dark Matter". R&D Magazine.
+
+^ Kincade, Kathy (May 16, 2019). "CosmoGAN: Training a neural network to study dark matter". Phys.org.
+
+^ "Training a neural network to study dark matter". Science Daily. May 16, 2019.
+
+^ at 06:13, Katyanna Quach 20 May 2019. "Cosmoboffins use neural networks to build dark matter maps the easy way". www.theregister.co.uk. Retrieved 2019-05-20.
+
+^ Mustafa, Mustafa; Bard, Deborah; Bhimji, Wahid; Lukić, Zarija; Al-Rfou, Rami; Kratochvil, Jan M. (2019-05-06). "CosmoGAN: creating high-fidelity weak lensing convergence maps using Generative Adversarial Networks". Computational Astrophysics and Cosmology. 6 (1): 1. arXiv:1706.02390. Bibcode:2019ComAC...6....1M. doi:10.1186/s40668-019-0029-9. ISSN 2197-7909.
+
+^ Paganini, Michela; de Oliveira, Luke; Nachman, Benjamin (2017). "Learning Particle Physics by Example: Location-Aware Generative Adversarial Networks for Physics Synthesis". Computing and Software for Big Science. 1: 4. arXiv:1701.05927. Bibcode:2017arXiv170105927D. doi:10.1007/s41781-017-0004-6.
+
+^ Paganini, Michela; de Oliveira, Luke; Nachman, Benjamin (2018). "Accelerating Science with Generative Adversarial Networks: An Application to 3D Particle Showers in Multi-Layer Calorimeters". Physical Review Letters. 120 (4): 042003. arXiv:1705.02355. Bibcode:2018PhRvL.120d2003P. doi:10.1103/PhysRevLett.120.042003. PMID 29437460.
+
+^ Paganini, Michela; de Oliveira, Luke; Nachman, Benjamin (2018). "CaloGAN: Simulating 3D High Energy Particle Showers in Multi-Layer Electromagnetic Calorimeters with Generative Adversarial Networks". Phys. Rev. D. 97 (1): 014021. arXiv:1712.10321. Bibcode:2018PhRvD..97a4021P. doi:10.1103/PhysRevD.97.014021.
+
+^ Erdmann, Martin; Glombitza, Jonas; Quast, Thorben (2019). "Precise Simulation of Electromagnetic Calorimeter Showers Using a Wasserstein Generative Adversarial Network". Computing and Software for Big Science. 3: 4. arXiv:1807.01954. doi:10.1007/s41781-018-0019-7.
+
+^ Musella, Pasquale; Pandolfi, Francesco (2018). "Fast and Accurate Simulation of Particle Detectors Using Generative Adversarial Networks". Computing and Software for Big Science. 2: 8. arXiv:1805.00850. Bibcode:2018arXiv180500850M. doi:10.1007/s41781-018-0015-y.
+
+^ ATLAS, Collaboration (2018). "Deep generative models for fast shower simulation in ATLAS".
+
+^ SHiP, Collaboration (2019). "Fast simulation of muons produced at the SHiP experiment using Generative Adversarial Networks". Journal of Instrumentation. 14 (11): P11028. arXiv:1909.04451. Bibcode:2019JInst..14P1028A. doi:10.1088/1748-0221/14/11/P11028.
+
+^ Tang, Xiaoou; Qiao, Yu; Loy, Chen Change; Dong, Chao; Liu, Yihao; Gu, Jinjin; Wu, Shixiang; Yu, Ke; Wang, Xintao (2018-09-01). "ESRGAN: Enhanced Super-Resolution Generative Adversarial Networks". arXiv:1809.00219. Bibcode:2018arXiv180900219W.
+
+^ msmash (2019-02-14). "'This Person Does Not Exist' Website Uses AI To Create Realistic Yet Horrifying Faces". Slashdot. Retrieved 2019-02-16.
+
+^ Doyle, Michael (May 16, 2019). "John Beasley lives on Saddlehorse Drive in Evansville. Or does he?". Courier and Press.
+
+^ Targett, Ed (May 16, 2019). "California moves closer to making deepfake pornography illegal". Computer Business Review.
+
+^ 
+Mihalcik, Carrie (2019-10-04). "California laws seek to crack down on deepfakes in politics and porn". cnet.com. CNET. Retrieved 2019-10-13.
+
+^ Knight, Will (Aug 7, 2018). "The Defense Department has produced the first tools for catching deepfakes". MIT Technology Review.
+
+^ Bisneto, Tomaz Ribeiro Viana; de Carvalho Filho, Antonio Oseas; Magalhães, Deborah Maria Vieira (February 2020). "Generative adversarial network and texture features applied to automatic glaucoma detection". Applied Soft Computing. 90: 106165. doi:10.1016/j.asoc.2020.106165.
+
+^ Wei, Jerry (2019-07-03). "Generating Shoe Designs with Machine Learning". Medium. Retrieved 2019-11-06.
+
+^ Greenemeier, Larry (June 20, 2016). "When Will Computers Have Common Sense? Ask Facebook". Scientific American. Retrieved July 31, 2016.
+
+^ "3D Generative Adversarial Network". 3dgan.csail.mit.edu.
+
+^ Vondrick, Carl; Pirsiavash, Hamed; Torralba, Antonio (2016). "Generating Videos with Scene Dynamics". carlvondrick.com. arXiv:1609.02612. Bibcode:2016arXiv160902612V.
+
+^ Antipov, Grigory; Baccouche, Moez; Dugelay, Jean-Luc (2017). "Face Aging With Conditional Generative Adversarial Networks". arXiv:1702.01983 [cs.CV].
+
+^ Kang, Yuhao; Gao, Song; Roth, Rob (2019). "Transferring Multiscale Map Styles Using Generative Adversarial Networks". International Journal of Cartography. 5 (2–3): 115–141. arXiv:1905.02200. Bibcode:2019arXiv190502200K. doi:10.1080/23729333.2019.1615729.
+
+^ Wijnands, Jasper; Nice, Kerry; Thompson, Jason; Zhao, Haifeng; Stevenson, Mark (2019). "Streetscape augmentation using generative adversarial networks: Insights related to health and wellbeing". Sustainable Cities and Society. 49: 101602. arXiv:1905.06464. Bibcode:2019arXiv190506464W. doi:10.1016/j.scs.2019.101602.
+
+^ Padhi, Radhakant; Unnikrishnan, Nishant (2006). "A single network adaptive critic (SNAC) architecture for optimal control synthesis for a class of nonlinear systems". Neural Networks. 19 (10): 1648–1660. doi:10.1016/j.neunet.2006.08.010. PMID 17045458.
+
+^ "AI can show us the ravages of climate change". MIT Technology Review. May 16, 2019.
+
+^ Christian, Jon (May 28, 2019). "ASTOUNDING AI GUESSES WHAT YOU LOOK LIKE BASED ON YOUR VOICE". Futurism.
+
+^ Zhavoronkov, Alex (2019). "Deep learning enables rapid identification of potent DDR1 kinase inhibitors". Nature Biotechnology. 37 (9): 1038–1040. doi:10.1038/s41587-019-0224-x. PMID 31477924. S2CID 201716327.
+
+^ Gregory, Barber. "A Molecule Designed By AI Exhibits 'Druglike' Qualities". Wired.
+
+^ Gutmann, Michael; Hyvärinen, Aapo. "Noise-Contrastive Estimation" (PDF). International Conference on AI and Statistics.
+
+^ Niemitalo, Olli (February 24, 2010). "A method for training artificial neural networks to generate missing data within a variable context". Internet Archive (Wayback Machine). Archived from the original on 2012-03-12. Retrieved February 22, 2019.
+
+^ "GANs were invented in 2010?". reddit r/MachineLearning. 2019. Retrieved 2019-05-28.
+
+^ Li, Wei; Gauci, Melvin; Gross, Roderich (July 6, 2013). "A Coevolutionary Approach to Learn Animal Behavior Through Controlled Interaction". Proceedings of the 15th Annual Conference on Genetic and Evolutionary Computation (GECCO 2013). Amsterdam, The Netherlands: ACM. pp. 223–230. doi:10.1145/2463372.2465801.
+
+^ Abu-Khalaf, Murad; Lewis, Frank L.; Huang, Jie (July 1, 2008). "Neurodynamic Programming and Zero-Sum Games for Constrained Control Systems". IEEE Transactions on Neural Networks. 19 (7): 1243–1252. doi:10.1109/TNN.2008.2000204.
+
+^ Abu-Khalaf, Murad; Lewis, Frank L.; Huang, Jie (December 1, 2006). "Policy Iterations on the Hamilton–Jacobi–Isaacs Equation for State Feedback Control With Input Saturation". doi:10.1109/TAC.2006.884959. Cite journal requires |journal= (help)
+
+^ Sajjadi, Mehdi S. M.; Schölkopf, Bernhard; Hirsch, Michael (2016-12-23). "EnhanceNet: Single Image Super-Resolution Through Automated Texture Synthesis". arXiv:1612.07919 [cs.CV].
+
+^ "This Person Does Not Exist: Neither Will Anything Eventually with AI". March 20, 2019.
+
+^ "ARTificial Intelligence enters the History of Art". December 28, 2018.
+
+^ Tom Février (2019-02-17). "Le scandale de l'intelligence ARTificielle".
+
+^ "StyleGAN: Official TensorFlow Implementation". March 2, 2019 – via GitHub.
+
+^ Paez, Danny (2019-02-13). "This Person Does Not Exist Is the Best One-Off Website of 2019". Retrieved 2019-02-16.
+
+^ BESCHIZZA, ROB (2019-02-15). "This Person Does Not Exist". Boing-Boing. Retrieved 2019-02-16.
+
+^ Horev, Rani (2018-12-26). "Style-based GANs – Generating and Tuning Realistic Artificial Faces". Lyrn.AI. Retrieved 2019-02-16.
+
+^ Elgammal, Ahmed; Liu, Bingchen; Elhoseiny, Mohamed; Mazzone, Marian (2017). "CAN: Creative Adversarial Networks, Generating "Art" by Learning About Styles and Deviating from Style Norms". arXiv:1706.07068 [cs.AI].
+
+^ Cohn, Gabe (2018-10-25). "AI Art at Christie's Sells for $432,500". The New York Times.
+
+^ Mazzone, Marian; Ahmed Elgammal (21 February 2019). "Art, Creativity, and the Potential of Artificial Intelligence". Arts. 8: 26. doi:10.3390/arts8010026.
+
+^ Kulp, Patrick (May 23, 2019). "Samsung's AI Lab Can Create Fake Video Footage From a Single Headshot". AdWeek.
+
+^ Yu, Yi; Canales, Simon (August 15, 2019). "Conditional LSTM-GAN for Melody Generation from Lyrics". arXiv:1908.05551 [cs.AI].
+
+^ "Nvidia's AI recreates Pac-Man from scratch just by watching it being played". The Verge. 2020-05-22.
+
+^ A bot will complete this citation soon. Click here to jump the queue arXiv:2005.12126.
+
+^ Zhirui Zhang; Shujie Liu; Mu Li; Ming Zhou; Enhong Chen (October 2018). "Bidirectional Generative Adversarial Networks for Neural Machine Translation" (PDF). pp. 190–199.
+
+
+External links[edit]
+
+
+Art portal
+Knight, Will. "5 Big Predictions for Artificial Intelligence in 2017". MIT Technology Review. Retrieved 2017-01-05.
+A Style-Based Generator Architecture for Generative Adversarial Networks
+This Person Does Not Exist –  photorealistic images of people who do not exist, generated by StyleGAN
+"Generative Adversarial Networks: A Survey and Taxonomy", recent review by Zhengwei Wang, Qi She, Tomas E. Ward
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Generative_adversarial_network&oldid=972292807"
+Categories: Artificial neural networksCognitive scienceUnsupervised learningHidden categories: CS1 errors: missing periodicalArticles with missing Cite arXiv inputsArticles with short descriptionShort description matches WikidataAll articles with unsourced statementsArticles with unsourced statements from January 2020Articles with unsourced statements from February 2018
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+In other projects
+
+
+
+
+Wikimedia Commons
+
+
+
+
+
+Languages
+
+
+
+
+العربيةDeutschΕλληνικάEspañolFrançais한국어Italiano日本語РусскийSimple EnglishSuomiУкраїнська粵語中文
+Edit links
+
+
+
+
+
+
+ This page was last edited on 11 August 2020, at 08:35 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,411 @@
+
+
+
+
+Local outlier factor - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Local outlier factor
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+Part of a series onMachine learninganddata mining
+Problems
+Classification
+Clustering
+Regression
+Anomaly detection
+AutoML
+Association rules
+Reinforcement learning
+Structured prediction
+Feature engineering
+Feature learning
+Online learning
+Semi-supervised learning
+Unsupervised learning
+Learning to rank
+Grammar induction
+
+
+Supervised learning(classification • regression) 
+Decision trees
+Ensembles
+Bagging
+Boosting
+Random forest
+k-NN
+Linear regression
+Naive Bayes
+Artificial neural networks
+Logistic regression
+Perceptron
+Relevance vector machine (RVM)
+Support vector machine (SVM)
+
+
+Clustering
+BIRCH
+CURE
+Hierarchical
+k-means
+Expectation–maximization (EM)
+DBSCAN
+OPTICS
+Mean-shift
+
+
+Dimensionality reduction
+Factor analysis
+CCA
+ICA
+LDA
+NMF
+PCA
+PGD
+t-SNE
+
+
+Structured prediction
+Graphical models
+Bayes net
+Conditional random field
+Hidden Markov
+
+
+Anomaly detection
+k-NN
+Local outlier factor
+
+
+Artificial neural network
+Autoencoder
+Deep learning
+DeepDream
+Multilayer perceptron
+RNN
+LSTM
+GRU
+Restricted Boltzmann machine
+GAN
+SOM
+Convolutional neural network
+U-Net
+
+
+Reinforcement learning
+Q-learning
+SARSA
+Temporal difference (TD)
+
+
+Theory
+Bias–variance dilemma
+Computational learning theory
+Empirical risk minimization
+Occam learning
+PAC learning
+Statistical learning
+VC theory
+
+
+Machine-learning venues
+NeurIPS
+ICML
+ML
+JMLR
+ArXiv:cs.LG
+
+
+Glossary of artificial intelligence
+Glossary of artificial intelligence
+
+
+Related articles
+List of datasets for machine-learning research
+Outline of machine learning
+
+vte
+In anomaly detection, the local outlier factor (LOF) is an algorithm proposed by Markus M. Breunig, Hans-Peter Kriegel, Raymond T. Ng and Jörg Sander in 2000 for finding anomalous data points by measuring the local deviation of a given data point with respect to its neighbours.[1]
+LOF shares some concepts with DBSCAN and OPTICS such as the concepts of "core distance" and "reachability distance", which are used for local density estimation.[2]
+
+Contents
+
+1 Basic idea
+2 Formal
+3 Advantages
+4 Disadvantages and Extensions
+5 References
+
+
+Basic idea[edit]
+ Basic idea of LOF: comparing the local density of a point with the densities of its neighbors. A has a much lower density than its neighbors.
+The local outlier factor is based on a concept of a local density, where locality is given by k nearest neighbors, whose distance is used to estimate the density. By comparing the local density of an object to the local densities of its neighbors, one can identify regions of similar density, and points that have a substantially lower density than their neighbors. These are considered to be outliers.
+The local density is estimated by the typical distance at which a point can be "reached" from its neighbors. The definition of "reachability distance" used in LOF is an additional measure to produce more stable results within clusters. The "reachability distance" used by LOF has some subtle details that are often found incorrect in secondary sources, e.g., in the textbook of Ethem Alpaydin.[3]
+
+Formal[edit]
+Let k-distance(A) be the distance of the object A to the k-th nearest neighbor. Note that the set of the k nearest neighbors includes all objects at this distance, which can in the case of a "tie" be more than k objects. We denote the set of k nearest neighbors as Nk(A).
+
+ Illustration of the reachability distance. Objects B and C have the same reachability distance (k=3), while D is not a k nearest neighbor
+This distance is used to define what is called reachability distance:
+reachability-distancek(A,B)=max{k-distance(B), d(A,B)} 
+In words, the reachability distance of an object A from B is the true distance of the two objects, but at least the k-distance of B. Objects that belong to the k nearest neighbors of B (the "core" of B, see DBSCAN cluster analysis) are considered to be equally distant. The reason for this distance is to get more stable results. Note that this is not a distance in the mathematical definition, since it is not symmetric. (While it is a common mistake[4] to always use the k-distance(A), this yields a slightly different method, referred to as Simplified-LOF[4])
+The local reachability density of an object A is defined by
+lrdk(A):=1/(∑B∈ Nk(A)reachability-distancek(A, B)/|Nk(A)|)
+which is the inverse of the average reachability distance of the object A from its neighbors. Note that it is not the average reachability of the neighbors from A (which by definition would be the k-distance(A)), but the distance at which A can be "reached" from its neighbors. With duplicate points, this value can become infinite.
+The local reachability densities are then compared with those of the neighbors using
+
+LOFk(A):=∑B∈ Nk(A)lrdk(B)/lrdk(A)/|Nk(A)|
+= ∑B∈ Nk(A)lrdk(B)/|Nk(A)| · lrdk(A)
+
+which is the average local reachability density of the neighbors divided by the object's own local reachability density. A value of approximately 1 indicates that the object is comparable to its neighbors (and thus not an outlier). A value below 1 indicates a denser region (which would be an inlier), while values significantly larger than 1 indicate outliers.
+LOF(k) ~ 1 means Similar density as neighbors,
+LOF(k) < 1 means Higher density than neighbors (Inlier),
+LOF(k) > 1 means Lower density than neighbors (Outlier)
+
+Advantages[edit]
+ LOF scores as visualized by ELKI. While the upper right cluster has a comparable density to the outliers close to the bottom left cluster, they are detected correctly.
+Due to the local approach, LOF is able to identify outliers in a data set that would not be outliers in another area of the data set. For example, a point at a "small" distance to a very dense cluster is an outlier, while a point within a sparse cluster might exhibit similar distances to its neighbors.
+While the geometric intuition of LOF is only applicable to low-dimensional vector spaces, the algorithm can be applied in any context a dissimilarity function can be defined. It has experimentally been shown to work very well in numerous setups, often outperforming the competitors, for example in network intrusion detection[5] and on processed classification benchmark data.[6]
+The LOF family of methods can be easily generalized and then applied to various other problems, such as detecting outliers in geographic data, video streams or authorship networks.[4]
+
+Disadvantages and Extensions[edit]
+The resulting values are quotient-values and hard to interpret. A value of 1 or even less indicates a clear inlier, but there is no clear rule for when a point is an outlier. In one data set, a value of 1.1 may already be an outlier, in another dataset and parameterization (with strong local fluctuations) a value of 2 could still be an inlier. These differences can also occur within a dataset due to the locality of the method. There exist extensions of LOF that try to improve over LOF in these aspects:
+
+Feature Bagging for Outlier Detection[7] runs LOF on multiple projections and combines the results for improved detection qualities in high dimensions. This is the first ensemble learning approach to outlier detection, for other variants see ref.[8]
+Local Outlier Probability (LoOP)[9] is a method derived from LOF but using inexpensive local statistics to become less sensitive to the choice of the parameter k. In addition, the resulting values are scaled to a value range of [0:1].
+Interpreting and Unifying Outlier Scores[10] proposes a normalization of the LOF outlier scores to the interval [0:1] using statistical scaling to increase usability and can be seen an improved version of the LoOP ideas.
+On Evaluation of Outlier Rankings and Outlier Scores[11] proposes methods for measuring similarity and diversity of methods for building advanced outlier detection ensembles using LOF variants and other algorithms and improving on the Feature Bagging approach discussed above.
+Local outlier detection reconsidered: a generalized view on locality with applications to spatial, video, and network outlier detection[4] discusses the general pattern in various local outlier detection methods (including, e.g., LOF, a simplified version of LOF and LoOP) and abstracts from this into a general framework. This framework is then applied, e.g., to detecting outliers in geographic data, video streams and authorship networks.
+References[edit]
+
+^ Breunig, M. M.; Kriegel, H.-P.; Ng, R. T.; Sander, J. (2000). LOF: Identifying Density-based Local Outliers (PDF). Proceedings of the 2000 ACM SIGMOD International Conference on Management of Data. SIGMOD. pp. 93–104. doi:10.1145/335191.335388. ISBN 1-58113-217-4.
+
+^ Breunig, M. M.; Kriegel, H.-P.; Ng, R. T.; Sander, J. R. (1999). "OPTICS-OF: Identifying Local Outliers" (PDF). Principles of Data Mining and Knowledge Discovery. Lecture Notes in Computer Science. 1704. p. 262. doi:10.1007/978-3-540-48247-5_28. ISBN 978-3-540-66490-1.
+
+^ Alpaydin, Ethem (2020). Introduction to machine learning (Fourth ed.). Cambridge, Massachusetts. ISBN 978-0-262-04379-3. OCLC 1108782604.
+
+^ a b c d Schubert, E.; Zimek, A.; Kriegel, H. -P. (2012). "Local outlier detection reconsidered: A generalized view on locality with applications to spatial, video, and network outlier detection". Data Mining and Knowledge Discovery. 28: 190–237. doi:10.1007/s10618-012-0300-z.
+
+^ Lazarevic, A.; Ozgur, A.; Ertoz, L.; Srivastava, J.; Kumar, V. (2003). "A comparative study of anomaly detection schemes in network intrusion detection" (PDF). Proc. 3rd SIAM International Conference on Data Mining: 25–36. Archived from the original (PDF) on 2013-07-17. Retrieved 2010-05-14.CS1 maint: uses authors parameter (link)
+
+^ Campos, Guilherme O.; Zimek, Arthur; Sander, Jörg; Campello, Ricardo J. G. B.; Micenková, Barbora; Schubert, Erich; Assent, Ira; Houle, Michael E. (2016). "On the evaluation of unsupervised outlier detection: measures, datasets, and an empirical study". Data Mining and Knowledge Discovery. 30 (4): 891–927. doi:10.1007/s10618-015-0444-8. ISSN 1384-5810.
+
+^ Lazarevic, A.; Kumar, V. (2005). "Feature bagging for outlier detection". Proc. 11th ACM SIGKDD International Conference on Knowledge Discovery in Data Mining: 157–166. doi:10.1145/1081870.1081891. ISBN 159593135X.
+
+^ Zimek, A.; Campello, R. J. G. B.; Sander, J. R. (2014). "Ensembles for unsupervised outlier detection". ACM SIGKDD Explorations Newsletter. 15: 11–22. doi:10.1145/2594473.2594476.
+
+^ Kriegel, H.-P.; Kröger, P.; Schubert, E.; Zimek, A. (2009). LoOP: Local Outlier Probabilities (PDF). Proceedings of the 18th ACM Conference on Information and Knowledge Management. CIKM '09. pp. 1649–1652. doi:10.1145/1645953.1646195. ISBN 978-1-60558-512-3.
+
+^ Kriegel, H. P.; Kröger, P.; Schubert, E.; Zimek, A. (2011). Interpreting and Unifying Outlier Scores. Proceedings of the 2011 SIAM International Conference on Data Mining. pp. 13–24. CiteSeerX 10.1.1.232.2719. doi:10.1137/1.9781611972818.2. ISBN 978-0-89871-992-5.
+
+^ Schubert, E.; Wojdanowski, R.; Zimek, A.; Kriegel, H. P. (2012). On Evaluation of Outlier Rankings and Outlier Scores. Proceedings of the 2012 SIAM International Conference on Data Mining. pp. 1047–1058. CiteSeerX 10.1.1.300.7205. doi:10.1137/1.9781611972825.90. ISBN 978-1-61197-232-0.
+
+
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Local_outlier_factor&oldid=958217939"
+Categories: Statistical outliersData miningMachine learning algorithmsHidden categories: CS1 maint: uses authors parameter
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+Deutsch日本語РусскийСрпски / srpskiSrpskohrvatski / српскохрватски
+Edit links
+
+
+
+
+
+
+ This page was last edited on 22 May 2020, at 15:02 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

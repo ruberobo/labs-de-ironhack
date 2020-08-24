@@ -1,0 +1,461 @@
+
+
+
+
+CURE algorithm - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CURE algorithm
+
+From Wikipedia, the free encyclopedia
+  (Redirected from CURE data clustering algorithm)
+
+
+Jump to navigation
+Jump to search
+Part of a series onMachine learninganddata mining
+Problems
+Classification
+Clustering
+Regression
+Anomaly detection
+AutoML
+Association rules
+Reinforcement learning
+Structured prediction
+Feature engineering
+Feature learning
+Online learning
+Semi-supervised learning
+Unsupervised learning
+Learning to rank
+Grammar induction
+
+
+Supervised learning(classification • regression) 
+Decision trees
+Ensembles
+Bagging
+Boosting
+Random forest
+k-NN
+Linear regression
+Naive Bayes
+Artificial neural networks
+Logistic regression
+Perceptron
+Relevance vector machine (RVM)
+Support vector machine (SVM)
+
+
+Clustering
+BIRCH
+CURE
+Hierarchical
+k-means
+Expectation–maximization (EM)
+DBSCAN
+OPTICS
+Mean-shift
+
+
+Dimensionality reduction
+Factor analysis
+CCA
+ICA
+LDA
+NMF
+PCA
+PGD
+t-SNE
+
+
+Structured prediction
+Graphical models
+Bayes net
+Conditional random field
+Hidden Markov
+
+
+Anomaly detection
+k-NN
+Local outlier factor
+
+
+Artificial neural network
+Autoencoder
+Deep learning
+DeepDream
+Multilayer perceptron
+RNN
+LSTM
+GRU
+Restricted Boltzmann machine
+GAN
+SOM
+Convolutional neural network
+U-Net
+
+
+Reinforcement learning
+Q-learning
+SARSA
+Temporal difference (TD)
+
+
+Theory
+Bias–variance dilemma
+Computational learning theory
+Empirical risk minimization
+Occam learning
+PAC learning
+Statistical learning
+VC theory
+
+
+Machine-learning venues
+NeurIPS
+ICML
+ML
+JMLR
+ArXiv:cs.LG
+
+
+Glossary of artificial intelligence
+Glossary of artificial intelligence
+
+
+Related articles
+List of datasets for machine-learning research
+Outline of machine learning
+
+vte
+CURE (Clustering Using REpresentatives) is an efficient data clustering algorithm for large databases[citation needed]. Compared with K-means clustering it is more robust to outliers and able to identify clusters having non-spherical shapes and size variances.
+
+Contents
+
+1 Drawbacks of traditional algorithms
+2 CURE clustering algorithm
+3 Pseudocode
+4 Availability
+5 See also
+6 References
+
+
+Drawbacks of traditional algorithms[edit]
+The popular K-means clustering algorithm minimizes the sum of squared errors criterion:
+
+
+
+
+
+E
+=
+
+∑
+
+i
+=
+1
+
+
+k
+
+
+
+∑
+
+p
+∈
+
+C
+
+i
+
+
+
+
+(
+p
+−
+
+m
+
+i
+
+
+
+)
+
+2
+
+
+,
+
+
+{\displaystyle E=\sum _{i=1}^{k}\sum _{p\in C_{i}}(p-m_{i})^{2},}
+
+
+Given large differences in sizes or geometries of different clusters, the square error method could split the large clusters to minimize the square error, which is not always correct. Also, with hierarchic clustering algorithms these problems exist as none of the distance measures between clusters (
+
+
+
+
+d
+
+m
+i
+n
+
+
+,
+
+d
+
+m
+e
+a
+n
+
+
+
+
+{\displaystyle d_{min},d_{mean}}
+
+) tend to work with different cluster shapes.  Also the running time is high when n is large.
+The problem with the BIRCH algorithm is that once the clusters are generated after step 3, it uses centroids of the clusters and assigns each data point to the cluster with the closest centroid.[citation needed] Using only the centroid to redistribute the data has problems when clusters lack uniform sizes and shapes.
+
+CURE clustering algorithm[edit]
+To avoid the problems with non-uniform sized or shaped clusters, CURE employs a hierarchical clustering algorithm that adopts a middle ground between the centroid based and all point extremes. In CURE, a constant number c of well scattered points of a cluster are chosen and they are shrunk towards the centroid of the cluster by a fraction α. The scattered points after shrinking are used as representatives of the cluster. The clusters with the closest pair of representatives are the clusters that are merged at each step of CURE's hierarchical clustering algorithm. This enables CURE to correctly identify the clusters and makes it less sensitive to outliers.
+Running time is O(n2 log n), making it rather expensive, and space complexity is O(n).
+The algorithm cannot be directly applied to large databases because of the high runtime complexity. Enhancements address this requirement.
+
+Random sampling :  random sampling supports large data sets. Generally the random sample fits in main memory. The random sampling involves a trade off between accuracy and efficiency.
+Partitioning : The basic idea is to partition the sample space into p partitions. Each partition contains n/p elements. The first pass partially clusters each partition until the final number of clusters reduces to n/pq for some constant q ≥ 1. A second clustering pass on n/q partially clusters partitions. For the second pass only the representative points are stored since the merge procedure only requires representative points of previous clusters before computing the representative points for the merged cluster. Partitioning the input reduces the execution times.
+Labeling data on disk : Given only representative points for k clusters, the remaining data points are also assigned to the clusters. For this a fraction of randomly selected representative points for each of the k clusters is chosen and data point is assigned to the cluster containing the representative point closest to it.
+Pseudocode[edit]
+CURE (no. of points,k)
+Input : A set of points S
+Output : k clusters
+
+For every cluster u (each input point), in u.mean and u.rep store the mean of the points in the cluster and a set of c representative points of the cluster (initially c = 1 since each cluster has one data point). Also u.closest stores the cluster closest to u.
+All the input points are inserted into a k-d tree T
+Treat each input point as separate cluster, compute u.closest for each u and then insert each cluster into the heap Q. (clusters are arranged in increasing order of distances between u and u.closest).
+While size (Q) > k
+Remove the top element of Q (say u) and merge it with its closest cluster u.closest (say v) and compute the new representative points for the merged cluster w.
+Remove u and v from T and Q.
+For all the clusters x in Q, update x.closest and relocate x
+insert w into Q
+repeat
+Availability[edit]
+pyclustering open source library includes a Python and C++ implementation of CURE algorithm.
+See also[edit]
+k-means clustering
+BFR algorithm
+References[edit]
+Guha, Sudipto; Rastogi, Rajeev; Shim, Kyuseok (1998). "CURE: An Efficient Clustering Algorithm for Large Databases" (PDF). Information Systems. 26 (1): 35–58. doi:10.1016/S0306-4379(01)00008-4.
+Kogan, Jacob; Nicholas, Charles K.; Teboulle, M. (2006). Grouping multidimensional data: recent advances in clustering. Springer. ISBN 978-3-540-28348-5.
+Theodoridis, Sergios; Koutroumbas, Konstantinos (2006). Pattern recognition. Academic Press. pp. 572–574. ISBN 978-0-12-369531-4.
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=CURE_algorithm&oldid=937732586"
+Categories: Cluster analysis algorithmsHidden categories: All articles with unsourced statementsArticles with unsourced statements from May 2018Articles with unsourced statements from May 2015Articles with example pseudocode
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+Русский
+Edit links
+
+
+
+
+
+
+ This page was last edited on 26 January 2020, at 23:07 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

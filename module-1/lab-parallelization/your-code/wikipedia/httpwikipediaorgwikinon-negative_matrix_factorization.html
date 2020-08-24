@@ -1,0 +1,1620 @@
+
+
+
+
+Non-negative matrix factorization - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Non-negative matrix factorization
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+Part of a series onMachine learninganddata mining
+Problems
+Classification
+Clustering
+Regression
+Anomaly detection
+AutoML
+Association rules
+Reinforcement learning
+Structured prediction
+Feature engineering
+Feature learning
+Online learning
+Semi-supervised learning
+Unsupervised learning
+Learning to rank
+Grammar induction
+
+
+Supervised learning(classification • regression) 
+Decision trees
+Ensembles
+Bagging
+Boosting
+Random forest
+k-NN
+Linear regression
+Naive Bayes
+Artificial neural networks
+Logistic regression
+Perceptron
+Relevance vector machine (RVM)
+Support vector machine (SVM)
+
+
+Clustering
+BIRCH
+CURE
+Hierarchical
+k-means
+Expectation–maximization (EM)
+DBSCAN
+OPTICS
+Mean-shift
+
+
+Dimensionality reduction
+Factor analysis
+CCA
+ICA
+LDA
+NMF
+PCA
+PGD
+t-SNE
+
+
+Structured prediction
+Graphical models
+Bayes net
+Conditional random field
+Hidden Markov
+
+
+Anomaly detection
+k-NN
+Local outlier factor
+
+
+Artificial neural network
+Autoencoder
+Deep learning
+DeepDream
+Multilayer perceptron
+RNN
+LSTM
+GRU
+Restricted Boltzmann machine
+GAN
+SOM
+Convolutional neural network
+U-Net
+
+
+Reinforcement learning
+Q-learning
+SARSA
+Temporal difference (TD)
+
+
+Theory
+Bias–variance dilemma
+Computational learning theory
+Empirical risk minimization
+Occam learning
+PAC learning
+Statistical learning
+VC theory
+
+
+Machine-learning venues
+NeurIPS
+ICML
+ML
+JMLR
+ArXiv:cs.LG
+
+
+Glossary of artificial intelligence
+Glossary of artificial intelligence
+
+
+Related articles
+List of datasets for machine-learning research
+Outline of machine learning
+
+vte
+ Illustration of approximate non-negative matrix factorization: the matrix V is represented by the two smaller matrices W and H, which, when multiplied, approximately reconstruct V.
+Non-negative matrix factorization (NMF or NNMF), also non-negative matrix approximation[1][2] is a group of algorithms in multivariate analysis and linear algebra where a matrix V is factorized into (usually) two matrices W and H, with the property that all three matrices have no negative elements. This non-negativity makes the resulting matrices easier to inspect. Also, in applications such as processing of audio spectrograms or muscular activity, non-negativity is inherent to the data being considered. Since the problem is not exactly solvable in general, it is commonly approximated numerically.
+NMF finds applications in such fields as astronomy,[3][4][5][6] computer vision, document clustering,[1] chemometrics, audio signal processing, recommender systems,[7][8] and bioinformatics.[9]
+
+Contents
+
+1 History
+2 Background
+3 Clustering property
+4 Types
+
+4.1 Approximate non-negative matrix factorization
+4.2 Convex non-negative matrix factorization
+4.3 Nonnegative rank factorization
+4.4 Different cost functions and regularizations
+4.5 Online NMF
+
+
+5 Algorithms
+
+5.1 Sequential NMF
+5.2 Exact NMF
+
+
+6 Relation to other techniques
+7 Uniqueness
+8 Applications
+
+8.1 Astronomy
+8.2 Text mining
+8.3 Spectral data analysis
+8.4 Scalable Internet distance prediction
+8.5 Non-stationary speech denoising
+8.6 Population Genetics
+8.7 Bioinformatics
+8.8 Nuclear imaging
+
+
+9 Current research
+10 See also
+11 Sources and external links
+
+11.1 Notes
+11.2 Others
+
+
+
+
+History[edit]
+In chemometrics non-negative matrix factorization has a long history under the name "self modeling curve resolution".[10]
+In this framework the vectors in the right matrix are continuous curves rather than discrete vectors.
+Also early work on non-negative matrix factorizations was performed by a Finnish group of researchers in the 1990s under the name positive matrix factorization.[11][12][13]
+It became more widely known as non-negative matrix factorization after Lee and Seung investigated
+the properties of the algorithm and published some simple and useful
+algorithms for two types of factorizations.[14][15]
+
+Background[edit]
+Let matrix V be the product of the matrices W and H,
+
+
+
+
+
+
+V
+
+=
+
+W
+
+
+H
+
+
+.
+
+
+{\displaystyle \mathbf {V} =\mathbf {W} \mathbf {H} \,.}
+
+
+Matrix multiplication can be implemented as computing the column vectors of V as linear combinations of the column vectors in W using coefficients supplied by columns of H.  That is, each column of V can be computed as follows:
+
+
+
+
+
+
+
+v
+
+
+i
+
+
+=
+
+W
+
+
+
+h
+
+
+i
+
+
+
+,
+
+
+{\displaystyle \mathbf {v} _{i}=\mathbf {W} \mathbf {h} _{i}\,,}
+
+
+where vi is the i-th column vector of the product matrix V and hi is the i-th column vector of the matrix H.
+When multiplying matrices, the dimensions of the factor matrices may be significantly lower than those of the product matrix and it is this property that forms the basis of NMF. NMF generates factors with significantly reduced dimensions compared to the original matrix. For example, if V is an m × n matrix, W is an m × p matrix, and H is a p × n matrix then p can be significantly less than both m and n.
+Here is an example based on a text-mining application: 
+
+Let the input matrix (the matrix to be factored) be V with 10000 rows and 500 columns where words are in rows and documents are in columns. That is, we have 500 documents indexed by 10000 words. It follows that a column vector v in V represents a document.
+Assume we ask the algorithm to find 10 features in order to generate a features matrix W with 10000 rows and 10 columns and a coefficients matrix H with 10 rows and 500 columns.
+The product of W and H is a matrix with 10000 rows and 500 columns, the same shape as the input matrix V and, if the factorization worked, it is a reasonable approximation to the input matrix V.
+From the treatment of matrix multiplication above it follows that each column in the product matrix WH is a linear combination of the 10 column vectors in the features matrix W with coefficients supplied by the coefficients matrix H.
+This last point is the basis of NMF because we can consider each original document in our example as being built from a small set of hidden features. NMF generates these features.
+It is useful to think of each feature (column vector) in the features matrix W as a document archetype comprising a set of words where each word's cell value defines the word's rank in the feature: The higher a word's cell value the higher the word's rank in the feature. A column in the coefficients matrix H represents an original document with a cell value defining the document's rank for a feature. We can now reconstruct a document (column vector) from our input matrix by a linear combination of our features (column vectors in W) where each feature is weighted by the feature's cell value from the document's column in H.
+
+Clustering property[edit]
+NMF has an inherent clustering property,[16] i.e., it automatically clusters the columns of input data 
+
+
+
+
+
+V
+
+=
+(
+
+v
+
+1
+
+
+,
+⋯
+,
+
+v
+
+n
+
+
+)
+
+
+{\displaystyle \mathbf {V} =(v_{1},\cdots ,v_{n})}
+
+.
+More specifically, the approximation of 
+
+
+
+
+V
+
+
+
+{\displaystyle \mathbf {V} }
+
+ by
+
+
+
+
+
+V
+
+≃
+
+W
+
+
+H
+
+
+
+{\displaystyle \mathbf {V} \simeq \mathbf {W} \mathbf {H} }
+
+ is achieved by finding 
+
+
+
+W
+
+
+{\displaystyle W}
+
+ and 
+
+
+
+H
+
+
+{\displaystyle H}
+
+ that minimize the error function
+
+
+
+
+
+|
+
+
+|
+
+V
+−
+W
+H
+
+|
+
+
+
+|
+
+
+F
+
+
+,
+
+
+{\displaystyle ||V-WH||_{F},}
+
+ subject to 
+
+
+
+W
+≥
+0
+,
+H
+≥
+0.
+
+
+{\displaystyle W\geq 0,H\geq 0.}
+
+
+If we furthermore impose an orthogonality constraint on 
+
+
+
+
+H
+
+
+
+{\displaystyle \mathbf {H} }
+
+, 
+i.e. 
+
+
+
+
+H
+
+
+
+H
+
+
+T
+
+
+=
+I
+
+
+{\displaystyle \mathbf {H} \mathbf {H} ^{T}=I}
+
+, then the above minimization is mathematically equivalent to the minimization of K-means clustering [16].
+Furthermore, the computed 
+
+
+
+H
+
+
+{\displaystyle H}
+
+ gives the cluster membership, i.e.,
+if 
+
+
+
+
+
+H
+
+
+k
+j
+
+
+>
+
+
+H
+
+
+i
+j
+
+
+
+
+{\displaystyle \mathbf {H} _{kj}>\mathbf {H} _{ij}}
+
+ for all i ≠ k, this suggests that
+the input data 
+
+
+
+
+v
+
+j
+
+
+
+
+{\displaystyle v_{j}}
+
+
+belongs to 
+
+
+
+
+k
+
+t
+h
+
+
+
+
+{\displaystyle k^{th}}
+
+ cluster. 
+The computed 
+
+
+
+W
+
+
+{\displaystyle W}
+
+ gives the cluster centroids, i.e., 
+the 
+
+
+
+
+k
+
+t
+h
+
+
+
+
+{\displaystyle k^{th}}
+
+ column 
+gives the cluster centroid of
+
+
+
+
+
+k
+
+t
+h
+
+
+
+
+{\displaystyle k^{th}}
+
+ cluster. This centroid's representation can be significantly enhanced by convex NMF.
+When the orthogonality constraint 
+
+
+
+
+H
+
+
+
+H
+
+
+T
+
+
+=
+I
+
+
+{\displaystyle \mathbf {H} \mathbf {H} ^{T}=I}
+
+ is not explicitly imposed, the orthogonality holds to a large extent, and the clustering property holds too. Clustering is the main objective of most data mining applications of NMF.[citation needed]
+When the error function to be used is Kullback–Leibler divergence, NMF is identical to the Probabilistic latent semantic analysis, a popular document clustering method.[17]
+
+Types[edit]
+Approximate non-negative matrix factorization[edit]
+Usually the number of columns of W and the number of rows of H in NMF are selected so the product WH will become an approximation to V.  The full decomposition of V then amounts to the two non-negative matrices W and H as well as a residual U, such that: V = WH + U. The elements of the residual matrix can either be negative or positive.
+When W and H are smaller than V they become easier to store and manipulate. Another reason for factorizing V into smaller matrices W and H, is that if one is able to approximately represent the elements of V by significantly less data, then one has to infer some latent structure in the data.
+
+Convex non-negative matrix factorization[edit]
+In standard NMF, matrix factor W ∈ ℝ+m × k， i.e., W can be anything in that space.  Convex NMF[18] restricts the columns of W to convex combinations of the input data vectors 
+
+
+
+(
+
+v
+
+1
+
+
+,
+⋯
+,
+
+v
+
+n
+
+
+)
+
+
+{\displaystyle (v_{1},\cdots ,v_{n})}
+
+. This greatly improves the quality of data representation of W. Furthermore, the resulting matrix factor H becomes more sparse and orthogonal.
+
+Nonnegative rank factorization[edit]
+In case the nonnegative rank of V is equal to its actual rank, V = WH is called a nonnegative rank factorization.[19][20][21] The problem of finding the NRF of V, if it exists, is known to be NP-hard.[22]
+
+Different cost functions and regularizations[edit]
+There are different types of non-negative matrix factorizations.
+The different types arise from using different cost functions for measuring the divergence between V and WH and possibly by regularization of the W and/or H matrices.[1]
+Two simple divergence functions studied by Lee and Seung are the squared error (or Frobenius norm) and an extension of the Kullback–Leibler divergence to positive matrices (the original Kullback–Leibler divergence is defined on probability distributions).
+Each divergence leads to a different NMF algorithm, usually minimizing the divergence using iterative update rules.
+The factorization problem in the squared error version of NMF may be stated as:
+Given a matrix 
+
+
+
+
+V
+
+
+
+{\displaystyle \mathbf {V} }
+
+ find nonnegative matrices W and H that minimize the function
+
+
+
+
+
+F
+(
+
+W
+
+,
+
+H
+
+)
+=
+‖
+
+V
+
+−
+
+W
+H
+
+
+‖
+
+F
+
+
+2
+
+
+
+
+{\displaystyle F(\mathbf {W} ,\mathbf {H} )=\|\mathbf {V} -\mathbf {WH} \|_{F}^{2}}
+
+
+Another type of NMF for images is based on the total variation norm.[23]
+When L1 regularization (akin to Lasso) is added to NMF with the mean squared error cost function, the resulting problem may be called non-negative sparse coding due to the similarity to the sparse coding problem,[24][25]
+although it may also still be referred to as NMF.[26]
+
+Online NMF[edit]
+Many standard NMF algorithms analyze all the data together; i.e., the whole matrix is available from the start. This may be unsatisfactory in applications where there are too many data to fit into memory or where the data are provided in streaming fashion. One such use is for collaborative filtering in recommendation systems, where there may be many users and many items to recommend, and it would be inefficient to recalculate everything when one user or one item is added to the system. The cost function for optimization in these cases may or may not be the same as for standard NMF, but the algorithms need to be rather different.[27][28][29]
+
+Algorithms[edit]
+There are several ways in which the W and H may be found: Lee and Seung's multiplicative update rule[15] has been a popular method due to the simplicity of implementation.  This algorithm is:
+
+initialize: W and H non negative.
+Then update the values in W and H by computing the following, with 
+
+
+
+n
+
+
+{\displaystyle n}
+
+ as an index of the iteration.
+
+
+
+
+
+
+H
+
+
+[
+i
+,
+j
+]
+
+
+n
++
+1
+
+
+←
+
+
+H
+
+
+[
+i
+,
+j
+]
+
+
+n
+
+
+
+
+
+(
+(
+
+
+W
+
+
+n
+
+
+
+)
+
+T
+
+
+
+V
+
+
+)
+
+[
+i
+,
+j
+]
+
+
+
+
+(
+(
+
+
+W
+
+
+n
+
+
+
+)
+
+T
+
+
+
+
+W
+
+
+n
+
+
+
+
+H
+
+
+n
+
+
+
+)
+
+[
+i
+,
+j
+]
+
+
+
+
+
+
+
+{\displaystyle \mathbf {H} _{[i,j]}^{n+1}\leftarrow \mathbf {H} _{[i,j]}^{n}{\frac {((\mathbf {W} ^{n})^{T}\mathbf {V} )_{[i,j]}}{((\mathbf {W} ^{n})^{T}\mathbf {W} ^{n}\mathbf {H} ^{n})_{[i,j]}}}}
+
+
+and
+
+
+
+
+
+
+W
+
+
+[
+i
+,
+j
+]
+
+
+n
++
+1
+
+
+←
+
+
+W
+
+
+[
+i
+,
+j
+]
+
+
+n
+
+
+
+
+
+(
+
+V
+
+(
+
+
+H
+
+
+n
++
+1
+
+
+
+)
+
+T
+
+
+
+)
+
+[
+i
+,
+j
+]
+
+
+
+
+(
+
+
+W
+
+
+n
+
+
+
+
+H
+
+
+n
++
+1
+
+
+(
+
+
+H
+
+
+n
++
+1
+
+
+
+)
+
+T
+
+
+
+)
+
+[
+i
+,
+j
+]
+
+
+
+
+
+
+
+{\displaystyle \mathbf {W} _{[i,j]}^{n+1}\leftarrow \mathbf {W} _{[i,j]}^{n}{\frac {(\mathbf {V} (\mathbf {H} ^{n+1})^{T})_{[i,j]}}{(\mathbf {W} ^{n}\mathbf {H} ^{n+1}(\mathbf {H} ^{n+1})^{T})_{[i,j]}}}}
+
+
+Until W and H are stable.
+Note that the updates are done on an element by element basis not matrix multiplication.
+We note that W and H multiplicative factor is identity matrix when 
+
+
+
+
+V
+
+=
+
+W
+
+
+H
+
+
+
+{\displaystyle \mathbf {V} =\mathbf {W} \mathbf {H} }
+
+.
+More recently other algorithms have been developed.
+Some approaches are based on alternating non-negative least squares: in each step of such an algorithm, first H is fixed and W found by a non-negative least squares solver, then W is fixed and H is found analogously. The procedures used to solve for W and H may be the same[30] or different, as some NMF variants regularize one of W and H.[24] Specific approaches include the projected gradient descent methods,[30][31] the active set method,[7][32] the optimal gradient method,[33] and the block principal pivoting method[34] among several others.[35]
+Current algorithms are sub-optimal in that they only guarantee finding a local minimum, rather than a global minimum of the cost function. A provably optimal algorithm is unlikely in the near future as the problem has been shown to generalize the k-means clustering problem which is known to be NP-complete.[36] However, as in many other data mining applications, a local minimum may still prove to be useful.
+
+ Fractional residual variance (FRV) plots for PCA and sequential NMF;[5] for PCA, the theoretical values are the contribution from the residual eigenvalues. In comparison, the FRV curves for PCA reaches a flat plateau where no signal are captured effectively; while the NMF FRV curves are declining continuously, indicating a better ability to capture signal. The FRV curves for NMF also converges to higher levels than PCA, indicating the less-overfitting property of NMF.
+Sequential NMF[edit]
+The sequential construction of NMF components (W and H) was firstly used to relate NMF with Principal Component Analysis (PCA) in astronomy.[37] The contribution from the PCA components are ranked by the magnitude of their corresponding eigenvalues; for NMF, its components can be ranked empirically when they are constructed one by one (sequentially), i.e., learn the 
+
+
+
+(
+n
++
+1
+)
+
+
+{\displaystyle (n+1)}
+
+-th component with the first 
+
+
+
+n
+
+
+{\displaystyle n}
+
+ components constructed.
+The contribution of the sequential NMF components can be compared with the Karhunen–Loève theorem, an application of PCA, using the plot of eigenvalues. A typical choice of the number of components with PCA is based on the "elbow" point, then the existence of the flat plateau is indicating that PCA is not capturing the data efficiently, and at last there exists a sudden drop reflecting the capture of random noise and falls into the regime of overfitting.[38][39] For sequential NMF, the plot of eigenvalues is approximated by the plot of the fractional residual variance curves, where the curves decreases continuously, and converge to a higher level than PCA,[5] which is the indication of less over-fitting of sequential NMF.
+
+Exact NMF[edit]
+Exact solutions for the variants of NMF can be expected (in polynomial time) when additional constraints hold for matrix V. A polynomial time algorithm for solving nonnegative rank factorization if V contains a monomial sub matrix of rank equal to its rank was given by Campbell and Poole in 1981.[40] Kalofolias and Gallopoulos (2012)[41] solved the symmetric counterpart of this problem, where V is symmetric and contains a diagonal principal sub matrix of rank r. Their algorithm runs in O(rm2) time in the dense case. Arora, Ge, Halpern, Mimno, Moitra, Sontag, Wu, & Zhu (2013) give a polynomial time algorithm for exact NMF that works for the case where one of the factors W satisfies a separability condition.[42]
+
+Relation to other techniques[edit]
+In Learning the parts of objects by non-negative matrix factorization Lee and Seung[43] proposed NMF mainly for parts-based decomposition of images.  It compares NMF to vector quantization and principal component analysis, and shows that although the three techniques may be written as factorizations, they implement different constraints and therefore produce different results.
+
+ NMF as a probabilistic graphical model: visible units (V) are connected to hidden units (H) through weights W, so that V is generated from a probability distribution with mean 
+
+
+
+
+∑
+
+a
+
+
+
+W
+
+i
+a
+
+
+
+h
+
+a
+
+
+
+
+{\displaystyle \sum _{a}W_{ia}h_{a}}
+
+.[14]:5
+It was later shown that some types of NMF are an instance of a more general probabilistic model called "multinomial PCA".[44]
+When NMF is obtained by minimizing the Kullback–Leibler divergence, it is in fact equivalent to another instance of multinomial PCA, probabilistic latent semantic analysis,[45]
+trained by maximum likelihood estimation.
+That method is commonly used for analyzing and clustering textual data and is also related to the latent class model.
+NMF with the least-squares objective is equivalent to a relaxed form of K-means clustering: the matrix factor W contains cluster centroids and H contains cluster membership indicators.[16][46]  This provides a theoretical foundation for using NMF for data clustering. However, k-means does not enforce non-negativity on its centroids, so the closest analogy is in fact with "semi-NMF".[18]
+NMF can be seen as a two-layer directed graphical model with one layer of observed random variables and one layer of hidden random variables.[47]
+NMF extends beyond matrices to tensors of arbitrary order.[48][49][50] This extension may be viewed as a non-negative counterpart to, e.g., the PARAFAC model.
+Other extensions of NMF include joint factorization of several data matrices and tensors where some factors are shared. Such models are useful for sensor fusion and relational learning.[51]
+NMF is an instance of nonnegative quadratic programming (NQP), just like the support vector machine (SVM). However, SVM and NMF are related at a more intimate level than that of NQP, which allows direct application of the solution algorithms developed for either of the two methods to problems in both domains.[52]
+
+Uniqueness[edit]
+The factorization is not unique: A matrix and its inverse can be used to transform the two factorization matrices by, e.g.,[53]
+
+
+
+
+
+
+W
+H
+
+=
+
+
+W
+B
+B
+
+
+−
+1
+
+
+
+H
+
+
+
+{\displaystyle \mathbf {WH} =\mathbf {WBB} ^{-1}\mathbf {H} }
+
+
+If the two new matrices 
+
+
+
+
+
+
+
+W
+~
+
+
+
+=
+W
+B
+
+
+
+{\displaystyle \mathbf {{\tilde {W}}=WB} }
+
+ and 
+
+
+
+
+
+
+H
+~
+
+
+
+=
+
+
+B
+
+
+−
+1
+
+
+
+H
+
+
+
+{\displaystyle \mathbf {\tilde {H}} =\mathbf {B} ^{-1}\mathbf {H} }
+
+ are non-negative they form another parametrization of the factorization.
+The non-negativity of 
+
+
+
+
+
+
+W
+~
+
+
+
+
+
+{\displaystyle \mathbf {\tilde {W}} }
+
+ and 
+
+
+
+
+
+
+H
+~
+
+
+
+
+
+{\displaystyle \mathbf {\tilde {H}} }
+
+ applies at least if B is a non-negative monomial matrix.
+In this simple case it will just correspond to a scaling and a permutation.
+More control over the non-uniqueness of NMF is obtained with sparsity constraints.[54]
+
+Applications[edit]
+Astronomy[edit]
+In astronomy, NMF is a promising method for dimension reduction in the sense that astrophysical signals are non-negative. NMF has been applied to the spectroscopic observations [3][4] and the direct imaging observations [5] as a method to study the common properties of astronomical objects and post-process the astronomical observations. The advances in the spectroscopic observations by Blanton & Roweis (2007) [4] takes into account of the uncertainties of astronomical observations, which is later improved by Zhu (2016) [37] where missing data are also considered and parallel computing is enabled. Their method is then adopted by Ren et al. (2018) [5] to the direct imaging field as one of the methods of detecting exoplanets, especially for the direct imaging of circumstellar disks.
+Ren et al. (2018) [5] are able to prove the stability of NMF components when they are constructed sequentially (i.e., one by one), which enables the linearity of the NMF modeling process; the linearity property is used to separate the stellar light and the light scattered from the exoplanets and circumstellar disks.
+In direct imaging, to reveal the faint exoplanets and circumstellar disks from bright the surrounding stellar lights, which has a typical contrast from 10⁵ to 10¹⁰, various statistical methods have been adopted,[55][56][38] however the light from the exoplanets or circumstellar disks are usually over-fitted, where forward modeling have to be adopted to recover the true flux.[57][39] Forward modeling is currently optimized for point sources,[39] however not for extended sources, especially for irregularly shaped structures such as circumstellar disks. In this situation, NMF has been an excellent method, being less over-fitting in the sense of the non-negativity and sparsity of the NMF modeling coefficients, therefore forward modeling can be performed with a few scaling factors,[5] rather than a computationally intensive data re-reduction on generated models.
+
+Text mining[edit]
+NMF can be used for text mining applications.
+In this process, a document-term matrix is constructed with the weights of various terms (typically weighted word frequency information) from a set of documents.
+This matrix is factored into a term-feature and a feature-document matrix.
+The features are derived from the contents of the documents, and the feature-document matrix describes data clusters of related documents.
+One specific application used hierarchical NMF on a small subset of scientific abstracts from PubMed.[58]
+Another research group clustered parts of the Enron email dataset[59]
+with 65,033 messages and 91,133 terms into 50 clusters.[60]
+NMF has also been applied to citations data, with one example clustering English Wikipedia articles and scientific journals based on the outbound scientific citations in English Wikipedia.[61]
+Arora, Ge, Halpern, Mimno, Moitra, Sontag, Wu, & Zhu (2013) have given polynomial-time algorithms to learn topic models using NMF. The algorithm assumes that the topic matrix satisfies a separability condition that is often found to hold in these settings.[42]
+Hassani, Iranmanesh and Mansouri (2019) proposed a feature agglomeration method for term-document matrices which operates using NMF. The algorithm reduces the term-document matrix into a smaller matrix more suitable for text clustering.[62]
+
+Spectral data analysis[edit]
+NMF is also used to analyze spectral data; one such use is in the classification of space objects and debris.[63]
+
+Scalable Internet distance prediction[edit]
+NMF is applied in scalable Internet distance (round-trip time) prediction. For a network with 
+
+
+
+N
+
+
+{\displaystyle N}
+
+ hosts, with the help of NMF, the distances of all the 
+
+
+
+
+N
+
+2
+
+
+
+
+{\displaystyle N^{2}}
+
+ end-to-end links can be predicted after conducting only 
+
+
+
+O
+(
+N
+)
+
+
+{\displaystyle O(N)}
+
+ measurements. This kind of method was firstly introduced in Internet
+Distance Estimation Service (IDES).[64] Afterwards, as a fully decentralized approach, Phoenix network coordinate system[65]
+is proposed. It achieves better overall prediction accuracy by introducing the concept of weight.
+
+Non-stationary speech denoising[edit]
+Speech denoising has been a long lasting problem in audio signal processing. There are lots of algorithms for denoising if the noise is stationary. For example, the Wiener filter is suitable for additive Gaussian noise. However, if the noise is non-stationary, the classical denoising algorithms usually have poor performance because the statistical information of the non-stationary noise is difficult to estimate. Schmidt et al.[66] use NMF to do speech denoising under non-stationary noise, which is completely different from classical statistical approaches. The key idea is that clean speech signal can be sparsely represented by a speech dictionary, but non-stationary noise cannot. Similarly, non-stationary noise can also be sparsely represented by a noise dictionary, but speech cannot.
+The algorithm for NMF denoising goes as follows. Two dictionaries, one for speech and one for noise, need to be trained offline. Once a noisy speech is given, we first calculate the magnitude of the Short-Time-Fourier-Transform. Second, separate it into two parts via NMF, one can be sparsely represented by the speech dictionary, and the other part can be sparsely represented by the noise dictionary. Third, the part that is represented by the speech dictionary will be the estimated clean speech.
+
+Population Genetics[edit]
+Sparse NMF is used in Population genetics for estimating individual admixture coefficients, detecting genetic clusters of individuals in a population sample or evaluating genetic admixture in sampled genomes. In human genetic clustering, NMF algorithms provide estimates similar to those of the computer program STRUCTURE, but the algorithms are more efficient computationally and allow analysis of large population genomic data sets.[67]
+
+Bioinformatics[edit]
+NMF has been successfully applied in bioinformatics for clustering gene expression and DNA methylation data and finding the genes most representative of the clusters.[25][68][69][70] In the analysis of cancer mutations it has been used to identify common patterns of mutations that occur in many cancers and that probably have distinct causes.[71] NMF techniques can identify sources of variation such as cell types, disease subtypes, population stratification, tissue composition, and tumor clonality.[72]
+
+Nuclear imaging[edit]
+NMF, also referred in this field as factor analysis, has been used since the 1980s[73] to analyze sequences of images in SPECT and PET dynamic medical imaging. Non-uniqueness of NMF was addressed using sparsity constraints.[74]
+[75]
+[76]
+
+Current research[edit]
+Current research (since 2010) in nonnegative matrix factorization includes, but is not limited to,
+
+Algorithmic: searching for global minima of the factors and factor initialization.[77]
+Scalability: how to factorize million-by-billion matrices, which are commonplace in Web-scale data mining, e.g., see Distributed Nonnegative Matrix Factorization (DNMF)[78], Scalable Nonnegative Matrix Factorization (ScalableNMF)[79], Distributed Stochastic Singular Value Decomposition.[80]
+Online: how to update the factorization when new data comes in without recomputing from scratch, e.g., see online CNSC[81]
+Collective (joint) factorization: factorizing multiple interrelated matrices for multiple-view learning, e.g. multi-view clustering, see CoNMF[82] and MultiNMF[83]
+Cohen and Rothblum 1993 problem: whether a rational matrix always has an NMF of minimal inner dimension whose factors are also rational. Recently, this problem has been answered negatively.[84]
+See also[edit]
+Multilinear algebra
+Multilinear subspace learning
+Tensor
+Tensor decomposition
+Tensor software
+Sources and external links[edit]
+Notes[edit]
+
+
+^ a b c Inderjit S. Dhillon; Suvrit Sra (2005). Generalized Nonnegative Matrix Approximations with Bregman Divergences (PDF). NIPS.
+
+^ Tandon, Rashish; Suvrit Sra (2010). "Sparse nonnegative matrix approximation: new formulations and algorithms" (PDF). TR. Cite journal requires |journal= (help)
+
+^ a b Olivier Berné; C. Joblin;  et al. (2007). "Analysis of the emission of very small dust particles from Spitzer spectro-imagery data using blind signal separation methods". Astronomy & Astrophysics. 469 (2): 575–586. arXiv:astro-ph/0703072. Bibcode:2007A&A...469..575B. doi:10.1051/0004-6361:20066282.
+
+^ a b c Blanton, Michael R.; Roweis, Sam (2007). "K-corrections and filter transformations in the ultraviolet, optical, and near infrared". The Astronomical Journal. 133 (2): 734–754. arXiv:astro-ph/0606170. Bibcode:2007AJ....133..734B. doi:10.1086/510127.
+
+^ a b c d e f g Ren, Bin; Pueyo, Laurent; Zhu, Guangtun B.; Duchêne, Gaspard (2018). "Non-negative Matrix Factorization: Robust Extraction of Extended Structures". The Astrophysical Journal. 852 (2): 104. arXiv:1712.10317. Bibcode:2018ApJ...852..104R. doi:10.3847/1538-4357/aaa1f2.
+
+^ Ren, Bin; Pueyo, Laurent; Chen, Christine; Choquet, Elodie; Debes, John H; Duechene, Gaspard; Menard, Francois; Perrin, Marshall D. (2020). "Using Data Imputation for Signal Separation in High Contrast Imaging". The Astrophysical Journal. 892 (2): 74. arXiv:2001.00563. Bibcode:2020ApJ...892...74R. doi:10.3847/1538-4357/ab7024.
+
+^ a b Rainer Gemulla; Erik Nijkamp; Peter J. Haas; Yannis Sismanis (2011). Large-scale matrix factorization with distributed stochastic gradient descent. Proc. ACM SIGKDD Int'l Conf. on Knowledge discovery and data mining. pp. 69–77.
+
+^ Yang Bao;  et al. (2014). TopicMF: Simultaneously Exploiting Ratings and Reviews for Recommendation. AAAI.
+
+^ Ben Murrell;  et al. (2011). "Non-Negative Matrix Factorization for Learning Alignment-Specific Models of Protein Evolution". PLOS ONE. 6 (12): e28898. Bibcode:2011PLoSO...628898M. doi:10.1371/journal.pone.0028898. PMC 3245233. PMID 22216138.
+
+^ William H. Lawton; Edward A. Sylvestre (1971). "Self modeling curve resolution". Technometrics. 13 (3): 617–633. doi:10.2307/1267173. JSTOR 1267173.
+
+^ Pentti Paatero; Unto Tapper; Pasi Aalto; Markku Kulmala (1991), "Matrix factorization methods for analysing diffusion battery data", Journal of Aerosol Science, 22, doi:10.1016/S0021-8502(05)80089-8, Wikidata  Q58065673 
+
+^ P. Paatero; U. Tapper (1994). "Positive matrix factorization: A non-negative factor model with optimal utilization of error estimates of data values". Environmetrics. 5 (2): 111–126. doi:10.1002/env.3170050203.
+
+^ Pia Anttila; Pentti Paatero; Unto Tapper; Olli Järvinen (1995). "Source identification of bulk wet deposition in Finland by positive matrix factorization". Atmospheric Environment. 29 (14): 1705–1718. Bibcode:1995AtmEn..29.1705A. doi:10.1016/1352-2310(94)00367-T.
+
+^ a b Daniel D. Lee & H. Sebastian Seung (1999). "Learning the parts of objects by non-negative matrix factorization". Nature. 401 (6755): 788–791. Bibcode:1999Natur.401..788L. doi:10.1038/44565. PMID 10548103.
+
+^ a b Daniel D. Lee & H. Sebastian Seung (2001). Algorithms for Non-negative Matrix Factorization (PDF). Advances in Neural Information Processing Systems 13: Proceedings of the 2000 Conference. MIT Press. pp. 556–562.
+
+^ a b c C. Ding, X. He, H.D. Simon (2005). "On the Equivalence of Nonnegative Matrix Factorization and Spectral Clustering". Proc. SIAM Int'l Conf. Data Mining, pp. 606-610. May 2005
+
+^ C Ding, T Li, W Peng, " On the equivalence between non-negative matrix factorization and probabilistic latent semantic indexing" Archived 2016-03-04 at the Wayback Machine Computational Statistics & Data Analysis 52, 3913-3927
+
+^ a b C Ding, T Li, MI Jordan, Convex and semi-nonnegative matrix factorizations, IEEE Transactions on Pattern Analysis and Machine Intelligence,  32, 45-55, 2010
+
+^ Berman, A.; R.J. Plemmons (1974). "Inverses of nonnegative matrices". Linear and Multilinear Algebra. 2 (2): 161–172. doi:10.1080/03081087408817055.
+
+^ A. Berman; R.J. Plemmons (1994). Nonnegative matrices in the Mathematical Sciences. Philadelphia: SIAM.
+
+^ Thomas, L.B. (1974). "Problem 73-14, Rank factorization of nonnegative matrices". SIAM Rev. 16 (3): 393–394. doi:10.1137/1016064.
+
+^ Vavasis, S.A. (2009). "On the complexity of nonnegative matrix factorization". SIAM J. Optim. 20 (3): 1364–1377. arXiv:0708.4149. doi:10.1137/070709967.
+
+^ Zhang, T.; Fang, B.; Liu, W.; Tang, Y. Y.; He, G.; Wen, J. (2008). "Total variation norm-based nonnegative matrix factorization for identifying discriminant representation of image patterns". Neurocomputing. 71 (10–12): 1824–1831. doi:10.1016/j.neucom.2008.01.022.
+
+^ a b Hoyer, Patrik O. (2002). Non-negative sparse coding. Proc. IEEE Workshop on Neural Networks for Signal Processing. arXiv:cs/0202009.
+
+^ a b Leo Taslaman & Björn Nilsson (2012). "A framework for regularized non-negative matrix factorization, with application to the analysis of gene expression data". PLOS One. 7 (11): e46331. Bibcode:2012PLoSO...746331T. doi:10.1371/journal.pone.0046331. PMC 3487913. PMID 23133590.
+
+^ Hsieh, C. J.; Dhillon, I. S. (2011). Fast coordinate descent methods with variable selection for non-negative matrix factorization (PDF). Proceedings of the 17th ACM SIGKDD international conference on Knowledge discovery and data mining - KDD '11. p. 1064. doi:10.1145/2020408.2020577. ISBN 9781450308137.
+
+^ http://www.ijcai.org/papers07/Papers/IJCAI07-432.pdf
+
+^ Fung, Yik-Hing; Li, Chun-Hung; Cheung, William K. (2 November 2007). Online Discussion Participation Prediction Using Non-negative Matrix Factorization. Wi-Iatw '07. IEEE Computer Society. pp. 284–287. ISBN 9780769530284 – via dl.acm.org.
+
+^ Naiyang Guan; Dacheng Tao; Zhigang Luo & Bo Yuan (July 2012). "Online Nonnegative Matrix Factorization With Robust Stochastic Approximation". IEEE Transactions on Neural Networks and Learning Systems. 23 (7): 1087–1099. doi:10.1109/TNNLS.2012.2197827. PMID 24807135.
+
+^ a b Lin, Chih-Jen (2007). "Projected Gradient Methods for Nonnegative Matrix Factorization" (PDF). Neural Computation. 19 (10): 2756–2779. CiteSeerX 10.1.1.308.9135. doi:10.1162/neco.2007.19.10.2756. PMID 17716011.
+
+^ Lin, Chih-Jen (2007). "On the Convergence of Multiplicative Update Algorithms for Nonnegative Matrix Factorization". IEEE Transactions on Neural Networks. 18 (6): 1589–1596. CiteSeerX 10.1.1.407.318. doi:10.1109/TNN.2007.895831.
+
+^ Hyunsoo Kim & Haesun Park (2008). "Nonnegative Matrix Factorization Based on Alternating Nonnegativity Constrained Least Squares and Active Set Method" (PDF). SIAM Journal on Matrix Analysis and Applications. 30 (2): 713–730. CiteSeerX 10.1.1.70.3485. doi:10.1137/07069239x.
+
+^ Naiyang Guan; Dacheng Tao; Zhigang Luo, Bo Yuan (June 2012). "NeNMF: An Optimal Gradient Method for Nonnegative Matrix Factorization". IEEE Transactions on Signal Processing. 60 (6): 2882–2898. Bibcode:2012ITSP...60.2882G. doi:10.1109/TSP.2012.2190406.
+
+^ Jingu Kim & Haesun Park (2011). "Fast Nonnegative Matrix Factorization: An Active-set-like Method and Comparisons". SIAM Journal on Scientific Computing. 58 (6): 3261–3281. CiteSeerX 10.1.1.419.798. doi:10.1137/110821172.
+
+^ Jingu Kim; Yunlong He & Haesun Park (2013). "Algorithms for nonnegative matrix and tensor factorizations: A unified view based on block coordinate descent framework" (PDF). Journal of Global Optimization. 33 (2): 285–319. doi:10.1007/s10898-013-0035-4.
+
+^ Ding, C.; He, X. & Simon, H.D. (2005). On the equivalence of nonnegative matrix factorization and spectral clustering. Proc. SIAM Data Mining Conf. 4. pp. 606–610. doi:10.1137/1.9781611972757.70. ISBN 978-0-89871-593-4.
+
+^ a b Zhu, Guangtun B. (2016-12-19). "Nonnegative Matrix Factorization (NMF) with Heteroscedastic Uncertainties and Missing data". arXiv:1612.06037 [astro-ph.IM].
+
+^ a b Soummer, Rémi; Pueyo, Laurent; Larkin, James (2012). "Detection and Characterization of Exoplanets and Disks Using Projections on Karhunen-Loève Eigenimages". The Astrophysical Journal Letters. 755 (2): L28. arXiv:1207.4197. Bibcode:2012ApJ...755L..28S. doi:10.1088/2041-8205/755/2/L28.
+
+^ a b c Pueyo, Laurent (2016). "Detection and Characterization of Exoplanets using Projections on Karhunen Loeve Eigenimages: Forward Modeling". The Astrophysical Journal. 824 (2): 117. arXiv:1604.06097. Bibcode:2016ApJ...824..117P. doi:10.3847/0004-637X/824/2/117.
+
+^ Campbell, S.L.; G.D. Poole (1981). "Computing nonnegative rank factorizations". Linear Algebra Appl. 35: 175–182. doi:10.1016/0024-3795(81)90272-x.
+
+^ Kalofolias, V.; Gallopoulos, E. (2012). "Computing symmetric nonnegative rank factorizations" (PDF). Linear Algebra Appl. 436 (2): 421–435. doi:10.1016/j.laa.2011.03.016.
+
+^ a b Arora, Sanjeev; Ge, Rong; Halpern, Yoni; Mimno, David; Moitra, Ankur; Sontag, David; Wu, Yichen; Zhu, Michael (2013). A practical algorithm for topic modeling with provable guarantees. Proceedings of the 30th International Conference on Machine Learning. arXiv:1212.4777. Bibcode:2012arXiv1212.4777A.
+
+^ Lee, Daniel D and Seung, H Sebastian (1999). "Learning the parts of objects by non-negative matrix factorization" (PDF). Nature. 401 (6755): 788–791. Bibcode:1999Natur.401..788L. doi:10.1038/44565. PMID 10548103.CS1 maint: multiple names: authors list (link)
+
+^ Wray Buntine (2002). Variational Extensions to EM and Multinomial PCA (PDF). Proc. European Conference on Machine Learning (ECML-02). LNAI. 2430. pp. 23–34.
+
+^ Eric Gaussier & Cyril Goutte (2005). Relation between PLSA and NMF and Implications (PDF). Proc. 28th international ACM SIGIR conference on Research and development in information retrieval (SIGIR-05). pp. 601–602. Archived from the original (PDF) on 2007-09-28. Retrieved 2007-01-29.
+
+^ Ron Zass and Amnon Shashua (2005). "A Unifying Approach to Hard and Probabilistic Clustering". International Conference on Computer Vision (ICCV)  Beijing, China, Oct., 2005.
+
+^ Max Welling;  et al. (2004). Exponential Family Harmoniums with an Application to Information Retrieval. NIPS.
+
+^ Pentti Paatero (1999). "The Multilinear Engine: A Table-Driven, Least Squares Program for Solving Multilinear Problems, including the n-Way Parallel Factor Analysis Model". Journal of Computational and Graphical Statistics. 8 (4): 854–888. doi:10.2307/1390831. JSTOR 1390831.
+
+^ Max Welling & Markus Weber (2001). "Positive Tensor Factorization". Pattern Recognition Letters. 22 (12): 1255–1261. CiteSeerX 10.1.1.21.24. doi:10.1016/S0167-8655(01)00070-8.
+
+^ Jingu Kim & Haesun Park (2012). Fast Nonnegative Tensor Factorization with an Active-set-like Method (PDF). High-Performance Scientific Computing: Algorithms and Applications. Springer. pp. 311–326.
+
+^ Kenan Yilmaz; A. Taylan Cemgil & Umut Simsekli (2011). Generalized Coupled Tensor Factorization (PDF). NIPS.
+
+^ Vamsi K. Potluru; Sergey M. Plis; Morten Morup; Vince D. Calhoun & Terran Lane (2009). Efficient Multiplicative updates for Support Vector Machines. Proceedings of the 2009 SIAM Conference on Data Mining (SDM). pp. 1218–1229.
+
+^ Wei Xu; Xin Liu & Yihong Gong (2003). Document clustering based on non-negative matrix factorization. Proceedings of the 26th annual international ACM SIGIR conference on Research and development in information retrieval. New York: Association for Computing Machinery. pp. 267–273.
+
+^ Eggert, J.; Korner, E. (2004). "Sparse coding and NMF". 2004 IEEE International Joint Conference on Neural Networks (IEEE Cat. No.04CH37541). 4. pp. 2529–2533. doi:10.1109/IJCNN.2004.1381036. ISBN 978-0-7803-8359-3.
+
+^ Lafrenière, David; Maroid, Christian; Doyon, René; Barman, Travis (2009). "HST/NICMOS Detection of HR 8799 b in 1998". The Astrophysical Journal Letters. 694 (2): L148. arXiv:0902.3247. Bibcode:2009ApJ...694L.148L. doi:10.1088/0004-637X/694/2/L148.
+
+^ Amara, Adam; Quanz, Sascha P. (2012). "PYNPOINT: an image processing package for finding exoplanets". Monthly Notices of the Royal Astronomical Society. 427 (2): 948. arXiv:1207.6637. Bibcode:2012MNRAS.427..948A. doi:10.1111/j.1365-2966.2012.21918.x.
+
+^ Wahhaj, Zahed; Cieza, Lucas A.; Mawet, Dimitri; Yang, Bin; Canovas, Hector; de Boer, Jozua; Casassus, Simon; Ménard, François; Schreiber, Matthias R.; Liu, Michael C.; Biller, Beth A.; Nielsen, Eric L.; Hayward, Thomas L. (2015). "Improving signal-to-noise in the direct imaging of exoplanets and circumstellar disks with MLOCI". Astronomy & Astrophysics. 581 (24): A24. arXiv:1502.03092. Bibcode:2015A&A...581A..24W. doi:10.1051/0004-6361/201525837.
+
+^ Nielsen, Finn Årup; Balslev, Daniela; Hansen, Lars Kai (2005). "Mining the posterior cingulate: segregation between memory and pain components" (PDF). NeuroImage. 27 (3): 520–522. doi:10.1016/j.neuroimage.2005.04.034. PMID 15946864.
+
+^ Cohen, William (2005-04-04). "Enron Email Dataset". Retrieved 2008-08-26.
+
+^ Berry, Michael W.; Browne, Murray (2005). "Email Surveillance Using Non-negative Matrix Factorization". Computational and Mathematical Organization Theory. 11 (3): 249–264. doi:10.1007/s10588-005-5380-5.
+
+^ Nielsen, Finn Årup (2008). Clustering of scientific citations in Wikipedia. Wikimania. arXiv:0805.1154.
+
+^ Hassani, Ali; Iranmanesh, Amir; Mansouri, Najme (2019-11-12). "Text Mining using Nonnegative Matrix Factorization and Latent Semantic Analysis". arXiv:1911.04705 [cs.LG].
+
+^ Michael W. Berry;  et al. (2006). "Algorithms and Applications for Approximate Nonnegative Matrix Factorization". Cite journal requires |journal= (help)
+
+^ Yun Mao; Lawrence Saul & Jonathan M. Smith (2006). "IDES: An Internet Distance Estimation Service for Large Networks". IEEE Journal on Selected Areas in Communications. 24 (12): 2273–2284. CiteSeerX 10.1.1.136.3837. doi:10.1109/JSAC.2006.884026.
+
+^ Yang Chen; Xiao Wang; Cong Shi;  et al. (2011). "Phoenix: A Weight-based Network Coordinate System Using Matrix Factorization" (PDF). IEEE Transactions on Network and Service Management. 8 (4): 334–347. CiteSeerX 10.1.1.300.2851. doi:10.1109/tnsm.2011.110911.100079. Archived from the original (PDF) on 2011-11-14.
+
+^ Schmidt, M.N., J. Larsen, and F.T. Hsiao. (2007). "Wind noise reduction using non-negative sparse coding", Machine Learning for Signal Processing,  IEEE Workshop on, 431–436
+
+^ Frichot, E., Mathieu, F., Trouillon, T., Bouchard, G., Francois, O. (2014). "Fast and efficient estimation of individual ancestry coefficients". Genetics. 196 (4): 973–983. doi:10.1534/genetics.113.160572. PMC 3982712. PMID 24496008.CS1 maint: multiple names: authors list (link)
+
+^ Devarajan, K. (2008). "Nonnegative Matrix Factorization: An Analytical and Interpretive Tool in Computational Biology". PLOS Computational Biology. 4 (7): e1000029. Bibcode:2008PLSCB...4E0029D. doi:10.1371/journal.pcbi.1000029. PMC 2447881. PMID 18654623.
+
+^ Hyunsoo Kim & Haesun Park (2007). "Sparse non-negative matrix factorizations via alternating non-negativity-constrained least squares for microarray data analysis". Bioinformatics. 23 (12): 1495–1502. doi:10.1093/bioinformatics/btm134. PMID 17483501.
+
+^ Schwalbe, E. (2013). "DNA methylation profiling of medulloblastoma allows robust sub-classification and improved outcome prediction using formalin-fixed biopsies". Acta Neuropathologica. 125 (3): 359–371. doi:10.1007/s00401-012-1077-2. PMC 4313078. PMID 23291781.
+
+^ Alexandrov, Ludmil B.; Nik-Zainal, Serena; Wedge, David C.; Campbell, Peter J.; Stratton, Michael R. (2013-01-31). "Deciphering signatures of mutational processes operative in human cancer". Cell Reports. 3 (1): 246–259. doi:10.1016/j.celrep.2012.12.008. ISSN 2211-1247. PMC 3588146. PMID 23318258.
+
+^ Stein-O’Brien, Genevieve L.; Arora, Raman; Culhane, Aedin C.; Favorov, Alexander V.; Garmire, Lana X.; Greene, Casey S.; Goff, Loyal A.; Li, Yifeng; Ngom, Aloune; Ochs, Michael F.; Xu, Yanxun (2018-10-01). "Enter the Matrix: Factorization Uncovers Knowledge from Omics". Trends in Genetics. 34 (10): 790–805. doi:10.1016/j.tig.2018.07.003. ISSN 0168-9525. PMC 6309559. PMID 30143323.
+
+^ DiPaola; Bazin; Aubry; Aurengo; Cavailloles; Herry; Kahn (1982). "Handling of dynamic sequences in nuclear medicine". IEEE Trans Nucl Sci. NS-29 (4): 1310–21. Bibcode:1982ITNS...29.1310D. doi:10.1109/tns.1982.4332188.
+
+^ Sitek; Gullberg; Huesman (2002). "Correction for ambiguous solutions in factor analysis using a penalized least squares objective". IEEE Trans Med Imaging. 21 (3): 216–25. doi:10.1109/42.996340. PMID 11989846.
+
+^ Boutchko; Mitra; Baker; Jagust; Gullberg (2015). "Clustering Initiated Factor Analysis (CIFA) Application for Tissue Classification in Dynamic Brain PET". Journal of Cerebral Blood Flow and Metabolism. 35 (7): 1104–11. doi:10.1038/jcbfm.2015.69. PMC 4640278. PMID 25899294.
+
+^ Abdalah; Boutchko; Mitra; Gullberg (2015). "Reconstruction of 4-D Dynamic SPECT Images From Inconsistent Projections Using a Spline Initialized FADS Algorithm (SIFADS)". IEEE Trans Med Imaging. 34 (1): 216–18. doi:10.1109/TMI.2014.2352033. PMID 25167546.
+
+^ C. Boutsidis & E. Gallopoulos (2008). "SVD based initialization: A head start for nonnegative matrix factorization". Pattern Recognition. 41 (4): 1350–1362. CiteSeerX 10.1.1.137.8281. doi:10.1016/j.patcog.2007.09.010.
+
+^ Chao Liu; Hung-chih Yang; Jinliang Fan; Li-Wei He & Yi-Min Wang (2010). "Distributed Nonnegative Matrix Factorization for Web-Scale Dyadic Data Analysis on MapReduce" (PDF). Proceedings of the 19th International World Wide Web Conference.
+
+^ Jiangtao Yin; Lixin Gao & Zhongfei (Mark) Zhang (2014). "Scalable Nonnegative Matrix Factorization with Block-wise Updates" (PDF). Proceedings of the European Conference on Machine Learning and Principles and Practice of Knowledge Discovery in Databases.
+
+^ "Apache Mahout". mahout.apache.org. Retrieved 2019-12-14.
+
+^ Dong Wang; Ravichander Vipperla; Nick Evans; Thomas Fang Zheng (2013). "Online Non-Negative Convolutive Pattern Learning for Speech Signals" (PDF). IEEE Transactions on Signal Processing. 61 (1): 44–56. Bibcode:2013ITSP...61...44W. CiteSeerX 10.1.1.707.7348. doi:10.1109/tsp.2012.2222381. Archived from the original (PDF) on 2015-04-19. Retrieved 2015-04-19.
+
+^ Xiangnan He; Min-Yen Kan; Peichu Xie & Xiao Chen (2014). "Comment-based Multi-View Clustering of Web 2.0 Items" (PDF). Proceedings of the 23rd International World Wide Web Conference. Archived from the original (PDF) on 2015-04-02. Retrieved 2015-03-22.
+
+^ Jialu Liu; Chi Wang; Jing Gao & Jiawei Han (2013). Multi-View Clustering via Joint Nonnegative Matrix Factorization (PDF). Proceedings of SIAM Data Mining Conference. pp. 252–260. CiteSeerX 10.1.1.301.1771. doi:10.1137/1.9781611972832.28. ISBN 978-1-61197-262-7.
+
+^ Chistikov, Dmitry; Kiefer, Stefan; Marušić, Ines; Shirmohammadi, Mahsa; Worrell, James (2016-05-22). "Nonnegative Matrix Factorization Requires Irrationality". arXiv:1605.06848 [cs.CC].
+
+
+Others[edit]
+
+J. Shen; G. W. Israël (1989). "A receptor model using a specific non-negative transformation technique for ambient aerosol". Atmospheric Environment. 23 (10): 2289–2298. Bibcode:1989AtmEn..23.2289S. doi:10.1016/0004-6981(89)90190-X.
+Pentti Paatero (1997). "Least squares formulation of robust non-negative factor analysis". Chemometrics and Intelligent Laboratory Systems. 37 (1): 23–35. doi:10.1016/S0169-7439(96)00044-5.
+Raul Kompass (2007). "A Generalized Divergence Measure for Nonnegative Matrix Factorization". Neural Computation. 19 (3): 780–791. doi:10.1162/neco.2007.19.3.780. PMID 17298233.
+Liu, W.X.; Zheng, N.N. & You, Q.B. (2006). "Nonnegative Matrix Factorization and its applications in pattern recognition". Chinese Science Bulletin. 51 (17–18): 7–18. Bibcode:2006ChSBu..51....7L. doi:10.1007/s11434-005-1109-6.
+Ngoc-Diep Ho; Paul Van Dooren & Vincent Blondel (2008). "Descent Methods for Nonnegative Matrix Factorization". arXiv:0801.3199 [cs.NA].
+Andrzej Cichocki; Rafal Zdunek & Shun-ichi Amari (2008). "Nonnegative Matrix and Tensor Factorization". IEEE Signal Processing Magazine. 25 (1): 142–145. Bibcode:2008ISPM...25R.142C. doi:10.1109/MSP.2008.4408452.
+Cédric Févotte; Nancy Bertin & Jean-Louis Durrieu (2009). "Nonnegative Matrix Factorization with the Itakura-Saito Divergence: With Application to Music Analysis". Neural Computation. 21 (3): 793–830. doi:10.1162/neco.2008.04-08-771. PMID 18785855.
+Ali Taylan Cemgil (2009). "Bayesian Inference for Nonnegative Matrix Factorisation Models". Computational Intelligence and Neuroscience. 2009 (2): 1–17. doi:10.1155/2009/785152. PMC 2688815. PMID 19536273.
+Andrzej Cichocki, Morten Mrup, et al.: "Advances in Nonnegative Matrix and Tensor Factorization", Hindawi Publishing Corporation, ISBN 978-9774540455 (2008).
+Andrzej Cichocki, Rafal Zdunek, Anh Huy Phan and Shun-ichi Amari: "Nonnegative Matrix and Tensor Factorizations: Applications to Exploratory Multi-way Data Analysis and Blind Source Separation", Wiley, ISBN 978-0470746660 (2009).
+Andri Mirzal: "Nonnegative Matrix Factorizations for Clustering and LSI: Theory and Programming",  LAP LAMBERT Academic Publishing, ISBN 978-3844324891 (2011).
+Yong Xiang: "Blind Source Separation: Dependent Component Analysis", Springer, ISBN 978-9812872265 (2014).
+Ganesh R. Naik(Ed.): "Non-negative Matrix Factorization Techniques: Advances in Theory and Applications", Springer, ISBN 978-3662517000 (2016).
+Julian Becker: "Nonnegative Matrix Factorization with Adaptive Elements for Monaural Audio Source Separation: 1 ", Shaker Verlag GmbH, Germany, ISBN 978-3844048148 (2016).
+Jen-Tzung Chien: "Source Separation and Machine Learning", Academic Press, ISBN 978-0128177969 (2018).
+Shoji Makino(Ed.): "Audio Source Separation", Springer, ISBN 978-3030103033 (2019).
+
+
+
+
+Scholia has a topic profile for Non-negative matrix factorization.
+
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Non-negative_matrix_factorization&oldid=965180028"
+Categories: Linear algebraMatrix theoryMachine learning algorithmsHidden categories: CS1 errors: missing periodicalWebarchive template wayback linksCS1 maint: multiple names: authors listCS1: long volume valueAll articles with unsourced statementsArticles with unsourced statements from April 2015
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+Españolفارسی한국어РусскийУкраїнська
+Edit links
+
+
+
+
+
+
+ This page was last edited on 29 June 2020, at 21:06 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

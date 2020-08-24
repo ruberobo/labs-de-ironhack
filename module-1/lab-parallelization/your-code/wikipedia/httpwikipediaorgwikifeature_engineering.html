@@ -1,0 +1,445 @@
+
+
+
+
+Feature engineering - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Feature engineering
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+Part of a series onMachine learninganddata mining
+Problems
+Classification
+Clustering
+Regression
+Anomaly detection
+AutoML
+Association rules
+Reinforcement learning
+Structured prediction
+Feature engineering
+Feature learning
+Online learning
+Semi-supervised learning
+Unsupervised learning
+Learning to rank
+Grammar induction
+
+
+Supervised learning(classification • regression) 
+Decision trees
+Ensembles
+Bagging
+Boosting
+Random forest
+k-NN
+Linear regression
+Naive Bayes
+Artificial neural networks
+Logistic regression
+Perceptron
+Relevance vector machine (RVM)
+Support vector machine (SVM)
+
+
+Clustering
+BIRCH
+CURE
+Hierarchical
+k-means
+Expectation–maximization (EM)
+DBSCAN
+OPTICS
+Mean-shift
+
+
+Dimensionality reduction
+Factor analysis
+CCA
+ICA
+LDA
+NMF
+PCA
+PGD
+t-SNE
+
+
+Structured prediction
+Graphical models
+Bayes net
+Conditional random field
+Hidden Markov
+
+
+Anomaly detection
+k-NN
+Local outlier factor
+
+
+Artificial neural network
+Autoencoder
+Deep learning
+DeepDream
+Multilayer perceptron
+RNN
+LSTM
+GRU
+Restricted Boltzmann machine
+GAN
+SOM
+Convolutional neural network
+U-Net
+
+
+Reinforcement learning
+Q-learning
+SARSA
+Temporal difference (TD)
+
+
+Theory
+Bias–variance dilemma
+Computational learning theory
+Empirical risk minimization
+Occam learning
+PAC learning
+Statistical learning
+VC theory
+
+
+Machine-learning venues
+NeurIPS
+ICML
+ML
+JMLR
+ArXiv:cs.LG
+
+
+Glossary of artificial intelligence
+Glossary of artificial intelligence
+
+
+Related articles
+List of datasets for machine-learning research
+Outline of machine learning
+
+vte
+Feature engineering is the process of using domain knowledge to extract features from raw data via data mining techniques. These features can be used to improve the performance of machine learning algorithms. Feature engineering can be considered as applied machine learning itself [1].
+
+Contents
+
+1 Features
+2 Importance
+3 Process
+4 Relevance
+5 Feature explosion
+6 Automation
+7 See also
+8 References
+9 Further reading
+
+
+Features[edit]
+A feature is an attribute or property shared by all of the independent units on which analysis or prediction is to be done. Any attribute could be a feature, as long as it is useful to the model.
+The purpose of a feature, other than being an attribute, would be much easier to understand in the context of a problem. A feature is a characteristic that might help when solving the problem.[2]
+
+Importance[edit]
+Features are important to predictive models and influence results [3].  
+It is asserted that feature engineering plays an important part of Kaggle competitions [4] and machine learning project's success or failure [5].
+
+Process[edit]
+The feature engineering process is:[6]
+
+Brainstorming or testing features;[7]
+Deciding what features to create;
+Creating features;
+Checking how the features work with your model;
+Improving your features if needed;
+Go back to brainstorming/creating more features until the work is done.
+Relevance[edit]
+A feature could be strongly relevant (i.e., the feature has information that doesn't exist in any other feature), relevant, weakly relevant (some information that other features include) or irrelevant.[8] Even if some features are irrelevant, having too many is better than missing those that are important. Feature selection can be used to prevent overfitting.[9]
+
+Feature explosion[edit]
+Feature explosion can be caused by feature combination or feature templates, both leading to a quick growth in the total number of features.
+
+Feature templates - implementing feature templates instead of coding new features
+Feature combinations - combinations that cannot be represented by the linear system
+Feature explosion can be stopped via techniques such as: regularization, kernel method, feature selection.[10]
+
+Automation[edit]
+Automation of feature engineering is a research topic that dates back to at least the late 1990s.[11] The academic literature on the topic can be roughly separated into two strings: First, Multi-relational decision tree learning (MRDTL), which uses a supervised algorithm that is similar to a decision tree. Second, more recent approaches, like Deep Feature Synthesis, which use simpler methods.[citation needed]
+Multi-relational decision tree learning (MRDTL) generates features in the form of SQL queries by successively adding new clauses to the queries.[12] For instance, the algorithm might start out with 
+
+SELECT COUNT(*) FROM ATOM t1 LEFT JOIN MOLECULE t2 ON t1.mol_id = t2.mol_id GROUP BY t1.mol_id
+
+The query can then successively be refined by adding conditions, such as "WHERE t1.charge <= -0.392".[13]
+However, most of the academic studies on MRDTL use implementations based on existing relational databases, which results in many redundant operations. These redundancies can be reduced by using tricks such as tuple id propagation.[14][15] More recently, it has been demonstrated that the efficiency can be increased further by using incremental updates, which completely eliminates redundancies.[16]
+In 2015, researchers at MIT presented the Deep Feature Synthesis algorithm and demonstrated its effectiveness in online data science competitions where it beat 615 of 906 human teams.[17][18] Deep Feature Synthesis is available as an open source library called Featuretools.[19] That work was followed by other researchers including IBM's OneBM[20] and Berkeley's ExploreKit.[21] The researchers at IBM stated that feature engineering automation "helps data scientists reduce data exploration time allowing them to try and error many ideas in short time. On the other hand, it enables non-experts, who are not familiar with data science, to quickly extract value from their data with a little effort, time, and cost."[citation needed]
+
+See also[edit]
+Covariate
+Data transformation
+Feature learning
+Hashing trick
+Kernel method
+List of datasets for machine learning research
+Space mapping
+References[edit]
+
+
+^ "Machine Learning and AI via Brain simulations". Stanford University. Retrieved 2019-08-01.
+
+^ "Discover Feature Engineering, How to Engineer Features and How to Get Good at It - Machine Learning Mastery". Machine Learning Mastery. Retrieved 2015-11-11.
+
+^ "Feature Engineering: How to transform variables and create new ones?". Analytics Vidhya. 2015-03-12. Retrieved 2015-11-12. 
+
+^ "Q&A with Xavier Conort". kaggle.com. 2013-04-10. Retrieved 12 November 2015.
+
+^ Domingos, Pedro (2012-10-01). "A few useful things to know about machine learning" (PDF). Communications of the ACM. 55 (10): 78–87. doi:10.1145/2347736.2347755.
+
+^ "Big Data: Week 3 Video 3 - Feature Engineering". youtube.com.
+
+^ Jalal, Ahmed Adeeb (January 1, 2018). "Big data and intelligent software systems". International Journal of Knowledge-based and Intelligent Engineering Systems. 22 (3): 177–193. doi:10.3233/KES-180383 – via content.iospress.com.
+
+^ "Feature Engineering" (PDF). 2010-04-22. Retrieved 12 November 2015.
+
+^ "Feature engineering and selection" (PDF). Alexandre Bouchard-Côté. October 1, 2009. Retrieved 12 November 2015.
+
+^ "Feature engineering in Machine Learning" (PDF). Zdenek Zabokrtsky. Archived from the original (PDF) on 4 March 2016. Retrieved 12 November 2015.
+
+^ Knobbe, Arno J.; Siebes, Arno; Van Der Wallen, Daniël (1999). "Multi-relational Decision Tree Induction" (PDF). Principles of Data Mining and Knowledge Discovery. Lecture Notes in Computer Science. 1704. pp. 378–383. doi:10.1007/978-3-540-48247-5_46. ISBN 978-3-540-66490-1.
+
+^ "A Comparative Study Of Multi-Relational Decision Tree Learning Algorithm". CiteSeerX 10.1.1.636.2932. Cite journal requires |journal= (help)
+
+^ Leiva, Hector; Atramentov, Anna; Honavar, Vasant (2002). "Experiments with MRDTL – A Multi-relational Decision Tree Learning Algorithm" (PDF). Cite journal requires |journal= (help)
+
+^ Yin, Xiaoxin; Han, Jiawei; Yang, Jiong; Yu, Philip S. (2004). "CrossMine: Efficient Classification Across Multiple Database Relations". Proceedings. 20th International Conference on Data Engineering. Proceedings of the 20th International Conference on Data Engineering. pp. 399–410. doi:10.1109/ICDE.2004.1320014. ISBN 0-7695-2065-0.
+
+^ Frank, Richard; Moser, Flavia; Ester, Martin (2007). "A Method for Multi-relational Classification Using Single and Multi-feature Aggregation Functions". Knowledge Discovery in Databases: PKDD 2007. Lecture Notes in Computer Science. 4702. pp. 430–437. doi:10.1007/978-3-540-74976-9_43. ISBN 978-3-540-74975-2.
+
+^ "How automated feature engineering works - The most efficient feature engineering solution for relational data and time series". Retrieved 2019-11-21.[promotional source?]
+
+^ "Automating big-data analysis".
+
+^ Kanter, James Max; Veeramachaneni, Kalyan (2015). "Deep Feature Synthesis: Towards Automating Data Science Endeavors". 2015 IEEE International Conference on Data Science and Advanced Analytics (DSAA). IEEE International Conference on Data Science and Advanced Analytics. pp. 1–10. doi:10.1109/DSAA.2015.7344858. ISBN 978-1-4673-8272-4.
+
+^ "Featuretools | An open source framework for automated feature engineering Quick Start". www.featuretools.com. Retrieved 2019-08-22.
+
+^ Hoang Thanh Lam; Thiebaut, Johann-Michael; Sinn, Mathieu; Chen, Bei; Mai, Tiep; Alkan, Oznur (2017). "One button machine for automating feature engineering in relational databases". arXiv:1706.00327. Bibcode:2017arXiv170600327T. Cite journal requires |journal= (help)
+
+^ "ExploreKit: Automatic Feature Generation and Selection" (PDF).
+
+
+Further reading[edit]
+Boehmke, Bradley; Greenwell, Brandon (2019). "Feature & Target Engineering". Hands-On Machine Learning with R. Chapman & Hall. pp. 41–75. ISBN 978-1-138-49568-5.
+Zheng, Alice; Casari, Amanda (2018). Feature Engineering for Machine Learning: Principles and Techniques for Data Scientists. O'Reilly. ISBN 978-1-4919-5324-2.
+Zumel, Nina; Mount, John (2020). "Data Engineering and Data Shaping". Practical Data Science with R (2nd ed.). Manning. pp. 113–160. ISBN 978-1-61729-587-4.
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Feature_engineering&oldid=948384435"
+Categories: Machine learningData analysisHidden categories: CS1 errors: missing periodicalAll articles lacking reliable referencesArticles lacking reliable references from January 2020All articles with unsourced statementsArticles with unsourced statements from January 2020
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+РусскийУкраїнська
+Edit links
+
+
+
+
+
+
+ This page was last edited on 31 March 2020, at 19:14 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

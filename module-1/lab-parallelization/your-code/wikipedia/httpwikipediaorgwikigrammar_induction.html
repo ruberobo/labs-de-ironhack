@@ -1,0 +1,470 @@
+
+
+
+
+Grammar induction - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Grammar induction
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+Part of a series onMachine learninganddata mining
+Problems
+Classification
+Clustering
+Regression
+Anomaly detection
+AutoML
+Association rules
+Reinforcement learning
+Structured prediction
+Feature engineering
+Feature learning
+Online learning
+Semi-supervised learning
+Unsupervised learning
+Learning to rank
+Grammar induction
+
+
+Supervised learning(classification • regression) 
+Decision trees
+Ensembles
+Bagging
+Boosting
+Random forest
+k-NN
+Linear regression
+Naive Bayes
+Artificial neural networks
+Logistic regression
+Perceptron
+Relevance vector machine (RVM)
+Support vector machine (SVM)
+
+
+Clustering
+BIRCH
+CURE
+Hierarchical
+k-means
+Expectation–maximization (EM)
+DBSCAN
+OPTICS
+Mean-shift
+
+
+Dimensionality reduction
+Factor analysis
+CCA
+ICA
+LDA
+NMF
+PCA
+PGD
+t-SNE
+
+
+Structured prediction
+Graphical models
+Bayes net
+Conditional random field
+Hidden Markov
+
+
+Anomaly detection
+k-NN
+Local outlier factor
+
+
+Artificial neural network
+Autoencoder
+Deep learning
+DeepDream
+Multilayer perceptron
+RNN
+LSTM
+GRU
+Restricted Boltzmann machine
+GAN
+SOM
+Convolutional neural network
+U-Net
+
+
+Reinforcement learning
+Q-learning
+SARSA
+Temporal difference (TD)
+
+
+Theory
+Bias–variance dilemma
+Computational learning theory
+Empirical risk minimization
+Occam learning
+PAC learning
+Statistical learning
+VC theory
+
+
+Machine-learning venues
+NeurIPS
+ICML
+ML
+JMLR
+ArXiv:cs.LG
+
+
+Glossary of artificial intelligence
+Glossary of artificial intelligence
+
+
+Related articles
+List of datasets for machine-learning research
+Outline of machine learning
+
+vte
+Grammar induction (or grammatical inference)[1] is the process in machine learning of learning a formal grammar (usually as a collection of re-write rules or productions or alternatively as a finite state machine or automaton of some kind) from a set of observations, thus constructing a model which accounts for the characteristics of the observed objects. More generally, grammatical inference is that branch of machine learning where the instance space consists of discrete combinatorial objects such as strings, trees and graphs.
+
+Contents
+
+1 Grammar classes
+2 Learning models
+3 Methodologies
+
+3.1 Grammatical inference by trial-and-error
+3.2 Grammatical inference by genetic algorithms
+3.3 Grammatical inference by greedy algorithms
+3.4 Distributional learning
+3.5 Learning of pattern languages
+3.6 Pattern theory
+
+
+4 Applications
+5 See also
+6 Notes
+7 References
+8 Sources
+
+
+Grammar classes[edit]
+Grammatical inference has often been very focused on the problem of learning finite state machines of various types (see the article Induction of regular languages for details on these approaches), since there have been efficient algorithms for this problem since the 1980s.
+Since the beginning of the century, these approaches have been extended to the problem of inference of context-free grammars and richer formalisms, such as multiple context-free grammars and parallel multiple context-free grammars.
+Other classes of grammars for which grammatical inference has been studied are combinatory categorial grammars,[2] stochastic context-free grammars,[3] contextual grammars and pattern languages.
+
+Learning models[edit]
+The simplest form of learning is where the learning algorithm merely receives a set of examples drawn from the language in question: the aim is to learn the language from examples of it (and, rarely, from counter-examples, that is, example that do not belong to the language).
+However, other learning models have been studied. One frequently studied alternative is the case where the learner can ask membership queries as in the exact query learning model or minimally adequate teacher model introduced by Angluin.[4]
+
+Methodologies[edit]
+There is a wide variety of methods for grammatical inference.  Two of the classic sources are Fu (1977) and Fu (1982). Duda, Hart & Stork (2001) also devote a brief section to the problem, and cite a number of references.  The basic trial-and-error method they present is discussed below. For approaches to infer subclasses of regular languages in particular, see Induction of regular languages. A more recent textbook is de la Higuera (2010),[1] which covers the theory of grammatical inference of regular languages and finite state automata. D'Ulizia, Ferri and Grifoni[5] provide a survey that explores grammatical inference methods for natural languages.
+
+Grammatical inference by trial-and-error[edit]
+The method proposed in Section 8.7 of Duda, Hart & Stork (2001) suggests successively guessing grammar rules (productions) and testing them against positive and negative observations.  The rule set is expanded so as to be able to generate each positive example, but if a given rule set also generates a negative example, it must be discarded.  This particular approach can be characterized as "hypothesis testing" and bears some similarity to Mitchel's version space algorithm. The Duda, Hart & Stork (2001) text provide a simple example which nicely illustrates the process, but the feasibility of such an unguided trial-and-error approach for more substantial problems is dubious.
+
+Grammatical inference by genetic algorithms[edit]
+Grammatical induction using evolutionary algorithms is the process of evolving a representation of the grammar of a target language through some evolutionary process. Formal grammars can easily be represented as tree structures of production rules that can be subjected to evolutionary operators. Algorithms of this sort stem from the genetic programming paradigm pioneered by John Koza.[citation needed] Other early work on simple formal languages used the binary string representation of genetic algorithms, but the inherently hierarchical structure of grammars couched in the EBNF language made trees a more flexible approach.
+Koza represented Lisp programs as trees. He was able to find analogues to the genetic operators within the standard set of tree operators. For example, swapping sub-trees is equivalent to the corresponding process of genetic crossover, where sub-strings of a genetic code are transplanted into an individual of the next generation. Fitness is measured by scoring the output from the functions of the Lisp code. Similar analogues between the tree structured lisp representation and the representation of grammars as trees, made the application of genetic programming techniques possible for grammar induction.
+In the case of grammar induction, the transplantation of sub-trees corresponds to the swapping of production rules that enable the parsing of phrases from some language. The fitness operator for the grammar is based upon some measure of how well it performed in parsing some group of sentences from the target language. In a tree representation of a grammar, a terminal symbol of a production rule corresponds to a leaf node of the tree. Its parent nodes corresponds to a non-terminal symbol (e.g. a noun phrase or a verb phrase) in the rule set. Ultimately, the root node might correspond to a sentence non-terminal.
+
+Grammatical inference by greedy algorithms[edit]
+Like all greedy algorithms, greedy grammar inference algorithms make, in iterative manner, decisions that seem to be the best at that stage.
+The decisions made usually deal with things like the creation of new rules, the removal of existing rules, the choice of a rule to be applied or the merging of some existing rules.
+Because there are several ways to define 'the stage' and 'the best', there are also several greedy grammar inference algorithms.
+These context-free grammar generating algorithms make the decision after every read symbol:
+
+Lempel-Ziv-Welch algorithm creates a context-free grammar in a deterministic way such that it is necessary to store only the start rule of the generated grammar.
+Sequitur and its modifications.
+These context-free grammar generating algorithms first read the whole given symbol-sequence and then start to make decisions:
+
+Byte pair encoding and its optimizations.
+Distributional learning[edit]
+A more recent approach is based on distributional learning. Algorithms using these approaches have been applied to learning context-free grammars and mildly context-sensitive languages and have been proven to be correct and efficient for large subclasses of these grammars.[6]
+
+Learning of pattern languages[edit]
+Angluin defines a pattern to be "a string of constant symbols from Σ and variable symbols from a disjoint set".
+The language of such a pattern is the set of all its nonempty ground instances  i.e. all strings resulting from consistent replacement of its variable symbols by nonempty strings of constant symbols.[note 1]
+A pattern is called descriptive for a finite input set of strings if its language is minimal (with respect to set inclusion) among all pattern languages subsuming the input set.
+Angluin gives a polynomial algorithm to compute, for a given input string set, all descriptive patterns in one variable x.[note 2]
+To this end, she builds an automaton representing all possibly relevant patterns; using sophisticated arguments about word lengths, which rely on x being the only variable, the state count can be drastically reduced.[7]
+Erlebach et al. give a more efficient version of Angluin's pattern learning algorithm, as well as a parallelized version.[8]
+Arimura et al. show that a language class  obtained from limited unions of patterns can be learned in polynomial time.[9]
+
+Pattern theory[edit]
+Pattern theory, formulated by Ulf Grenander,[10] is a mathematical formalism to describe knowledge of the world as patterns. It differs from other approaches to artificial intelligence in that it does not begin by prescribing algorithms and machinery to recognize and classify patterns; rather, it prescribes a vocabulary to articulate and recast the pattern concepts in precise language.
+In addition to the new algebraic vocabulary, its statistical approach was novel in its aim to:
+
+Identify the hidden variables of a data set using real world data rather than artificial stimuli, which was commonplace at the time.
+Formulate prior distributions for hidden variables and models for the observed variables that form the vertices of a Gibbs-like graph.
+Study the randomness and variability of these graphs.
+Create the basic classes of stochastic models applied by listing the deformations of the patterns.
+Synthesize (sample) from the models, not just analyze signals with it.
+Broad in its mathematical coverage, pattern theory spans algebra and statistics, as well as local topological and global entropic properties.
+
+Applications[edit]
+The principle of grammar induction has been applied to other aspects of natural language processing, and has been applied (among many other problems) to semantic parsing,[2] natural language understanding,[11] example-based translation,[12] morpheme analysis, and place name derivations.[citation needed] Grammar induction has also been used for lossless data compression[13] and statistical inference via minimum message length (MML) and minimum description length (MDL) principles.[citation needed] Grammar induction has also been used in some probabilistic models of language acquisition.[14]
+
+See also[edit]
+Artificial grammar learning#Artificial intelligence
+Example-based machine translation
+Inductive programming
+Kolmogorov complexity
+Language identification in the limit
+Straight-line grammar
+Syntactic pattern recognition
+Notes[edit]
+
+
+^ The language of a pattern with at least two occurrences of the same variable is not regular due to the pumping lemma.
+
+^ x may occur several times, but no other variable y may occur
+
+
+References[edit]
+
+
+^ a b de la Higuera, Colin (2010). Grammatical Inference: Learning Automata and Grammars (PDF). Cambridge: Cambridge University Press.
+
+^ a b Kwiatkowski, Tom, et al. "Lexical generalization in CCG grammar induction for semantic parsing." Proceedings of the conference on empirical methods in natural language processing. Association for Computational Linguistics, 2011.
+
+^ Clark, Alexander. "Unsupervised induction of stochastic context-free grammars using distributional clustering." Proceedings of the 2001 workshop on Computational Natural Language Learning-Volume 7. Association for Computational Linguistics, 2001.
+
+^ Dana Angluin (1987). "Learning Regular Sets from Queries and Counter-Examples" (PDF). Information and Control. 75 (2): 87–106. CiteSeerX 10.1.1.187.9414. doi:10.1016/0890-5401(87)90052-6. Archived from the original (PDF) on 2013-12-02.
+
+^ D’Ulizia, A., Ferri, F., Grifoni, P. (2011) "A Survey of Grammatical Inference Methods for Natural Language Learning[permanent dead link]", Artificial Intelligence Review, Vol. 36, No. 1, pp. 1–27.
+
+^ Clark and Eyraud (2007) Journal of Machine Learning Research; Ryo Yoshinaka (2011) Theoretical Computer Science
+
+^ Dana Angluin (1980). "Finding Patterns Common to a Set of Strings". Journal of Computer and System Sciences. 21: 46–62. doi:10.1016/0022-0000(80)90041-0.
+
+^ T. Erlebach; P. Rossmanith; H. Stadtherr; A. Steger; T. Zeugmann (1997). "Learning One-Variable Pattern Languages Very Efficiently on Average, in Parallel, and by Asking Queries".  In M. Li; A. Maruoka (eds.). Proc. 8th International Workshop on Algorithmic Learning Theory — ALT'97. LNAI. 1316. Springer. pp. 260–276.
+
+^ Hiroki Arimura; Takeshi Shinohara; Setsuko Otsuki (1994). "Finding Minimal Generalizations for Unions of Pattern Languages and Its Application to Inductive Inference from Positive Data" (PDF). Proc. STACS 11. LNCS. 775. Springer. pp. 649–660.[dead link]
+
+^ Grenander, Ulf, and Michael I. Miller. Pattern theory: from representation to inference.[dead link] Vol. 1. Oxford: Oxford university press, 2007.
+
+^ Miller, Scott, et al. "Hidden understanding models of natural language." Proceedings of the 32nd annual meeting on Association for Computational Linguistics. Association for Computational Linguistics, 1994.
+
+^ Brown, Ralf D. "Transfer-rule induction for example-based translation." Proceedings of the MT Summit VIII Workshop on Example-Based Machine Translation. 2001.
+
+^ Cherniavsky, Neva, and Richard Ladner. "Grammar-based compression of DNA sequences." DIMACS Working Group on The Burrows-Wheeler Transform 21 (2004).
+
+^ Chater, Nick, and Christopher D. Manning. "Probabilistic models of language processing and acquisition." Trends in cognitive sciences 10.7 (2006): 335-344.
+
+
+Sources[edit]
+Duda, Richard O.; Hart, Peter E.; Stork, David G. (2001), Pattern Classification (2 ed.), New York: John Wiley & Sons
+Fu, King Sun (1982), Syntactic Pattern Recognition and Applications, Englewood Cliffs, NJ: Prentice-Hall
+Fu, King Sun (1977), Syntactic Pattern Recognition, Applications, Berlin: Springer-Verlag
+Horning, James Jay (1969), A Study of Grammatical Inference (Ph.D. Thesis ed.), Stanford: Stanford University Computer Science Department, ProQuest 302483145
+Gold, E. Mark (1967), Language Identification in the Limit, 10, Information and Control, pp. 447–474, archived from the original on 2016-08-28, retrieved 2016-09-04
+Gold, E. Mark (1967), Language Identification in the Limit (PDF), 10, Information and Control, pp. 447–474
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Grammar_induction&oldid=955741291"
+Categories: Genetic programmingNatural language processingComputational linguisticsGrammarInferenceMachine learningHidden categories: All articles with dead external linksArticles with dead external links from September 2018Articles with permanently dead external linksArticles with dead external links from February 2018Articles with dead external links from March 2018All articles with unsourced statementsArticles with unsourced statements from August 2007Articles with unsourced statements from February 2018Articles with unsourced statements from August 2017
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+PolskiРусский
+Edit links
+
+
+
+
+
+
+ This page was last edited on 9 May 2020, at 14:53 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

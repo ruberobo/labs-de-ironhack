@@ -1,0 +1,661 @@
+
+
+
+
+Proper generalized decomposition - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Proper generalized decomposition
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+Part of a series onMachine learninganddata mining
+Problems
+Classification
+Clustering
+Regression
+Anomaly detection
+AutoML
+Association rules
+Reinforcement learning
+Structured prediction
+Feature engineering
+Feature learning
+Online learning
+Semi-supervised learning
+Unsupervised learning
+Learning to rank
+Grammar induction
+
+
+Supervised learning(classification • regression) 
+Decision trees
+Ensembles
+Bagging
+Boosting
+Random forest
+k-NN
+Linear regression
+Naive Bayes
+Artificial neural networks
+Logistic regression
+Perceptron
+Relevance vector machine (RVM)
+Support vector machine (SVM)
+
+
+Clustering
+BIRCH
+CURE
+Hierarchical
+k-means
+Expectation–maximization (EM)
+DBSCAN
+OPTICS
+Mean-shift
+
+
+Dimensionality reduction
+Factor analysis
+CCA
+ICA
+LDA
+NMF
+PCA
+PGD
+t-SNE
+
+
+Structured prediction
+Graphical models
+Bayes net
+Conditional random field
+Hidden Markov
+
+
+Anomaly detection
+k-NN
+Local outlier factor
+
+
+Artificial neural network
+Autoencoder
+Deep learning
+DeepDream
+Multilayer perceptron
+RNN
+LSTM
+GRU
+Restricted Boltzmann machine
+GAN
+SOM
+Convolutional neural network
+U-Net
+
+
+Reinforcement learning
+Q-learning
+SARSA
+Temporal difference (TD)
+
+
+Theory
+Bias–variance dilemma
+Computational learning theory
+Empirical risk minimization
+Occam learning
+PAC learning
+Statistical learning
+VC theory
+
+
+Machine-learning venues
+NeurIPS
+ICML
+ML
+JMLR
+ArXiv:cs.LG
+
+
+Glossary of artificial intelligence
+Glossary of artificial intelligence
+
+
+Related articles
+List of datasets for machine-learning research
+Outline of machine learning
+
+vte
+The proper generalized decomposition (PGD) is an iterative numerical method for solving boundary value problems (BVPs), that is, partial differential equations constrained by a set of boundary conditions. The PGD algorithm computes an approximation of the solution of the BVP by successive enrichment. This means that, in each iteration, a new component (or mode) is computed and added to the approximation. The more modes obtained, the closer the approximation is to its theoretical solution. By selecting only the first PGD modes, a reduced order model of the solution is obtained. Because of this, PGD is considered a dimensionality reduction algorithm.
+The PGD can be considered as a generalized form of the Proper Orthogonal Decomposition.
+
+Contents
+
+1 Description
+2 Features
+3 Sparse Subspace Learning
+4 References
+
+
+Description[edit]
+The proper generalized decomposition is a method characterized by (1) a variational formulation of the problem, (2) a discretization of the domain in the style of the finite element method, (3) the assumption that the solution can be approximated as a separated representation and (4) a numerical greedy algorithm to find the solution.[1][2]
+The most implemented variational formulation in PGD is the Bubnov-Galerkin method,[3][4] although other implementations exist.[5][3]
+The discretization of the domain is a well defined set of procedures that cover (a) the creation of finite element meshes, (b) the definition of basis function on reference elements (also called shape functions) and (c) the mapping of reference elements onto the elements of the mesh.
+PGD assumes that the solution u of a (multidimensional) problem can be approximated as a separated representation of the form
+
+
+
+
+
+
+u
+
+≈
+
+
+u
+
+
+N
+
+
+(
+
+x
+
+1
+
+
+,
+
+x
+
+2
+
+
+,
+…
+,
+
+x
+
+d
+
+
+)
+=
+
+∑
+
+i
+=
+1
+
+
+N
+
+
+
+
+
+X
+
+1
+
+
+
+
+i
+
+
+(
+
+x
+
+1
+
+
+)
+⋅
+
+
+
+X
+
+2
+
+
+
+
+i
+
+
+(
+
+x
+
+2
+
+
+)
+⋯
+
+
+
+X
+
+d
+
+
+
+
+i
+
+
+(
+
+x
+
+d
+
+
+)
+,
+
+
+{\displaystyle \mathbf {u} \approx \mathbf {u} ^{N}(x_{1},x_{2},\ldots ,x_{d})=\sum _{i=1}^{N}\mathbf {X_{1}} _{i}(x_{1})\cdot \mathbf {X_{2}} _{i}(x_{2})\cdots \mathbf {X_{d}} _{i}(x_{d}),}
+
+
+where the number of addends N and the functional products X1(x1), X2(x2), ..., Xd(xd), each depending on a variable (or variables), are unknown beforehand.
+The solution is sought by applying a greedy algorithm, usually the fixed point algorithm, to the weak formulation of the problem. For each iteration i of the algorithm, a mode of the solution is computed. Each mode consists of a set of numerical values of the functional products X1(x1), ..., Xd(xd), which enrich the approximation of the solution. Note that due to the greedy nature of the algorithm, the term 'enrich' is used rather than 'improve'. The number of computed modes required to obtain an approximation of the solution below a certain error threshold depends on the stop criterium of the iterative algorithm.
+Unlike POD, PGD modes are not necessarily orthogonal to each other.
+
+Features[edit]
+PGD is suitable for solving high-dimensional problems, since it overcomes the limitations of classical approaches. In particular, PGD avoids the curse of dimensionality, as solving decoupled problems is computationally much less expensive than solving multidimensional problems.
+Therefore, PGD enables to re-adapt parametric problems into a multidimensional framework by setting the parameters of the problem as extra coordinates:
+
+
+
+
+
+
+u
+
+≈
+
+
+u
+
+
+N
+
+
+(
+
+x
+
+1
+
+
+,
+…
+,
+
+x
+
+d
+
+
+;
+
+k
+
+1
+
+
+,
+…
+,
+
+k
+
+p
+
+
+)
+=
+
+∑
+
+i
+=
+1
+
+
+N
+
+
+
+
+
+X
+
+1
+
+
+
+
+i
+
+
+(
+
+x
+
+1
+
+
+)
+⋯
+
+
+
+X
+
+d
+
+
+
+
+i
+
+
+(
+
+x
+
+d
+
+
+)
+⋅
+
+
+
+K
+
+1
+
+
+
+
+i
+
+
+(
+
+k
+
+1
+
+
+)
+⋯
+
+
+
+K
+
+p
+
+
+
+
+i
+
+
+(
+
+k
+
+p
+
+
+)
+,
+
+
+{\displaystyle \mathbf {u} \approx \mathbf {u} ^{N}(x_{1},\ldots ,x_{d};k_{1},\ldots ,k_{p})=\sum _{i=1}^{N}\mathbf {X_{1}} _{i}(x_{1})\cdots \mathbf {X_{d}} _{i}(x_{d})\cdot \mathbf {K_{1}} _{i}(k_{1})\cdots \mathbf {K_{p}} _{i}(k_{p}),}
+
+
+where a series of functional products K1(k1), K2(k2), ..., Kp(kp), each depending on a parameter (or parameters), has been incorporated to the equation.
+In this case, the obtained approximation of the solution is called computational vademecum: a general meta-model containing all the particular solutions for every possible value of the involved parameters.[6]
+
+Sparse Subspace Learning[edit]
+The Sparse Subspace Learning (SSL) method leverages the use of hierarchical collocation to approximate the numerical solution of parametric models. With respect to traditional projection-based reduced order modeling, the use of a collocation enables non-intrusive approach based on sparse adaptive sampling of the parametric space. This allows to recover the lowdimensional structure of the parametric solution subspace while also learning the functional dependency from the parameters in explicit form. A sparse low-rank approximate tensor representation of the parametric solution can be built through an incremental strategy that only needs to have access to the output of a deterministic solver. Non-intrusiveness makes this approach straightforwardly applicable to challenging problems characterized by nonlinearity or non affine weak forms.[7]
+
+References[edit]
+
+
+^ Amine Ammar, Béchir Mokdad, Francisco Chinesta, Roland Keunings (2006). "A New Family of Solvers for Some Classes of Multidimensional Partial Differential Equations Encountered in Kinetic Theory Modeling of Complex Fluids". Journal of Non-Newtonian Fluid Mechanics.CS1 maint: multiple names: authors list (link)
+
+^ Amine Ammar, Béchir Mokdad, Francisco Chinesta, Roland Keunings (2007). "A new family of solvers for some classes of multidimensional partial differential equations encountered in kinetic theory modelling of complex fluids. Part II: Transient simulation using space-time separated representations". Journal of Non-Newtonian Fluid Mechanics.CS1 maint: multiple names: authors list (link)
+
+^ a b Croft, Thomas Lloyd David (2015-04-09). Proper generalised decompositions: theory and applications (phd thesis). Cardiff University.
+
+^ Chinesta, Francisco; Keunings, Roland; Leygue, Adrien (2014). The Proper Generalized Decomposition for Advanced Numerical Simulations: A Primer. SpringerBriefs in Applied Sciences and Technology. Springer International Publishing. ISBN 978-3-319-02864-4.
+
+^ Aguado, José Vicente (18 Nov 2018). "Advanced strategies for the separated formulation of problems in the Proper Generalized Decomposition framework".
+
+^ Francisco Chinesta, Adrien Leygue, Felipe Bordeu, Elías Cueto, David Gonzalez, Amine Ammar, Antonio Huerta (2013). "PGD-Based Computational Vademecum for Efficient Design, Optimization and Control". Archives of Computational Methods in Engineering.CS1 maint: multiple names: authors list (link)
+
+^ Borzacchiello, Domenico; Aguado, José V.; Chinesta, Francisco (April 2019). "Non-intrusive Sparse Subspace Learning for Parametrized Problems". Archives of Computational Methods in Engineering. 26 (2): 303–326. doi:10.1007/s11831-017-9241-4. ISSN 1134-3060.
+
+
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Proper_generalized_decomposition&oldid=968183420"
+Categories: Numerical analysisMathematical modelingDimension reductionBoundary value problemsHidden categories: CS1 maint: multiple names: authors list
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+
+Add links
+
+
+
+
+
+
+ This page was last edited on 17 July 2020, at 19:22 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

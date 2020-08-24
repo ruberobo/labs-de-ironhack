@@ -1,0 +1,1456 @@
+
+
+
+
+Hierarchical clustering - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hierarchical clustering
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+"SLINK" redirects here. For the online magazine, see Slink.
+A statistical method of analysis which seeks to build a hierarchy of clusters
+Part of a series onMachine learninganddata mining
+Problems
+Classification
+Clustering
+Regression
+Anomaly detection
+AutoML
+Association rules
+Reinforcement learning
+Structured prediction
+Feature engineering
+Feature learning
+Online learning
+Semi-supervised learning
+Unsupervised learning
+Learning to rank
+Grammar induction
+
+
+Supervised learning(classification • regression) 
+Decision trees
+Ensembles
+Bagging
+Boosting
+Random forest
+k-NN
+Linear regression
+Naive Bayes
+Artificial neural networks
+Logistic regression
+Perceptron
+Relevance vector machine (RVM)
+Support vector machine (SVM)
+
+
+Clustering
+BIRCH
+CURE
+Hierarchical
+k-means
+Expectation–maximization (EM)
+DBSCAN
+OPTICS
+Mean-shift
+
+
+Dimensionality reduction
+Factor analysis
+CCA
+ICA
+LDA
+NMF
+PCA
+PGD
+t-SNE
+
+
+Structured prediction
+Graphical models
+Bayes net
+Conditional random field
+Hidden Markov
+
+
+Anomaly detection
+k-NN
+Local outlier factor
+
+
+Artificial neural network
+Autoencoder
+Deep learning
+DeepDream
+Multilayer perceptron
+RNN
+LSTM
+GRU
+Restricted Boltzmann machine
+GAN
+SOM
+Convolutional neural network
+U-Net
+
+
+Reinforcement learning
+Q-learning
+SARSA
+Temporal difference (TD)
+
+
+Theory
+Bias–variance dilemma
+Computational learning theory
+Empirical risk minimization
+Occam learning
+PAC learning
+Statistical learning
+VC theory
+
+
+Machine-learning venues
+NeurIPS
+ICML
+ML
+JMLR
+ArXiv:cs.LG
+
+
+Glossary of artificial intelligence
+Glossary of artificial intelligence
+
+
+Related articles
+List of datasets for machine-learning research
+Outline of machine learning
+
+vte
+In data mining and statistics, hierarchical clustering (also called hierarchical cluster analysis or HCA) is a method of cluster analysis which seeks to build a hierarchy of clusters. Strategies for hierarchical clustering generally fall into two types:[1]
+
+Agglomerative: This is a "bottom-up" approach: each observation starts in its own cluster, and pairs of clusters are merged as one moves up the hierarchy.
+Divisive: This is a "top-down" approach: all observations start in one cluster, and splits are performed recursively as one moves down the hierarchy.
+In general, the merges and splits are determined in a greedy manner. The results of hierarchical clustering[2] are usually presented in a dendrogram.
+The standard algorithm for hierarchical agglomerative clustering (HAC) has a time complexity of 
+
+
+
+
+
+O
+
+
+(
+
+n
+
+3
+
+
+)
+
+
+{\displaystyle {\mathcal {O}}(n^{3})}
+
+ and requires 
+
+
+
+
+
+O
+
+
+(
+
+n
+
+2
+
+
+)
+
+
+{\displaystyle {\mathcal {O}}(n^{2})}
+
+ memory, which makes it too slow for even medium data sets. However, for some special cases, optimal efficient agglomerative methods (of complexity 
+
+
+
+
+
+O
+
+
+(
+
+n
+
+2
+
+
+)
+
+
+{\displaystyle {\mathcal {O}}(n^{2})}
+
+) are known: SLINK[3] for single-linkage and CLINK[4] for complete-linkage clustering. With a heap the runtime of the general case can be reduced to 
+
+
+
+
+
+O
+
+
+(
+
+n
+
+2
+
+
+log
+⁡
+n
+)
+
+
+{\displaystyle {\mathcal {O}}(n^{2}\log n)}
+
+ at the cost of further increasing the memory requirements. In many cases, the memory overheads of this approach are too large to make it practically usable.
+Except for the special case of single-linkage, none of the algorithms (except exhaustive search in 
+
+
+
+
+
+O
+
+
+(
+
+2
+
+n
+
+
+)
+
+
+{\displaystyle {\mathcal {O}}(2^{n})}
+
+) can be guaranteed to find the optimum solution.
+Divisive clustering with an exhaustive search is 
+
+
+
+
+
+O
+
+
+(
+
+2
+
+n
+
+
+)
+
+
+{\displaystyle {\mathcal {O}}(2^{n})}
+
+, but it is common to use faster heuristics to choose splits, such as k-means.
+
+Contents
+
+1 Cluster dissimilarity
+
+1.1 Metric
+1.2 Linkage criteria
+
+
+2 Discussion
+3 Agglomerative clustering example
+4 Divisive clustering
+5 Software
+
+5.1 Open source implementations
+5.2 Commercial implementations
+
+
+6 See also
+7 References
+8 Further reading
+
+
+Cluster dissimilarity[edit]
+In order to decide which clusters should be combined (for agglomerative), or where a cluster should be split (for divisive), a measure of dissimilarity between sets of observations is required. In most methods of hierarchical clustering, this is achieved by use of an appropriate metric (a measure of distance between pairs of observations), and a linkage criterion which specifies the dissimilarity of sets as a function of the pairwise distances of observations in the sets.
+
+Metric[edit]
+Further information: Metric (mathematics)
+The choice of an appropriate metric will influence the shape of the clusters, as some elements may be relatively closer to one another under one metric than another. For example, in two dimensions, under the Manhattan distance metric, the distance between the origin (0,0) and (.5, .5) is the same as the distance between the origin and (0, 1), while under the Euclidean distance metric the latter is strictly greater.
+Some commonly used metrics for hierarchical clustering are:[5]
+
+
+
+Names
+
+Formula
+
+
+Euclidean distance
+
+
+
+
+
+‖
+a
+−
+b
+
+‖
+
+2
+
+
+=
+
+
+
+∑
+
+i
+
+
+(
+
+a
+
+i
+
+
+−
+
+b
+
+i
+
+
+
+)
+
+2
+
+
+
+
+
+
+{\displaystyle \|a-b\|_{2}={\sqrt {\sum _{i}(a_{i}-b_{i})^{2}}}}
+
+
+
+
+Squared Euclidean distance
+
+
+
+
+
+‖
+a
+−
+b
+
+‖
+
+2
+
+
+2
+
+
+=
+
+∑
+
+i
+
+
+(
+
+a
+
+i
+
+
+−
+
+b
+
+i
+
+
+
+)
+
+2
+
+
+
+
+{\displaystyle \|a-b\|_{2}^{2}=\sum _{i}(a_{i}-b_{i})^{2}}
+
+
+
+
+Manhattan distance
+
+
+
+
+
+‖
+a
+−
+b
+
+‖
+
+1
+
+
+=
+
+∑
+
+i
+
+
+
+|
+
+
+a
+
+i
+
+
+−
+
+b
+
+i
+
+
+
+|
+
+
+
+{\displaystyle \|a-b\|_{1}=\sum _{i}|a_{i}-b_{i}|}
+
+
+
+
+Maximum distance
+
+
+
+
+
+‖
+a
+−
+b
+
+‖
+
+∞
+
+
+=
+
+max
+
+i
+
+
+
+|
+
+
+a
+
+i
+
+
+−
+
+b
+
+i
+
+
+
+|
+
+
+
+{\displaystyle \|a-b\|_{\infty }=\max _{i}|a_{i}-b_{i}|}
+
+
+
+
+Mahalanobis distance
+
+
+
+
+
+
+
+(
+a
+−
+b
+
+)
+
+⊤
+
+
+
+S
+
+−
+1
+
+
+(
+a
+−
+b
+)
+
+
+
+
+{\displaystyle {\sqrt {(a-b)^{\top }S^{-1}(a-b)}}}
+
+ where S is the Covariance matrix
+
+
+For text or other non-numeric data, metrics such as the Hamming distance or Levenshtein distance are often used.
+A review of cluster analysis in health psychology research found that the most common distance measure in published studies in that research area is the Euclidean distance or the squared Euclidean distance.[citation needed]
+
+Linkage criteria[edit]
+The linkage criterion determines the distance between sets of observations as a function of the pairwise distances between observations.
+Some commonly used linkage criteria between two sets of observations A and B are:[6][7]
+
+
+
+Names
+
+Formula
+
+
+Maximum or complete-linkage clustering
+
+
+
+
+
+max
+
+{
+
+d
+(
+a
+,
+b
+)
+:
+a
+∈
+A
+,
+
+b
+∈
+B
+
+}
+.
+
+
+{\displaystyle \max \,\{\,d(a,b):a\in A,\,b\in B\,\}.}
+
+
+
+
+Minimum or single-linkage clustering
+
+
+
+
+
+min
+
+{
+
+d
+(
+a
+,
+b
+)
+:
+a
+∈
+A
+,
+
+b
+∈
+B
+
+}
+.
+
+
+{\displaystyle \min \,\{\,d(a,b):a\in A,\,b\in B\,\}.}
+
+
+
+
+Unweighted average linkage clustering (or UPGMA)
+
+
+
+
+
+
+
+1
+
+
+|
+
+A
+
+|
+
+⋅
+
+|
+
+B
+
+|
+
+
+
+
+
+∑
+
+a
+∈
+A
+
+
+
+∑
+
+b
+∈
+B
+
+
+d
+(
+a
+,
+b
+)
+.
+
+
+{\displaystyle {\frac {1}{|A|\cdot |B|}}\sum _{a\in A}\sum _{b\in B}d(a,b).}
+
+
+
+
+Weighted average linkage clustering (or WPGMA)
+
+
+
+
+
+d
+(
+i
+∪
+j
+,
+k
+)
+=
+
+
+
+d
+(
+i
+,
+k
+)
++
+d
+(
+j
+,
+k
+)
+
+2
+
+
+.
+
+
+{\displaystyle d(i\cup j,k)={\frac {d(i,k)+d(j,k)}{2}}.}
+
+
+
+
+Centroid linkage clustering, or UPGMC
+
+
+
+
+
+‖
+
+c
+
+s
+
+
+−
+
+c
+
+t
+
+
+‖
+
+
+{\displaystyle \|c_{s}-c_{t}\|}
+
+ where 
+
+
+
+
+c
+
+s
+
+
+
+
+{\displaystyle c_{s}}
+
+ and 
+
+
+
+
+c
+
+t
+
+
+
+
+{\displaystyle c_{t}}
+
+ are the centroids of clusters s and t, respectively.
+
+
+Minimum energy clustering
+
+
+
+
+
+
+
+2
+
+n
+m
+
+
+
+
+∑
+
+i
+,
+j
+=
+1
+
+
+n
+,
+m
+
+
+‖
+
+a
+
+i
+
+
+−
+
+b
+
+j
+
+
+
+‖
+
+2
+
+
+−
+
+
+1
+
+n
+
+2
+
+
+
+
+
+∑
+
+i
+,
+j
+=
+1
+
+
+n
+
+
+‖
+
+a
+
+i
+
+
+−
+
+a
+
+j
+
+
+
+‖
+
+2
+
+
+−
+
+
+1
+
+m
+
+2
+
+
+
+
+
+∑
+
+i
+,
+j
+=
+1
+
+
+m
+
+
+‖
+
+b
+
+i
+
+
+−
+
+b
+
+j
+
+
+
+‖
+
+2
+
+
+
+
+{\displaystyle {\frac {2}{nm}}\sum _{i,j=1}^{n,m}\|a_{i}-b_{j}\|_{2}-{\frac {1}{n^{2}}}\sum _{i,j=1}^{n}\|a_{i}-a_{j}\|_{2}-{\frac {1}{m^{2}}}\sum _{i,j=1}^{m}\|b_{i}-b_{j}\|_{2}}
+
+
+
+where d is the chosen metric.  Other linkage criteria include:
+
+The sum of all intra-cluster variance.
+The increase in variance for the cluster being merged (Ward's criterion).[8]
+The probability that candidate clusters spawn from the same distribution function (V-linkage).
+The product of in-degree and out-degree on a k-nearest-neighbour graph (graph degree linkage).[9]
+The increment of some cluster descriptor (i.e., a quantity defined for measuring the quality of a cluster) after merging two clusters.[10][11][12]
+Discussion[edit]
+Hierarchical clustering has the distinct advantage that any valid measure of distance can be used. In fact, the observations themselves are not required: all that is used is a matrix of distances.
+
+Agglomerative clustering example[edit]
+ Raw data
+For example, suppose this data is to be clustered, and the Euclidean distance is the distance metric.
+The hierarchical clustering dendrogram would be as such:
+
+ Traditional representation
+Cutting the tree at a given height will give a partitioning clustering at a selected precision. In this example, cutting after the second row (from the top) of the dendrogram will yield clusters {a} {b c} {d e} {f}. Cutting after the third row will yield clusters {a} {b c} {d e f}, which is a coarser clustering, with a smaller number but larger clusters.
+This method builds the hierarchy from the individual elements by progressively merging clusters. In our example, we have six elements {a} {b} {c} {d} {e} and {f}. The first step is to determine which elements to merge in a cluster. Usually, we want to take the two closest elements, according to the chosen distance.
+Optionally, one can also construct a distance matrix at this stage, where the number in the i-th row j-th column is the distance between the i-th and j-th elements. Then, as clustering progresses, rows and columns are merged as the clusters are merged and the distances updated. This is a common way to implement this type of clustering, and has the benefit of caching distances between clusters. A simple agglomerative clustering algorithm is described in the single-linkage clustering page; it can easily be adapted to different types of linkage (see below).
+Suppose we have merged the two closest elements b and c, we now have the following clusters {a}, {b, c}, {d}, {e} and {f}, and want to merge them further. To do that, we need to take the distance between {a} and {b c}, and therefore define the distance between two clusters.
+Usually the distance between two clusters 
+
+
+
+
+
+A
+
+
+
+
+{\displaystyle {\mathcal {A}}}
+
+ and 
+
+
+
+
+
+B
+
+
+
+
+{\displaystyle {\mathcal {B}}}
+
+ is one of the following:
+
+The maximum distance between elements of each cluster (also called complete-linkage clustering):
+
+
+
+
+max
+{
+
+d
+(
+x
+,
+y
+)
+:
+x
+∈
+
+
+A
+
+
+,
+
+y
+∈
+
+
+B
+
+
+
+}
+.
+
+
+{\displaystyle \max\{\,d(x,y):x\in {\mathcal {A}},\,y\in {\mathcal {B}}\,\}.}
+
+
+The minimum distance between elements of each cluster (also called single-linkage clustering):
+
+
+
+
+min
+{
+
+d
+(
+x
+,
+y
+)
+:
+x
+∈
+
+
+A
+
+
+,
+
+y
+∈
+
+
+B
+
+
+
+}
+.
+
+
+{\displaystyle \min\{\,d(x,y):x\in {\mathcal {A}},\,y\in {\mathcal {B}}\,\}.}
+
+
+The mean distance between elements of each cluster (also called average linkage clustering, used e.g. in UPGMA):
+
+
+
+
+
+
+1
+
+
+|
+
+
+
+A
+
+
+
+|
+
+⋅
+
+|
+
+
+
+B
+
+
+
+|
+
+
+
+
+
+∑
+
+x
+∈
+
+
+A
+
+
+
+
+
+∑
+
+y
+∈
+
+
+B
+
+
+
+
+d
+(
+x
+,
+y
+)
+.
+
+
+{\displaystyle {1 \over {|{\mathcal {A}}|\cdot |{\mathcal {B}}|}}\sum _{x\in {\mathcal {A}}}\sum _{y\in {\mathcal {B}}}d(x,y).}
+
+
+The sum of all intra-cluster variance.
+The increase in variance for the cluster being merged (Ward's method[8])
+The probability that candidate clusters spawn from the same distribution function (V-linkage).
+In case of tied minimum distances, a pair is randomly chosen, thus being able to generate several structurally different dendrograms. Alternatively, all tied pairs may be joined at the same time, generating a unique dendrogram.[13]
+One can always decide to stop clustering when there is a sufficiently small number of clusters (number criterion). Some linkages may also guarantee that agglomeration occurs at a greater distance between clusters than the previous agglomeration, and then one can stop clustering when the clusters are too far apart to be merged (distance criterion). However, this is not the case of, e.g., the centroid linkage where the so-called reversals[14] (inversions, departures from ultrametricity) may occur.
+
+Divisive clustering[edit]
+The basic principle of divisive clustering was published as the DIANA (DIvisive ANAlysis Clustering) algorithm.[15] Initially, all data is in the same cluster, and the largest cluster is split until every object is separate.
+Because there exist 
+
+
+
+O
+(
+
+2
+
+n
+
+
+)
+
+
+{\displaystyle O(2^{n})}
+
+ ways of splitting each cluster, heuristics are needed. DIANA chooses the object with the maximum average dissimilarity and then moves all objects to this cluster that are more similar to the new cluster than to the remainder.
+
+Software[edit]
+Open source implementations[edit]
+ Hierarchical clustering dendrogram of the Iris dataset (using R). Source
+ Hierarchical clustering and interactive dendrogram visualization in Orange data mining suite.
+ALGLIB implements several hierarchical clustering algorithms (single-link, complete-link, Ward) in C++ and C# with O(n²) memory and O(n³) run time.
+ELKI includes multiple hierarchical clustering algorithms, various linkage strategies and also includes the efficient SLINK,[3] CLINK[4] and Anderberg algorithms, flexible cluster extraction from dendrograms and various other cluster analysis algorithms.
+Octave, the GNU analog to MATLAB implements hierarchical clustering in function "linkage".
+Orange, a data mining software suite, includes hierarchical clustering with interactive dendrogram visualisation.
+R has many packages that provide functions for hierarchical clustering.
+SciPy implements hierarchical clustering in Python, including the efficient SLINK algorithm.
+scikit-learn also implements hierarchical clustering in Python.
+Weka includes hierarchical cluster analysis.
+Commercial implementations[edit]
+MATLAB includes hierarchical cluster analysis.
+SAS includes hierarchical cluster analysis in PROC CLUSTER.
+Mathematica includes a Hierarchical Clustering Package.
+NCSS includes hierarchical cluster analysis.
+SPSS includes hierarchical cluster analysis.
+Qlucore Omics Explorer includes hierarchical cluster analysis.
+Stata includes hierarchical cluster analysis.
+CrimeStat includes a nearest neighbor hierarchical cluster algorithm with a graphical output for a Geographic Information System.
+See also[edit]
+
+Binary space partitioning
+Bounding volume hierarchy
+Brown clustering
+Cladistics
+Cluster analysis
+Computational phylogenetics
+CURE data clustering algorithm
+Dasgupta's objective
+Dendrogram
+Determining the number of clusters in a data set
+Hierarchical clustering of networks
+Locality-sensitive hashing
+Nearest neighbor search
+Nearest-neighbor chain algorithm
+Numerical taxonomy
+OPTICS algorithm
+Statistical distance
+Persistent homology
+References[edit]
+
+
+^ Rokach, Lior, and Oded Maimon. "Clustering methods." Data mining and knowledge discovery handbook. Springer US, 2005. 321-352.
+
+^ Frank Nielsen (2016). "Chapter 8: Hierarchical Clustering". Introduction to HPC with MPI for Data Science. Springer.
+
+^ a b R. Sibson (1973). "SLINK: an optimally efficient algorithm for the single-link cluster method" (PDF). The Computer Journal. British Computer Society. 16 (1): 30–34. doi:10.1093/comjnl/16.1.30.
+
+^ a b D. Defays (1977). "An efficient algorithm for a complete-link method". The Computer Journal. British Computer Society. 20 (4): 364–366. doi:10.1093/comjnl/20.4.364.
+
+^ "The DISTANCE Procedure: Proximity Measures". SAS/STAT 9.2 Users Guide. SAS Institute. Retrieved 2009-04-26.
+
+^ "The CLUSTER Procedure: Clustering Methods". SAS/STAT 9.2 Users Guide. SAS Institute. Retrieved 2009-04-26.
+
+^ Székely, G. J.; Rizzo, M. L. (2005). "Hierarchical clustering via Joint Between-Within Distances: Extending Ward's Minimum Variance Method". Journal of Classification. 22 (2): 151–183. doi:10.1007/s00357-005-0012-9.
+
+^ a b Ward, Joe H. (1963). "Hierarchical Grouping to Optimize an Objective Function". Journal of the American Statistical Association. 58 (301): 236–244. doi:10.2307/2282967. JSTOR 2282967. MR 0148188.
+
+^ Zhang, Wei; Wang, Xiaogang; Zhao, Deli; Tang, Xiaoou (2012).  Fitzgibbon, Andrew; Lazebnik, Svetlana; Perona, Pietro; Sato, Yoichi; Schmid, Cordelia (eds.). "Graph Degree Linkage: Agglomerative Clustering on a Directed Graph". Computer Vision – ECCV 2012. Lecture Notes in Computer Science. Springer Berlin Heidelberg. 7572: 428–441. arXiv:1208.5092. Bibcode:2012arXiv1208.5092Z. doi:10.1007/978-3-642-33718-5_31. ISBN 9783642337185. See also: https://github.com/waynezhanghk/gacluster
+
+^ Zhang, et al. "Agglomerative clustering via maximum incremental path integral." Pattern Recognition (2013).
+
+^ Zhao, and Tang. "Cyclizing clusters via zeta function of a graph."Advances in Neural Information Processing Systems. 2008.
+
+^ Ma, et al. "Segmentation of multivariate mixed data via lossy data coding and compression." IEEE Transactions on Pattern Analysis and Machine Intelligence, 29(9) (2007): 1546-1562.
+
+^ Fernández, Alberto; Gómez, Sergio (2008). "Solving Non-uniqueness in Agglomerative Hierarchical Clustering Using Multidendrograms". Journal of Classification. 25 (1): 43–65. arXiv:cs/0608049. doi:10.1007/s00357-008-9004-x.
+
+^ Legendre, P.; Legendre, L. (2003). Numerical Ecology. Elsevier Science BV.
+
+^ Kaufman, L., & Roussew, P. J. (1990). Finding Groups in Data - An Introduction to Cluster Analysis. A Wiley-Science Publication John Wiley & Sons.
+
+
+Further reading[edit]
+Kaufman, L.; Rousseeuw, P.J. (1990). Finding Groups in Data: An Introduction to Cluster Analysis (1 ed.). New York: John Wiley. ISBN 0-471-87876-6.
+Hastie, Trevor; Tibshirani, Robert; Friedman, Jerome (2009). "14.3.12 Hierarchical clustering". The Elements of Statistical Learning (2nd ed.). New York: Springer. pp. 520–528. ISBN 978-0-387-84857-0. Archived from the original (PDF) on 2009-11-10. Retrieved 2009-10-20.
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Hierarchical_clustering&oldid=973740550"
+Categories: Network analysisCluster analysis algorithmsHidden categories: Articles with short descriptionShort description is different from WikidataAll articles with unsourced statementsArticles with unsourced statements from April 2009
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+In other projects
+
+
+
+
+Wikimedia Commons
+
+
+
+
+
+Languages
+
+
+
+
+العربيةČeštinaDeutschEspañolEuskaraفارسیFrançaisItalianoPolskiРусскийУкраїнська
+Edit links
+
+
+
+
+
+
+ This page was last edited on 18 August 2020, at 23:42 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,3764 @@
+
+
+
+
+Random forest - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Random forest
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+This article is about the machine learning technique. For other kinds of random tree, see Random tree.
+An ensemble machine learning method
+Part of a series onMachine learninganddata mining
+Problems
+Classification
+Clustering
+Regression
+Anomaly detection
+AutoML
+Association rules
+Reinforcement learning
+Structured prediction
+Feature engineering
+Feature learning
+Online learning
+Semi-supervised learning
+Unsupervised learning
+Learning to rank
+Grammar induction
+
+
+Supervised learning(classification • regression) 
+Decision trees
+Ensembles
+Bagging
+Boosting
+Random forest
+k-NN
+Linear regression
+Naive Bayes
+Artificial neural networks
+Logistic regression
+Perceptron
+Relevance vector machine (RVM)
+Support vector machine (SVM)
+
+
+Clustering
+BIRCH
+CURE
+Hierarchical
+k-means
+Expectation–maximization (EM)
+DBSCAN
+OPTICS
+Mean-shift
+
+
+Dimensionality reduction
+Factor analysis
+CCA
+ICA
+LDA
+NMF
+PCA
+PGD
+t-SNE
+
+
+Structured prediction
+Graphical models
+Bayes net
+Conditional random field
+Hidden Markov
+
+
+Anomaly detection
+k-NN
+Local outlier factor
+
+
+Artificial neural network
+Autoencoder
+Deep learning
+DeepDream
+Multilayer perceptron
+RNN
+LSTM
+GRU
+Restricted Boltzmann machine
+GAN
+SOM
+Convolutional neural network
+U-Net
+
+
+Reinforcement learning
+Q-learning
+SARSA
+Temporal difference (TD)
+
+
+Theory
+Bias–variance dilemma
+Computational learning theory
+Empirical risk minimization
+Occam learning
+PAC learning
+Statistical learning
+VC theory
+
+
+Machine-learning venues
+NeurIPS
+ICML
+ML
+JMLR
+ArXiv:cs.LG
+
+
+Glossary of artificial intelligence
+Glossary of artificial intelligence
+
+
+Related articles
+List of datasets for machine-learning research
+Outline of machine learning
+
+vte
+ Diagram of a random decision forest
+Random forests or random decision forests are an ensemble learning method for classification, regression and other tasks that operate by constructing a multitude of decision trees at training time and outputting the class that is the mode of the classes (classification) or mean prediction (regression) of the individual trees.[1][2] Random decision forests correct for decision trees' habit of overfitting to their training set.[3]:587–588
+The first algorithm for random decision forests was created by Tin Kam Ho[1] using the random subspace method,[2] which, in Ho's formulation, is a way to implement the "stochastic discrimination" approach to classification proposed by Eugene Kleinberg.[4][5][6]
+An extension of the algorithm was developed by Leo Breiman[7] and Adele Cutler,[8] who registered[9] "Random Forests" as a trademark (as of 2019[update], owned by Minitab, Inc.).[10] The extension combines Breiman's "bagging" idea and random selection of features, introduced first by Ho[1] and later independently by Amit and Geman[11] in order to construct a collection of decision trees with controlled variance.
+
+Contents
+
+1 History
+2 Algorithm
+
+2.1 Preliminaries: decision tree learning
+2.2 Bagging
+2.3 From bagging to random forests
+2.4 ExtraTrees
+
+
+3 Properties
+
+3.1 Variable importance
+3.2 Relationship to nearest neighbors
+
+
+4 Unsupervised learning with random forests
+5 Variants
+6 Kernel random forest
+
+6.1 History
+6.2 Notations and definitions
+
+6.2.1 Preliminaries: Centered forests
+6.2.2 Uniform forest
+6.2.3 From random forest to KeRF
+6.2.4 Centered KeRF
+6.2.5 Uniform KeRF
+
+
+6.3 Properties
+
+6.3.1 Relation between KeRF and random forest
+6.3.2 Relation between infinite KeRF and infinite random forest
+
+
+6.4 Consistency results
+
+6.4.1 Consistency of centered KeRF
+6.4.2 Consistency of uniform KeRF
+
+
+
+
+7 See also
+8 References
+9 Further reading
+10 External links
+
+
+History[edit]
+The general method of random decision forests was first proposed by Ho in 1995.[1] Ho established that forests of trees splitting with oblique hyperplanes can gain accuracy as they grow without suffering from overtraining, as long as the forests are randomly restricted to be sensitive to only selected feature dimensions.  A subsequent work along the same lines[2] concluded that other splitting methods behave similarly, as long as they are randomly forced to be insensitive to some feature dimensions.  Note that this observation of a more complex classifier (a larger forest) getting more accurate nearly monotonically is in sharp contrast to the common belief that the complexity of a classifier can only grow to a certain level of accuracy before being hurt by overfitting.  The explanation of the forest method's resistance to overtraining can be found in Kleinberg's theory of stochastic discrimination.[4][5][6]
+The early development of Breiman's notion of random forests was influenced by the work of Amit and
+Geman[11] who introduced the idea of searching over a random subset of the
+available decisions when splitting a node, in the context of growing a single
+tree.  The idea of random subspace selection from Ho[2] was also influential in the design of random forests.  In this method a forest of trees is grown,
+and variation among the trees is introduced by projecting the training data
+into a randomly chosen subspace before fitting each tree or each node.  Finally, the idea of
+randomized node optimization, where the decision at each node is selected by a
+randomized procedure, rather than a deterministic optimization was first
+introduced by Dietterich.[12]
+The introduction of random forests proper was first made in a paper
+by Leo Breiman.[7]  This paper describes a method of building a forest of
+uncorrelated trees using a CART like procedure, combined with randomized node
+optimization and bagging.  In addition, this paper combines several
+ingredients, some previously known and some novel, which form the basis of the
+modern practice of random forests, in particular:
+
+Using out-of-bag error as an estimate of the generalization error.
+Measuring variable importance through permutation.
+The report also offers the first theoretical result for random forests in the
+form of a bound on the generalization error which depends on the strength of the
+trees in the forest and their correlation.
+
+Algorithm[edit]
+Preliminaries: decision tree learning[edit]
+Main article: Decision tree learning
+Decision trees are a popular method for various machine learning tasks. Tree learning "come[s] closest to meeting the requirements for serving as an off-the-shelf procedure for data mining", say Hastie et al., "because it is invariant under scaling and various other transformations of feature values, is robust to inclusion of irrelevant features, and produces inspectable models. However, they are seldom accurate".[3]:352
+In particular, trees that are grown very deep tend to learn highly irregular patterns: they overfit their training sets, i.e. have low bias, but very high variance. Random forests are a way of averaging multiple deep decision trees, trained on different parts of the same training set, with the goal of reducing the variance.[3]:587–588 This comes at the expense of a small increase in the bias and some loss of interpretability, but generally greatly boosts the performance in the final model.
+Forests are like the pulling together of decision tree algorithm efforts. Taking the teamwork of many trees thus improving the performance of a single random tree. Though not quite similar, forests give the effects of a K-fold cross validation.
+
+Bagging[edit]
+Main article: Bootstrap aggregating
+The training algorithm for random forests applies the general technique of bootstrap aggregating, or bagging, to tree learners. Given a training set X = x1, ..., xn with responses Y = y1, ..., yn, bagging repeatedly (B times) selects a random sample with replacement of the training set and fits trees to these samples:
+
+For b = 1, ..., B:
+Sample, with replacement, n training examples from X, Y; call these Xb, Yb.
+Train a classification or regression tree fb on Xb, Yb.
+After training, predictions for unseen samples x' can be made by averaging the predictions from all the individual regression trees on x':
+
+
+
+
+
+
+
+
+f
+^
+
+
+
+=
+
+
+1
+B
+
+
+
+∑
+
+b
+=
+1
+
+
+B
+
+
+
+f
+
+b
+
+
+(
+
+x
+′
+
+)
+
+
+{\displaystyle {\hat {f}}={\frac {1}{B}}\sum _{b=1}^{B}f_{b}(x')}
+
+
+or by taking the majority vote in the case of classification trees.
+This bootstrapping procedure leads to better model performance because it decreases the variance of the model, without increasing the bias. This means that while the predictions of a single tree are highly sensitive to noise in its training set, the average of many trees is not, as long as the trees are not correlated. Simply training many trees on a single training set would give strongly correlated trees (or even the same tree many times, if the training algorithm is deterministic); bootstrap sampling is a way of de-correlating the trees by showing them different training sets.
+Additionally, an estimate of the uncertainty of the prediction can be made as the standard deviation of the predictions from all the individual regression trees on x':
+
+
+
+
+
+σ
+=
+
+
+
+
+
+∑
+
+b
+=
+1
+
+
+B
+
+
+(
+
+f
+
+b
+
+
+(
+
+x
+′
+
+)
+−
+
+
+
+f
+^
+
+
+
+
+)
+
+2
+
+
+
+
+B
+−
+1
+
+
+
+
+.
+
+
+{\displaystyle \sigma ={\sqrt {\frac {\sum _{b=1}^{B}(f_{b}(x')-{\hat {f}})^{2}}{B-1}}}.}
+
+
+The number of samples/trees, B, is a free parameter. Typically, a few hundred to several thousand trees are used, depending on the size and nature of the training set. An optimal number of trees B can be found using cross-validation, or by observing the out-of-bag error: the mean prediction error on each training sample xᵢ, using only the trees that did not have xᵢ in their bootstrap sample.[13]
+The training and test error tend to level off after some number of trees have been fit.
+
+From bagging to random forests[edit]
+Main article: Random subspace method
+The above procedure describes the original bagging algorithm for trees. Random forests differ in only one way from this general scheme: they use a modified tree learning algorithm that selects, at each candidate split in the learning process, a random subset of the features. This process is sometimes called "feature bagging". The reason for doing this is the correlation of the trees in an ordinary bootstrap sample: if one or a few features are very strong predictors for the response variable (target output), these features will be selected in many of the B trees, causing them to become correlated. An analysis of how bagging and random subspace projection contribute to accuracy gains under different conditions is given by Ho.[14]
+Typically, for a classification problem with p features, √p (rounded down) features are used in each split.[3]:592  For regression problems the inventors recommend p/3 (rounded down) with a minimum node size of 5 as the default.[3]:592 In practice the best values for these parameters will depend on the problem, and they should be treated as tuning parameters.[3]:592
+
+ExtraTrees[edit]
+Adding one further step of randomization yields extremely randomized trees, or ExtraTrees. While similar to ordinary random forests in that they are an ensemble of individual trees, there are two main differences: first, each tree is trained using the whole learning sample (rather than a bootstrap sample), and second, the top-down splitting in the tree learner is randomized. Instead of computing the locally optimal cut-point for each feature under consideration (based on, e.g., information gain or the Gini impurity), a random cut-point is selected. This value is selected from a uniform distribution within the feature's empirical range (in the tree's training set). Then, of all the randomly generated splits, the split that yields the highest score is chosen to split the node. Similar to ordinary random forests, the number of randomly selected features to be considered at each node can be specified. Default values for this parameter are 
+
+
+
+
+
+p
+
+
+
+
+{\displaystyle {\sqrt {p}}}
+
+ for classification and 
+
+
+
+p
+
+
+{\displaystyle p}
+
+ for regression, where 
+
+
+
+p
+
+
+{\displaystyle p}
+
+ is the number of features in the model.[15]
+
+Properties[edit]
+Variable importance[edit]
+Random forests can be used to rank the importance of variables in a regression or classification problem in a natural way.  The following technique was described in Breiman's original paper[7] and is implemented in the R package randomForest.[8]
+The first step in measuring the variable importance in a data set 
+
+
+
+
+
+
+D
+
+
+
+n
+
+
+=
+{
+(
+
+X
+
+i
+
+
+,
+
+Y
+
+i
+
+
+)
+
+}
+
+i
+=
+1
+
+
+n
+
+
+
+
+{\displaystyle {\mathcal {D}}_{n}=\{(X_{i},Y_{i})\}_{i=1}^{n}}
+
+ is to fit a random forest to the data.  During the fitting process the out-of-bag error for each data point is recorded and averaged over the forest (errors on an independent test set can be substituted if bagging is not used during training).
+To measure the importance of the 
+
+
+
+j
+
+
+{\displaystyle j}
+
+-th feature after training, the values of the 
+
+
+
+j
+
+
+{\displaystyle j}
+
+-th feature are permuted among the training data and the out-of-bag error is again computed on this perturbed data set.  The importance score for the 
+
+
+
+j
+
+
+{\displaystyle j}
+
+-th feature is computed by averaging the difference in out-of-bag error before and after the permutation over all trees.  The score is normalized by the standard deviation of these differences.
+Features which produce large values for this score are ranked as more important than features which produce small values. The statistical definition of the variable importance measure was given and analyzed by Zhu et al.[16]
+This method of determining variable importance has some drawbacks.  For data including categorical variables with different number of levels, random forests are biased in favor of those attributes with more levels. Methods such as partial permutations[17][18]
+and growing unbiased trees[19][20] can be used to solve the problem.  If the data contain groups of correlated features of similar relevance for the output, then smaller groups are favored over larger groups.[21]
+
+Relationship to nearest neighbors[edit]
+A relationship between random forests and the k-nearest neighbor algorithm (k-NN) was pointed out by Lin and Jeon in 2002.[22] It turns out that both can be viewed as so-called weighted neighborhoods schemes. These are models built from a training set 
+
+
+
+{
+(
+
+x
+
+i
+
+
+,
+
+y
+
+i
+
+
+)
+
+}
+
+i
+=
+1
+
+
+n
+
+
+
+
+{\displaystyle \{(x_{i},y_{i})\}_{i=1}^{n}}
+
+ that make predictions 
+
+
+
+
+
+
+y
+^
+
+
+
+
+
+{\displaystyle {\hat {y}}}
+
+ for new points x' by looking at the "neighborhood" of the point, formalized by a weight function W:
+
+
+
+
+
+
+
+
+y
+^
+
+
+
+=
+
+∑
+
+i
+=
+1
+
+
+n
+
+
+W
+(
+
+x
+
+i
+
+
+,
+
+x
+′
+
+)
+
+
+y
+
+i
+
+
+.
+
+
+{\displaystyle {\hat {y}}=\sum _{i=1}^{n}W(x_{i},x')\,y_{i}.}
+
+
+Here, 
+
+
+
+W
+(
+
+x
+
+i
+
+
+,
+
+x
+′
+
+)
+
+
+{\displaystyle W(x_{i},x')}
+
+ is the non-negative weight of the i'th training point relative to the new point x' in the same tree. For any particular x', the weights for points 
+
+
+
+
+x
+
+i
+
+
+
+
+{\displaystyle x_{i}}
+
+ must sum to one. Weight functions are given as follows:
+
+In k-NN, the weights are 
+
+
+
+W
+(
+
+x
+
+i
+
+
+,
+
+x
+′
+
+)
+=
+
+
+1
+k
+
+
+
+
+{\displaystyle W(x_{i},x')={\frac {1}{k}}}
+
+ if xi is one of the k points closest to x', and zero otherwise.
+In a tree, 
+
+
+
+W
+(
+
+x
+
+i
+
+
+,
+
+x
+′
+
+)
+=
+
+
+1
+
+k
+′
+
+
+
+
+
+{\displaystyle W(x_{i},x')={\frac {1}{k'}}}
+
+ if xi is one of the k' points in the same leaf as x', and zero otherwise.
+Since a forest averages the predictions of a set of m trees with individual weight functions 
+
+
+
+
+W
+
+j
+
+
+
+
+{\displaystyle W_{j}}
+
+, its predictions are
+
+
+
+
+
+
+
+
+y
+^
+
+
+
+=
+
+
+1
+m
+
+
+
+∑
+
+j
+=
+1
+
+
+m
+
+
+
+∑
+
+i
+=
+1
+
+
+n
+
+
+
+W
+
+j
+
+
+(
+
+x
+
+i
+
+
+,
+
+x
+′
+
+)
+
+
+y
+
+i
+
+
+=
+
+∑
+
+i
+=
+1
+
+
+n
+
+
+
+(
+
+
+
+1
+m
+
+
+
+∑
+
+j
+=
+1
+
+
+m
+
+
+
+W
+
+j
+
+
+(
+
+x
+
+i
+
+
+,
+
+x
+′
+
+)
+
+)
+
+
+
+y
+
+i
+
+
+.
+
+
+{\displaystyle {\hat {y}}={\frac {1}{m}}\sum _{j=1}^{m}\sum _{i=1}^{n}W_{j}(x_{i},x')\,y_{i}=\sum _{i=1}^{n}\left({\frac {1}{m}}\sum _{j=1}^{m}W_{j}(x_{i},x')\right)\,y_{i}.}
+
+
+This shows that the whole forest is again a weighted neighborhood scheme, with weights that average those of the individual trees. The neighbors of x' in this interpretation are the points 
+
+
+
+
+x
+
+i
+
+
+
+
+{\displaystyle x_{i}}
+
+ sharing the same leaf in any tree 
+
+
+
+j
+
+
+{\displaystyle j}
+
+. In this way, the neighborhood of x' depends in a complex way on the structure of the trees, and thus on the structure of the training set. Lin and Jeon show that the shape of the neighborhood used by a random forest adapts to the local importance of each feature.[22]
+
+Unsupervised learning with random forests[edit]
+As part of their construction, random forest predictors naturally lead to a dissimilarity measure among the observations. One can also define a random forest dissimilarity measure between unlabeled data: the idea is to construct a random forest predictor that distinguishes the “observed” data from suitably generated synthetic data.[7][23]
+The observed data are the original unlabeled data and the synthetic data are drawn from a reference distribution. A random forest dissimilarity can be attractive because it handles mixed variable types very well, is invariant to monotonic transformations of the input variables, and is robust to outlying observations. The random forest dissimilarity easily deals with a large number of semi-continuous variables due to its intrinsic variable selection; for example, the "Addcl 1" random forest dissimilarity weighs the contribution of each variable according to how dependent it is on other variables. The random forest dissimilarity has been used in a variety of applications, e.g. to find clusters of patients based on tissue marker data.[24]
+
+Variants[edit]
+Instead of decision trees, linear models have been proposed and evaluated as base estimators in random forests, in particular multinomial logistic regression and naive Bayes classifiers.[25][26]
+
+Kernel random forest[edit]
+In machine learning, kernel random forests establish the connection between random forests and kernel methods. By slightly modifying their definition, random forests can be rewritten as kernel methods, which are more interpretable and easier to analyze.[27]
+
+History[edit]
+Leo Breiman[28] was the first person to notice the link between random forest and kernel methods. He pointed out that random forests which are grown using i.i.d. random vectors in the tree construction are equivalent to a kernel acting on the true margin. Lin and Jeon[29] established the connection between random forests and adaptive nearest neighbor, implying that random forests can be seen as adaptive kernel estimates. Davies and Ghahramani[30] proposed Random Forest Kernel and show that it can empirically outperform state-of-art kernel methods. Scornet[27] first defined KeRF estimates and gave the explicit link between KeRF estimates and random forest. He also gave explicit expressions for kernels based on centered random forest[31] and uniform random forest,[32] two simplified models of random forest. He named these two KeRFs Centered KeRF and Uniform KeRF, and proved upper bounds on their rates of consistency.
+
+Notations and definitions[edit]
+Preliminaries: Centered forests[edit]
+Centered forest[31] is a simplified model for Breiman's original random forest, which uniformly selects an attribute among all attributes and performs splits at the center of the cell along the pre-chosen attribute. The algorithm stops when a fully binary tree of level 
+
+
+
+k
+
+
+{\displaystyle k}
+
+ is built, where 
+
+
+
+k
+∈
+
+N
+
+
+
+{\displaystyle k\in \mathbb {N} }
+
+ is a parameter of the algorithm.
+
+Uniform forest[edit]
+Uniform forest[32] is another simplified model for Breiman's original random forest, which uniformly selects a feature among all features and performs splits at a point uniformly drawn on the side of the cell, along the preselected feature.
+
+From random forest to KeRF[edit]
+Given a training sample  
+
+
+
+
+
+
+D
+
+
+
+n
+
+
+=
+{
+(
+
+
+X
+
+
+i
+
+
+,
+
+Y
+
+i
+
+
+)
+
+}
+
+i
+=
+1
+
+
+n
+
+
+
+
+{\displaystyle {\mathcal {D}}_{n}=\{(\mathbf {X} _{i},Y_{i})\}_{i=1}^{n}}
+
+ of 
+
+
+
+[
+0
+,
+1
+
+]
+
+p
+
+
+×
+
+R
+
+
+
+{\displaystyle [0,1]^{p}\times \mathbb {R} }
+
+-valued independent random variables distributed as the independent prototype pair 
+
+
+
+(
+
+X
+
+,
+Y
+)
+
+
+{\displaystyle (\mathbf {X} ,Y)}
+
+, where 
+
+
+
+E
+⁡
+[
+
+Y
+
+2
+
+
+]
+<
+∞
+
+
+{\displaystyle \operatorname {E} [Y^{2}]<\infty }
+
+. We aim at predicting the response 
+
+
+
+Y
+
+
+{\displaystyle Y}
+
+, associated with the random variable 
+
+
+
+
+X
+
+
+
+{\displaystyle \mathbf {X} }
+
+, by estimating the regression function 
+
+
+
+m
+(
+
+x
+
+)
+=
+E
+⁡
+[
+Y
+∣
+
+X
+
+=
+
+x
+
+]
+
+
+{\displaystyle m(\mathbf {x} )=\operatorname {E} [Y\mid \mathbf {X} =\mathbf {x} ]}
+
+. A random regression forest is an ensemble of 
+
+
+
+M
+
+
+{\displaystyle M}
+
+ randomized regression trees. Denote 
+
+
+
+
+m
+
+n
+
+
+(
+
+x
+
+,
+
+
+Θ
+
+
+j
+
+
+)
+
+
+{\displaystyle m_{n}(\mathbf {x} ,\mathbf {\Theta } _{j})}
+
+ the predicted value at point 
+
+
+
+
+x
+
+
+
+{\displaystyle \mathbf {x} }
+
+ by the 
+
+
+
+j
+
+
+{\displaystyle j}
+
+-th tree, where 
+
+
+
+
+
+Θ
+
+
+1
+
+
+,
+…
+,
+
+
+Θ
+
+
+M
+
+
+
+
+{\displaystyle \mathbf {\Theta } _{1},\ldots ,\mathbf {\Theta } _{M}}
+
+ are independent random variables, distributed as a generic random variable 
+
+
+
+
+Θ
+
+
+
+{\displaystyle \mathbf {\Theta } }
+
+, independent of the sample 
+
+
+
+
+
+
+D
+
+
+
+n
+
+
+
+
+{\displaystyle {\mathcal {D}}_{n}}
+
+. This random variable can be used to describe the randomness induced by node splitting and the sampling procedure for tree construction. The trees are combined to form the finite forest estimate 
+
+
+
+
+m
+
+M
+,
+n
+
+
+(
+
+x
+
+,
+
+Θ
+
+1
+
+
+,
+…
+,
+
+Θ
+
+M
+
+
+)
+=
+
+
+1
+M
+
+
+
+∑
+
+j
+=
+1
+
+
+M
+
+
+
+m
+
+n
+
+
+(
+
+x
+
+,
+
+Θ
+
+j
+
+
+)
+
+
+{\displaystyle m_{M,n}(\mathbf {x} ,\Theta _{1},\ldots ,\Theta _{M})={\frac {1}{M}}\sum _{j=1}^{M}m_{n}(\mathbf {x} ,\Theta _{j})}
+
+.
+For regression trees, we have 
+
+
+
+
+m
+
+n
+
+
+=
+
+∑
+
+i
+=
+1
+
+
+n
+
+
+
+
+
+
+Y
+
+i
+
+
+
+
+1
+
+
+
+
+X
+
+
+i
+
+
+∈
+
+A
+
+n
+
+
+(
+
+x
+
+,
+
+Θ
+
+j
+
+
+)
+
+
+
+
+
+N
+
+n
+
+
+(
+
+x
+
+,
+
+Θ
+
+j
+
+
+)
+
+
+
+
+
+{\displaystyle m_{n}=\sum _{i=1}^{n}{\frac {Y_{i}\mathbf {1} _{\mathbf {X} _{i}\in A_{n}(\mathbf {x} ,\Theta _{j})}}{N_{n}(\mathbf {x} ,\Theta _{j})}}}
+
+, where 
+
+
+
+
+A
+
+n
+
+
+(
+
+x
+
+,
+
+Θ
+
+j
+
+
+)
+
+
+{\displaystyle A_{n}(\mathbf {x} ,\Theta _{j})}
+
+ is the cell containing 
+
+
+
+
+x
+
+
+
+{\displaystyle \mathbf {x} }
+
+, designed with randomness 
+
+
+
+
+Θ
+
+j
+
+
+
+
+{\displaystyle \Theta _{j}}
+
+ and dataset 
+
+
+
+
+
+
+D
+
+
+
+n
+
+
+
+
+{\displaystyle {\mathcal {D}}_{n}}
+
+, and 
+
+
+
+
+N
+
+n
+
+
+(
+
+x
+
+,
+
+Θ
+
+j
+
+
+)
+=
+
+∑
+
+i
+=
+1
+
+
+n
+
+
+
+
+1
+
+
+
+
+X
+
+
+i
+
+
+∈
+
+A
+
+n
+
+
+(
+
+x
+
+,
+
+Θ
+
+j
+
+
+)
+
+
+
+
+{\displaystyle N_{n}(\mathbf {x} ,\Theta _{j})=\sum _{i=1}^{n}\mathbf {1} _{\mathbf {X} _{i}\in A_{n}(\mathbf {x} ,\Theta _{j})}}
+
+.
+Thus random forest estimates satisfy, for all 
+
+
+
+
+x
+
+∈
+[
+0
+,
+1
+
+]
+
+d
+
+
+
+
+{\displaystyle \mathbf {x} \in [0,1]^{d}}
+
+, 
+
+
+
+
+m
+
+M
+,
+n
+
+
+(
+
+x
+
+,
+
+Θ
+
+1
+
+
+,
+…
+,
+
+Θ
+
+M
+
+
+)
+=
+
+
+1
+M
+
+
+
+∑
+
+j
+=
+1
+
+
+M
+
+
+
+(
+
+
+∑
+
+i
+=
+1
+
+
+n
+
+
+
+
+
+
+Y
+
+i
+
+
+
+
+1
+
+
+
+
+X
+
+
+i
+
+
+∈
+
+A
+
+n
+
+
+(
+
+x
+
+,
+
+Θ
+
+j
+
+
+)
+
+
+
+
+
+N
+
+n
+
+
+(
+
+x
+
+,
+
+Θ
+
+j
+
+
+)
+
+
+
+
+)
+
+
+
+{\displaystyle m_{M,n}(\mathbf {x} ,\Theta _{1},\ldots ,\Theta _{M})={\frac {1}{M}}\sum _{j=1}^{M}\left(\sum _{i=1}^{n}{\frac {Y_{i}\mathbf {1} _{\mathbf {X} _{i}\in A_{n}(\mathbf {x} ,\Theta _{j})}}{N_{n}(\mathbf {x} ,\Theta _{j})}}\right)}
+
+. Random regression forest has two level of averaging, first over the samples in the target cell of a tree, then over all trees. Thus the contributions of observations that are in cells with a high density of data points are smaller than that of observations which belong to less populated cells. In order to improve the random forest methods and compensate the misestimation, Scornet[27] defined KeRF by
+
+
+
+
+
+
+
+
+
+m
+~
+
+
+
+
+M
+,
+n
+
+
+(
+
+x
+
+,
+
+Θ
+
+1
+
+
+,
+…
+,
+
+Θ
+
+M
+
+
+)
+=
+
+
+1
+
+
+∑
+
+j
+=
+1
+
+
+M
+
+
+
+N
+
+n
+
+
+(
+
+x
+
+,
+
+Θ
+
+j
+
+
+)
+
+
+
+
+∑
+
+j
+=
+1
+
+
+M
+
+
+
+∑
+
+i
+=
+1
+
+
+n
+
+
+
+Y
+
+i
+
+
+
+
+1
+
+
+
+
+X
+
+
+i
+
+
+∈
+
+A
+
+n
+
+
+(
+
+x
+
+,
+
+Θ
+
+j
+
+
+)
+
+
+,
+
+
+{\displaystyle {\tilde {m}}_{M,n}(\mathbf {x} ,\Theta _{1},\ldots ,\Theta _{M})={\frac {1}{\sum _{j=1}^{M}N_{n}(\mathbf {x} ,\Theta _{j})}}\sum _{j=1}^{M}\sum _{i=1}^{n}Y_{i}\mathbf {1} _{\mathbf {X} _{i}\in A_{n}(\mathbf {x} ,\Theta _{j})},}
+
+
+which is equal to the mean of the 
+
+
+
+
+Y
+
+i
+
+
+
+
+{\displaystyle Y_{i}}
+
+'s falling in the cells containing 
+
+
+
+
+x
+
+
+
+{\displaystyle \mathbf {x} }
+
+ in the forest. If we define the connection function of the 
+
+
+
+M
+
+
+{\displaystyle M}
+
+ finite forest as 
+
+
+
+
+K
+
+M
+,
+n
+
+
+(
+
+x
+
+,
+
+z
+
+)
+=
+
+
+1
+M
+
+
+
+∑
+
+j
+=
+1
+
+
+M
+
+
+
+
+1
+
+
+
+z
+
+∈
+
+A
+
+n
+
+
+(
+
+x
+
+,
+
+Θ
+
+j
+
+
+)
+
+
+
+
+{\displaystyle K_{M,n}(\mathbf {x} ,\mathbf {z} )={\frac {1}{M}}\sum _{j=1}^{M}\mathbf {1} _{\mathbf {z} \in A_{n}(\mathbf {x} ,\Theta _{j})}}
+
+, i.e. the proportion of cells shared between 
+
+
+
+
+x
+
+
+
+{\displaystyle \mathbf {x} }
+
+ and 
+
+
+
+
+z
+
+
+
+{\displaystyle \mathbf {z} }
+
+, then almost surely we have 
+
+
+
+
+
+
+
+m
+~
+
+
+
+
+M
+,
+n
+
+
+(
+
+x
+
+,
+
+Θ
+
+1
+
+
+,
+…
+,
+
+Θ
+
+M
+
+
+)
+=
+
+
+
+
+∑
+
+i
+=
+1
+
+
+n
+
+
+
+Y
+
+i
+
+
+
+K
+
+M
+,
+n
+
+
+(
+
+x
+
+,
+
+
+x
+
+
+i
+
+
+)
+
+
+
+∑
+
+ℓ
+=
+1
+
+
+n
+
+
+
+K
+
+M
+,
+n
+
+
+(
+
+x
+
+,
+
+
+x
+
+
+ℓ
+
+
+)
+
+
+
+
+
+{\displaystyle {\tilde {m}}_{M,n}(\mathbf {x} ,\Theta _{1},\ldots ,\Theta _{M})={\frac {\sum _{i=1}^{n}Y_{i}K_{M,n}(\mathbf {x} ,\mathbf {x} _{i})}{\sum _{\ell =1}^{n}K_{M,n}(\mathbf {x} ,\mathbf {x} _{\ell })}}}
+
+, which defines the KeRF.
+
+Centered KeRF[edit]
+The construction of Centered KeRF of level 
+
+
+
+k
+
+
+{\displaystyle k}
+
+ is the same as for centered forest, except that predictions are made by 
+
+
+
+
+
+
+
+m
+~
+
+
+
+
+M
+,
+n
+
+
+(
+
+x
+
+,
+
+Θ
+
+1
+
+
+,
+…
+,
+
+Θ
+
+M
+
+
+)
+
+
+{\displaystyle {\tilde {m}}_{M,n}(\mathbf {x} ,\Theta _{1},\ldots ,\Theta _{M})}
+
+, the corresponding kernel function, or connection function is
+
+
+
+
+
+
+
+
+
+
+K
+
+k
+
+
+c
+c
+
+
+(
+
+x
+
+,
+
+z
+
+)
+=
+
+∑
+
+
+k
+
+1
+
+
+,
+…
+,
+
+k
+
+d
+
+
+,
+
+∑
+
+j
+=
+1
+
+
+d
+
+
+
+k
+
+j
+
+
+=
+k
+
+
+
+
+
+
+
+k
+!
+
+
+
+k
+
+1
+
+
+!
+⋯
+
+k
+
+d
+
+
+!
+
+
+
+
+
+(
+
+
+1
+d
+
+
+)
+
+
+k
+
+
+
+∏
+
+j
+=
+1
+
+
+d
+
+
+
+
+1
+
+
+⌈
+
+2
+
+
+k
+
+j
+
+
+
+
+
+x
+
+j
+
+
+⌉
+=
+⌈
+
+2
+
+
+k
+
+j
+
+
+
+
+
+z
+
+j
+
+
+⌉
+
+
+,
+
+
+
+
+
+
+ for all 
+
+
+x
+
+,
+
+z
+
+∈
+[
+0
+,
+1
+
+]
+
+d
+
+
+.
+
+
+
+
+
+
+{\displaystyle {\begin{aligned}K_{k}^{cc}(\mathbf {x} ,\mathbf {z} )=\sum _{k_{1},\ldots ,k_{d},\sum _{j=1}^{d}k_{j}=k}&{\frac {k!}{k_{1}!\cdots k_{d}!}}\left({\frac {1}{d}}\right)^{k}\prod _{j=1}^{d}\mathbf {1} _{\lceil 2^{k_{j}}x_{j}\rceil =\lceil 2^{k_{j}}z_{j}\rceil },\\&{\text{ for all }}\mathbf {x} ,\mathbf {z} \in [0,1]^{d}.\end{aligned}}}
+
+
+Uniform KeRF[edit]
+Uniform KeRF is built in the same way as uniform forest, except that predictions are made by 
+
+
+
+
+
+
+
+m
+~
+
+
+
+
+M
+,
+n
+
+
+(
+
+x
+
+,
+
+Θ
+
+1
+
+
+,
+…
+,
+
+Θ
+
+M
+
+
+)
+
+
+{\displaystyle {\tilde {m}}_{M,n}(\mathbf {x} ,\Theta _{1},\ldots ,\Theta _{M})}
+
+, the corresponding kernel function, or connection function is
+
+
+
+
+
+
+K
+
+k
+
+
+u
+f
+
+
+(
+
+0
+
+,
+
+x
+
+)
+=
+
+∑
+
+
+k
+
+1
+
+
+,
+…
+,
+
+k
+
+d
+
+
+,
+
+∑
+
+j
+=
+1
+
+
+d
+
+
+
+k
+
+j
+
+
+=
+k
+
+
+
+
+
+k
+!
+
+
+
+k
+
+1
+
+
+!
+…
+
+k
+
+d
+
+
+!
+
+
+
+
+
+(
+
+
+1
+d
+
+
+)
+
+
+k
+
+
+
+∏
+
+m
+=
+1
+
+
+d
+
+
+
+(
+
+1
+−
+
+|
+
+
+x
+
+m
+
+
+
+|
+
+
+∑
+
+j
+=
+0
+
+
+
+k
+
+m
+
+
+−
+1
+
+
+
+
+
+(
+−
+ln
+⁡
+
+|
+
+
+x
+
+m
+
+
+
+|
+
+
+)
+
+j
+
+
+
+
+j
+!
+
+
+
+
+)
+
+
+ for all 
+
+
+x
+
+∈
+[
+0
+,
+1
+
+]
+
+d
+
+
+.
+
+
+{\displaystyle K_{k}^{uf}(\mathbf {0} ,\mathbf {x} )=\sum _{k_{1},\ldots ,k_{d},\sum _{j=1}^{d}k_{j}=k}{\frac {k!}{k_{1}!\ldots k_{d}!}}\left({\frac {1}{d}}\right)^{k}\prod _{m=1}^{d}\left(1-|x_{m}|\sum _{j=0}^{k_{m}-1}{\frac {(-\ln |x_{m}|)^{j}}{j!}}\right){\text{ for all }}\mathbf {x} \in [0,1]^{d}.}
+
+
+Properties[edit]
+Relation between KeRF and random forest[edit]
+Predictions given by KeRF and random forests are close if the number of points in each cell is controlled:
+
+
+Assume that there exist sequences 
+
+
+
+(
+
+a
+
+n
+
+
+)
+,
+(
+
+b
+
+n
+
+
+)
+
+
+{\displaystyle (a_{n}),(b_{n})}
+
+ such that, almost surely,
+
+
+
+
+
+
+a
+
+n
+
+
+≤
+
+N
+
+n
+
+
+(
+
+x
+
+,
+Θ
+)
+≤
+
+b
+
+n
+
+
+
+ and 
+
+
+a
+
+n
+
+
+≤
+
+
+1
+M
+
+
+
+∑
+
+m
+=
+1
+
+
+M
+
+
+
+N
+
+n
+
+
+
+
+x
+
+,
+
+Θ
+
+m
+
+
+
+≤
+
+b
+
+n
+
+
+.
+
+
+{\displaystyle a_{n}\leq N_{n}(\mathbf {x} ,\Theta )\leq b_{n}{\text{ and }}a_{n}\leq {\frac {1}{M}}\sum _{m=1}^{M}N_{n}{\mathbf {x} ,\Theta _{m}}\leq b_{n}.}
+
+
+Then almost surely,
+
+
+
+
+
+
+|
+
+
+m
+
+M
+,
+n
+
+
+(
+
+x
+
+)
+−
+
+
+
+
+m
+~
+
+
+
+
+M
+,
+n
+
+
+(
+
+x
+
+)
+
+|
+
+≤
+
+
+
+
+b
+
+n
+
+
+−
+
+a
+
+n
+
+
+
+
+a
+
+n
+
+
+
+
+
+
+
+
+m
+~
+
+
+
+
+M
+,
+n
+
+
+(
+
+x
+
+)
+.
+
+
+{\displaystyle |m_{M,n}(\mathbf {x} )-{\tilde {m}}_{M,n}(\mathbf {x} )|\leq {\frac {b_{n}-a_{n}}{a_{n}}}{\tilde {m}}_{M,n}(\mathbf {x} ).}
+
+
+
+Relation between infinite KeRF and infinite random forest[edit]
+When the number of trees 
+
+
+
+M
+
+
+{\displaystyle M}
+
+ goes to infinity, then we have infinite random forest and infinite KeRF. Their estimates are close if the number of observations in each cell is bounded:
+
+
+Assume that there exist sequences 
+
+
+
+(
+
+ε
+
+n
+
+
+)
+,
+(
+
+a
+
+n
+
+
+)
+,
+(
+
+b
+
+n
+
+
+)
+
+
+{\displaystyle (\varepsilon _{n}),(a_{n}),(b_{n})}
+
+ such that, almost surely
+
+
+
+
+
+E
+⁡
+[
+
+N
+
+n
+
+
+(
+
+x
+
+,
+Θ
+)
+]
+≥
+1
+,
+
+
+{\displaystyle \operatorname {E} [N_{n}(\mathbf {x} ,\Theta )]\geq 1,}
+
+
+
+
+
+
+P
+⁡
+[
+
+a
+
+n
+
+
+≤
+
+N
+
+n
+
+
+(
+
+x
+
+,
+Θ
+)
+≤
+
+b
+
+n
+
+
+∣
+
+
+
+D
+
+
+
+n
+
+
+]
+≥
+1
+−
+
+ε
+
+n
+
+
+
+/
+
+2
+,
+
+
+{\displaystyle \operatorname {P} [a_{n}\leq N_{n}(\mathbf {x} ,\Theta )\leq b_{n}\mid {\mathcal {D}}_{n}]\geq 1-\varepsilon _{n}/2,}
+
+
+
+
+
+
+P
+⁡
+[
+
+a
+
+n
+
+
+≤
+
+E
+
+Θ
+
+
+⁡
+[
+
+N
+
+n
+
+
+(
+
+x
+
+,
+Θ
+)
+]
+≤
+
+b
+
+n
+
+
+∣
+
+
+
+D
+
+
+
+n
+
+
+]
+≥
+1
+−
+
+ε
+
+n
+
+
+
+/
+
+2
+,
+
+
+{\displaystyle \operatorname {P} [a_{n}\leq \operatorname {E} _{\Theta }[N_{n}(\mathbf {x} ,\Theta )]\leq b_{n}\mid {\mathcal {D}}_{n}]\geq 1-\varepsilon _{n}/2,}
+
+
+Then almost surely,
+
+
+
+
+
+
+|
+
+
+m
+
+∞
+,
+n
+
+
+(
+
+x
+
+)
+−
+
+
+
+
+m
+~
+
+
+
+
+∞
+,
+n
+
+
+(
+
+x
+
+)
+
+|
+
+≤
+
+
+
+
+b
+
+n
+
+
+−
+
+a
+
+n
+
+
+
+
+a
+
+n
+
+
+
+
+
+
+
+
+m
+~
+
+
+
+
+∞
+,
+n
+
+
+(
+
+x
+
+)
++
+n
+
+ε
+
+n
+
+
+
+(
+
+
+max
+
+1
+≤
+i
+≤
+n
+
+
+
+Y
+
+i
+
+
+
+)
+
+.
+
+
+{\displaystyle |m_{\infty ,n}(\mathbf {x} )-{\tilde {m}}_{\infty ,n}(\mathbf {x} )|\leq {\frac {b_{n}-a_{n}}{a_{n}}}{\tilde {m}}_{\infty ,n}(\mathbf {x} )+n\varepsilon _{n}\left(\max _{1\leq i\leq n}Y_{i}\right).}
+
+
+
+Consistency results[edit]
+Assume that 
+
+
+
+Y
+=
+m
+(
+
+X
+
+)
++
+ε
+
+
+{\displaystyle Y=m(\mathbf {X} )+\varepsilon }
+
+, where 
+
+
+
+ε
+
+
+{\displaystyle \varepsilon }
+
+ is a centered Gaussian noise, independent of 
+
+
+
+
+X
+
+
+
+{\displaystyle \mathbf {X} }
+
+, with finite variance 
+
+
+
+
+σ
+
+2
+
+
+<
+∞
+
+
+{\displaystyle \sigma ^{2}<\infty }
+
+. Moreover, 
+
+
+
+
+X
+
+
+
+{\displaystyle \mathbf {X} }
+
+ is uniformly distributed on 
+
+
+
+[
+0
+,
+1
+
+]
+
+d
+
+
+
+
+{\displaystyle [0,1]^{d}}
+
+ and 
+
+
+
+m
+
+
+{\displaystyle m}
+
+ is Lipschitz. Scornet[27] proved upper bounds on the rates of consistency for centered KeRF and uniform KeRF.
+
+Consistency of centered KeRF[edit]
+Providing 
+
+
+
+k
+→
+∞
+
+
+{\displaystyle k\rightarrow \infty }
+
+ and 
+
+
+
+n
+
+/
+
+
+2
+
+k
+
+
+→
+∞
+
+
+{\displaystyle n/2^{k}\rightarrow \infty }
+
+, there exists a constant 
+
+
+
+
+C
+
+1
+
+
+>
+0
+
+
+{\displaystyle C_{1}>0}
+
+ such that, for all 
+
+
+
+n
+
+
+{\displaystyle n}
+
+,
+
+
+
+
+
+E
+
+[
+
+
+
+
+m
+~
+
+
+
+
+n
+
+
+c
+c
+
+
+(
+
+X
+
+)
+−
+m
+(
+
+X
+
+)
+
+]
+
+2
+
+
+≤
+
+C
+
+1
+
+
+
+n
+
+−
+1
+
+/
+
+(
+3
++
+d
+log
+⁡
+2
+)
+
+
+(
+log
+⁡
+n
+
+)
+
+2
+
+
+
+
+{\displaystyle \mathbb {E} [{\tilde {m}}_{n}^{cc}(\mathbf {X} )-m(\mathbf {X} )]^{2}\leq C_{1}n^{-1/(3+d\log 2)}(\log n)^{2}}
+
+.
+
+Consistency of uniform KeRF[edit]
+Providing 
+
+
+
+k
+→
+∞
+
+
+{\displaystyle k\rightarrow \infty }
+
+ and 
+
+
+
+n
+
+/
+
+
+2
+
+k
+
+
+→
+∞
+
+
+{\displaystyle n/2^{k}\rightarrow \infty }
+
+, there exists a constant 
+
+
+
+C
+>
+0
+
+
+{\displaystyle C>0}
+
+ such that,
+
+
+
+
+
+E
+
+[
+
+
+
+
+m
+~
+
+
+
+
+n
+
+
+u
+f
+
+
+(
+
+X
+
+)
+−
+m
+(
+
+X
+
+)
+
+]
+
+2
+
+
+≤
+C
+
+n
+
+−
+2
+
+/
+
+(
+6
++
+3
+d
+log
+⁡
+2
+)
+
+
+(
+log
+⁡
+n
+
+)
+
+2
+
+
+
+
+{\displaystyle \mathbb {E} [{\tilde {m}}_{n}^{uf}(\mathbf {X} )-m(\mathbf {X} )]^{2}\leq Cn^{-2/(6+3d\log 2)}(\log n)^{2}}
+
+.
+
+See also[edit]
+Boosting
+Decision tree learning
+Ensemble learning
+Gradient boosting
+Non-parametric statistics
+Randomized algorithm
+References[edit]
+
+
+^ a b c d Ho, Tin Kam (1995). Random Decision Forests (PDF). Proceedings of the 3rd International Conference on Document Analysis and Recognition, Montreal, QC, 14–16 August 1995. pp. 278–282. Archived from the original (PDF) on 17 April 2016. Retrieved 5 June 2016.
+
+^ a b c d Ho TK (1998). "The Random Subspace Method for Constructing Decision Forests" (PDF). IEEE Transactions on Pattern Analysis and Machine Intelligence. 20 (8): 832–844. doi:10.1109/34.709601.
+
+^ a b c d e f Hastie, Trevor; Tibshirani, Robert; Friedman, Jerome (2008). The Elements of Statistical Learning (2nd ed.). Springer. ISBN 0-387-95284-5.
+
+^ a b Kleinberg E (1990). "Stochastic Discrimination" (PDF). Annals of Mathematics and Artificial Intelligence. 1 (1–4): 207–239. CiteSeerX 10.1.1.25.6750. doi:10.1007/BF01531079.
+
+^ a b Kleinberg E (1996). "An Overtraining-Resistant Stochastic Modeling Method for Pattern Recognition". Annals of Statistics. 24 (6): 2319–2349. doi:10.1214/aos/1032181157. MR 1425956.
+
+^ a b Kleinberg E (2000). "On the Algorithmic Implementation of Stochastic Discrimination" (PDF). IEEE Transactions on PAMI. 22 (5): 473–490. CiteSeerX 10.1.1.33.4131. doi:10.1109/34.857004.
+
+^ a b c d Breiman L (2001). "Random Forests". Machine Learning. 45 (1): 5–32. doi:10.1023/A:1010933404324.
+
+^ a b Liaw A (16 October 2012). "Documentation for R package randomForest" (PDF). Retrieved 15 March 2013.
+
+^ U.S. trademark registration number 3185828, registered 2006/12/19.
+
+^ "RANDOM FORESTS Trademark of Health Care Productivity, Inc. - Registration Number 3185828 - Serial Number 78642027 :: Justia Trademarks".
+
+^ a b Amit Y, Geman D (1997). "Shape quantization and recognition with randomized trees" (PDF). Neural Computation. 9 (7): 1545–1588. CiteSeerX 10.1.1.57.6069. doi:10.1162/neco.1997.9.7.1545.
+
+^ Dietterich, Thomas (2000). "An Experimental Comparison of Three Methods for Constructing Ensembles of Decision Trees: Bagging, Boosting, and Randomization". Machine Learning. 40 (2): 139–157. doi:10.1023/A:1007607513941.
+
+^ Gareth James; Daniela Witten; Trevor Hastie; Robert Tibshirani (2013). An Introduction to Statistical Learning. Springer. pp. 316–321.
+
+^ 
+Ho, Tin Kam (2002). "A Data Complexity Analysis of Comparative Advantages of Decision Forest Constructors" (PDF). Pattern Analysis and Applications. 5 (2): 102–112. doi:10.1007/s100440200009.
+
+^ Geurts P, Ernst D, Wehenkel L (2006). "Extremely randomized trees" (PDF). Machine Learning. 63: 3–42. doi:10.1007/s10994-006-6226-1.
+
+^ Zhu R, Zeng D, Kosorok MR (2015). "Reinforcement Learning Trees". Journal of the American Statistical Association. 110 (512): 1770–1784. doi:10.1080/01621459.2015.1036994. PMC 4760114. PMID 26903687.
+
+^ Deng,H.; Runger, G.; Tuv, E. (2011). Bias of importance measures for multi-valued attributes and solutions. Proceedings of the 21st International Conference on Artificial Neural Networks (ICANN). pp. 293–300.
+
+^ Altmann A, Toloşi L, Sander O, Lengauer T (May 2010). "Permutation importance: a corrected feature importance measure". Bioinformatics. 26 (10): 1340–7. doi:10.1093/bioinformatics/btq134. PMID 20385727.
+
+^ Strobl C, Boulesteix A, Augustin T (2007). "Unbiased split selection for classification trees based on the Gini index" (PDF). Computational Statistics & Data Analysis. 52: 483–501. CiteSeerX 10.1.1.525.3178. doi:10.1016/j.csda.2006.12.030.
+
+^ Painsky A, Rosset S (2017). "Cross-Validated Variable Selection in Tree-Based Methods Improves Predictive Performance". IEEE Transactions on Pattern Analysis and Machine Intelligence. 39 (11): 2142–2153. arXiv:1512.03444. doi:10.1109/tpami.2016.2636831. PMID 28114007.
+
+^ Tolosi L, Lengauer T (July 2011). "Classification with correlated features: unreliability of feature ranking and solutions". Bioinformatics. 27 (14): 1986–94. doi:10.1093/bioinformatics/btr300. PMID 21576180.
+
+^ a b Lin, Yi; Jeon, Yongho (2002). Random forests and adaptive nearest neighbors (Technical report). Technical Report No. 1055. University of Wisconsin. CiteSeerX 10.1.1.153.9168.
+
+^ Shi, T., Horvath, S. (2006). "Unsupervised Learning with Random Forest Predictors". Journal of Computational and Graphical Statistics. 15 (1): 118–138. CiteSeerX 10.1.1.698.2365. doi:10.1198/106186006X94072. JSTOR 27594168.CS1 maint: uses authors parameter (link)
+
+^ Shi T, Seligson D, Belldegrun AS, Palotie A, Horvath S (April 2005). "Tumor classification by tissue microarray profiling: random forest clustering applied to renal cell carcinoma". Modern Pathology. 18 (4): 547–57. doi:10.1038/modpathol.3800322. PMID 15529185.
+
+^ Prinzie, A., Van den Poel, D. (2008). "Random Forests for multiclass classification: Random MultiNomial Logit". Expert Systems with Applications. 34 (3): 1721–1732. doi:10.1016/j.eswa.2007.01.029.CS1 maint: uses authors parameter (link)
+
+^ Prinzie, Anita (2007). "Random Multiclass Classification: Generalizing Random Forests to Random MNL and Random NB".  In Roland Wagner; Norman Revell; Günther Pernul (eds.). Database and Expert Systems Applications: 18th International Conference, DEXA 2007, Regensburg, Germany, September 3-7, 2007, Proceedings. Lecture Notes in Computer Science. 4653. pp. 349–358. doi:10.1007/978-3-540-74469-6_35. ISBN 978-3-540-74467-2.
+
+^ a b c d Scornet, Erwan (2015). "Random forests and kernel methods". arXiv:1502.03836 [math.ST].
+
+^ Breiman, Leo (2000). "Some infinity theory for predictor ensembles" (PDF). Technical Report 579, Statistics Dept. UCB. Cite journal requires |journal= (help)[permanent dead link]
+
+^ Lin, Yi; Jeon, Yongho (2006). "Random forests and adaptive nearest neighbors". Journal of the American Statistical Association. 101 (474): 578–590. CiteSeerX 10.1.1.153.9168. doi:10.1198/016214505000001230.
+
+^ Davies, Alex; Ghahramani, Zoubin (2014). "The Random Forest Kernel and other kernels for big data from random partitions". arXiv:1402.4293 [stat.ML].
+
+^ a b Breiman L, Ghahramani Z (2004). "Consistency for a simple model of random forests". Statistical Department, University of California at Berkeley. Technical Report (670). CiteSeerX 10.1.1.618.90.
+
+^ a b Arlot S, Genuer R (2014). "Analysis of purely random forests bias". arXiv:1407.3939 [math.ST].
+
+
+Further reading[edit]
+
+
+
+Scholia has a topic profile for Random forest.
+
+
+Prinzie A, Poel D (2007). "Random Multiclass Classification: Generalizing Random Forests to Random MNL and Random NB". Database and Expert Systems Applications. Lecture Notes in Computer Science. 4653. p. 349. doi:10.1007/978-3-540-74469-6_35. ISBN 978-3-540-74467-2.
+Denisko D, Hoffman MM (February 2018). "Classification and interaction in random forests". Proceedings of the National Academy of Sciences of the United States of America. 115 (8): 1690–1692. doi:10.1073/pnas.1800256115. PMC 5828645. PMID 29440440.
+
+External links[edit]
+Random Forests classifier description (Leo Breiman's site)
+Liaw, Andy & Wiener, Matthew "Classification and Regression by randomForest" R News (2002) Vol. 2/3 p. 18 (Discussion of the use of the random forest package for R)
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Random_forest&oldid=972396951"
+Categories: Classification algorithmsEnsemble learningDecision treesDecision theoryComputational statisticsMachine learningHidden categories: CS1 maint: uses authors parameterCS1 errors: missing periodicalAll articles with dead external linksArticles with dead external links from May 2017Articles with permanently dead external linksArticles with short descriptionShort description is different from WikidataArticles containing potentially dated statements from 2019All articles containing potentially dated statements
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+ČeštinaDeutschEestiEspañolفارسیFrançaisGalego한국어Bahasa IndonesiaItaliano日本語PolskiРусскийSimple EnglishTürkçeУкраїнська中文
+Edit links
+
+
+
+
+
+
+ This page was last edited on 11 August 2020, at 20:54 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

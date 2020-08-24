@@ -1,0 +1,337 @@
+
+
+
+
+Anaconda (Python distribution) - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Anaconda (Python distribution)
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+Distribution of the Python and R languages for scientific computing
+AnacondaDeveloper(s)Anaconda, Inc.[1] (previously Continuum Analytics)[2]Initial release0.8.0[3]/17 July 2012; 8 years ago (2012-07-17)Stable release2020.07
+   / 23 July 2020; 25 days ago (2020-07-23)[4]
+Written inPythonOperating systemWindows, macOS, LinuxTypeProgramming language, machine learning, data scienceLicenseNew BSD License[5]Websitewww.anaconda.com
+Anaconda is a free and open-source[6] distribution of the Python and R programming languages for scientific computing (data science, machine learning applications, large-scale data processing, predictive analytics, etc.), that aims to simplify package management and deployment. The distribution includes data-science packages suitable for Windows, Linux, and macOS. It is developed and maintained by Anaconda, Inc., which was founded by Peter Wang and Travis Oliphant in 2012.[7] As an Anaconda, Inc. product, it is also known as Anaconda Distribution or Anaconda Individual Edition, while other products from the company are Anaconda Team Edition and Anaconda Enterprise Edition, which are both not free.[8][9]
+Package versions in Anaconda are managed by the package management system conda.[10] This package manager was spun out as a separate open-source package as it ended up being useful on its own and for other things than Python.[11] There is also a small, bootstrap version of Anaconda called Miniconda, which includes only conda, Python, the packages they depend on, and a small number of other  packages.[12]
+
+Contents
+
+1 Overview
+
+1.1 Anaconda Navigator
+1.2 Conda
+
+
+2 Anaconda Cloud
+3 See also
+4 References
+5 External links
+
+
+Overview[edit]
+Anaconda distribution comes with over 250 packages automatically installed, and over 7,500 additional open-source packages can be installed from PyPI as well as the conda package and virtual environment manager. It also includes a GUI, Anaconda Navigator[13], as a graphical alternative to the command line interface (CLI). 
+The big difference between conda and the pip package manager is in how package dependencies are managed, which is a significant challenge for Python data science and the reason conda exists. 
+When pip installs a package, it automatically installs any dependent Python packages without checking if these conflict with previously installed packages[citation needed]. It will install a package and any of its dependencies regardless of the state of the existing installation[citation needed]. Because of this, a user with a working installation of, for example, Google Tensorflow, can find that it stops working having used pip to install a different package that requires a different version of the dependent numpy library than the one used by Tensorflow. In some cases, the package may appear to work but produce different results in detail.
+In contrast, conda analyses the current environment including everything currently installed, and, together with any version limitations specified (e.g. the user may wish to have Tensorflow version 2,0 or higher), works out how to install a compatible set of dependencies, and shows a warning if this cannot be done.
+Open source packages can be individually installed from the Anaconda repository[14], Anaconda Cloud (anaconda.org), or the user's own private repository or mirror, using the conda install command. Anaconda, Inc. compiles and builds the packages available in the Anaconda repository itself, and provides binaries for Windows 32/64 bit, Linux 64 bit and MacOS 64-bit. Anything available on PyPI may be installed into a conda environment using pip, and conda will keep track of what it has installed itself and what pip has installed.
+Custom packages can be made using the conda build command, and can be shared with others by uploading them to Anaconda Cloud,[15] PyPI or other repositories.
+The default installation of Anaconda2 includes Python 2.7 and Anaconda3 includes Python 3.7. However, it is possible to create new environments that include any version of Python packaged with conda[16]. 
+
+Anaconda Navigator[edit]
+Anaconda Navigator is a desktop graphical user interface (GUI) included in Anaconda distribution that allows users to launch applications and manage conda packages, environments and channels without using command-line commands. Navigator can search for packages on Anaconda Cloud or in a local Anaconda Repository, install them in an environment, run the packages and update them. It is available for Windows, macOS and Linux.
+The following applications are available by default in Navigator[17]:
+
+JupyterLab
+Jupyter Notebook
+QtConsole[18]
+Spyder
+Glue
+Orange
+RStudio
+Visual Studio Code
+Conda[edit]
+Main article: Conda (package manager)
+Conda is an open source,[19] cross-platform,[20] language-agnostic[21] package manager and environment management system[22][23][24]  that installs, runs, and updates packages and their dependencies.[19] It was created for Python programs, but it can package and distribute software for any language (e.g., R), including multi-language projects.[21] 
+The conda package and environment manager is included in all versions of Anaconda, Miniconda,[25] and Anaconda Repository.[14]
+
+Anaconda Cloud[edit]
+Anaconda Cloud is a package management service by Anaconda where users can find, access, store and share public and private notebooks, environments, and conda and PyPI packages.[26] Cloud hosts useful Python packages, notebooks and environments for a wide variety of applications. Users do not need to log in or to have a Cloud account, to search for public packages, download and install them.
+Users can build new packages using the Anaconda Client command line interface (CLI), then manually or automatically upload the packages to Cloud.
+
+See also[edit]
+List of software package management systems
+Package manager
+Pip (package manager)
+Setuptools
+References[edit]
+
+
+^ "What is Anaconda, Inc.?". docs.anaconda.com. Anaconda is a software development and consulting company of passionate open source advocates based in Austin, Texas, USA. We are committed to the open source community. We created the Anaconda Python distribution and contribute to many other open source-based data analytics tools.
+
+^ Collison, Scott (2017-06-28). "Continuum Analytics Officially Becomes Anaconda". Anaconda Inc. corporate website. Retrieved 22 April 2020.
+
+^ "Archived copy". Archived from the original on 2018-10-12. Retrieved 2017-10-26.CS1 maint: archived copy as title (link)
+
+^ https://docs.anaconda.com/anaconda/reference/release-notes/
+
+^ "Anaconda End User License Agreement". continuum.io. Continuum Analytics. Retrieved May 30, 2016.
+
+^ "Open Source Community". Anaconda. Retrieved 2019-02-27.
+
+^ "About Anaconda". Archived from the original on 19 April 2020. Retrieved 27 April 2020.
+
+^ "Anaconda Documentation". Retrieved 27 April 2020.
+
+^ "Products and Pricing". Anaconda, Inc. Retrieved 28 April 2020.
+
+^ "Conda – Conda documentation". Retrieved February 25, 2016.
+
+^ "What's the difference between Anaconda, conda, and Miniconda?". FAQ - Bioconda documentation. Retrieved 22 April 2020.
+
+^ "Miniconda". conda.io. Archived from the original on 2018-09-10. Retrieved 2018-07-11.
+
+^ "Anaconda Navigator". docs.anaconda.com.
+
+^ a b "Anaconda repository". anaconda.org.
+
+^ "Anaconda Cloud". anaconda.org.
+
+^ "Managing Python with conda". conda.io. Archived from the original on 2018-06-13. Retrieved 2018-06-13.
+
+^ "What application can I access using navigator?". docs.anaconda.com.
+
+^ "The Qt Console for Jupyter". readthedocs.io.
+
+^ a b "Conda". pydata.org. Retrieved 9 April 2015.
+
+^ "Building Conda Packages for Multiple Operating Systems". Pydannt. 29 January 2015. Retrieved 9 April 2015.
+
+^ a b Doig, Christine (21 May 2015). "Conda for Data Science". Archived from the original on 16 June 2015. Retrieved 16 Jun 2015. Conda works with Linux, OSX, and Windows, and is language agnostic, which allows us to use it with any programming language or even multi-language projects.
+
+^ 
+Gorelick (Author), Micha; Ozsvald, Ian (September 2014). High Performance Python: Practical Performant Programming for Humans (1st ed.). O'Reilly Media. p. 370. ISBN 1449361595.
+
+^ 
+Jackson, Joab (Feb 5, 2013). "Python gets a big data boost from DARPA". networkworld. Retrieved October 30, 2014.
+
+^ 
+Lorica, Ben (March 24, 2013). "Python data tools just keep getting better". O'Reilly Radar. Retrieved October 30, 2014.
+
+^ "Miniconda". conda.io. Archived from the original on 2018-09-10. Retrieved 2018-06-13.
+
+^ Mathur, Natasha (9 August 2018). "Share projects and environment on Anaconda cloud [Tutorial]". Packt Hub.
+
+
+External links[edit]
+Official website 
+Anaconda Cloud
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Anaconda_(Python_distribution)&oldid=971017617"
+Categories: Package management systemsPython softwareSoftware using the BSD licenseHidden categories: CS1 maint: archived copy as titleArticles with short descriptionShort description is different from WikidataAll articles with unsourced statementsArticles with unsourced statements from February 2020
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+CatalàDeutschEspañolEuskaraFrançais한국어日本語РусскийTürkçeУкраїнська中文
+Edit links
+
+
+
+
+
+
+ This page was last edited on 3 August 2020, at 18:16 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

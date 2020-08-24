@@ -1,0 +1,494 @@
+
+
+
+
+Computational learning theory - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Computational learning theory
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+See also: Statistical learning theory
+Theory of machine learningThis article needs additional citations for verification. Please help improve this article by adding citations to reliable sources. Unsourced material may be challenged and removed.Find sources: "Computational learning theory" – news · newspapers · books · scholar · JSTOR (November 2018) (Learn how and when to remove this template message)
+Part of a series onMachine learninganddata mining
+Problems
+Classification
+Clustering
+Regression
+Anomaly detection
+AutoML
+Association rules
+Reinforcement learning
+Structured prediction
+Feature engineering
+Feature learning
+Online learning
+Semi-supervised learning
+Unsupervised learning
+Learning to rank
+Grammar induction
+
+
+Supervised learning(classification • regression) 
+Decision trees
+Ensembles
+Bagging
+Boosting
+Random forest
+k-NN
+Linear regression
+Naive Bayes
+Artificial neural networks
+Logistic regression
+Perceptron
+Relevance vector machine (RVM)
+Support vector machine (SVM)
+
+
+Clustering
+BIRCH
+CURE
+Hierarchical
+k-means
+Expectation–maximization (EM)
+DBSCAN
+OPTICS
+Mean-shift
+
+
+Dimensionality reduction
+Factor analysis
+CCA
+ICA
+LDA
+NMF
+PCA
+PGD
+t-SNE
+
+
+Structured prediction
+Graphical models
+Bayes net
+Conditional random field
+Hidden Markov
+
+
+Anomaly detection
+k-NN
+Local outlier factor
+
+
+Artificial neural network
+Autoencoder
+Deep learning
+DeepDream
+Multilayer perceptron
+RNN
+LSTM
+GRU
+Restricted Boltzmann machine
+GAN
+SOM
+Convolutional neural network
+U-Net
+
+
+Reinforcement learning
+Q-learning
+SARSA
+Temporal difference (TD)
+
+
+Theory
+Bias–variance dilemma
+Computational learning theory
+Empirical risk minimization
+Occam learning
+PAC learning
+Statistical learning
+VC theory
+
+
+Machine-learning venues
+NeurIPS
+ICML
+ML
+JMLR
+ArXiv:cs.LG
+
+
+Glossary of artificial intelligence
+Glossary of artificial intelligence
+
+
+Related articles
+List of datasets for machine-learning research
+Outline of machine learning
+
+vte
+In computer science, computational learning theory (or just learning theory) is a subfield of artificial intelligence devoted to studying the design and analysis of machine learning algorithms.[1]
+
+Contents
+
+1 Overview
+2 See also
+3 References
+
+3.1 Surveys
+3.2 VC dimension
+3.3 Feature selection
+3.4 Inductive inference
+3.5 Optimal O notation learning
+3.6 Negative results
+3.7 Boosting (machine learning)
+3.8 Occam Learning
+3.9 Probably approximately correct learning
+3.10 Error tolerance
+3.11 Equivalence
+3.12 Distribution Learning Theory
+
+
+4 External links
+
+
+Overview[edit]
+Theoretical results in machine learning mainly deal with a type of inductive learning called supervised learning.  In supervised learning, an algorithm is given samples that are labeled in some useful way.  For example, the samples might be descriptions of mushrooms, and the labels could be whether or not the mushrooms are edible.  The algorithm takes these previously labeled samples and uses them to induce a classifier.  This classifier is a function that assigns labels to samples, including samples that have not been seen previously by the algorithm.  The goal of the supervised learning algorithm is to optimize some measure of performance such as minimizing the number of mistakes made on new samples.
+In addition to performance bounds, computational learning theory studies the time complexity and feasibility of learning.[citation needed] In
+computational learning theory, a computation is considered feasible if it can be done in polynomial time.[citation needed] There are two kinds of time
+complexity results:
+
+Positive results – Showing that a certain class of functions is learnable in polynomial time.
+Negative results – Showing that certain classes cannot be learned in polynomial time.
+Negative results often rely on commonly believed, but yet unproven assumptions,[citation needed] such as:
+
+Computational complexity – P ≠ NP (the P versus NP problem);
+Cryptographic – One-way functions exist.
+There are several different approaches to computational learning theory based on making different assumptions about the
+inference principles used to generalize from limited data. This includes different definitions of probability (see frequency probability, Bayesian probability) and different assumptions on the generation of samples.[citation needed] The different approaches include:[citation needed]
+
+Exact learning, proposed by Dana Angluin;
+Probably approximately correct learning (PAC learning), proposed by Leslie Valiant;
+VC theory, proposed by Vladimir Vapnik and Alexey Chervonenkis;
+Bayesian inference;
+Algorithmic learning theory, from the work of E. Mark Gold;
+Online machine learning, from the work of Nick Littlestone.
+While its primary goal is to understand learning abstractly, computational learning theory has led to the development of practical algorithms. For example, PAC theory inspired boosting, VC theory led to support vector machines, and Bayesian inference led to belief networks.
+
+See also[edit]
+Grammar induction
+Information theory
+Stability (learning theory)
+Error Tolerance (PAC learning)
+References[edit]
+
+
+^ "ACL - Association for Computational Learning".
+
+
+Surveys[edit]
+Angluin, D. 1992. Computational learning theory: Survey and selected bibliography. In Proceedings of the Twenty-Fourth Annual ACM Symposium on Theory of Computing (May 1992), pages 351–369. http://portal.acm.org/citation.cfm?id=129712.129746
+D. Haussler. Probably approximately correct learning. In AAAI-90 Proceedings of the Eight National Conference on Artificial Intelligence, Boston, MA, pages 1101–1108. American Association for Artificial Intelligence, 1990. http://citeseer.ist.psu.edu/haussler90probably.html
+VC dimension[edit]
+V. Vapnik and A. Chervonenkis. On the uniform convergence of relative frequencies of events to their probabilities. Theory of Probability and Its Applications, 16(2):264–280, 1971.
+Feature selection[edit]
+A. Dhagat and L. Hellerstein, "PAC learning with irrelevant attributes", in 'Proceedings of the IEEE Symp. on Foundation of Computer Science', 1994. http://citeseer.ist.psu.edu/dhagat94pac.html
+Inductive inference[edit]
+Gold, E. Mark (1967). "Language identification in the limit" (PDF). Information and Control. 10 (5): 447–474. doi:10.1016/S0019-9958(67)91165-5.
+Optimal O notation learning[edit]
+Oded Goldreich, Dana Ron. On universal learning algorithms. http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.47.2224
+Negative results[edit]
+M. Kearns and Leslie Valiant. 1989. Cryptographic limitations on learning boolean formulae and finite automata. In Proceedings of the 21st Annual ACM Symposium on Theory of Computing, pages 433–444, New York. ACM. http://citeseer.ist.psu.edu/kearns89cryptographic.html
+Boosting (machine learning)[edit]
+Robert E. Schapire. The strength of weak learnability. Machine Learning, 5(2):197–227, 1990 http://citeseer.ist.psu.edu/schapire90strength.html
+Occam Learning[edit]
+Blumer, A.; Ehrenfeucht, A.; Haussler, D.; Warmuth, M. K. "Occam's razor" Inf.Proc.Lett. 24, 377–380, 1987.
+A. Blumer, A. Ehrenfeucht, D. Haussler, and M. K. Warmuth. Learnability and the Vapnik-Chervonenkis dimension. Journal of the ACM, 36(4):929–865, 1989.
+Probably approximately correct learning[edit]
+L. Valiant. A Theory of the Learnable. Communications of the ACM, 27(11):1134–1142, 1984.
+Error tolerance[edit]
+Michael Kearns and Ming Li. Learning in the presence of malicious errors. SIAM Journal on Computing, 22(4):807–837, August 1993. http://citeseer.ist.psu.edu/kearns93learning.html
+Kearns, M. (1993). Efficient noise-tolerant learning from statistical queries. In Proceedings of the Twenty-Fifth Annual ACM Symposium on Theory of Computing, pages 392–401. http://citeseer.ist.psu.edu/kearns93efficient.html
+Equivalence[edit]
+D.Haussler, M.Kearns, N.Littlestone and M. Warmuth, Equivalence of models for polynomial learnability, Proc. 1st ACM Workshop on Computational Learning Theory, (1988) 42-55.
+Pitt, L.; Warmuth, M. K. (1990). "Prediction-Preserving Reducibility". Journal of Computer and System Sciences. 41 (3): 430–467. doi:10.1016/0022-0000(90)90028-J.
+A description of some of these publications is given at important publications in machine learning.
+
+Distribution Learning Theory[edit]
+External links[edit]
+Basics of Bayesian inference
+vteDifferentiable computingGeneral
+Differentiable programming
+Neural Turing machine
+Differentiable neural computer
+Automatic differentiation
+Neuromorphic engineering
+Concepts
+Gradient descent
+Cable theory
+Cluster analysis
+Regression analysis
+Pattern recognition
+Adversarial machine learning
+Computational learning theory
+Programming languages
+Python
+Julia
+Application
+Machine learning
+Artificial neural network
+Scientific computing
+Artificial Intelligence
+Hardware
+TPU
+VPU
+Memristor
+SpiNNaker
+Software library
+TensorFlow
+PyTorch
+ImplementationAudio-visual
+AlexNet
+WaveNet
+Human image synthesis
+HWR
+OCR
+Speech synthesis
+Speech recognition
+Facial recognition system
+Verbal
+Word2vec
+Transformer
+BERT
+NMT
+Project Debater
+Watson
+Decisional
+AlphaGo
+Q-learning
+SARSA
+OpenAI Five
+People
+Alex Graves
+Ian Goodfellow
+Yoshua Bengio
+Geoffrey Hinton
+Yann LeCun
+Andrew Ng
+Demis Hassabis
+
+ Portals
+Computer programming
+Technology
+ Category
+Artificial neural networks
+Machine learning
+
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Computational_learning_theory&oldid=968928577"
+Categories: Computational learning theoryTheoretical computer scienceMachine learningComputational fields of studyHidden categories: Articles with short descriptionShort description matches WikidataArticles needing additional references from November 2018All articles needing additional referencesAll articles with unsourced statementsArticles with unsourced statements from October 2017
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+DeutschفارسیNederlandsPortuguêsРусский粵語
+Edit links
+
+
+
+
+
+
+ This page was last edited on 22 July 2020, at 10:41 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

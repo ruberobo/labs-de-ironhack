@@ -1,0 +1,1820 @@
+
+
+
+
+MATLAB - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MATLAB
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+Numerical computing environment and programming language
+
+
+For the geographical region, see Matlab (Bangladesh).
+Not to be confused with MATHLAB.
+MATLAB (software)L-shaped membrane logo[1]MATLAB R2015b running on Windows 10Developer(s)MathWorksInitial release1984; 36 years ago (1984)Stable releaseR2020a
+   / March 19, 2020; 5 months ago (2020-03-19)
+Written inC/C++, MATLABOperating systemWindows, macOS, and Linux[2]PlatformIA-32, x86-64TypeNumerical computingLicenseProprietary commercial softwareWebsitemathworks.com
+MATLAB (programming language)Paradigmmulti-paradigm: functional, imperative, procedural, object-oriented, arrayDesigned byCleve MolerDeveloperMathWorksFirst appearedlate 1970sStable release9.8 (R2020a)
+   / March 19, 2020; 5 months ago (2020-03-19)
+Typing disciplinedynamic, weakFilename extensions.m, .p[3], .mex*[4], .mat[5], .fig[6], .mlx[7], .mlapp[8], .mltbx[9], .mlappinstall[10], .mlpkginstall[11]Websitemathworks.comInfluenced by
+APL
+EISPACK
+LINPACK
+PL/0
+Speakeasy[12]
+Influenced
+Julia[13]
+Octave[14]
+Scilab[15]
+INTLAB[16][17][18][19]
+
+ MATLAB Programming at Wikibooks
+
+MATLAB (an abbreviation of "matrix laboratory") is a multi-paradigm numerical computing environment and proprietary programming language developed by MathWorks. MATLAB allows matrix manipulations, plotting of functions and data, implementation of algorithms, creation of user interfaces, and interfacing with programs written in other languages.
+Although MATLAB is intended primarily for numerical computing, an optional toolbox uses the MuPAD symbolic engine allowing access to symbolic computing abilities. An additional package, Simulink, adds graphical multi-domain simulation and model-based design for dynamic and embedded systems.
+As of 2020, MATLAB has more than 4 million users worldwide.[20] MATLAB users come from various backgrounds of engineering, science, and economics.
+
+Contents
+
+1 History
+2 Syntax
+
+2.1 Variables
+2.2 Vectors and matrices
+2.3 Structures
+2.4 Functions
+2.5 Function handles
+2.6 Classes and object-oriented programming
+
+
+3 Graphics and graphical user interface programming
+4 Interfacing with other languages
+5 China ban
+6 Alternatives
+7 Release history
+8 See also
+9 Notes
+10 References
+11 External links
+
+
+History[edit]
+Cleve Moler, the chairman of the computer science department at the University of New Mexico, started developing MATLAB in the late 1970s.[21] He designed it to give his students access to LINPACK and EISPACK without them having to learn Fortran. It soon spread to other universities and found a strong audience within the applied mathematics community. Jack Little, an engineer, was exposed to it during a visit Moler made to Stanford University in 1983. Recognizing its commercial potential, he joined with Moler and Steve Bangert. They rewrote MATLAB in C and founded MathWorks in 1984 to continue its development. These rewritten libraries were known as JACKPAC.[22] In 2000, MATLAB was rewritten to use a newer set of libraries for matrix manipulation, LAPACK.[23]
+MATLAB was first adopted by researchers and practitioners in control engineering, Little's specialty, but quickly spread to many other domains. It is now also used in education, in particular the teaching of linear algebra and numerical analysis, and is popular amongst scientists involved in image processing.[21]
+
+Syntax[edit]
+The MATLAB application is built around the MATLAB programming language. Common usage of the MATLAB application involves using the "Command Window" as an interactive mathematical shell or executing text files containing MATLAB code.[24]
+
+Variables[edit]
+Variables are defined using the assignment operator, =. MATLAB is a weakly typed programming language because types are implicitly converted.[25]  It is an inferred typed language because variables can be assigned without declaring their type, except if they are to be treated as symbolic objects,[26] and that their type can change. Values can come from constants, from computation involving values of other variables, or from the output of a function. For example:
+
+>> x = 17
+x =
+ 17
+
+>> x = 'hat'
+x =
+hat
+
+>> x = [3*4, pi/2]
+x =
+   12.0000    1.5708
+
+>> y = 3*sin(x)
+y =
+   -1.6097    3.0000
+
+Vectors and matrices[edit]
+A simple array is defined using the colon syntax: initial:increment:terminator. For instance:
+
+>> array = 1:2:9
+array =
+ 1 3 5 7 9
+
+defines a variable named array (or assigns a new value to an existing variable with the name array) which is an array consisting of the values 1, 3, 5, 7, and 9. That is, the array starts at 1 (the initial value), increments with each step from the previous value by 2 (the increment value), and stops once it reaches (or to avoid exceeding) 9 (the terminator value).
+the increment value can actually be left out of this syntax (along with one of the colons), to use a default value of 1.
+
+>> ari = 1:5
+ari =
+ 1 2 3 4 5
+
+assigns to the variable named ari an array with the values 1, 2, 3, 4, and 5, since the default value of 1 is used as the increment.
+Indexing is one-based,[27] which is the usual convention for matrices in mathematics, unlike zero-based indexing commonly used in other programming languages such as C, C++, and Java.
+Matrices can be defined by separating the elements of a row with blank space or comma and using a semicolon to terminate each row. The list of elements should be surrounded by square brackets []. Parentheses () are used to access elements and subarrays (they are also used to denote a function argument list).
+
+>> A = [16 3 2 13; 5 10 11 8; 9 6 7 12; 4 15 14 1]
+A =
+ 16  3  2 13
+  5 10 11  8
+  9  6  7 12
+  4 15 14  1
+
+>> A(2,3)
+ans =
+ 11
+
+Sets of indices can be specified by expressions such as 2:4, which evaluates to [2, 3, 4].  For example, a submatrix taken from rows 2 through 4 and columns 3 through 4 can be written as:
+
+>> A(2:4,3:4)
+ans =
+ 11 8
+ 7 12
+ 14 1
+
+A square identity matrix of size n can be generated using the function eye, and matrices of any size with zeros or ones can be generated with the functions zeros and ones, respectively.
+
+>> eye(3,3)
+ans =
+ 1 0 0
+ 0 1 0
+ 0 0 1
+
+>> zeros(2,3)
+ans =
+ 0 0 0
+ 0 0 0
+
+>> ones(2,3)
+ans =
+ 1 1 1
+ 1 1 1
+
+Transposing a vector or a matrix is done either by the function transpose or by adding dot-prime after the matrix (without the dot, prime will perform conjugate transpose for complex arrays):
+
+>> A = [1 ; 2],  B = A.', C = transpose(A)
+A =
+     1
+     2
+B =
+     1     2
+C =
+     1     2
+
+>> D = [0 3 ; 1 5], D.'
+D =
+     0     3
+     1     5
+ans =
+     0     1
+     3     5
+
+Most functions accept arrays as input and operate element-wise on each element. For example, mod(2*J,n) will multiply every element in J by 2, and then reduce each element modulo n. MATLAB does include standard for and while loops, but (as in other similar applications such as R), using the vectorized notation is encouraged and is often faster to execute. The following code, excerpted from the function magic.m, creates a magic square M for odd values of n (MATLAB function meshgrid is used here to generate square matrices I and J containing 1:n).
+
+[J,I] = meshgrid(1:n);
+A = mod(I + J - (n + 3) / 2, n);
+B = mod(I + 2 * J - 2, n);
+M = n * A + B + 1;
+
+Structures[edit]
+MATLAB supports structure data types.[28] Since all variables in MATLAB are arrays, a more adequate name is "structure array", where each element of the array has the same field names. In addition, MATLAB supports dynamic field names[29] (field look-ups by name, field manipulations, etc.).
+
+Functions[edit]
+When creating a MATLAB function, the name of the file should match the name of the first function in the file. Valid function names begin with an alphabetic character, and can contain letters, numbers, or underscores.  Variables and functions are case sensitive.[30]
+
+Function handles[edit]
+MATLAB supports elements of lambda calculus by introducing function handles,[31] or function references, which are implemented either in .m files or anonymous[32]/nested functions.[33]
+
+Classes and object-oriented programming[edit]
+MATLAB supports object-oriented programming including classes, inheritance, virtual dispatch, packages, pass-by-value semantics, and pass-by-reference semantics.[34] However, the syntax and calling conventions are significantly different from other languages. MATLAB has value classes and reference classes, depending on whether the class has handle as a super-class (for reference classes) or not (for value classes).[35]
+Method call behavior is different between value and reference classes. For example, a call to a method
+
+object.method();
+
+can alter any member of object only if object is an instance of a reference class, otherwise value class methods must return a new instance if it needs to modify the object.
+An example of a simple class is provided below.
+
+classdef Hello
+    methods
+        function greet(obj)
+            disp('Hello!')
+        end
+    end
+end
+
+When put into a file named hello.m, this can be executed with the following commands:
+
+>> x = Hello();
+>> x.greet();
+Hello!
+
+Graphics and graphical user interface programming[edit]
+
+MATLAB has tightly integrated graph-plotting features. For example, the function plot can be used to produce a graph from two vectors x and y. The code:
+
+x = 0:pi/100:2*pi;
+y = sin(x);
+plot(x,y)
+
+produces the following figure of the sine function:
+
+MATLAB supports three-dimensional graphics as well:
+
+
+
+[X,Y] = meshgrid(-10:0.25:10,-10:0.25:10);
+f = sinc(sqrt((X/pi).^2+(Y/pi).^2));
+mesh(X,Y,f);
+axis([-10 10 -10 10 -0.3 1])
+xlabel('{\bfx}')
+ylabel('{\bfy}')
+zlabel('{\bfsinc} ({\bfR})')
+hidden off
+
+
+   
+
+[X,Y] = meshgrid(-10:0.25:10,-10:0.25:10);
+f = sinc(sqrt((X/pi).^2+(Y/pi).^2));
+surf(X,Y,f);
+axis([-10 10 -10 10 -0.3 1])
+xlabel('{\bfx}')
+ylabel('{\bfy}')
+zlabel('{\bfsinc} ({\bfR})')
+
+
+
+This code produces a wireframe 3D plot of the two-dimensional unnormalized sinc function:
+
+   
+
+This code produces a surface 3D plot of the two-dimensional unnormalized sinc function:
+
+
+
+
+   
+
+
+
+MATLAB supports developing graphical user interface (GUI) applications.[36] UIs can be generated either programmatically or using visual design environments such as GUIDE and App Designer.[37][38]
+
+Interfacing with other languages[edit]
+MATLAB can call functions and subroutines written in the programming languages C or Fortran.[39] A wrapper function is created allowing MATLAB data types to be passed and returned. MEX files (MATLAB executables) are the dynamically loadable object files created by compiling such functions.[40][41] Since 2014 increasing two-way interfacing with Python was being added.[42][43]
+Libraries written in Perl, Java, ActiveX or .NET can be directly called from MATLAB,[44][45] and many MATLAB libraries (for example XML or SQL support) are implemented as wrappers around Java or ActiveX libraries. Calling MATLAB from Java is more complicated, but can be done with a MATLAB toolbox[46] which is sold separately by MathWorks, or using an undocumented mechanism called JMI (Java-to-MATLAB  Interface),[47][48] (which should not be confused with the unrelated Java Metadata Interface that is also called JMI). Official MATLAB API for Java was added in 2016.[49]
+As alternatives to the MuPAD based Symbolic Math Toolbox available from MathWorks, MATLAB can be connected to Maple or Mathematica.[50][51]
+Libraries also exist to import and export MathML.[52]
+
+China ban[edit]
+In 2020 Chinese state media reported that MATLAB had withdrawn services from two Chinese universities as a result of US sanctions, and said this will be responded to by increased use of open-source alternatives and by developing domestic alternatives.[53]
+
+Alternatives[edit]
+See also: list of numerical analysis software and comparison of numerical analysis software
+There are a number of competitors to MATLAB. Some notable examples include:
+
+Maple
+IDL
+Wolfram Mathematica
+There are also free open source alternatives to MATLAB, in particular:
+
+GNU Octave
+Scilab
+FreeMat
+Julia
+SageMath
+which are somewhat compatible with the MATLAB language. GNU Octave is unique from the others in that it aims to be drop-in compatible with MATLAB syntax-wise (see MATLAB Compatibility of GNU Octave).
+Among other languages that treat arrays as basic entities (array programming languages) are:
+
+APL
+Fortran 90 and higher
+S-Lang, as well as the statistical languages R and S
+There are also libraries to add similar functionality to existing languages, such as:
+
+NumPy/SciPy/matplotlib for Python
+Perl Data Language for Perl
+SciLua/Torch for Lua
+SciRuby for Ruby
+IT++ for C++
+ILNumerics for .NET
+Numeric.js for JavaScript
+Release history[edit]
+
+
+Version[54]
+Release name
+Number
+Bundled JVM
+Year
+Release date
+Notes
+
+
+MATLAB 1.0
+
+
+
+
+
+
+
+1984
+
+
+
+
+
+
+MATLAB  2
+
+
+
+
+
+
+
+1986
+
+
+
+
+
+
+MATLAB  3
+
+
+
+
+
+
+
+1987
+
+
+
+
+
+
+MATLAB  3.5
+
+
+
+
+
+
+
+1990
+
+
+
+Ran on DOS but needed at least a 386 processor; version 3.5m needed math coprocessor
+
+
+MATLAB  4
+
+
+
+
+
+
+
+1992
+
+
+
+Ran on Windows 3.1x and Macintosh
+
+
+MATLAB  4.2c
+
+
+
+
+
+
+
+1994
+
+
+
+Ran on Windows 3.1x, needed a math coprocessor
+
+
+MATLAB 5.0
+
+Volume 8
+
+
+
+
+
+1996
+
+December 1996
+
+Unified releases across all platforms
+
+
+MATLAB 5.1
+
+Volume 9
+
+
+
+
+
+1997
+
+May 1997
+
+
+
+
+MATLAB 5.1.1
+
+R9.1
+
+
+
+
+
+
+
+
+
+
+MATLAB 5.2
+
+R10
+
+
+
+
+
+1998
+
+March 1998
+
+Last version working on classic Macs
+
+
+MATLAB 5.2.1
+
+R10.1
+
+
+
+
+
+
+
+
+
+
+MATLAB 5.3
+
+R11
+
+
+
+
+
+1999
+
+January 1999
+
+
+
+
+MATLAB 5.3.1
+
+R11.1
+
+
+
+
+
+November 1999
+
+
+
+
+MATLAB 6.0
+
+R12
+
+12
+
+1.1.8
+
+2000
+
+November 2000
+
+First release with bundled Java virtual machine (JVM)
+
+
+MATLAB 6.1
+
+R12.1
+
+1.3.0
+
+2001
+
+June 2001
+
+Last release for Windows 95
+
+
+MATLAB 6.5
+
+R13
+
+13
+
+1.3.1
+
+2002
+
+July 2002
+
+
+
+
+MATLAB 6.5.1
+
+R13SP1
+
+
+
+2003
+
+
+
+
+
+
+MATLAB 6.5.2
+
+R13SP2
+
+
+
+
+
+Last release for Windows 98, Windows ME, IBM/AIX, Alpha/TRU64, and SGI/IRIX[55]
+
+
+MATLAB 7
+
+R14
+
+14
+
+1.4.2
+
+2004
+
+June 2004
+
+Introduced anonymous and nested functions[56]
+Re-introduced for Mac (under Mac OS X)
+
+
+
+MATLAB 7.0.1
+
+R14SP1
+
+
+
+October 2004
+
+
+
+
+MATLAB 7.0.4
+
+R14SP2
+
+1.5.0
+
+2005
+
+March 7, 2005
+
+Support for memory-mapped files[57]
+
+
+MATLAB 7.1
+
+R14SP3
+
+1.5.0
+
+September 1, 2005
+
+First 64-bit version available for Windows XP 64-bit
+
+
+MATLAB 7.2
+
+R2006a
+
+15
+
+1.5.0
+
+2006
+
+March 1, 2006
+
+
+
+
+MATLAB 7.3
+
+R2006b
+
+16
+
+1.5.0
+
+September 1, 2006
+
+HDF5-based MAT-file support
+
+
+MATLAB 7.4
+
+R2007a
+
+17
+
+1.5.0_07
+
+2007
+
+March 1, 2007
+
+New bsxfun function to apply element-by-element binary operation with singleton expansion enabled[58]
+
+
+MATLAB 7.5
+
+R2007b
+
+18
+
+1.6.0
+
+September 1, 2007
+
+Last release for Windows 2000 and PowerPC Mac; License Server support for Windows Vista;[59] new internal format for P-code
+
+
+MATLAB 7.6
+
+R2008a
+
+19
+
+1.6.0
+
+2008
+
+March 1, 2008
+
+Major enhancements to object-oriented programming abilities with a new class definition syntax,[60] and ability to manage namespaces with packages[61]
+
+
+MATLAB 7.7
+
+R2008b
+
+20
+
+1.6.0_04
+
+October 9, 2008
+
+Last release for processors w/o SSE2. New Map data structure:[62] upgrades to random number generators[63]
+
+
+MATLAB 7.8
+
+R2009a
+
+21
+
+1.6.0_04
+
+2009
+
+March 6, 2009
+
+First release for Microsoft 32-bit & 64-bit Windows 7, new external interface to .NET Framework[64]
+
+
+MATLAB 7.9
+
+R2009b
+
+22
+
+1.6.0_12
+
+September 4, 2009
+
+First release for Intel 64-bit Mac, and last for Solaris SPARC; new use for the tilde operator (~) to ignore arguments in function calls[65][66]
+
+
+MATLAB 7.9.1
+
+R2009bSP1
+
+1.6.0_12
+
+2010
+
+April 1, 2010
+
+bug fixes.
+
+
+MATLAB 7.10
+
+R2010a
+
+23
+
+1.6.0_12
+
+March 5, 2010
+
+Last release for Intel 32-bit Mac
+
+
+MATLAB 7.11
+
+R2010b
+
+24
+
+1.6.0_17
+
+September 3, 2010
+
+Add support for enumerations[67]
+
+
+MATLAB 7.11.1
+
+R2010bSP1
+
+1.6.0_17
+
+2011
+
+March 17, 2011
+
+bug fixes and updates
+
+
+MATLAB 7.11.2
+
+R2010bSP2
+
+1.6.0_17
+
+April 5, 2012[68]
+
+bug fixes
+
+
+MATLAB 7.12
+
+R2011a
+
+25
+
+1.6.0_17
+
+April 8, 2011
+
+New rng function to control random number generation[69][70][71]
+
+
+MATLAB 7.13
+
+R2011b
+
+26
+
+1.6.0_17
+
+September 1, 2011
+
+Access-change parts of variables directly in MAT-files, without loading into memory;[72] increased maximum local workers with Parallel Computing Toolbox from 8 to 12[73]
+
+
+MATLAB 7.14
+
+R2012a
+
+27
+
+1.6.0_17
+
+2012
+
+March 1, 2012
+
+Last version with 32-bit Linux support.[74]
+
+
+MATLAB 8
+
+R2012b
+
+28
+
+1.6.0_17
+
+September 11, 2012
+
+First release with Toolstrip interface;[75] MATLAB Apps.[76] redesigned documentation system
+
+
+MATLAB 8.1
+
+R2013a
+
+29
+
+1.6.0_17
+
+2013
+
+March 7, 2013
+
+New unit testing framework[77]
+
+
+MATLAB 8.2
+
+R2013b
+
+30
+
+1.7.0_11
+
+September 6, 2013[78]
+
+Built in Java Runtime Environment (JRE) updated to version 7;[79] New table data type[80]
+
+
+MATLAB 8.3
+
+R2014a
+
+31
+
+1.7.0_11
+
+2014
+
+March 7, 2014[81]
+
+Simplified compiler setup for building MEX-files; USB Webcams support in core MATLAB; number of local workers no longer limited to 12 with Parallel Computing Toolbox
+
+
+MATLAB 8.4
+
+R2014b
+
+32
+
+1.7.0_11
+
+October 3, 2014
+
+New class-based graphics engine (a.k.a. HG2);[82] tabbing function in GUI;[83] improved user toolbox packaging and help files;[84] new objects for time-date manipulations;[85] Git-Subversion integration in IDE;[86] big data abilities with MapReduce (scalable to Hadoop);[87] new py package for using Python from inside MATLAB,[88] new engine interface to call MATLAB from Python;[89] several new and improved functions: webread (RESTful web services with JSON/XML support), tcpclient (socket-based connections), histcounts, histogram, animatedline, and others
+
+
+MATLAB 8.5
+
+R2015a
+
+33
+
+1.7.0_60
+
+2015
+
+March 5, 2015
+
+
+
+
+MATLAB 8.5
+
+R2015aSP1
+
+1.7.0_60
+
+October 14, 2015
+
+Last release supporting Windows XP and Windows Vista
+
+
+MATLAB 8.6
+
+R2015b
+
+34
+
+1.7.0_60
+
+September 3, 2015
+
+New MATLAB execution engine (a.k.a. LXE);[90] graph and digraph classes to work with graphs and networks;[91] MinGW-w64 as supported compiler on Windows;[92] Last version with 32-bit support
+
+
+MATLAB 9.0
+
+R2016a
+
+35
+
+1.7.0_60
+
+2016
+
+March 3, 2016
+
+Live Scripts: interactive documents that combine text, code, and output (in the style of Literate programming);[93]  App Designer: a new development environment for building apps (with new kind of UI figures, axes, and components);[94] pause execution of running programs using a Pause Button
+
+
+MATLAB 9.1
+
+R2016b
+
+36
+
+1.7.0_60
+
+September 15, 2016
+
+define local functions in scripts;[95] automatic expansion of dimensions (previously provided via explicit call to bsxfun); tall arrays for Big data;[96] new string type;[97] new functions to encode/decode JSON;[98] official MATLAB Engine API for Java[49]
+
+
+MATLAB 9.2
+
+R2017a
+
+37
+
+1.7.0_60
+
+2017
+
+March 9, 2017
+
+MATLAB Online: cloud-based MATLAB desktop accessed in a web browser;[99]  double-quoted strings; new memoize function for Memoization; expanded object properties validation;[100] mocking framework for unit testing;[101]  MEX targets 64-bit by default;  new heatmap function for creating heatmap charts[102]
+
+
+MATLAB 9.3
+
+R2017b
+
+38
+
+1.8.0_121
+
+September 21, 2017
+
+
+
+
+MATLAB 9.4
+
+R2018a
+
+39
+
+1.8.0_144
+
+2018
+
+March 15, 2018[103]
+
+
+
+
+MATLAB 9.5
+
+R2018b
+
+40
+
+1.8.0_152
+
+September 12, 2018
+
+
+
+
+MATLAB 9.6
+
+R2019a
+
+41
+
+1.8.0_181
+
+2019
+
+March 20, 2019
+
+MATLAB Projects.
+
+
+MATLAB 9.7
+
+R2019b
+
+42
+
+1.8.0_202
+
+September 11, 2019
+
+Introduction of 'arguments' block for input validation, and enabling of dot indexing into function outputs
+
+
+MATLAB 9.8
+
+R2020a
+
+
+
+
+
+2020
+
+March 19, 2020
+
+Removal of Mupad
+
+The number (or release number) is the version reported by Concurrent License Manager program FLEXlm.
+For a complete list of changes of both MATLAB and official toolboxes, consult the MATLAB release notes.[104]
+
+
+See also[edit]
+Comparison of numerical analysis software
+List of numerical analysis software
+Notes[edit]
+
+
+^ "The L-Shaped Membrane". MathWorks. 2003. Retrieved February 7, 2014.
+
+^ "System Requirements and Platform Availability". MathWorks. Retrieved August 14, 2013.
+
+^ "Protect Your Source Code". MathWorks. Retrieved November 1, 2019.
+
+^ "MEX Platform Compatibility". MathWorks. Retrieved November 1, 2019.
+
+^ "MAT-File Versions". MathWorks. Retrieved November 1, 2019.
+
+^ "Save Figure to Reopen in MATLAB Later". MathWorks. Retrieved November 1, 2019.
+
+^ "Live Code File Format (.mlx)". MathWorks. Retrieved November 1, 2019.
+
+^ "MATLAB App Designer". MathWorks. Retrieved November 1, 2019.
+
+^ "Toolbox Distribution". MathWorks. Retrieved November 1, 2019.
+
+^ "MATLAB App Installer File". MathWorks. Retrieved November 1, 2019.
+
+^ "Support Package Installation". MathWorks. Retrieved November 1, 2019.
+
+^ "An interview with CLEVE MOLER Conducted by Thomas Haigh On 8 and 9 March, 2004 Santa Barbara, California" (PDF). Computer History Museum. Archived from the original (PDF) on December 27, 2014. Retrieved December 6, 2016. So APL, Speakeasy, LINPACK, EISPACK, and PL0 were the predecessors to MATLAB.
+
+^ Bezanson, Jeff; Karpinski, Stefan; Shah, Viral; Edelman, Alan (February 14, 2012). "Why We Created Julia". Julia Language. Retrieved December 1, 2016.
+
+^ Eaton, John W. (May 21, 2001). "Octave: Past, Present, and Future" (PDF). Texas-Wisconsin Modeling and Control Consortium. Archived from the original (PDF) on August 9, 2017. Retrieved December 1, 2016.
+
+^ "History". Scilab. Archived from the original on December 1, 2016. Retrieved December 1, 2016.
+
+^ S.M. Rump: INTLAB – INTerval LABoratory. In Tibor Csendes, editor, Developments in Reliable Computing, pages 77–104. Kluwer Academic Publishers, Dordrecht, 1999.
+
+^ Moore, R. E., Kearfott, R. B., & Cloud, M. J. (2009). Introduction to Interval Analysis. Society for Industrial and Applied Mathematics.
+
+^ Rump, S. M. (2010). Verification methods: Rigorous results using floating-point arithmetic. Acta Numerica, 19, 287–449.
+
+^ Hargreaves, G. I. (2002). Interval analysis in MATLAB. Numerical Algorithms, (2009.1).
+
+^ The MathWorks (February 2020). "Company Overview" (PDF).
+
+^ a b Cleve Moler (December 2004). "The Origins of MATLAB". Retrieved April 15, 2007.
+
+^ "MATLAB Programming Language". Altius Directory. Archived from the original on January 3, 2017. Retrieved December 17, 2010.
+
+^ Moler, Cleve (January 2000). "MATLAB Incorporates LAPACK". Cleve's Corner. MathWorks. Retrieved December 20, 2008.
+
+^ "MATLAB Documentation". MathWorks. Retrieved August 14, 2013.
+
+^ "Comparing MATLAB with Other OO Languages". MATLAB. MathWorks. Retrieved August 14, 2013.
+
+^ "Create Symbolic Variables and Expressions". Symbolic Math Toolbox. MathWorks. Retrieved August 14, 2013.
+
+^ "Matrix Indexing". MathWorks. Retrieved August 14, 2013.
+
+^ "Structures". MathWorks. Retrieved August 14, 2013.
+
+^ "Generate Field Names from Variables". MathWorks. Retrieved August 14, 2013.
+
+^ "Case and Space Sensitivity". MathWorks. Retrieved November 1, 2019.
+
+^ "Function Handles". MathWorks. Retrieved August 14, 2013.
+
+^ "Anonymous Functions". MathWorks. Retrieved August 14, 2013.
+
+^ "Nested Functions". MathWorks.
+
+^ "Object-Oriented Programming". MathWorks. Retrieved August 14, 2013.
+
+^ "Comparing Handle and Value Classes". MathWorks.
+
+^ "MATLAB GUI". MathWorks. April 30, 2011. Retrieved August 14, 2013.
+
+^ "Create a Simple GUIDE GUI". MathWorks. Retrieved August 14, 2014.
+
+^ "MATLAB App Designer". MathWorks. Retrieved November 1, 2019.
+
+^ "Application Programming Interfaces to MATLAB". MathWorks. Retrieved August 14, 2013.
+
+^ "Create MEX-Files". MathWorks. Retrieved August 14, 2013.
+
+^ Spielman, Dan (February 10, 2004). "Connecting C and Matlab". Yale University, Computer Science Department. Retrieved May 20, 2008.
+
+^ "MATLAB Engine for Python". MathWorks. Retrieved June 13, 2015.
+
+^ "Call Python Libraries". MathWorks. Retrieved June 13, 2015.
+
+^ "External Programming Language Interfaces". MathWorks. Retrieved August 14, 2013.
+
+^ "Call Perl script using appropriate operating system executable". MathWorks. Retrieved November 7, 2013.
+
+^ "MATLAB Builder JA". MathWorks. Retrieved June 7, 2010.
+
+^ Altman, Yair (April 14, 2010). "Java-to-Matlab Interface". Undocumented Matlab. Retrieved June 7, 2010.
+
+^ Kaplan, Joshua. "matlabcontrol JMI".
+
+^ a b "MATLAB Engine API for Java". MathWorks. Retrieved September 15, 2016.
+
+^ Germundsson, Roger (September 30, 1998). "MaMa: Calling MATLAB from Mathematica with MathLink". Wolfram Research. Wolfram Library Archive.
+
+^ rsmenon; szhorvat (2013). "MATLink:   Communicate with MATLAB from Mathematica". Retrieved August 14, 2013.
+
+^ Weitzel, Michael (September 1, 2006). "MathML import/export". MathWorks - File Exchange. Retrieved August 14, 2013.
+
+^ https://news.cgtn.com/news/2020-06-13/Chinese-FM-responds-to-MATLAB-s-ban-on-two-Chinese-universities-Rhx20G3pte/
+
+^ Moler, Cleve (January 2006). "The Growth of MATLAB and The MathWorks over Two Decades". News & Notes Newsletter. MathWorks. Retrieved August 14, 2013.
+
+^ "MATLAB System Requirements - Release 13". MathWorks. Retrieved October 6, 2015.
+
+^ "Dynamic Function Creation with Anonymous and Nested Functions". MathWorks. Retrieved January 15, 2016.
+
+^ "Memory Mapping". MathWorks. Retrieved January 22, 2014.
+
+^ "MATLAB bsxfun". MathWorks. Retrieved January 22, 2014.
+
+^ "Do MATLAB versions prior to R2007a run under Windows Vista?". MathWorks. September 3, 2010. Retrieved February 8, 2011.
+
+^ "OOP Compatibility with Previous Versions". MathWorks. Retrieved March 11, 2013.
+
+^ "Packages Create Namespaces". MathWorks. Retrieved January 22, 2014.
+
+^ "Map Containers". MathWorks. Retrieved January 22, 2014.
+
+^ "Creating and Controlling a Random Number Stream". MathWorks. Retrieved January 22, 2014.
+
+^ "New MATLAB External Interfacing Features in R2009a". MathWorks. Retrieved January 22, 2014.
+
+^ "Ignore Function Outputs". MathWorks. Retrieved January 22, 2014.
+
+^ "Ignore Function Inputs". MathWorks. Retrieved January 22, 2014.
+
+^ "Working with Enumerations". MathWorks. Retrieved January 22, 2014.
+
+^ "What's New in Release 2010b". MathWorks. Retrieved January 22, 2014.
+
+^ "New RNG Function for Controlling Random Number Generation in Release 2011a". MathWorks. Retrieved January 22, 2014.
+
+^ "MATLAB rng". MathWorks. Retrieved January 22, 2014.
+
+^ "Replace Discouraged Syntaxes of rand and randn". MathWorks. Retrieved January 22, 2014.
+
+^ "MATLAB matfile". MathWorks. Retrieved January 22, 2014.
+
+^ "MATLAB max workers". Retrieved January 22, 2014.
+
+^ MathWorks Support Team (June 4, 2015). "Is MATLAB supported on 32-bit Linux?". Versions of MATLAB prior to R2012a are fully supported on 32-bit Linux. After R2012a, MATLAB is no longer supported on 32-bit Linux.
+
+^ Shure, Loren (September 2012). "The MATLAB R2012b Desktop – Part 1: Introduction to the Toolstrip".
+
+^ "MATLAB Apps". MathWorks. Retrieved August 14, 2013.
+
+^ "MATLAB Unit Testing Framework". MathWorks. Retrieved August 14, 2013.
+
+^ "MathWorks Announces Release 2013b of the MATLAB and Simulink Product Families". MathWorks. September 2013.
+
+^ "R2013b Release Notes". MathWorks. Retrieved September 17, 2018.
+
+^ "MATLAB Tables". MathWorks. Retrieved September 14, 2013.
+
+^ "MathWorks Announces Release 2014a of the MATLAB and Simulink Product Families". MathWorks. Retrieved March 11, 2014.
+
+^ "Graphics Changes in R2014b". MathWorks. Retrieved October 3, 2014.
+
+^ "uitab: Create tabbed panel". MathWorks. Retrieved October 3, 2014.
+
+^ "Create and Share Toolboxes". MathWorks. Retrieved October 3, 2014.
+
+^ "Dates and Time". MathWorks. Retrieved October 3, 2014.
+
+^ "Source Control Integration". MathWorks. Retrieved October 3, 2014.
+
+^ "MATLAB MapReduce and Hadoop". MathWorks. Retrieved October 3, 2014.
+
+^ "Call Python Libraries". MathWorks. Retrieved October 3, 2014.
+
+^ "MATLAB Engine for Python". MathWorks. Retrieved October 3, 2014.
+
+^ "MATLAB Execution Engine". MathWorks. Retrieved September 15, 2016.
+
+^ "Graph and Network Algorithms". MathWorks. Retrieved September 15, 2016.
+
+^ "Install MinGW-w64 Compiler". MathWorks. Retrieved September 15, 2016.
+
+^ "What Is a Live Script?". MathWorks. Retrieved September 15, 2016.
+
+^ "MATLAB App Designer". MathWorks. Retrieved September 15, 2016.
+
+^ "Add Functions to Scripts". MathWorks. Retrieved September 15, 2016.
+
+^ "Tall Arrays". MathWorks. Retrieved September 15, 2016.
+
+^ "Create String Arrays". MathWorks. Retrieved September 15, 2016.
+
+^ "JSON Format - MATLAB & Simulink". mathworks.com. Retrieved August 20, 2017.
+
+^ "MATLAB Online". MathWorks. Retrieved April 10, 2017.
+
+^ "Validate Property Values". MathWorks. Retrieved April 10, 2017.
+
+^ "Mocking Framework". MathWorks. Retrieved April 10, 2017.
+
+^ "Create Heatmap from Tabular Data". MathWorks. Retrieved April 10, 2017.
+
+^ "MathWorks Announces Release 2018a of the MATLAB and Simulink Product Families". MathWorks. Retrieved April 5, 2018.
+
+^ "MATLAB Release Notes". MathWorks. Retrieved January 25, 2014.
+
+
+References[edit]
+
+Gilat, Amos (2004). MATLAB: An Introduction with Applications 2nd Edition. John Wiley & Sons. ISBN 978-0-471-69420-5.
+Quarteroni, Alfio; Saleri, Fausto (2006). Scientific Computing with MATLAB and Octave. Springer. ISBN 978-3-540-32612-0.
+Ferreira, A.J.M. (2009). MATLAB Codes for Finite Element Analysis. Springer. ISBN 978-1-4020-9199-5.
+Lynch, Stephen (2004). Dynamical Systems with Applications using MATLAB. Birkhäuser. ISBN 978-0-8176-4321-8.
+
+External links[edit]
+MATLABat Wikipedia's sister projectsMedia from Wikimedia Commons
+Textbooks from Wikibooks
+Resources from Wikiversity
+
+
+Official website
+MATLAB at Curlie
+vteNumerical analysis softwareFree
+Advanced Simulation Library
+ADMB
+Chapel
+Euler
+Fortress
+FreeFem++
+FreeMat
+Genius
+Gmsh
+GNU Octave
+gretl
+Julia
+MFEM
+OpenFOAM
+R
+SageMath
+Salome
+ScicosLab
+Scilab
+X10
+Weka
+Proprietary
+DADiSP
+FEATool Multiphysics
+GAUSS
+LabVIEW
+Maple
+Mathcad
+Mathematica
+MATLAB
+Speakeasy
+VisSim
+
+List of numerical-analysis software
+Comparison of numerical-analysis software
+
+vteComputer algebra systemsOpen-source
+Axiom
+Cadabra
+CoCoA
+Erable
+Fermat
+FriCAS
+FORM
+GAP
+GiNaC
+Macaulay2
+Maxima
+Normaliz
+PARI/GP
+Reduce
+SageMath
+Singular
+SymPy
+Xcas/Giac
+Yacas
+Proprietary
+ClassPad Manager
+KANT
+Magma
+Maple
+Mathcad
+Mathematica
+muPAD (MATLAB symbolic math toolbox)
+SMath Studio
+TI InterActive!
+Discontinued
+CAMAL
+Derive
+LiveMath
+Macsyma
+Mathomatic
+muMATH
+
+Category
+List
+
+vteStatistical softwarePublic domain
+Dataplot
+Epi Info
+CSPro
+X-12-ARIMA
+Open-source
+ADMB
+DAP
+gretl
+JASP
+JAGS
+JMulTi
+Julia
+GNU Octave
+OpenBUGS
+Orange
+PSPP
+PyMC3
+R (RStudio)
+SageMath
+SimFiT
+SOFA Statistics
+Stan
+XLispStat
+Freeware
+BV4.1
+CumFreq
+SegReg
+XploRe
+WinBUGS
+CommercialCross-platform
+Data Desk
+GAUSS
+GraphPad InStat
+GraphPad Prism
+IBM SPSS Statistics
+IBM SPSS Modeler
+JMP
+Maple
+Mathcad
+Mathematica
+MATLAB
+OxMetrics
+RATS
+Revolution Analytics
+SAS
+SmartPLS
+Stata
+StatView
+SUDAAN
+S-PLUS
+TSP
+World Programming System (WPS)
+Windows only
+BMDP
+EViews
+GenStat
+LIMDEP
+LISREL
+MedCalc
+Microfit
+Minitab
+MLwiN
+NCSS
+SHAZAM
+SigmaStat
+Statistica
+StatsDirect
+StatXact
+SYSTAT
+The Unscrambler
+UNISTAT
+Excel add-ons
+Analyse-it
+SigmaXL
+UNISTAT for Excel
+XLfit
+RExcel
+
+Category
+Comparison
+
+vteImage processing softwareFree
+3D Slicer
+AFNI
+CellCognition
+CellProfiler
+Dlib
+Endrov
+Fiji
+FMRIB Software Library
+FreeSurfer
+GemIdent
+GNU Octave
+ilastik
+ImageJ
+ITK
+InVesalius
+ITK-SNAP
+KNIME
+Mango
+OpenCV
+OsiriX
+VIGRA
+VXL
+Proprietary
+Amira
+Analyze
+Aphelion
+Bitplane
+IDL
+Mathematica
+MATLAB
+Mimics
+MountainsMap
+Visage SDK
+
+vteLinear algebraBasic concepts
+Scalar
+Vector
+Vector space
+Scalar multiplication
+Vector projection
+Linear span
+Linear map
+Linear projection
+Linear independence
+Linear combination
+Basis
+Change of basis
+Row and column vectors
+Row and column spaces
+Kernel
+Eigenvalues and eigenvectors
+Transpose
+Linear equations
+Matrices
+Block
+Decomposition
+Invertible
+Minor
+Multiplication
+Rank
+Transformation
+Cramer's rule
+Gaussian elimination
+Bilinear
+Orthogonality
+Dot product
+Inner product space
+Outer product
+Gram–Schmidt process
+Multilinear algebra
+Determinant
+Cross product
+Triple product
+Seven-dimensional cross product
+Geometric algebra
+Exterior algebra
+Bivector
+Multivector
+Tensor
+Outermorphism
+Vector space constructions
+Dual
+Direct sum
+Function space
+Quotient
+Subspace
+Tensor product
+Numerical
+Floating-point
+Numerical stability
+Basic Linear Algebra Subprograms (BLAS)
+Sparse matrix
+Comparison of linear algebra libraries
+
+ Category
+ Outline
+ Mathematics portal
+ Wikibook
+ Wikiversity
+
+vteProgramming languages
+Comparison
+Timeline
+History
+
+ALGOL
+APL
+Assembly
+BASIC
+C
+C++
+C#
+COBOL
+Go
+Erlang
+Forth
+Fortran
+Haskell
+Java
+JavaScript
+Kotlin
+Lisp
+ML
+Objective-C
+Pascal
+Perl
+PHP
+Prolog
+Python
+R
+Ruby
+Rust
+SQL
+Shell
+Simula
+Smalltalk
+Swift
+more...
+
+ Category
+ Lists: Alphabetical
+Categorical
+Generational
+Non-English-based
+
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=MATLAB&oldid=973851834"
+Categories: Image processing softwareArray programming languagesC softwareComputer algebra system software for LinuxComputer algebra system software for MacOSComputer algebra system software for WindowsComputer algebra systemsComputer vision softwareCross-platform softwareData mining and machine learning softwareData visualization softwareData-centric programming languagesDynamically typed programming languagesEconometrics softwareHigh-level programming languagesIRIX softwareLinear algebraMathematical optimization softwareNumerical analysis software for LinuxNumerical analysis software for MacOSNumerical analysis software for WindowsNumerical linear algebraNumerical programming languagesNumerical softwareParallel computingPlotting softwareProprietary commercial software for LinuxProprietary cross-platform softwareRegression and curve fitting softwareSoftware modeling languageStatistical programming languagesTime series softwareDomain-specific programming languagesHidden categories: Articles with short descriptionShort description is different from WikidataUse mdy dates from September 2018Pages using deprecated image syntaxArticles with Curlie linksArticles with example MATLAB/Octave codePages using the Graph extension
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+In other projects
+
+
+
+
+Wikimedia CommonsWikiversity
+
+
+
+
+
+Languages
+
+
+
+
+العربيةAzərbaycancaবাংলাBân-lâm-gúБългарскиBosanskiCatalàČeštinaDanskDeutschEestiΕλληνικάEspañolفارسیFrançais한국어Հայերենहिन्दीHrvatskiBahasa IndonesiaÍslenskaItalianoעבריתಕನ್ನಡLietuviųLumbaartMagyarМакедонскиBahasa Melayuမြန်မာဘာသာNederlands日本語Norsk bokmålNorsk nynorskଓଡ଼ିଆPolskiPortuguêsQaraqalpaqshaRomânăРусскийScotsShqipSimple EnglishSlovenčinaSlovenščinaکوردیСрпски / srpskiSrpskohrvatski / српскохрватскиSuomiSvenskaTagalogதமிழ்TaqbaylitไทยТоҷикӣTürkçeTürkmençeУкраїнськаاردوئۇيغۇرچە / UyghurcheTiếng Việt吴语粵語中文
+Edit links
+
+
+
+
+
+
+ This page was last edited on 19 August 2020, at 16:07 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

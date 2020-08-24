@@ -1,0 +1,929 @@
+
+
+
+
+Multilayer perceptron - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Multilayer perceptron
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+"MLP" is not to be confused with "NLP", which refers to natural language processing.
+Part of a series onMachine learninganddata mining
+Problems
+Classification
+Clustering
+Regression
+Anomaly detection
+AutoML
+Association rules
+Reinforcement learning
+Structured prediction
+Feature engineering
+Feature learning
+Online learning
+Semi-supervised learning
+Unsupervised learning
+Learning to rank
+Grammar induction
+
+
+Supervised learning(classification • regression) 
+Decision trees
+Ensembles
+Bagging
+Boosting
+Random forest
+k-NN
+Linear regression
+Naive Bayes
+Artificial neural networks
+Logistic regression
+Perceptron
+Relevance vector machine (RVM)
+Support vector machine (SVM)
+
+
+Clustering
+BIRCH
+CURE
+Hierarchical
+k-means
+Expectation–maximization (EM)
+DBSCAN
+OPTICS
+Mean-shift
+
+
+Dimensionality reduction
+Factor analysis
+CCA
+ICA
+LDA
+NMF
+PCA
+PGD
+t-SNE
+
+
+Structured prediction
+Graphical models
+Bayes net
+Conditional random field
+Hidden Markov
+
+
+Anomaly detection
+k-NN
+Local outlier factor
+
+
+Artificial neural network
+Autoencoder
+Deep learning
+DeepDream
+Multilayer perceptron
+RNN
+LSTM
+GRU
+Restricted Boltzmann machine
+GAN
+SOM
+Convolutional neural network
+U-Net
+
+
+Reinforcement learning
+Q-learning
+SARSA
+Temporal difference (TD)
+
+
+Theory
+Bias–variance dilemma
+Computational learning theory
+Empirical risk minimization
+Occam learning
+PAC learning
+Statistical learning
+VC theory
+
+
+Machine-learning venues
+NeurIPS
+ICML
+ML
+JMLR
+ArXiv:cs.LG
+
+
+Glossary of artificial intelligence
+Glossary of artificial intelligence
+
+
+Related articles
+List of datasets for machine-learning research
+Outline of machine learning
+
+vte
+A multilayer perceptron (MLP) is a class of feedforward artificial neural network (ANN). The term MLP is used ambiguously, sometimes loosely to any feedforward ANN, sometimes strictly to refer to networks composed of multiple layers of perceptrons (with threshold activation); see § Terminology. Multilayer perceptrons are sometimes colloquially referred to as "vanilla" neural networks, especially when they have a single hidden layer.[1]
+An MLP consists of at least three layers of nodes: an input layer, a hidden layer and an output layer. Except for the input nodes, each node is a neuron that uses a nonlinear activation function. MLP utilizes a supervised learning technique called backpropagation for training.[2][3] Its multiple layers and non-linear activation distinguish MLP from a linear perceptron. It can distinguish data that is not linearly separable.[4]
+
+Contents
+
+1 Theory
+
+1.1 Activation function
+1.2 Layers
+1.3 Learning
+
+
+2 Terminology
+3 Applications
+4 References
+5 External links
+
+
+Theory[edit]
+Activation function[edit]
+If a multilayer perceptron has a linear activation function in all neurons, that is, a linear function that maps the weighted inputs to the output of each neuron, then linear algebra shows that any number of layers can be reduced to a two-layer input-output model. In MLPs some neurons use a nonlinear activation function that was developed to model the frequency of action potentials, or firing, of biological neurons.
+The two historically common activation functions are both sigmoids, and are described by
+
+
+
+
+
+y
+(
+
+v
+
+i
+
+
+)
+=
+tanh
+⁡
+(
+
+v
+
+i
+
+
+)
+ 
+ 
+
+
+and
+
+
+ 
+ 
+y
+(
+
+v
+
+i
+
+
+)
+=
+(
+1
++
+
+e
+
+−
+
+v
+
+i
+
+
+
+
+
+)
+
+−
+1
+
+
+
+
+{\displaystyle y(v_{i})=\tanh(v_{i})~~{\textrm {and}}~~y(v_{i})=(1+e^{-v_{i}})^{-1}}
+
+.
+In recent developments of deep learning the rectifier linear unit (ReLU) is more frequently used as one of the possible ways to overcome the numerical problems related to the sigmoids.
+The first is a hyperbolic tangent that ranges from -1 to 1, while the other is the logistic function, which is similar in shape but ranges from 0 to 1. Here 
+
+
+
+
+y
+
+i
+
+
+
+
+{\displaystyle y_{i}}
+
+ is the output of the 
+
+
+
+i
+
+
+{\displaystyle i}
+
+th node (neuron) and 
+
+
+
+
+v
+
+i
+
+
+
+
+{\displaystyle v_{i}}
+
+ is the weighted sum of the input connections. Alternative activation functions have been proposed, including the rectifier and softplus functions. More specialized activation functions include radial basis functions (used in radial basis networks, another class of supervised neural network models).
+
+Layers[edit]
+The MLP consists of three or more layers (an input and an output layer with one or more hidden layers) of nonlinearly-activating nodes. Since MLPs are fully connected, each node in one layer connects with a certain weight 
+
+
+
+
+w
+
+i
+j
+
+
+
+
+{\displaystyle w_{ij}}
+
+ to every node in the following layer.
+
+Learning[edit]
+Learning occurs in the perceptron by changing connection weights after each piece of data is processed, based on the amount of error in the output compared to the expected result. This is an example of supervised learning, and is carried out through backpropagation, a generalization of the least mean squares algorithm in the linear perceptron.
+We can represent the degree of error in an output node 
+
+
+
+j
+
+
+{\displaystyle j}
+
+ in the 
+
+
+
+n
+
+
+{\displaystyle n}
+
+th data point (training example) by 
+
+
+
+
+e
+
+j
+
+
+(
+n
+)
+=
+
+d
+
+j
+
+
+(
+n
+)
+−
+
+y
+
+j
+
+
+(
+n
+)
+
+
+{\displaystyle e_{j}(n)=d_{j}(n)-y_{j}(n)}
+
+, where 
+
+
+
+d
+
+
+{\displaystyle d}
+
+ is the target value and 
+
+
+
+y
+
+
+{\displaystyle y}
+
+ is the value produced by the perceptron. The node weights can then be adjusted based on corrections that minimize the error in the entire output, given by
+
+
+
+
+
+
+
+E
+
+
+(
+n
+)
+=
+
+
+1
+2
+
+
+
+∑
+
+j
+
+
+
+e
+
+j
+
+
+2
+
+
+(
+n
+)
+
+
+{\displaystyle {\mathcal {E}}(n)={\frac {1}{2}}\sum _{j}e_{j}^{2}(n)}
+
+.
+Using gradient descent, the change in each weight is
+
+
+
+
+
+Δ
+
+w
+
+j
+i
+
+
+(
+n
+)
+=
+−
+η
+
+
+
+∂
+
+
+E
+
+
+(
+n
+)
+
+
+∂
+
+v
+
+j
+
+
+(
+n
+)
+
+
+
+
+y
+
+i
+
+
+(
+n
+)
+
+
+{\displaystyle \Delta w_{ji}(n)=-\eta {\frac {\partial {\mathcal {E}}(n)}{\partial v_{j}(n)}}y_{i}(n)}
+
+
+where 
+
+
+
+
+y
+
+i
+
+
+
+
+{\displaystyle y_{i}}
+
+ is the output of the previous neuron and 
+
+
+
+η
+
+
+{\displaystyle \eta }
+
+ is the learning rate, which is selected to ensure that the weights quickly converge to a response, without oscillations.
+The derivative to be calculated depends on the induced local field 
+
+
+
+
+v
+
+j
+
+
+
+
+{\displaystyle v_{j}}
+
+, which itself varies. It is easy to prove that for an output node this derivative can be simplified to
+
+
+
+
+
+−
+
+
+
+∂
+
+
+E
+
+
+(
+n
+)
+
+
+∂
+
+v
+
+j
+
+
+(
+n
+)
+
+
+
+=
+
+e
+
+j
+
+
+(
+n
+)
+
+ϕ
+
+′
+
+
+(
+
+v
+
+j
+
+
+(
+n
+)
+)
+
+
+{\displaystyle -{\frac {\partial {\mathcal {E}}(n)}{\partial v_{j}(n)}}=e_{j}(n)\phi ^{\prime }(v_{j}(n))}
+
+
+where 
+
+
+
+
+ϕ
+
+′
+
+
+
+
+{\displaystyle \phi ^{\prime }}
+
+ is the derivative of the activation function described above, which itself does not vary. The analysis is more difficult for the change in weights to a hidden node, but it can be shown that the relevant derivative is
+
+
+
+
+
+−
+
+
+
+∂
+
+
+E
+
+
+(
+n
+)
+
+
+∂
+
+v
+
+j
+
+
+(
+n
+)
+
+
+
+=
+
+ϕ
+
+′
+
+
+(
+
+v
+
+j
+
+
+(
+n
+)
+)
+
+∑
+
+k
+
+
+−
+
+
+
+∂
+
+
+E
+
+
+(
+n
+)
+
+
+∂
+
+v
+
+k
+
+
+(
+n
+)
+
+
+
+
+w
+
+k
+j
+
+
+(
+n
+)
+
+
+{\displaystyle -{\frac {\partial {\mathcal {E}}(n)}{\partial v_{j}(n)}}=\phi ^{\prime }(v_{j}(n))\sum _{k}-{\frac {\partial {\mathcal {E}}(n)}{\partial v_{k}(n)}}w_{kj}(n)}
+
+.
+This depends on the change in weights of the 
+
+
+
+k
+
+
+{\displaystyle k}
+
+th nodes, which represent the output layer. So to change the hidden layer weights, the output layer weights change according to the derivative of the activation function, and so this algorithm represents a backpropagation of the activation function.[5]
+
+
+Terminology[edit]
+The term "multilayer perceptron" does not refer to a single perceptron that has multiple layers. Rather, it contains many perceptrons that are organized into layers. An alternative is "multilayer perceptron network". Moreover, MLP "perceptrons" are not perceptrons in the strictest possible sense. True perceptrons are formally a special case of artificial neurons that use a threshold activation function such as the Heaviside step function. MLP perceptrons can employ arbitrary activation functions. A true perceptron performs binary classification, an MLP neuron is free to either perform classification or regression, depending upon its activation function.
+The term "multilayer perceptron" later was applied without respect to nature of the nodes/layers, which can be composed of arbitrarily defined artificial neurons, and not perceptrons specifically. This interpretation avoids the loosening of the definition of "perceptron" to mean an artificial neuron in general.
+
+Applications[edit]
+MLPs are useful in research for their ability to solve problems stochastically, which often allows approximate solutions for extremely complex problems like fitness approximation.
+MLPs are universal function approximators as shown by Cybenko's theorem,[4] so they can be used to create mathematical models by regression analysis. As classification is a particular case of regression when the response variable is categorical, MLPs make good classifier algorithms.
+MLPs were a popular machine learning solution in the 1980s, finding applications in diverse fields such as speech recognition, image recognition, and machine translation software,[6] but thereafter faced strong competition from much simpler (and related[7]) support vector machines. Interest in backpropagation networks returned due to the successes of deep learning.
+
+References[edit]
+
+
+^ Hastie, Trevor. Tibshirani, Robert. Friedman, Jerome. The Elements of Statistical Learning: Data Mining, Inference, and Prediction. Springer, New York, NY, 2009.
+
+^ Rosenblatt, Frank. x. Principles of Neurodynamics: Perceptrons and the Theory of Brain Mechanisms. Spartan Books, Washington DC, 1961
+
+^ Rumelhart, David E., Geoffrey E. Hinton, and R. J. Williams. "Learning Internal Representations by Error Propagation". David E. Rumelhart, James L. McClelland, and the PDP research group. (editors), Parallel distributed processing: Explorations in the microstructure of cognition, Volume 1: Foundation. MIT Press, 1986.
+
+^ a b Cybenko, G. 1989. Approximation by superpositions of a sigmoidal function Mathematics of Control, Signals, and Systems, 2(4), 303–314.
+
+^ Haykin, Simon (1998). Neural Networks: A Comprehensive Foundation (2 ed.). Prentice Hall. ISBN 0-13-273350-1.
+
+^ Neural networks. II. What are they and why is everybody so interested in them now?; Wasserman, P.D.; Schwartz, T.; Page(s): 10-15; IEEE Expert, 1988, Volume 3, Issue 1
+
+^ R. Collobert and S. Bengio (2004). Links between Perceptrons, MLPs and SVMs. Proc. Int'l Conf. on Machine Learning (ICML).
+
+
+External links[edit]
+A Gentle Introduction to Backpropagation - An intuitive tutorial by Shashi Sathyanarayana This is an updated PDF version of a blog article that was previously linked here. This article contains pseudocode ("Training Wheels for Training Neural Networks") for implementing the algorithm.
+Weka: Open source data mining software with multilayer perceptron implementation.
+Neuroph Studio documentation, implements this algorithm and a few others.
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Multilayer_perceptron&oldid=961430969"
+Categories: Classification algorithmsArtificial neural networks
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+БългарскиCatalàDanskDeutschEspañolفارسیFrançaisItaliano日本語PolskiPortuguêsРусскийSuomiУкраїнська粵語中文
+Edit links
+
+
+
+
+
+
+ This page was last edited on 8 June 2020, at 12:26 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

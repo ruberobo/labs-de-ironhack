@@ -1,0 +1,408 @@
+
+
+
+
+PyTorch - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PyTorch
+
+From Wikipedia, the free encyclopedia
+  (Redirected from Pytorch)
+
+
+Jump to navigation
+Jump to search
+Open source machine learning library for Python, based on Torch
+PyTorchOriginal author(s)Adam Paszke, Sam Gross, Soumith Chintala, Gregory ChananDeveloper(s)Facebook's AI Research lab (FAIR)Initial releaseSeptember 2016; 3 years ago (2016-09)[1]Stable release1.6.0
+   / 28 July 2020; 23 days ago (2020-07-28)
+Repositorygithub.com/pytorch/pytorchWritten inPython, C++, CUDAOperating systemLinux, macOS, WindowsPlatformIA-32, x86-64Available inEnglishTypeLibrary for machine learning and deep learningLicenseBSDWebsitepytorch.org
+PyTorch is an open source machine learning library based on the Torch library,[2][3][4] used for applications such as computer vision and natural language processing,[5] primarily developed by Facebook's AI Research lab (FAIR).[6][7][8] It is free and open-source software released under the Modified BSD license. Although the Python interface is more polished and the primary focus of development, PyTorch also has a C++ interface.[9]
+A number of pieces of Deep Learning software are built on top of PyTorch, including Tesla Autopilot[10], Uber's Pyro,[11] HuggingFace's Transformers,[12] PyTorch Lightning[13][14], and Catalyst.[15][16]
+PyTorch provides two high-level features:[17]
+
+Tensor computing (like NumPy) with strong acceleration via graphics processing units (GPU)
+Deep neural networks built on a tape-based automatic differentiation system
+Contents
+
+1 History
+2 PyTorch tensors
+3 Modules
+
+3.1 Autograd module
+3.2 Optim module
+3.3 nn module
+
+
+4 See also
+5 References
+6 External links
+
+
+History[edit]
+Facebook operates both PyTorch and Convolutional Architecture for Fast Feature Embedding (Caffe2), but models defined by the two frameworks were mutually incompatible. The Open Neural Network Exchange (ONNX) project was created by Facebook and Microsoft in September 2017 for converting models between frameworks. Caffe2 was merged into PyTorch at the end of March 2018.[18]
+
+PyTorch tensors[edit]
+PyTorch defines a class called Tensor (torch.Tensor) to store and operate on homogeneous multidimensional rectangular arrays of numbers. PyTorch Tensors are similar to NumPy Arrays, but can also be operated on a CUDA-capable Nvidia GPU. PyTorch supports various sub-types of Tensors.[19]
+
+Modules[edit]
+Autograd module[edit]
+PyTorch uses a method called automatic differentiation. A recorder records what operations have performed, and then it replays it backward to compute the gradients. This method is especially powerful when building neural networks to save time on one epoch by calculating differentiation of the parameters at the forward pass.
+
+Optim module[edit]
+torch.optim is a module that implements various optimization algorithms used for building neural networks. Most of the commonly used methods are already supported, so there is no need to build them from scratch.
+
+nn module[edit]
+PyTorch autograd makes it easy to define computational graphs and take gradients, but raw autograd can be a bit too low-level for defining complex neural networks. This is where the nn module can help.
+
+See also[edit]
+
+
+Free and open-source software portal
+Comparison of deep learning software
+Differentiable programming
+DeepSpeed
+Torch (machine learning)
+Tensor
+References[edit]
+
+
+^ Chintala, Soumith (1 September 2016). "PyTorch Alpha-1 release".
+
+^ Yegulalp, Serdar (19 January 2017). "Facebook brings GPU-powered machine learning to Python". InfoWorld. Retrieved 11 December 2017.
+
+^ Lorica, Ben (3 August 2017). "Why AI and machine learning researchers are beginning to embrace PyTorch". O'Reilly Media. Retrieved 11 December 2017.
+
+^ Ketkar, Nikhil (2017). "Introduction to PyTorch". Deep Learning with Python. Apress, Berkeley, CA. pp. 195–208. doi:10.1007/978-1-4842-2766-4_12. ISBN 9781484227657.
+
+^ "Natural Language Processing (NLP) with PyTorch – NLP with PyTorch documentation". dl4nlp.info. Retrieved 2017-12-18.
+
+^ Patel, Mo (2017-12-07). "When two trends fuse: PyTorch and recommender systems". O'Reilly Media. Retrieved 2017-12-18.
+
+^ Mannes, John. "Facebook and Microsoft collaborate to simplify conversions from PyTorch to Caffe2". TechCrunch. Retrieved 2017-12-18. FAIR is accustomed to working with PyTorch – a deep learning framework optimized for achieving state of the art results in research, regardless of resource constraints. Unfortunately in the real world, most of us are limited by the computational capabilities of our smartphones and computers.
+
+^ Arakelyan, Sophia (2017-11-29). "Tech giants are using open source frameworks to dominate the AI community". VentureBeat. Retrieved 2017-12-18.
+
+^ "The C++ Frontend". PyTorch Master Documentation. Retrieved 2019-07-29.
+
+^ Karpathy, Andrej. "PyTorch at Tesla - Andrej Karpathy, Tesla".
+
+^ "Uber AI Labs Open Sources Pyro, a Deep Probabilistic Programming Language". Uber Engineering Blog. 2017-11-03. Retrieved 2017-12-18.
+
+^ PYTORCH-TRANSFORMERS: PyTorch implementations of popular NLP Transformers, PyTorch Hub, 2019-12-01, retrieved 2019-12-01
+
+^ PYTORCH-Lightning: The lightweight PyTorch wrapper for ML researchers. Scale your models. Write less boilerplate, Lightning-Team, 2020-06-18, retrieved 2020-06-18
+
+^ "Ecosystem Tools". pytorch.org. Retrieved 2020-06-18.
+
+^ GitHub - catalyst-team/catalyst: Accelerated DL & RL, Catalyst-Team, 2019-12-05, retrieved 2019-12-05
+
+^ "Ecosystem Tools". pytorch.org. Retrieved 2020-04-04.
+
+^ "PyTorch – About". pytorch.org. Archived from the original on 2018-06-15. Retrieved 2018-06-11.
+
+^ "Caffe2 Merges With PyTorch". 2018-04-02.
+
+^ "An Introduction to PyTorch – A Simple yet Powerful Deep Learning Library". analyticsvidhya.com. 2018-02-22. Retrieved 2018-06-11.
+
+
+External links[edit]
+Official website
+vteDeep learning softwareOpen-source
+Apache SINGA
+Caffe
+Deeplearning4j
+DeepSpeed
+Dlib
+Keras
+Microsoft Cognitive Toolkit
+ML.NET
+MXNet
+OpenNN
+PyTorch
+TensorFlow
+Theano
+Torch
+ONNX
+Proprietary
+Maple
+Neural Designer
+Wolfram Mathematica
+Apple Core ML
+
+Category
+Comparison
+
+vteDifferentiable computingGeneral
+Differentiable programming
+Neural Turing machine
+Differentiable neural computer
+Automatic differentiation
+Neuromorphic engineering
+Concepts
+Gradient descent
+Cable theory
+Cluster analysis
+Regression analysis
+Pattern recognition
+Adversarial machine learning
+Computational learning theory
+Programming languages
+Python
+Julia
+Application
+Machine learning
+Artificial neural network
+Scientific computing
+Artificial Intelligence
+Hardware
+TPU
+VPU
+Memristor
+SpiNNaker
+Software library
+TensorFlow
+PyTorch
+ImplementationAudio-visual
+AlexNet
+WaveNet
+Human image synthesis
+HWR
+OCR
+Speech synthesis
+Speech recognition
+Facial recognition system
+Verbal
+Word2vec
+Transformer
+BERT
+NMT
+Project Debater
+Watson
+Decisional
+AlphaGo
+Q-learning
+SARSA
+OpenAI Five
+People
+Alex Graves
+Ian Goodfellow
+Yoshua Bengio
+Geoffrey Hinton
+Yann LeCun
+Andrew Ng
+Demis Hassabis
+
+ Portals
+Computer programming
+Technology
+ Category
+Artificial neural networks
+Machine learning
+
+
+
+This software article is a stub. You can help Wikipedia by expanding it.vte
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=PyTorch&oldid=973851659"
+Categories: Applied machine learningData mining and machine learning softwareDeep learningFacebook softwareFree science softwareFree software programmed in CFree software programmed in PythonOpen-source artificial intelligencePython scientific librariesSoftware using the BSD licenseSoftware stubsHidden categories: Articles with short descriptionShort description matches WikidataOfficial website different in Wikidata and WikipediaAll stub articles
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+العربيةবাংলাCatalàDeutschEuskaraفارسیFrançais한국어हिन्दी日本語PolskiРусскийไทยTürkçeУкраїнська中文
+Edit links
+
+
+
+
+
+
+ This page was last edited on 19 August 2020, at 16:06 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

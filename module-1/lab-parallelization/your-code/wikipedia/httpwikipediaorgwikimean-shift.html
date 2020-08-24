@@ -1,0 +1,1523 @@
+
+
+
+
+Mean shift - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Mean shift
+
+From Wikipedia, the free encyclopedia
+  (Redirected from Mean-shift)
+
+
+Jump to navigation
+Jump to search
+Part of a series onMachine learninganddata mining
+Problems
+Classification
+Clustering
+Regression
+Anomaly detection
+AutoML
+Association rules
+Reinforcement learning
+Structured prediction
+Feature engineering
+Feature learning
+Online learning
+Semi-supervised learning
+Unsupervised learning
+Learning to rank
+Grammar induction
+
+
+Supervised learning(classification • regression) 
+Decision trees
+Ensembles
+Bagging
+Boosting
+Random forest
+k-NN
+Linear regression
+Naive Bayes
+Artificial neural networks
+Logistic regression
+Perceptron
+Relevance vector machine (RVM)
+Support vector machine (SVM)
+
+
+Clustering
+BIRCH
+CURE
+Hierarchical
+k-means
+Expectation–maximization (EM)
+DBSCAN
+OPTICS
+Mean-shift
+
+
+Dimensionality reduction
+Factor analysis
+CCA
+ICA
+LDA
+NMF
+PCA
+PGD
+t-SNE
+
+
+Structured prediction
+Graphical models
+Bayes net
+Conditional random field
+Hidden Markov
+
+
+Anomaly detection
+k-NN
+Local outlier factor
+
+
+Artificial neural network
+Autoencoder
+Deep learning
+DeepDream
+Multilayer perceptron
+RNN
+LSTM
+GRU
+Restricted Boltzmann machine
+GAN
+SOM
+Convolutional neural network
+U-Net
+
+
+Reinforcement learning
+Q-learning
+SARSA
+Temporal difference (TD)
+
+
+Theory
+Bias–variance dilemma
+Computational learning theory
+Empirical risk minimization
+Occam learning
+PAC learning
+Statistical learning
+VC theory
+
+
+Machine-learning venues
+NeurIPS
+ICML
+ML
+JMLR
+ArXiv:cs.LG
+
+
+Glossary of artificial intelligence
+Glossary of artificial intelligence
+
+
+Related articles
+List of datasets for machine-learning research
+Outline of machine learning
+
+vte
+Mean shift is a non-parametric feature-space analysis technique for locating the maxima of a density function, a so-called mode-seeking algorithm.[1] Application domains include cluster analysis in computer vision and image processing.[2]
+
+Contents
+
+1 History
+2 Overview
+3 Details
+4 Types of kernels
+5 Applications
+
+5.1 Clustering
+5.2 Tracking
+5.3 Smoothing
+
+
+6 Strengths
+7 Weaknesses
+8 Availability
+9 See also
+10 References
+
+
+History[edit]
+The mean shift procedure was originally presented in 1975 by Fukunaga and Hostetler.[3]
+
+Overview[edit]
+Mean shift is a procedure for locating the maxima—the modes—of a density function given discrete data sampled from that function.[1] This is an iterative method, and we start with an initial estimate 
+
+
+
+x
+
+
+{\displaystyle x}
+
+.  Let a kernel function 
+
+
+
+K
+(
+
+x
+
+i
+
+
+−
+x
+)
+
+
+{\displaystyle K(x_{i}-x)}
+
+ be given.  This function determines the weight of nearby points for re-estimation of the mean.  Typically a Gaussian kernel on the distance to the current estimate is used, 
+
+
+
+K
+(
+
+x
+
+i
+
+
+−
+x
+)
+=
+
+e
+
+−
+c
+
+|
+
+
+|
+
+
+x
+
+i
+
+
+−
+x
+
+|
+
+
+
+|
+
+
+2
+
+
+
+
+
+
+{\displaystyle K(x_{i}-x)=e^{-c||x_{i}-x||^{2}}}
+
+.  The weighted mean of the density in the window determined by 
+
+
+
+K
+
+
+{\displaystyle K}
+
+ is
+
+
+
+
+
+m
+(
+x
+)
+=
+
+
+
+
+∑
+
+
+x
+
+i
+
+
+∈
+N
+(
+x
+)
+
+
+K
+(
+
+x
+
+i
+
+
+−
+x
+)
+
+x
+
+i
+
+
+
+
+
+∑
+
+
+x
+
+i
+
+
+∈
+N
+(
+x
+)
+
+
+K
+(
+
+x
+
+i
+
+
+−
+x
+)
+
+
+
+
+
+{\displaystyle m(x)={\frac {\sum _{x_{i}\in N(x)}K(x_{i}-x)x_{i}}{\sum _{x_{i}\in N(x)}K(x_{i}-x)}}}
+
+
+where 
+
+
+
+N
+(
+x
+)
+
+
+{\displaystyle N(x)}
+
+ is the neighborhood of 
+
+
+
+x
+
+
+{\displaystyle x}
+
+, a set of points for which 
+
+
+
+K
+(
+
+x
+
+i
+
+
+)
+≠
+0
+
+
+{\displaystyle K(x_{i})\neq 0}
+
+.
+The difference 
+
+
+
+m
+(
+x
+)
+−
+x
+
+
+{\displaystyle m(x)-x}
+
+ is called mean shift in Fukunaga and Hostetler.[3] 
+The mean-shift algorithm now sets 
+
+
+
+x
+←
+m
+(
+x
+)
+
+
+{\displaystyle x\leftarrow m(x)}
+
+, and repeats the estimation until 
+
+
+
+m
+(
+x
+)
+
+
+{\displaystyle m(x)}
+
+ converges.
+Although the mean shift algorithm has been widely used in many applications, a rigid proof for the convergence of the algorithm using a general kernel in a high dimensional space is still not known.[4] Aliyari Ghassabeh showed the convergence of the mean shift algorithm in one-dimension with a differentiable, convex, and strictly decreasing profile function.[5] However, the one-dimensional case has limited real world applications. Also, the convergence of the algorithm in higher dimensions with a finite number of the (or isolated) stationary points has been proved.[4][6] However, sufficient conditions for a general kernel function to have finite (or isolated) stationary points have not been provided.
+Gaussian Mean-Shift is an Expectation–maximization algorithm.[7]
+
+Details[edit]
+Let data be a finite set 
+
+
+
+S
+
+
+{\displaystyle S}
+
+ embedded in the 
+
+
+
+n
+
+
+{\displaystyle n}
+
+-dimensional Euclidean space, 
+
+
+
+X
+
+
+{\displaystyle X}
+
+. Let 
+
+
+
+K
+
+
+{\displaystyle K}
+
+ be a flat kernel that is the characteristic function of the 
+
+
+
+λ
+
+
+{\displaystyle \lambda }
+
+-ball in 
+
+
+
+X
+
+
+{\displaystyle X}
+
+,
+
+
+
+
+
+
+K
+(
+x
+)
+=
+
+
+{
+
+
+
+1
+
+
+
+if
+
+ 
+‖
+x
+‖
+≤
+λ
+
+
+
+
+0
+
+
+
+if
+
+ 
+‖
+x
+‖
+>
+λ
+
+
+
+
+
+
+
+
+{\displaystyle K(x)={\begin{cases}1&{\text{if}}\ \|x\|\leq \lambda \\0&{\text{if}}\ \|x\|>\lambda \\\end{cases}}}
+
+
+
+
+In each iteration of the algorithm, 
+
+
+
+s
+←
+m
+(
+s
+)
+
+
+{\displaystyle s\leftarrow m(s)}
+
+ is performed for all 
+
+
+
+s
+∈
+S
+
+
+{\displaystyle s\in S}
+
+ simultaneously. The first question, then, is how to estimate the density function given a sparse set of samples. One of the simplest approaches is to just smooth the data, e.g., by convolving it with a fixed kernel of width 
+
+
+
+h
+
+
+{\displaystyle h}
+
+,
+
+
+
+
+
+
+f
+(
+x
+)
+=
+
+∑
+
+i
+
+
+K
+(
+x
+−
+
+x
+
+i
+
+
+)
+=
+
+∑
+
+i
+
+
+k
+
+(
+
+
+
+‖
+x
+−
+
+x
+
+i
+
+
+
+‖
+
+2
+
+
+
+
+h
+
+2
+
+
+
+
+)
+
+
+
+{\displaystyle f(x)=\sum _{i}K(x-x_{i})=\sum _{i}k\left({\frac {\|x-x_{i}\|^{2}}{h^{2}}}\right)}
+
+
+
+
+where 
+
+
+
+
+x
+
+i
+
+
+
+
+{\displaystyle x_{i}}
+
+ are the input samples and 
+
+
+
+k
+(
+r
+)
+
+
+{\displaystyle k(r)}
+
+ is the kernel function (or Parzen window). 
+
+
+
+h
+
+
+{\displaystyle h}
+
+ is the only parameter in the algorithm and is called the bandwidth. This approach is known as kernel density estimation or the Parzen window technique. Once we have computed 
+
+
+
+f
+(
+x
+)
+
+
+{\displaystyle f(x)}
+
+ from equation above, we can find its local maxima using gradient ascent or some other optimization technique. The problem with this "brute force" approach is that, for higher dimensions, it becomes computationally prohibitive to evaluate 
+
+
+
+f
+(
+x
+)
+
+
+{\displaystyle f(x)}
+
+ over the complete search space. Instead, mean shift uses a variant of what is known in the optimization literature as multiple restart gradient descent. Starting at some guess for a local maximum, 
+
+
+
+
+y
+
+k
+
+
+
+
+{\displaystyle y_{k}}
+
+, which can be a random input data point 
+
+
+
+
+x
+
+1
+
+
+
+
+{\displaystyle x_{1}}
+
+, mean shift computes the gradient of the density estimate 
+
+
+
+f
+(
+x
+)
+
+
+{\displaystyle f(x)}
+
+ at 
+
+
+
+
+y
+
+k
+
+
+
+
+{\displaystyle y_{k}}
+
+ and takes an uphill step in that direction.[8]
+
+Types of kernels[edit]
+Kernel definition: Let 
+
+
+
+X
+
+
+{\displaystyle X}
+
+ be the 
+
+
+
+n
+
+
+{\displaystyle n}
+
+-dimensional Euclidean space, 
+
+
+
+
+
+R
+
+
+n
+
+
+
+
+{\displaystyle \mathbb {R} ^{n}}
+
+. The norm of 
+
+
+
+x
+
+
+{\displaystyle x}
+
+ is a non-negative number, 
+
+
+
+‖
+x
+
+‖
+
+2
+
+
+=
+
+x
+
+⊤
+
+
+x
+≥
+0
+
+
+{\displaystyle \|x\|^{2}=x^{\top }x\geq 0}
+
+. A function 
+
+
+
+K
+:
+X
+→
+
+R
+
+
+
+{\displaystyle K:X\rightarrow \mathbb {R} }
+
+ is said to be a kernel if there exists a profile, 
+
+
+
+k
+:
+[
+0
+,
+∞
+[
+→
+
+R
+
+
+
+{\displaystyle k:[0,\infty [\rightarrow \mathbb {R} }
+
+ , such that
+
+
+
+
+K
+(
+x
+)
+=
+k
+(
+‖
+x
+
+‖
+
+2
+
+
+)
+
+
+{\displaystyle K(x)=k(\|x\|^{2})}
+
+
+and 
+
+k is non-negative.
+k is non-increasing: 
+
+
+
+k
+(
+a
+)
+≥
+k
+(
+b
+)
+
+
+{\displaystyle k(a)\geq k(b)}
+
+ if 
+
+
+
+a
+<
+b
+
+
+{\displaystyle a<b}
+
+.
+k is piecewise continuous and 
+
+
+
+
+∫
+
+0
+
+
+∞
+
+
+k
+(
+r
+)
+
+d
+r
+<
+∞
+ 
+
+
+{\displaystyle \int _{0}^{\infty }k(r)\,dr<\infty \ }
+
+
+The two most frequently used kernel profiles for mean shift are:
+
+Flat kernel
+
+
+
+
+
+k
+(
+x
+)
+=
+
+
+{
+
+
+
+1
+
+
+
+if
+
+ 
+x
+≤
+λ
+
+
+
+
+0
+
+
+
+if
+
+ 
+x
+>
+λ
+
+
+
+
+
+
+
+
+{\displaystyle k(x)={\begin{cases}1&{\text{if}}\ x\leq \lambda \\0&{\text{if}}\ x>\lambda \\\end{cases}}}
+
+
+
+
+Gaussian kernel
+
+
+
+
+
+k
+(
+x
+)
+=
+
+e
+
+−
+
+
+
+x
+
+2
+
+
+
+2
+
+σ
+
+2
+
+
+
+
+
+
+
+,
+
+
+{\displaystyle k(x)=e^{-{\frac {x^{2}}{2\sigma ^{2}}}},}
+
+
+
+
+where the standard deviation parameter 
+
+
+
+σ
+
+
+{\displaystyle \sigma }
+
+ works as the bandwidth parameter, 
+
+
+
+h
+
+
+{\displaystyle h}
+
+.
+
+Applications[edit]
+Clustering[edit]
+Consider a set of points in two-dimensional space. Assume a circular window centered at C and having radius r as the kernel. Mean shift is a hill climbing algorithm which involves shifting this kernel iteratively to a higher density region until convergence. Every shift is defined by a mean shift vector. The mean shift vector always points toward the direction of the maximum increase in the density. At every iteration the kernel is shifted to the centroid or the mean of the points within it. The method of calculating this mean depends on the choice of the kernel. In this case if a Gaussian kernel is chosen instead of a flat kernel, then every point will first be assigned a weight which will decay exponentially as the distance from the kernel's center increases. At convergence, there will be no direction at which a shift can accommodate more points inside the kernel.
+
+Tracking[edit]
+The mean shift algorithm can be used for visual tracking.  The simplest such algorithm would create a confidence map in the new image based on the color histogram of the object in the previous image, and use mean shift to find the peak of a confidence map near the object's old position. The confidence map is a probability density function on the new image, assigning each pixel of the new image a probability, which is the probability of the pixel color occurring in the object in the previous image. A few algorithms, such as kernel-based object tracking,[9] 
+ensemble tracking,[10] 
+CAMshift [11][12] 
+expand on this idea.
+
+Smoothing[edit]
+Let 
+
+
+
+
+x
+
+i
+
+
+
+
+{\displaystyle x_{i}}
+
+ and 
+
+
+
+
+z
+
+i
+
+
+,
+i
+=
+1
+,
+.
+.
+.
+,
+n
+,
+
+
+{\displaystyle z_{i},i=1,...,n,}
+
+ be the 
+
+
+
+d
+
+
+{\displaystyle d}
+
+-dimensional input and filtered image pixels in the joint spatial-range domain. For each pixel,
+
+Initialize 
+
+
+
+j
+=
+1
+
+
+{\displaystyle j=1}
+
+ and 
+
+
+
+
+y
+
+i
+,
+1
+
+
+=
+
+x
+
+i
+
+
+
+
+{\displaystyle y_{i,1}=x_{i}}
+
+
+Compute 
+
+
+
+
+y
+
+i
+,
+j
++
+1
+
+
+
+
+{\displaystyle y_{i,j+1}}
+
+ according to 
+
+
+
+m
+(
+⋅
+)
+
+
+{\displaystyle m(\cdot )}
+
+ until convergence, 
+
+
+
+y
+=
+
+y
+
+i
+,
+c
+
+
+
+
+{\displaystyle y=y_{i,c}}
+
+.
+Assign 
+
+
+
+
+z
+
+i
+
+
+=
+(
+
+x
+
+i
+
+
+s
+
+
+,
+
+y
+
+i
+,
+c
+
+
+r
+
+
+)
+
+
+{\displaystyle z_{i}=(x_{i}^{s},y_{i,c}^{r})}
+
+. The superscripts s and r denote the spatial and range components of a vector, respectively. The assignment specifies that the filtered data at the spatial location axis will have the range component of the point of convergence 
+
+
+
+
+y
+
+i
+,
+c
+
+
+r
+
+
+
+
+{\displaystyle y_{i,c}^{r}}
+
+.
+Strengths[edit]
+Mean shift is an application-independent tool suitable for real data analysis.
+Does not assume any predefined shape on data clusters.
+It is capable of handling arbitrary feature spaces.
+The procedure relies on choice of a single parameter: bandwidth.
+The bandwidth/window size 'h' has a physical meaning, unlike k-means.
+Weaknesses[edit]
+The selection of a window size is not trivial.
+Inappropriate window size can cause modes to be merged, or generate additional “shallow” modes.
+Often requires using adaptive window size.
+Availability[edit]
+Variants of the algorithm can be found in machine learning and image processing packages:
+
+ELKI. Java data mining tool with many clustering algorithms.
+ImageJ. Image filtering using the mean shift filter.
+mlpack. Efficient dual-tree algorithm-based implementation.
+OpenCV contains mean-shift implementation via cvMeanShift Method
+Orfeo toolbox. A C++ implementation.
+Scikit-learn Numpy/Python implementation uses ball tree for efficient neighboring points lookup
+See also[edit]
+DBSCAN
+OPTICS algorithm
+Kernel density estimation (KDE)
+Kernel (statistics)
+References[edit]
+
+
+^ a b Cheng, Yizong (August 1995). "Mean Shift, Mode Seeking, and Clustering". IEEE Transactions on Pattern Analysis and Machine Intelligence. 17 (8): 790–799. CiteSeerX 10.1.1.510.1222. doi:10.1109/34.400568.
+
+^ Comaniciu, Dorin; Peter Meer (May 2002). "Mean Shift: A Robust Approach Toward Feature Space Analysis". IEEE Transactions on Pattern Analysis and Machine Intelligence. 24 (5): 603–619. CiteSeerX 10.1.1.160.3832. doi:10.1109/34.1000236.
+
+^ a b Fukunaga, Keinosuke; Larry D. Hostetler (January 1975). "The Estimation of the Gradient of a Density Function, with Applications in Pattern Recognition". IEEE Transactions on Information Theory. 21 (1): 32–40. doi:10.1109/TIT.1975.1055330.
+
+^ a b Aliyari Ghassabeh, Youness (2015-03-01). "A sufficient condition for the convergence of the mean shift algorithm with Gaussian kernel". Journal of Multivariate Analysis. 135: 1–10. doi:10.1016/j.jmva.2014.11.009.
+
+^ Aliyari Ghassabeh, Youness (2013-09-01). "On the convergence of the mean shift algorithm in the one-dimensional space". Pattern Recognition Letters. 34 (12): 1423–1427. arXiv:1407.2961. doi:10.1016/j.patrec.2013.05.004.
+
+^ Li, Xiangru; Hu, Zhanyi; Wu, Fuchao (2007-06-01). "A note on the convergence of the mean shift". Pattern Recognition. 40 (6): 1756–1762. doi:10.1016/j.patcog.2006.10.016.
+
+^ Carreira-Perpinan, Miguel A. (May 2007). "Gaussian Mean-Shift Is an EM Algorithm". IEEE Transactions on Pattern Analysis and Machine Intelligence. 29 (5): 767–776. doi:10.1109/tpami.2007.1057. ISSN 0162-8828.
+
+^ Richard Szeliski, Computer Vision, Algorithms and Applications, Springer, 2011
+
+^ Comaniciu, Dorin; Visvanathan Ramesh; Peter Meer (May 2003). "Kernel-based Object Tracking". IEEE Transactions on Pattern Analysis and Machine Intelligence. 25 (5): 564–575. CiteSeerX 10.1.1.8.7474. doi:10.1109/tpami.2003.1195991.
+
+^ Avidan, Shai (2005). Ensemble Tracking. 2005 IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR'05). 2. San Diego, California: IEEE. pp. 494–501. doi:10.1109/CVPR.2005.144. ISBN 978-0-7695-2372-9. PMID 17170479.
+
+^ Gary Bradski (1998) Computer Vision Face Tracking For Use in a Perceptual User Interface Archived 2012-04-17 at the Wayback Machine, Intel Technology Journal, No. Q2.
+
+^ Emami, Ebrahim (2013). Online failure detection and correction for CAMShift tracking algorithm. 2013 Iranian Conference on Machine Vision and Image Processing (MVIP). 2. IEEE. pp. 180–183. doi:10.1109/IranianMVIP.2013.6779974. ISBN 978-1-4673-6184-2.
+
+
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Mean_shift&oldid=967563319"
+Categories: Computer visionCluster analysis algorithmsHidden categories: Webarchive template wayback links
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+CatalàفارسیItalianoРусский
+Edit links
+
+
+
+
+
+
+ This page was last edited on 14 July 2020, at 00:34 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

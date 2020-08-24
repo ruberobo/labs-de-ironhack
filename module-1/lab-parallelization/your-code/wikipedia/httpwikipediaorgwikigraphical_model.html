@@ -1,0 +1,916 @@
+
+
+
+
+Graphical model - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Graphical model
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+Part of a series onMachine learninganddata mining
+Problems
+Classification
+Clustering
+Regression
+Anomaly detection
+AutoML
+Association rules
+Reinforcement learning
+Structured prediction
+Feature engineering
+Feature learning
+Online learning
+Semi-supervised learning
+Unsupervised learning
+Learning to rank
+Grammar induction
+
+
+Supervised learning(classification • regression) 
+Decision trees
+Ensembles
+Bagging
+Boosting
+Random forest
+k-NN
+Linear regression
+Naive Bayes
+Artificial neural networks
+Logistic regression
+Perceptron
+Relevance vector machine (RVM)
+Support vector machine (SVM)
+
+
+Clustering
+BIRCH
+CURE
+Hierarchical
+k-means
+Expectation–maximization (EM)
+DBSCAN
+OPTICS
+Mean-shift
+
+
+Dimensionality reduction
+Factor analysis
+CCA
+ICA
+LDA
+NMF
+PCA
+PGD
+t-SNE
+
+
+Structured prediction
+Graphical models
+Bayes net
+Conditional random field
+Hidden Markov
+
+
+Anomaly detection
+k-NN
+Local outlier factor
+
+
+Artificial neural network
+Autoencoder
+Deep learning
+DeepDream
+Multilayer perceptron
+RNN
+LSTM
+GRU
+Restricted Boltzmann machine
+GAN
+SOM
+Convolutional neural network
+U-Net
+
+
+Reinforcement learning
+Q-learning
+SARSA
+Temporal difference (TD)
+
+
+Theory
+Bias–variance dilemma
+Computational learning theory
+Empirical risk minimization
+Occam learning
+PAC learning
+Statistical learning
+VC theory
+
+
+Machine-learning venues
+NeurIPS
+ICML
+ML
+JMLR
+ArXiv:cs.LG
+
+
+Glossary of artificial intelligence
+Glossary of artificial intelligence
+
+
+Related articles
+List of datasets for machine-learning research
+Outline of machine learning
+
+vte
+This article includes a list of references, but its sources remain unclear because it has insufficient inline citations. Please help to improve this article by introducing more precise citations. (May 2017) (Learn how and when to remove this template message)
+A graphical model or probabilistic graphical model (PGM) or structured probabilistic model is a probabilistic model for which a graph expresses the conditional dependence structure between random variables. They are commonly used in probability theory, statistics—particularly Bayesian statistics—and machine learning.
+
+ An example of a graphical model. Each arrow indicates a dependency. In this example: D depends on A, B, and C; and C depends on B and D; whereas A and B are each independent.
+Contents
+
+1 Types of graphical models
+
+1.1 Bayesian network
+1.2 Other types
+
+
+2 Applications
+3 See also
+4 Notes
+5 Further reading
+
+5.1 Books and book chapters
+5.2 Journal articles
+5.3 Other
+
+
+6 External links
+
+
+Types of graphical models[edit]
+Generally, probabilistic graphical models use a graph-based representation as the foundation for encoding a  distribution over a multi-dimensional space and a graph that is a compact or factorized representation of a set of independences that hold in the specific distribution. Two branches of graphical representations of distributions are commonly used, namely, Bayesian networks and Markov random fields. Both families encompass the properties of factorization and independences, but they differ in the set of independences they can encode and the factorization of the distribution that they induce.[1]
+
+Bayesian network[edit]
+Main article: Bayesian network
+If the network structure of the model is a directed acyclic graph, the model represents a factorization of the joint probability of all random variables.  More precisely, if the events are 
+
+
+
+
+X
+
+1
+
+
+,
+…
+,
+
+X
+
+n
+
+
+
+
+{\displaystyle X_{1},\ldots ,X_{n}}
+
+ then the joint probability satisfies
+
+
+
+
+
+P
+[
+
+X
+
+1
+
+
+,
+…
+,
+
+X
+
+n
+
+
+]
+=
+
+∏
+
+i
+=
+1
+
+
+n
+
+
+P
+[
+
+X
+
+i
+
+
+
+|
+
+
+pa
+
+(
+
+X
+
+i
+
+
+)
+]
+
+
+{\displaystyle P[X_{1},\ldots ,X_{n}]=\prod _{i=1}^{n}P[X_{i}|{\text{pa}}(X_{i})]}
+
+
+where 
+
+
+
+
+pa
+
+(
+
+X
+
+i
+
+
+)
+
+
+{\displaystyle {\text{pa}}(X_{i})}
+
+ is the set of parents of node 
+
+
+
+
+X
+
+i
+
+
+
+
+{\displaystyle X_{i}}
+
+ (nodes with edges directed towards 
+
+
+
+
+X
+
+i
+
+
+
+
+{\displaystyle X_{i}}
+
+).  In other words, the joint distribution factors into a product of conditional distributions. For example, the graphical model in the Figure shown above (which is actually not a directed acyclic graph, but an ancestral graph) consists of the random variables 
+
+
+
+A
+,
+B
+,
+C
+,
+D
+
+
+{\displaystyle A,B,C,D}
+
+
+with a joint probability density that factors as
+
+
+
+
+
+P
+[
+A
+,
+B
+,
+C
+,
+D
+]
+=
+P
+[
+A
+]
+⋅
+P
+[
+B
+]
+⋅
+P
+[
+C
+,
+D
+
+|
+
+A
+,
+B
+]
+
+
+{\displaystyle P[A,B,C,D]=P[A]\cdot P[B]\cdot P[C,D|A,B]}
+
+
+Any two nodes are conditionally independent given the values of their parents.  In general, any two sets of nodes are conditionally independent given a third set if a criterion called d-separation holds in the graph.  Local independences and global independences are equivalent in Bayesian networks.
+This type of graphical model is known as a directed graphical model, Bayesian network, or belief network. Classic machine learning models like hidden Markov models, neural networks and newer models such as variable-order Markov models can be considered special cases of Bayesian networks.
+
+Other types[edit]
+Naive Bayes classifier where we use a tree with a single root
+Dependency network  where cycles are allowed
+Tree-augmented classifier or TAN model
+A factor graph is an undirected bipartite graph connecting variables and factors. Each factor represents a function over the variables it is connected to. This is a helpful representation for understanding and implementing belief propagation.
+A clique tree or junction tree is a tree of cliques, used in the junction tree algorithm.
+A chain graph is a graph which may have both directed and undirected edges, but without any directed cycles (i.e. if we start at any vertex and move along the graph respecting the directions of any arrows, we cannot return to the vertex we started from if we have passed an arrow). Both directed acyclic graphs and undirected graphs are special cases of chain graphs, which can therefore provide a way of unifying and generalizing Bayesian and Markov networks.[2]
+An ancestral graph is a further extension, having directed, bidirected and undirected edges.[3]
+Random field techniques
+A Markov random field, also known as a Markov network, is a model over an undirected graph. A graphical model with many repeated subunits can be represented with plate notation.
+A conditional random field is a discriminative model specified over an undirected graph.
+A restricted Boltzmann machine is a bipartite generative model specified over an undirected graph.
+Applications[edit]
+The framework of the models, which provides algorithms for discovering and analyzing structure in complex distributions  to describe them succinctly and extract the unstructured information, allows them to be constructed and utilized effectively.[1] Applications of graphical models include causal inference, information extraction, speech recognition, computer vision, decoding of low-density parity-check codes, modeling of gene regulatory networks, gene finding and diagnosis of diseases, and graphical models for protein structure.
+
+See also[edit]
+Belief propagation
+Structural equation model
+Notes[edit]
+
+
+^ a b Koller, D.; Friedman, N. (2009). Probabilistic Graphical Models. Massachusetts: MIT Press. p. 1208. ISBN 978-0-262-01319-2. Archived from the original on 2014-04-27.
+
+^ Frydenberg, Morten (1990). "The Chain Graph Markov Property". Scandinavian Journal of Statistics. 17 (4): 333–353. JSTOR 4616181. MR 1096723.
+
+^ Richardson, Thomas; Spirtes, Peter (2002). "Ancestral graph Markov models". Annals of Statistics. 30 (4): 962–1030. CiteSeerX 10.1.1.33.4906. doi:10.1214/aos/1031689015. MR 1926166. Zbl 1033.60008.
+
+
+Further reading[edit]
+Books and book chapters[edit]
+Barber, David (2012). Bayesian Reasoning and Machine Learning. Cambridge University Press. ISBN 978-0-521-51814-7.
+Bishop, Christopher M. (2006). "Chapter 8. Graphical Models" (PDF). Pattern Recognition and Machine Learning. Springer. pp. 359–422. ISBN 978-0-387-31073-2. MR 2247587.
+Cowell, Robert G.; Dawid, A. Philip; Lauritzen, Steffen L.; Spiegelhalter, David J. (1999). Probabilistic networks and expert systems. Berlin: Springer. ISBN 978-0-387-98767-5. MR 1697175. A more advanced and statistically oriented book
+Jensen, Finn (1996). An introduction to Bayesian networks. Berlin: Springer. ISBN 978-0-387-91502-9.
+Pearl, Judea (1988). Probabilistic Reasoning in Intelligent Systems (2nd revised ed.). San Mateo, CA: Morgan Kaufmann. ISBN 978-1-55860-479-7. MR 0965765. A computational reasoning approach, where the relationships between graphs and probabilities were formally introduced.
+Journal articles[edit]
+Edoardo M. Airoldi (2007). "Getting Started in Probabilistic Graphical Models". PLoS Computational Biology. 3 (12): e252. doi:10.1371/journal.pcbi.0030252. PMC 2134967. PMID 18069887.
+Jordan, M. I. (2004). "Graphical Models". Statistical Science. 19: 140–155. doi:10.1214/088342304000000026.
+Ghahramani, Zoubin (May 2015). "Probabilistic machine learning and artificial intelligence". Nature. 521 (7553): 452–459. doi:10.1038/nature14541. PMID 26017444.
+Other[edit]
+Heckerman's Bayes Net Learning Tutorial
+A Brief Introduction to Graphical Models and Bayesian Networks
+Sargur Srihari's lecture slides on probabilistic graphical models
+External links[edit]
+Graphical models and Conditional Random Fields
+Probabilistic Graphical Models taught by Eric Xing at CMU
+vteStatistics
+Outline
+Index
+Descriptive statisticsContinuous dataCenter
+Mean
+arithmetic
+geometric
+harmonic
+Median
+Mode
+Dispersion
+Variance
+Standard deviation
+Coefficient of variation
+Percentile
+Range
+Interquartile range
+Shape
+Central limit theorem
+Moments
+Skewness
+Kurtosis
+L-moments
+Count data
+Index of dispersion
+Summary tables
+Grouped data
+Frequency distribution
+Contingency table
+Dependence
+Pearson product-moment correlation
+Rank correlation
+Spearman's ρ
+Kendall's τ
+Partial correlation
+Scatter plot
+Graphics
+Bar chart
+Biplot
+Box plot
+Control chart
+Correlogram
+Fan chart
+Forest plot
+Histogram
+Pie chart
+Q–Q plot
+Run chart
+Scatter plot
+Stem-and-leaf display
+Radar chart
+Violin plot
+Data collectionStudy design
+Population
+Statistic
+Effect size
+Statistical power
+Optimal design
+Sample size determination
+Replication
+Missing data
+Survey methodology
+Sampling
+stratified
+cluster
+Standard error
+Opinion poll
+Questionnaire
+Controlled experiments
+Scientific control
+Randomized experiment
+Randomized controlled trial
+Random assignment
+Blocking
+Interaction
+Factorial experiment
+Adaptive Designs
+Adaptive clinical trial
+Up-and-Down Designs
+Stochastic approximation
+Observational Studies
+Cross-sectional study
+Cohort study
+Natural experiment
+Quasi-experiment
+Statistical inferenceStatistical theory
+Population
+Statistic
+Probability distribution
+Sampling distribution
+Order statistic
+Empirical distribution
+Density estimation
+Statistical model
+Model specification
+Lp space
+Parameter
+location
+scale
+shape
+Parametric family
+Likelihood (monotone)
+Location–scale family
+Exponential family
+Completeness
+Sufficiency
+Statistical functional
+Bootstrap
+U
+V
+Optimal decision
+loss function
+Efficiency
+Statistical distance
+divergence
+Asymptotics
+Robustness
+Frequentist inferencePoint estimation
+Estimating equations
+Maximum likelihood
+Method of moments
+M-estimator
+Minimum distance
+Unbiased estimators
+Mean-unbiased minimum-variance
+Rao–Blackwellization
+Lehmann–Scheffé theorem
+Median unbiased
+Plug-in
+Interval estimation
+Confidence interval
+Pivot
+Likelihood interval
+Prediction interval
+Tolerance interval
+Resampling
+Bootstrap
+Jackknife
+Testing hypotheses
+1- & 2-tails
+Power
+Uniformly most powerful test
+Permutation test
+Randomization test
+Multiple comparisons
+Parametric tests
+Likelihood-ratio
+Score/Lagrange multiplier
+Wald
+Specific tests
+Z-test (normal)
+Student's t-test
+F-test
+Goodness of fit
+Chi-squared
+G-test
+Kolmogorov–Smirnov
+Anderson–Darling
+Lilliefors
+Jarque–Bera
+Normality (Shapiro–Wilk)
+Likelihood-ratio test
+Model selection
+Cross validation
+AIC
+BIC
+Rank statistics
+Sign
+Sample median
+Signed rank (Wilcoxon)
+Hodges–Lehmann estimator
+Rank sum (Mann–Whitney)
+Nonparametric anova
+1-way (Kruskal–Wallis)
+2-way (Friedman)
+Ordered alternative (Jonckheere–Terpstra)
+Bayesian inference
+Bayesian probability
+prior
+posterior
+Credible interval
+Bayes factor
+Bayesian estimator
+Maximum posterior estimator
+CorrelationRegression analysisCorrelation
+Pearson product-moment
+Partial correlation
+Confounding variable
+Coefficient of determination
+Regression analysis
+Errors and residuals
+Regression validation
+Mixed effects models
+Simultaneous equations models
+Multivariate adaptive regression splines (MARS)
+Linear regression
+Simple linear regression
+Ordinary least squares
+General linear model
+Bayesian regression
+Non-standard predictors
+Nonlinear regression
+Nonparametric
+Semiparametric
+Isotonic
+Robust
+Heteroscedasticity
+Homoscedasticity
+Generalized linear model
+Exponential families
+Logistic (Bernoulli) / Binomial / Poisson regressions
+Partition of variance
+Analysis of variance (ANOVA, anova)
+Analysis of covariance
+Multivariate ANOVA
+Degrees of freedom
+Categorical / Multivariate / Time-series / Survival analysisCategorical
+Cohen's kappa
+Contingency table
+Graphical model
+Log-linear model
+McNemar's test
+Multivariate
+Regression
+Manova
+Principal components
+Canonical correlation
+Discriminant analysis
+Cluster analysis
+Classification
+Structural equation model
+Factor analysis
+Multivariate distributions
+Elliptical distributions
+Normal
+Time-seriesGeneral
+Decomposition
+Trend
+Stationarity
+Seasonal adjustment
+Exponential smoothing
+Cointegration
+Structural break
+Granger causality
+Specific tests
+Dickey–Fuller
+Johansen
+Q-statistic (Ljung–Box)
+Durbin–Watson
+Breusch–Godfrey
+Time domain
+Autocorrelation (ACF)
+partial (PACF)
+Cross-correlation (XCF)
+ARMA model
+ARIMA model (Box–Jenkins)
+Autoregressive conditional heteroskedasticity (ARCH)
+Vector autoregression (VAR)
+Frequency domain
+Spectral density estimation
+Fourier analysis
+Wavelet
+Whittle likelihood
+SurvivalSurvival function
+Kaplan–Meier estimator (product limit)
+Proportional hazards models
+Accelerated failure time (AFT) model
+First hitting time
+Hazard function
+Nelson–Aalen estimator
+Test
+Log-rank test
+ApplicationsBiostatistics
+Bioinformatics
+Clinical trials / studies
+Epidemiology
+Medical statistics
+Engineering statistics
+Chemometrics
+Methods engineering
+Probabilistic design
+Process / quality control
+Reliability
+System identification
+Social statistics
+Actuarial science
+Census
+Crime statistics
+Demography
+Econometrics
+Jurimetrics
+National accounts
+Official statistics
+Population statistics
+Psychometrics
+Spatial statistics
+Cartography
+Environmental statistics
+Geographic information system
+Geostatistics
+Kriging
+
+Category
+ Mathematics portal
+Commons
+ WikiProject
+
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Graphical_model&oldid=961425346"
+Categories: Bayesian statisticsGraphical modelsHidden categories: Articles lacking in-text citations from May 2017All articles lacking in-text citations
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+CatalàDeutschEspañolفارسیFrançais한국어日本語PortuguêsРусскийСрпски / srpskiSrpskohrvatski / српскохрватскиSundaதமிழ்УкраїнськаTiếng Việt中文
+Edit links
+
+
+
+
+
+
+ This page was last edited on 8 June 2020, at 11:34 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

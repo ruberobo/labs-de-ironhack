@@ -1,0 +1,822 @@
+
+
+
+
+Probably approximately correct learning - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Probably approximately correct learning
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+Framework for mathematical analysis of machine learning
+Part of a series onMachine learninganddata mining
+Problems
+Classification
+Clustering
+Regression
+Anomaly detection
+AutoML
+Association rules
+Reinforcement learning
+Structured prediction
+Feature engineering
+Feature learning
+Online learning
+Semi-supervised learning
+Unsupervised learning
+Learning to rank
+Grammar induction
+
+
+Supervised learning(classification • regression) 
+Decision trees
+Ensembles
+Bagging
+Boosting
+Random forest
+k-NN
+Linear regression
+Naive Bayes
+Artificial neural networks
+Logistic regression
+Perceptron
+Relevance vector machine (RVM)
+Support vector machine (SVM)
+
+
+Clustering
+BIRCH
+CURE
+Hierarchical
+k-means
+Expectation–maximization (EM)
+DBSCAN
+OPTICS
+Mean-shift
+
+
+Dimensionality reduction
+Factor analysis
+CCA
+ICA
+LDA
+NMF
+PCA
+PGD
+t-SNE
+
+
+Structured prediction
+Graphical models
+Bayes net
+Conditional random field
+Hidden Markov
+
+
+Anomaly detection
+k-NN
+Local outlier factor
+
+
+Artificial neural network
+Autoencoder
+Deep learning
+DeepDream
+Multilayer perceptron
+RNN
+LSTM
+GRU
+Restricted Boltzmann machine
+GAN
+SOM
+Convolutional neural network
+U-Net
+
+
+Reinforcement learning
+Q-learning
+SARSA
+Temporal difference (TD)
+
+
+Theory
+Bias–variance dilemma
+Computational learning theory
+Empirical risk minimization
+Occam learning
+PAC learning
+Statistical learning
+VC theory
+
+
+Machine-learning venues
+NeurIPS
+ICML
+ML
+JMLR
+ArXiv:cs.LG
+
+
+Glossary of artificial intelligence
+Glossary of artificial intelligence
+
+
+Related articles
+List of datasets for machine-learning research
+Outline of machine learning
+
+vte
+In computational learning theory, probably approximately correct (PAC) learning is a framework for mathematical analysis of machine learning. It was proposed in 1984 by Leslie Valiant.[1]
+In this framework, the learner receives samples and must select a generalization function (called the hypothesis) from a certain class of possible functions. The goal is that, with high probability (the "probably" part), the selected function will have low generalization error (the "approximately correct" part). The learner must be able to learn the concept given any arbitrary approximation ratio, probability of success, or distribution of the samples.
+The model was later extended to treat noise (misclassified samples).
+An important innovation of the PAC framework is the introduction of computational complexity theory concepts to machine learning. In particular, the learner is expected to find efficient functions (time and space requirements bounded to a polynomial of the example size), and the learner itself must implement an efficient procedure (requiring an example count bounded to a polynomial of the concept size, modified by the approximation and likelihood bounds).
+
+Contents
+
+1 Definitions and terminology
+2 Equivalence
+3 See also
+4 References
+5 Further reading
+
+
+Definitions and terminology[edit]
+In order to give the definition for something that is PAC-learnable, we first have to introduce some terminology.[2][3]
+For the following definitions, two examples will be used.  The first is the problem of character recognition given an array of 
+
+
+
+n
+
+
+{\displaystyle n}
+
+ bits encoding a binary-valued image.  The other example is the problem of finding an interval that will correctly classify points within the interval as positive and the points outside of the range as negative.
+Let 
+
+
+
+X
+
+
+{\displaystyle X}
+
+ be a set called the instance space or the encoding of all the samples.  In the character recognition problem, the instance space is 
+
+
+
+X
+=
+{
+0
+,
+1
+
+}
+
+n
+
+
+
+
+{\displaystyle X=\{0,1\}^{n}}
+
+.  In the interval problem the instance space, 
+
+
+
+X
+
+
+{\displaystyle X}
+
+, is the set of all bounded intervals in 
+
+
+
+
+R
+
+
+
+{\displaystyle \mathbb {R} }
+
+, where 
+
+
+
+
+R
+
+
+
+{\displaystyle \mathbb {R} }
+
+ denotes the set of all real numbers.
+A concept is a subset 
+
+
+
+c
+⊂
+X
+
+
+{\displaystyle c\subset X}
+
+.  One concept is the set of all patterns of bits in 
+
+
+
+X
+=
+{
+0
+,
+1
+
+}
+
+n
+
+
+
+
+{\displaystyle X=\{0,1\}^{n}}
+
+ that encode a picture of the letter "P".  An example concept from the second example is the set of open intervals, 
+
+
+
+{
+(
+a
+,
+b
+)
+∣
+0
+≤
+a
+≤
+π
+
+/
+
+2
+,
+π
+≤
+b
+≤
+
+
+13
+
+
+}
+
+
+{\displaystyle \{(a,b)\mid 0\leq a\leq \pi /2,\pi \leq b\leq {\sqrt {13}}\}}
+
+, each of which contain only the positive points.  A concept class 
+
+
+
+C
+
+
+{\displaystyle C}
+
+ is a set of concepts over 
+
+
+
+X
+
+
+{\displaystyle X}
+
+.  This could be the set of all subsets of the array of bits that are skeletonized 4-connected (width of the font is 1).
+Let 
+
+
+
+E
+X
+(
+c
+,
+D
+)
+
+
+{\displaystyle EX(c,D)}
+
+ be a procedure that draws an example, 
+
+
+
+x
+
+
+{\displaystyle x}
+
+, using a probability distribution 
+
+
+
+D
+
+
+{\displaystyle D}
+
+ and gives the correct label 
+
+
+
+c
+(
+x
+)
+
+
+{\displaystyle c(x)}
+
+, that is 1 if 
+
+
+
+x
+∈
+c
+
+
+{\displaystyle x\in c}
+
+ and 0 otherwise.
+Now, given 
+
+
+
+0
+<
+ϵ
+,
+δ
+<
+1
+
+
+{\displaystyle 0<\epsilon ,\delta <1}
+
+, assume there is an algorithm 
+
+
+
+A
+
+
+{\displaystyle A}
+
+ and a polynomial 
+
+
+
+p
+
+
+{\displaystyle p}
+
+ in 
+
+
+
+1
+
+/
+
+ϵ
+,
+1
+
+/
+
+δ
+
+
+{\displaystyle 1/\epsilon ,1/\delta }
+
+ (and other relevant parameters of the class 
+
+
+
+C
+
+
+{\displaystyle C}
+
+) such that, given a sample of size 
+
+
+
+p
+
+
+{\displaystyle p}
+
+ drawn according to 
+
+
+
+E
+X
+(
+c
+,
+D
+)
+
+
+{\displaystyle EX(c,D)}
+
+, then, with probability of at least 
+
+
+
+1
+−
+δ
+
+
+{\displaystyle 1-\delta }
+
+, 
+
+
+
+A
+
+
+{\displaystyle A}
+
+ outputs a hypothesis 
+
+
+
+h
+∈
+C
+
+
+{\displaystyle h\in C}
+
+ that has an average error less than or equal to 
+
+
+
+ϵ
+
+
+{\displaystyle \epsilon }
+
+ on 
+
+
+
+X
+
+
+{\displaystyle X}
+
+ with the same distribution 
+
+
+
+D
+
+
+{\displaystyle D}
+
+.  Further if the above statement for algorithm 
+
+
+
+A
+
+
+{\displaystyle A}
+
+
+is true for every concept 
+
+
+
+c
+∈
+C
+
+
+{\displaystyle c\in C}
+
+ and for every distribution 
+
+
+
+D
+
+
+{\displaystyle D}
+
+ over 
+
+
+
+X
+
+
+{\displaystyle X}
+
+, and for all 
+
+
+
+0
+<
+ϵ
+,
+δ
+<
+1
+
+
+{\displaystyle 0<\epsilon ,\delta <1}
+
+  then 
+
+
+
+C
+
+
+{\displaystyle C}
+
+ is (efficiently) PAC learnable (or distribution-free PAC learnable).  We can also say that 
+
+
+
+A
+
+
+{\displaystyle A}
+
+ is a PAC learning algorithm for 
+
+
+
+C
+
+
+{\displaystyle C}
+
+.
+
+Equivalence[edit]
+Under some regularity conditions these conditions are equivalent: [4]
+
+The concept class C is PAC learnable.
+The VC dimension of C is finite.
+C is a uniform Glivenko-Cantelli class.[clarification needed]
+C is compressible in the sense of Littlestone and Warmuth
+See also[edit]
+Machine learning
+Data mining
+Error tolerance (PAC learning)
+Sample complexity
+References[edit]
+
+^ L. Valiant. A theory of the learnable. Communications of the ACM, 27, 1984.
+
+^ Kearns and Vazirani, pg. 1-12,
+
+^ Balas Kausik Natarajan, Machine Learning , A Theoretical Approach, Morgan Kaufmann Publishers, 1991
+
+^ Blumer, Anselm; Ehrenfeucht, Andrzej; David, Haussler; Manfred, Warmuth (October 1989). "Learnability and the Vapnik-Chervonenkis Dimension". Journal of the Association for Computing Machinery. 36 (4): 929–965. doi:10.1145/76359.76371. Retrieved 13 April 2020.
+
+
+https://users.soe.ucsc.edu/~manfred/pubs/lrnk-olivier.pdf
+A bot will complete this citation soon. Click here to jump the queue arXiv:1503.06960.
+
+Further reading[edit]
+M. Kearns, U. Vazirani. An Introduction to Computational Learning Theory. MIT Press, 1994. A textbook.
+M. Mohri, A. Rostamizadeh, and A. Talwalkar. Foundations of Machine Learning. MIT Press, 2018. Chapter 2 contains a detailed treatment of PAC-learnability. Readable through open access from the publisher.
+D. Haussler. Overview of the Probably Approximately Correct (PAC) Learning Framework. An introduction to the topic.
+L. Valiant. Probably Approximately Correct. Basic Books, 2013. In which Valiant argues that PAC learning describes how organisms evolve and learn.
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Probably_approximately_correct_learning&oldid=960018404"
+Categories: Computational learning theoryHidden categories: Articles with short descriptionShort description matches WikidataWikipedia articles needing clarification from March 2018Articles with missing Cite arXiv inputs
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+DeutschEspañolفارسیFrançaisעברית日本語РусскийTürkçeУкраїнськаTiếng Việt
+Edit links
+
+
+
+
+
+
+ This page was last edited on 31 May 2020, at 18:38 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

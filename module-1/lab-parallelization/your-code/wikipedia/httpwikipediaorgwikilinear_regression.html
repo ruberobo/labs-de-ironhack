@@ -1,0 +1,2928 @@
+
+
+
+
+Linear regression - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Linear regression
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+Part of a series onRegression analysis
+Models
+Linear regression
+Simple regression
+Polynomial regression
+General linear model
+
+Generalized linear model
+Discrete choice
+Binomial regression
+Binary regression
+Logistic regression
+Multinomial logit
+Mixed logit
+Probit
+Multinomial probit
+Ordered logit
+Ordered probit
+Poisson
+
+Multilevel model
+Fixed effects
+Random effects
+Linear mixed-effects model
+Nonlinear mixed-effects model
+
+Nonlinear regression
+Nonparametric
+Semiparametric
+Robust
+Quantile
+Isotonic
+Principal components
+Least angle
+Local
+Segmented
+
+Errors-in-variables
+
+Estimation
+Least squares
+Linear
+Non-linear
+
+Ordinary
+Weighted
+Generalized
+
+Partial
+Total
+Non-negative
+Ridge regression
+Regularized
+
+Least absolute deviations
+Iteratively reweighted
+Bayesian
+Bayesian multivariate
+
+Background
+Regression validation
+Mean and predicted response
+Errors and residuals
+Goodness of fit
+Studentized residual
+Gauss–Markov theorem
+
+ Mathematics portalvte
+In statistics, linear regression is a linear approach to modeling the relationship between a scalar response (or dependent variable) and one or more explanatory variables (or independent variables). The case of one explanatory variable is called simple linear regression. For more than one explanatory variable, the process is called multiple linear regression.[1] This term is distinct from multivariate linear regression, where multiple correlated dependent variables are predicted, rather than a single scalar variable.[2]
+In linear regression, the relationships are modeled using linear predictor functions whose unknown model parameters are estimated from the data. Such models are called linear models.[3] Most commonly, the conditional mean of the response given the values of the explanatory variables (or predictors) is assumed to be an affine function of those values; less commonly, the conditional median or some other quantile is used. Like all forms of regression analysis, linear regression focuses on the conditional probability distribution of the response given the values of the predictors, rather than on the joint probability distribution of all of these variables, which is the domain of multivariate analysis.
+Linear regression was the first type of regression analysis to be studied rigorously, and to be used extensively in practical applications.[4] This is because models which depend linearly on their unknown parameters are easier to fit than models which are non-linearly related to their parameters and because the statistical properties of the resulting estimators are easier to determine.
+Linear regression has many practical uses. Most applications fall into one of the following two broad categories:
+
+If the goal is prediction, forecasting, or error reduction,[clarification needed] linear regression can be used to fit a predictive model to an observed data set of values of the response and explanatory variables. After developing such a model, if additional values of the explanatory variables are collected without an accompanying response value, the fitted model can be used to make a prediction of the response.
+If the goal is to explain variation in the response variable that can be attributed to variation in the explanatory variables, linear regression analysis can be applied to quantify the strength of the relationship between the response and the explanatory variables, and in particular to determine whether some explanatory variables may have no linear relationship with the response at all, or to identify which subsets of explanatory variables may contain redundant information about the response.
+Linear regression models are often fitted using the least squares approach, but they may also be fitted in other ways, such as by minimizing the "lack of fit" in some other norm (as with least absolute deviations regression), or by minimizing a penalized version of the least squares cost function as in ridge regression (L2-norm penalty) and lasso (L1-norm penalty). Conversely, the least squares approach can be used to fit models that are not linear models. Thus, although the terms "least squares" and "linear model" are closely linked, they are not synonymous.
+
+Contents
+
+1 Introduction
+
+1.1 Assumptions
+1.2 Interpretation
+
+
+2 Extensions
+
+2.1 Simple and multiple linear regression
+2.2 General linear models
+2.3 Heteroscedastic models
+2.4 Generalized linear models
+2.5 Hierarchical linear models
+2.6 Errors-in-variables
+2.7 Others
+
+
+3 Estimation methods
+
+3.1 Least-squares estimation and related techniques
+3.2 Maximum-likelihood estimation and related techniques
+3.3 Other estimation techniques
+
+
+4 Applications
+
+4.1 Trend line
+4.2 Epidemiology
+4.3 Finance
+4.4 Economics
+4.5 Environmental science
+4.6 Machine learning
+
+
+5 History
+6 See also
+7 References
+
+7.1 Citations
+7.2 Sources
+
+
+8 Further reading
+9 External links
+
+
+Introduction[edit]
+ In linear regression, the observations (red) are assumed to be the result of random deviations (green) from an underlying relationship (blue) between a dependent variable (y) and an independent variable (x).
+Given a data set 
+
+
+
+{
+
+y
+
+i
+
+
+,
+
+
+x
+
+i
+1
+
+
+,
+…
+,
+
+x
+
+i
+p
+
+
+
+}
+
+i
+=
+1
+
+
+n
+
+
+
+
+{\displaystyle \{y_{i},\,x_{i1},\ldots ,x_{ip}\}_{i=1}^{n}}
+
+ of n statistical units, a linear regression model assumes that the relationship between the dependent variable y and the p-vector of regressors x is linear. This relationship is modeled through a disturbance term or error variable ε — an unobserved random variable that adds "noise" to the linear relationship between the dependent variable and regressors. Thus the model takes the form
+
+
+
+
+
+
+y
+
+i
+
+
+=
+
+β
+
+0
+
+
++
+
+β
+
+1
+
+
+
+x
+
+i
+1
+
+
++
+⋯
++
+
+β
+
+p
+
+
+
+x
+
+i
+p
+
+
++
+
+ε
+
+i
+
+
+=
+
+
+x
+
+
+i
+
+
+
+T
+
+
+
+
+β
+
++
+
+ε
+
+i
+
+
+,
+
+i
+=
+1
+,
+…
+,
+n
+,
+
+
+{\displaystyle y_{i}=\beta _{0}+\beta _{1}x_{i1}+\cdots +\beta _{p}x_{ip}+\varepsilon _{i}=\mathbf {x} _{i}^{\mathsf {T}}{\boldsymbol {\beta }}+\varepsilon _{i},\qquad i=1,\ldots ,n,}
+
+
+where T denotes the transpose, so that xiTβ is the inner product between vectors xi and β.
+Often these n equations are stacked together and written in matrix notation as
+
+
+
+
+
+
+y
+
+=
+X
+
+β
+
++
+
+ε
+
+,
+
+
+
+{\displaystyle \mathbf {y} =X{\boldsymbol {\beta }}+{\boldsymbol {\varepsilon }},\,}
+
+
+where
+
+
+
+
+
+
+y
+
+=
+
+
+(
+
+
+
+
+y
+
+1
+
+
+
+
+
+
+
+y
+
+2
+
+
+
+
+
+
+⋮
+
+
+
+
+
+y
+
+n
+
+
+
+
+
+)
+
+
+,
+
+
+
+{\displaystyle \mathbf {y} ={\begin{pmatrix}y_{1}\\y_{2}\\\vdots \\y_{n}\end{pmatrix}},\quad }
+
+
+
+
+
+
+X
+=
+
+
+(
+
+
+
+
+
+x
+
+
+1
+
+
+
+T
+
+
+
+
+
+
+
+
+
+x
+
+
+2
+
+
+
+T
+
+
+
+
+
+
+
+⋮
+
+
+
+
+
+
+x
+
+
+n
+
+
+
+T
+
+
+
+
+
+
+)
+
+
+=
+
+
+(
+
+
+
+1
+
+
+
+x
+
+11
+
+
+
+
+⋯
+
+
+
+x
+
+1
+p
+
+
+
+
+
+
+1
+
+
+
+x
+
+21
+
+
+
+
+⋯
+
+
+
+x
+
+2
+p
+
+
+
+
+
+
+⋮
+
+
+⋮
+
+
+⋱
+
+
+⋮
+
+
+
+
+1
+
+
+
+x
+
+n
+1
+
+
+
+
+⋯
+
+
+
+x
+
+n
+p
+
+
+
+
+
+)
+
+
+,
+
+
+{\displaystyle X={\begin{pmatrix}\mathbf {x} _{1}^{\mathsf {T}}\\\mathbf {x} _{2}^{\mathsf {T}}\\\vdots \\\mathbf {x} _{n}^{\mathsf {T}}\end{pmatrix}}={\begin{pmatrix}1&x_{11}&\cdots &x_{1p}\\1&x_{21}&\cdots &x_{2p}\\\vdots &\vdots &\ddots &\vdots \\1&x_{n1}&\cdots &x_{np}\end{pmatrix}},}
+
+
+
+
+
+
+
+β
+
+=
+
+
+(
+
+
+
+
+β
+
+0
+
+
+
+
+
+
+
+β
+
+1
+
+
+
+
+
+
+
+β
+
+2
+
+
+
+
+
+
+⋮
+
+
+
+
+
+β
+
+p
+
+
+
+
+
+)
+
+
+,
+
+
+ε
+
+=
+
+
+(
+
+
+
+
+ε
+
+1
+
+
+
+
+
+
+
+ε
+
+2
+
+
+
+
+
+
+⋮
+
+
+
+
+
+ε
+
+n
+
+
+
+
+
+)
+
+
+.
+
+
+{\displaystyle {\boldsymbol {\beta }}={\begin{pmatrix}\beta _{0}\\\beta _{1}\\\beta _{2}\\\vdots \\\beta _{p}\end{pmatrix}},\quad {\boldsymbol {\varepsilon }}={\begin{pmatrix}\varepsilon _{1}\\\varepsilon _{2}\\\vdots \\\varepsilon _{n}\end{pmatrix}}.}
+
+
+Some remarks on notation and terminology:
+
+
+
+
+
+
+y
+
+
+
+{\displaystyle \mathbf {y} }
+
+ is a vector of observed values 
+
+
+
+
+y
+
+i
+
+
+ 
+(
+i
+=
+1
+,
+…
+,
+n
+)
+
+
+{\displaystyle y_{i}\ (i=1,\ldots ,n)}
+
+ of the variable called the regressand, endogenous variable, response variable, measured variable, criterion variable, or dependent variable. This variable is also sometimes known as the predicted variable, but this should not be confused with predicted values, which are denoted 
+
+
+
+
+
+
+y
+^
+
+
+
+
+
+{\displaystyle {\hat {y}}}
+
+. The decision as to which variable in a data set is modeled as the dependent variable and which are modeled as the independent variables may be based on a presumption that the value of one of the variables is caused by, or directly influenced by the other variables. Alternatively, there may be an operational reason to model one of the variables in terms of the others, in which case there need be no presumption of causality.
+
+
+
+
+X
+
+
+{\displaystyle X}
+
+ may be seen as a matrix of row-vectors 
+
+
+
+
+
+x
+
+
+i
+
+
+
+
+{\displaystyle \mathbf {x} _{i}}
+
+ or of n-dimensional column-vectors 
+
+
+
+
+X
+
+j
+
+
+
+
+{\displaystyle X_{j}}
+
+, which are known as regressors, exogenous variables, explanatory variables, covariates, input variables, predictor variables, or independent variables (not to be confused with the concept of independent random variables). The matrix 
+
+
+
+X
+
+
+{\displaystyle X}
+
+ is sometimes called the design matrix.
+Usually a constant is included as one of the regressors. In particular, 
+
+
+
+
+
+x
+
+
+i
+0
+
+
+=
+1
+
+
+{\displaystyle \mathbf {x} _{i0}=1}
+
+ for 
+
+
+
+i
+=
+1
+,
+…
+,
+n
+
+
+{\displaystyle i=1,\ldots ,n}
+
+. The corresponding element of β is called the intercept. Many statistical inference procedures for linear models require an intercept to be present, so it is often included even if theoretical considerations suggest that its value should be zero.
+Sometimes one of the regressors can be a non-linear function of another regressor or of the data, as in polynomial regression and segmented regression. The model remains linear as long as it is linear in the parameter vector β.
+The values xij may be viewed as either observed values of random variables Xj or as fixed values chosen prior to observing the dependent variable. Both interpretations may be appropriate in different cases, and they generally lead to the same estimation procedures; however different approaches to asymptotic analysis are used in these two situations.
+
+
+
+
+
+β
+
+
+
+{\displaystyle {\boldsymbol {\beta }}}
+
+ is a 
+
+
+
+(
+p
++
+1
+)
+
+
+{\displaystyle (p+1)}
+
+-dimensional parameter vector, where 
+
+
+
+
+β
+
+0
+
+
+
+
+{\displaystyle \beta _{0}}
+
+ is the intercept term (if one is included in the model—otherwise 
+
+
+
+
+β
+
+
+
+{\displaystyle {\boldsymbol {\beta }}}
+
+ is p-dimensional). Its elements are known as effects or regression coefficients (although the latter term is sometimes reserved for the estimated effects). Statistical estimation and inference in linear regression focuses on β. The elements of this parameter vector are interpreted as the partial derivatives of the dependent variable with respect to the various independent variables.
+
+
+
+
+
+ε
+
+
+
+{\displaystyle {\boldsymbol {\varepsilon }}}
+
+ is a vector of values 
+
+
+
+
+ε
+
+i
+
+
+
+
+{\displaystyle \varepsilon _{i}}
+
+. This part of the model is called the error term, disturbance term, or sometimes noise (in contrast with the "signal" provided by the rest of the model). This variable captures all other factors which influence the dependent variable y other than the regressors x. The relationship between the error term and the regressors, for example their correlation, is a crucial consideration in formulating a linear regression model, as it will determine the appropriate estimation method.
+Fitting a linear model to a given data set usually requires estimating the regression coefficients  
+
+
+
+
+β
+
+
+
+{\displaystyle {\boldsymbol {\beta }}}
+
+ such that the error term 
+
+
+
+
+ε
+
+=
+
+y
+
+−
+X
+
+β
+
+
+
+{\displaystyle {\boldsymbol {\varepsilon }}=\mathbf {y} -X{\boldsymbol {\beta }}}
+
+ is minimized. For example, it is common to use the sum of squared errors 
+
+
+
+
+|
+
+
+|
+
+
+ε
+
+
+|
+
+
+|
+
+
+
+{\displaystyle ||{\boldsymbol {\varepsilon }}||}
+
+ as the quality of the fit.
+Example. Consider a situation where a small ball is being tossed up in the air and then we measure its heights of ascent hi at various moments in time ti. Physics tells us that, ignoring the drag, the relationship can be modeled as
+
+
+
+
+
+
+h
+
+i
+
+
+=
+
+β
+
+1
+
+
+
+t
+
+i
+
+
++
+
+β
+
+2
+
+
+
+t
+
+i
+
+
+2
+
+
++
+
+ε
+
+i
+
+
+,
+
+
+{\displaystyle h_{i}=\beta _{1}t_{i}+\beta _{2}t_{i}^{2}+\varepsilon _{i},}
+
+
+where β1 determines the initial velocity of the ball, β2 is proportional to the standard gravity, and εi is due to measurement errors. Linear regression can be used to estimate the values of β1 and β2 from the measured data. This model is non-linear in the time variable, but it is linear in the parameters β1 and β2; if we take regressors xi = (xi1, xi2)  = (ti, ti2), the model takes on the standard form
+
+
+
+
+
+
+h
+
+i
+
+
+=
+
+
+x
+
+
+i
+
+
+
+T
+
+
+
+
+β
+
++
+
+ε
+
+i
+
+
+.
+
+
+{\displaystyle h_{i}=\mathbf {x} _{i}^{\mathsf {T}}{\boldsymbol {\beta }}+\varepsilon _{i}.}
+
+
+Assumptions[edit]
+See also: Ordinary least squares § Assumptions
+Standard linear regression models with standard estimation techniques make a number of assumptions about the predictor variables, the response variables and their relationship.  Numerous extensions have been developed that allow each of these assumptions to be relaxed (i.e. reduced to a weaker form), and in some cases eliminated entirely. Generally these extensions make the estimation procedure more complex and time-consuming, and may also require more data in order to produce an equally precise model.
+
+ Example of a cubic polynomial regression, which is a type of linear regression.
+The following are the major assumptions made by standard linear regression models with standard estimation techniques (e.g. ordinary least squares):
+
+Weak exogeneity.  This essentially means that the predictor variables x can be treated as fixed values, rather than random variables.  This means, for example, that the predictor variables are assumed to be error-free—that is, not contaminated with measurement errors. Although this assumption is not realistic in many settings, dropping it leads to significantly more difficult errors-in-variables models.
+Linearity.  This means that the mean of the response variable is a linear combination of the parameters (regression coefficients) and the predictor variables.  Note that this assumption is much less restrictive than it may at first seem.  Because the predictor variables are treated as fixed values (see above), linearity is really only a restriction on the parameters.  The predictor variables themselves can be arbitrarily transformed, and in fact multiple copies of the same underlying predictor variable can be added, each one transformed differently.  This technique is used, for example, in polynomial regression, which uses linear regression to fit the response variable as an arbitrary polynomial function (up to a given rank) of a predictor variable. With this much flexibility, models such as polynomial regression often have "too much power", in that they tend to overfit the data.  As a result, some kind of regularization must typically be used to prevent unreasonable solutions coming out of the estimation process.  Common examples are ridge regression and lasso regression.  Bayesian linear regression can also be used, which by its nature is more or less immune to the problem of overfitting. (In fact, ridge regression and lasso regression can both be viewed as    special cases of Bayesian linear regression, with particular types of prior distributions placed on the regression coefficients.)
+Constant variance (a.k.a. homoscedasticity).  This means that different values of the response variable have the same variance in their errors, regardless of the values of the predictor variables. In practice this assumption is invalid (i.e. the errors are heteroscedastic) if the response variable can vary over a wide scale. In order to check for heterogeneous error variance, or when a pattern of residuals violates model assumptions of homoscedasticity (error is equally variable around the 'best-fitting line' for all points of x), it is prudent to look for a "fanning effect" between residual error and predicted values. This is to say there will be a systematic change in the absolute or squared residuals when plotted against the predictive variables. Errors will not be evenly distributed across the regression line. Heteroscedasticity will result in the averaging over of distinguishable variances around the points to get a single variance that is inaccurately representing all the variances of the line. In effect, residuals appear clustered and spread apart on their predicted plots for larger and smaller values for points along the linear regression line, and the mean squared error for the model will be wrong. Typically, for example, a response variable whose mean is large will have a greater variance than one whose mean is small. For example, a given person whose income is predicted to be $100,000 may easily have an actual income of $80,000 or $120,000 (a standard deviation of around $20,000), while another person with a predicted income of $10,000 is unlikely to have the same $20,000 standard deviation, which would imply their actual income would vary anywhere between -$10,000 and $30,000. (In fact, as this shows, in many cases—often the same cases where the assumption of normally distributed errors fails—the variance or standard deviation should be predicted to be proportional to the mean, rather than constant.) Simple linear regression estimation methods give less precise parameter estimates and misleading inferential quantities such as standard errors when substantial heteroscedasticity is present. However, various estimation techniques (e.g. weighted least squares and heteroscedasticity-consistent standard errors) can handle heteroscedasticity in a quite general way. Bayesian linear regression techniques can also be used when the variance is assumed to be a function of the mean. It is also possible in some cases to fix the problem by applying a transformation to the response variable (e.g. fit the logarithm of the response variable using a linear regression model, which implies that the response variable has a log-normal distribution rather than a normal distribution).
+Independence of errors.  This assumes that the errors of the response variables are uncorrelated with each other. (Actual statistical independence is a stronger condition than mere lack of correlation and is often not needed, although it can be exploited if it is known to hold.) Some methods (e.g. generalized least squares) are capable of handling correlated errors, although they typically require significantly more data unless some sort of regularization is used to bias the model towards assuming uncorrelated errors. Bayesian linear regression is a general way of handling this issue.
+Lack of perfect multicollinearity in the predictors.  For standard least squares estimation methods, the design matrix X must have full column rank p; otherwise, we have a condition known as perfect multicollinearity in the predictor variables.  This can be triggered by having two or more perfectly correlated predictor variables (e.g. if the same predictor variable is mistakenly given twice, either without transforming one of the copies or by transforming one of the copies linearly). It can also happen if there is too little data available compared to the number of parameters to be estimated (e.g. fewer data points than regression coefficients). In the case of perfect multicollinearity, the parameter vector β will be non-identifiable—it has no unique solution.  At most we will be able to identify some of the parameters, i.e. narrow down its value to some linear subspace of Rp. See partial least squares regression.  Methods for fitting linear models with multicollinearity have been developed;[5][6][7][8] some require additional assumptions such as "effect sparsity"—that a large fraction of the effects are exactly zero. Note that the more computationally expensive iterated algorithms for parameter estimation, such as those used in generalized linear models, do not suffer from this problem.
+Beyond these assumptions, several other statistical properties of the data strongly influence the performance of different estimation methods:
+
+The statistical relationship between the error terms and the regressors plays an important role in determining whether an estimation procedure has desirable sampling properties such as being unbiased and consistent.
+The arrangement, or probability distribution of the predictor variables x has a major influence on the precision of estimates of β. Sampling and design of experiments are highly developed subfields of statistics that provide guidance for collecting data in such a way to achieve a precise estimate of β.
+Interpretation[edit]
+ The data sets in the Anscombe's quartet are designed to have approximately the same linear regression line (as well as nearly identical means, standard deviations, and correlations) but are graphically very different. This illustrates the pitfalls of relying solely on a fitted model to understand the relationship between variables.
+A fitted linear regression model can be used to identify the relationship between a single predictor variable xj and the response variable y when all the other predictor variables in the model are "held fixed". Specifically, the interpretation of βj is the expected change in y for a one-unit change in xj when the other covariates are held fixed—that is, the expected value of the partial derivative of y with respect to xj. This is sometimes called the unique effect of xj on y. In contrast, the marginal effect of xj on y can be assessed using a correlation coefficient or simple linear regression model relating only xj to y; this effect is the total derivative of y with respect to xj.
+Care must be taken when interpreting regression results, as some of the regressors may not allow for marginal changes (such as dummy variables, or the intercept term), while others cannot be held fixed (recall the example from the introduction: it would be impossible to "hold ti fixed" and at the same time change the value of ti2).
+It is possible that the unique effect can be nearly zero even when the marginal effect is large. This may imply that some other covariate captures all the information in xj, so that once that variable is in the model, there is no contribution of xj to the variation in y. Conversely, the unique effect of xj can be large while its marginal effect is nearly zero. This would happen if the other covariates explained a great deal of the variation of y, but they mainly explain variation in a way that is complementary to what is captured by xj. In this case, including the other variables in the model reduces the part of the variability of y that is unrelated to xj, thereby strengthening the apparent relationship with xj.
+The meaning of the expression "held fixed" may depend on how the values of the predictor variables arise. If the experimenter directly sets the values of the predictor variables according to a study design, the comparisons of interest may literally correspond to comparisons among units whose predictor variables have been "held fixed" by the experimenter. Alternatively, the expression "held fixed" can refer to a selection that takes place in the context of data analysis. In this case, we "hold a variable fixed" by restricting our attention to the subsets of the data that happen to have a common value for the given predictor variable. This is the only interpretation of "held fixed" that can be used in an observational study.
+The notion of a "unique effect" is appealing when studying a complex system where multiple interrelated components influence the response variable. In some cases, it can literally be interpreted as the causal effect of an intervention that is linked to the value of a predictor variable. However, it has been argued that in many cases multiple regression analysis fails to clarify the relationships between the predictor variables and the response variable when the predictors are correlated with each other and are not assigned following a study design.[9] Commonality analysis may be helpful in disentangling the shared and unique impacts of correlated independent variables.[10]
+
+Extensions[edit]
+Numerous extensions of linear regression have been developed, which allow some or all of the assumptions underlying the basic model to be relaxed.
+
+Simple and multiple linear regression[edit]
+ Example of simple linear regression, which has one independent variable
+The very simplest case of a single scalar predictor variable x and a single scalar response variable y is known as simple linear regression.  The extension to multiple and/or vector-valued predictor variables (denoted with a capital X) is known as multiple linear regression, also known as multivariable linear regression.  Nearly all real-world regression models involve multiple predictors, and basic descriptions of linear regression are often phrased in terms of the multiple regression model.  Note, however, that in these cases the response variable y is still a scalar. Another term, multivariate linear regression, refers to cases where y is a vector, i.e., the same as general linear regression.
+
+General linear models[edit]
+The general linear model considers the situation when the response variable is not a scalar (for each observation) but a vector, yi. Conditional linearity of 
+
+
+
+E
+(
+
+y
+
+∣
+
+
+x
+
+
+i
+
+
+)
+=
+
+
+x
+
+
+i
+
+
+
+T
+
+
+
+B
+
+
+{\displaystyle E(\mathbf {y} \mid \mathbf {x} _{i})=\mathbf {x} _{i}^{\mathsf {T}}B}
+
+ is still assumed, with a matrix B replacing the vector β of the classical linear regression model. Multivariate analogues of ordinary least squares (OLS) and generalized least squares (GLS) have been developed. "General linear models" are also called "multivariate linear models". These are not the same as multivariable linear models (also called "multiple linear models").
+
+Heteroscedastic models[edit]
+Various models have been created that allow for heteroscedasticity, i.e. the errors for different response variables may have different variances.  For example, weighted least squares is a method for estimating linear regression models when the response variables may have different error variances, possibly with correlated errors. (See also Weighted linear least squares, and Generalized least squares.) Heteroscedasticity-consistent standard errors is an improved method for use with uncorrelated but potentially heteroscedastic errors.
+
+Generalized linear models[edit]
+Generalized linear models (GLMs) are a framework for modeling response variables that are bounded or discrete. This is used, for example:
+
+when modeling positive quantities (e.g. prices or populations) that vary over a large scale—which are better described using a skewed distribution such as the log-normal distribution or Poisson distribution (although GLMs are not used for log-normal data, instead the response variable is simply transformed using the logarithm function);
+when modeling categorical data, such as the choice of a given candidate in an election (which is better described using a Bernoulli distribution/binomial distribution for binary choices, or a categorical distribution/multinomial distribution for multi-way choices), where there are a fixed number of choices that cannot be meaningfully ordered;
+when modeling ordinal data, e.g. ratings on a scale from 0 to 5, where the different outcomes can be ordered but where the quantity itself may not have any absolute meaning (e.g. a rating of 4 may not be "twice as good" in any objective sense as a rating of 2, but simply indicates that it is better than 2 or 3 but not as good as 5).
+Generalized linear models allow for an arbitrary link function, g, that relates the mean of the response variable(s) to the predictors: 
+
+
+
+E
+(
+Y
+)
+=
+
+g
+
+−
+1
+
+
+(
+X
+B
+)
+
+
+{\displaystyle E(Y)=g^{-1}(XB)}
+
+. The link function is often related to the distribution of the response, and in particular it typically has the effect of transforming between the 
+
+
+
+(
+−
+∞
+,
+∞
+)
+
+
+{\displaystyle (-\infty ,\infty )}
+
+ range of the linear predictor and the range of the response variable.
+Some common examples of GLMs are:
+
+Poisson regression for count data.
+Logistic regression and probit regression for binary data.
+Multinomial logistic regression and multinomial probit regression for categorical data.
+Ordered logit and ordered probit regression for ordinal data.
+Single index models[clarification needed] allow some degree of nonlinearity in the relationship between x and y, while preserving the central role of the linear predictor β′x as in the classical linear regression model. Under certain conditions, simply applying OLS to data from a single-index model will consistently estimate β up to a proportionality constant.[11]
+
+Hierarchical linear models[edit]
+Hierarchical linear models (or multilevel regression) organizes the data into a hierarchy of regressions, for example where A is regressed on B, and B is regressed on C. It is often used where the variables of interest have a natural hierarchical structure such as in educational statistics, where students are nested in classrooms, classrooms are nested in schools, and schools are nested in some administrative grouping, such as a school district. The response variable might be a measure of student achievement such as a test score, and different covariates would be collected at the classroom, school, and school district levels.
+
+Errors-in-variables[edit]
+Errors-in-variables models (or "measurement error models") extend the traditional linear regression model to allow the predictor variables X to be observed with error. This error causes standard estimators of β to become biased. Generally, the form of bias is an attenuation, meaning that the effects are biased toward zero.
+
+Others[edit]
+In Dempster–Shafer theory, or a linear belief function in particular, a linear regression model may be represented as a partially swept matrix, which can be combined with similar matrices representing observations and other assumed normal distributions and state equations. The combination of swept or unswept matrices provides an alternative method for estimating linear regression models.
+Estimation methods[edit]
+A large number of procedures have been developed for parameter estimation and inference in linear regression. These methods differ in computational simplicity of algorithms, presence of a closed-form solution, robustness with respect to heavy-tailed distributions, and theoretical assumptions needed to validate desirable statistical properties such as consistency and asymptotic efficiency.
+Some of the more common estimation techniques for linear regression are summarized below.
+
+Least-squares estimation and related techniques[edit]
+Main article: Linear least squares
+ Francis Galton's 1875 illustration of the correlation between the heights of adults and their parents. The observation that adult children's heights tended to deviate less from the mean height than their parents suggested the concept of "regression toward the mean", giving regression its name. The "locus of horizontal tangential points" passing through the leftmost and rightmost points on the ellipse (which is a level curve of the bivariate normal distribution estimated from the data) is the OLS estimate of the regression of parents' heights on children's heights, while the "locus of vertical tangential points" is the OLS estimate of the regression of children's heights on parent's heights. The major axis of the ellipse is the TLS estimate.Let's assume that the independent variable is 
+
+
+
+
+
+
+
+x
+
+i
+
+
+→
+
+
+
+=
+[
+
+x
+
+1
+
+
+i
+
+
+,
+
+x
+
+2
+
+
+i
+
+
+,
+…
+,
+
+x
+
+m
+
+
+i
+
+
+]
+
+
+{\displaystyle {\vec {x_{i}}}=[x_{1}^{i},x_{2}^{i},\dots ,x_{m}^{i}]}
+
+ and the model's parameters are 
+
+
+
+
+
+
+β
+→
+
+
+
+=
+[
+
+β
+
+0
+
+
+,
+
+β
+
+1
+
+
+,
+⋯
+,
+
+β
+
+m
+
+
+]
+
+
+{\displaystyle {\vec {\beta }}=[\beta _{0},\beta _{1},\cdots ,\beta _{m}]}
+
+, then the model's prediction would be 
+
+
+
+
+y
+
+i
+
+
+≈
+
+β
+
+0
+
+
++
+
+∑
+
+j
+=
+1
+
+
+m
+
+
+
+β
+
+j
+
+
+×
+
+x
+
+j
+
+
+i
+
+
+
+
+{\displaystyle y_{i}\approx \beta _{0}+\sum _{j=1}^{m}\beta _{j}\times x_{j}^{i}}
+
+. If 
+
+
+
+
+
+
+
+x
+
+i
+
+
+→
+
+
+
+
+
+{\displaystyle {\vec {x_{i}}}}
+
+ is extended to  
+
+
+
+
+
+
+
+x
+
+i
+
+
+→
+
+
+
+=
+[
+1
+,
+
+x
+
+1
+
+
+i
+
+
+,
+
+x
+
+2
+
+
+i
+
+
+,
+…
+,
+
+x
+
+m
+
+
+i
+
+
+]
+
+
+{\displaystyle {\vec {x_{i}}}=[1,x_{1}^{i},x_{2}^{i},\dots ,x_{m}^{i}]}
+
+ then  
+
+
+
+
+y
+
+i
+
+
+
+
+{\displaystyle y_{i}}
+
+ would become a dot product of the parameter and the independent variable, i.e. 
+
+
+
+
+y
+
+i
+
+
+≈
+
+∑
+
+j
+=
+0
+
+
+m
+
+
+
+β
+
+j
+
+
+×
+
+x
+
+j
+
+
+i
+
+
+=
+
+
+
+β
+→
+
+
+
+
+
+.
+
+
+
+
+
+x
+
+i
+
+
+→
+
+
+
+
+
+{\displaystyle y_{i}\approx \sum _{j=0}^{m}\beta _{j}\times x_{j}^{i}={\vec {\beta }}\,\,.\,{\vec {x_{i}}}}
+
+. In the least-squares setting, the optimum parameter is defined as such that minimizes the sum of mean squared loss: 
+
+
+
+
+
+
+
+
+
+β
+^
+
+
+→
+
+
+
+=
+
+
+
+arg min
+
+
+
+β
+→
+
+
+
+
+
+L
+(
+D
+,
+
+
+
+β
+→
+
+
+
+)
+=
+
+
+
+arg min
+
+
+
+β
+→
+
+
+
+
+
+∑
+
+i
+=
+1
+
+
+n
+
+
+(
+
+
+
+β
+→
+
+
+
+
+.
+
+
+
+
+
+x
+
+i
+
+
+→
+
+
+
+−
+
+y
+
+i
+
+
+
+)
+
+2
+
+
+
+
+{\displaystyle {\vec {\hat {\beta }}}={\underset {\vec {\beta }}{\mbox{arg min}}}\,L(D,{\vec {\beta }})={\underset {\vec {\beta }}{\mbox{arg min}}}\sum _{i=1}^{n}({\vec {\beta }}\,.\,{\vec {x_{i}}}-y_{i})^{2}}
+
+
+Now putting the independent and dependent variables in matrices  
+
+
+
+X
+
+
+{\displaystyle X}
+
+ and 
+
+
+
+Y
+
+
+{\displaystyle Y}
+
+ respectively, the loss function can be rewritten as:
+
+
+
+
+
+
+
+
+L
+(
+D
+,
+
+
+
+β
+→
+
+
+
+)
+
+
+
+=
+
+|
+
+
+|
+
+X
+
+
+
+β
+→
+
+
+
+−
+Y
+
+|
+
+
+
+|
+
+
+2
+
+
+
+
+
+
+
+
+=
+(
+X
+
+
+
+β
+→
+
+
+
+−
+Y
+
+)
+
+T
+
+
+(
+X
+
+
+
+β
+→
+
+
+
+−
+Y
+)
+
+
+
+
+
+
+=
+
+Y
+
+T
+
+
+Y
+−
+
+Y
+
+T
+
+
+X
+
+
+
+β
+→
+
+
+
+−
+
+
+
+
+β
+→
+
+
+
+
+T
+
+
+
+X
+
+T
+
+
+Y
++
+
+
+
+
+β
+→
+
+
+
+
+T
+
+
+
+X
+
+T
+
+
+X
+
+
+
+β
+→
+
+
+
+
+
+
+
+
+
+{\displaystyle {\begin{aligned}L(D,{\vec {\beta }})&=||X{\vec {\beta }}-Y||^{2}\\&=(X{\vec {\beta }}-Y)^{T}(X{\vec {\beta }}-Y)\\&=Y^{T}Y-Y^{T}X{\vec {\beta }}-{\vec {\beta }}^{T}X^{T}Y+{\vec {\beta }}^{T}X^{T}X{\vec {\beta }}\end{aligned}}}
+
+
+As the loss is convex the optimum solution lies at gradient zero. The gradient of the loss function is (using Denominator layout convention):
+
+
+
+
+
+
+
+
+
+
+
+∂
+L
+(
+D
+,
+
+
+
+β
+→
+
+
+
+)
+
+
+∂
+
+
+
+β
+→
+
+
+
+
+
+
+
+
+
+=
+
+
+
+∂
+
+(
+
+
+Y
+
+T
+
+
+Y
+−
+
+Y
+
+T
+
+
+X
+
+
+
+β
+→
+
+
+
+−
+
+
+
+
+β
+→
+
+
+
+
+T
+
+
+
+X
+
+T
+
+
+Y
++
+
+
+
+
+β
+→
+
+
+
+
+T
+
+
+
+X
+
+T
+
+
+X
+
+
+
+β
+→
+
+
+
+
+)
+
+
+
+∂
+
+
+
+β
+→
+
+
+
+
+
+
+
+
+
+
+
+
+=
+−
+2
+
+Y
+
+T
+
+
+X
++
+2
+
+
+
+
+β
+→
+
+
+
+
+T
+
+
+
+X
+
+T
+
+
+X
+
+
+
+
+
+
+{\displaystyle {\begin{aligned}{\frac {\partial L(D,{\vec {\beta }})}{\partial {\vec {\beta }}}}&={\frac {\partial \left(Y^{T}Y-Y^{T}X{\vec {\beta }}-{\vec {\beta }}^{T}X^{T}Y+{\vec {\beta }}^{T}X^{T}X{\vec {\beta }}\right)}{\partial {\vec {\beta }}}}\\&=-2Y^{T}X+2{\vec {\beta }}^{T}X^{T}X\end{aligned}}}
+
+
+Setting the gradient to zero produces the optimum parameter:
+
+
+
+
+
+
+
+
+−
+2
+
+Y
+
+T
+
+
+X
++
+2
+
+
+
+
+β
+→
+
+
+
+
+T
+
+
+
+X
+
+T
+
+
+X
+=
+0
+
+
+
+
+
+
+⇒
+
+Y
+
+T
+
+
+X
+=
+
+
+
+
+β
+→
+
+
+
+
+T
+
+
+
+X
+
+T
+
+
+X
+
+
+
+
+
+
+⇒
+
+X
+
+T
+
+
+Y
+=
+
+X
+
+T
+
+
+X
+
+
+
+β
+→
+
+
+
+
+
+
+
+
+
+⇒
+
+
+
+
+
+β
+^
+
+
+→
+
+
+
+=
+(
+
+X
+
+T
+
+
+X
+
+)
+
+−
+1
+
+
+
+X
+
+T
+
+
+Y
+
+
+
+
+
+
+{\displaystyle {\begin{aligned}-2Y^{T}X+2{\vec {\beta }}^{T}X^{T}X=0\\&\Rightarrow Y^{T}X={\vec {\beta }}^{T}X^{T}X\\&\Rightarrow X^{T}Y=X^{T}X{\vec {\beta }}\\&\Rightarrow {\vec {\hat {\beta }}}=(X^{T}X)^{-1}X^{T}Y\end{aligned}}}
+
+
+Linear least squares methods include mainly:
+
+Ordinary least squares
+Weighted least squares
+Generalized least squares
+Maximum-likelihood estimation and related techniques[edit]
+Maximum likelihood estimation can be performed when the distribution of the error terms is known to belong to a certain parametric family ƒθ of probability distributions.[12] When fθ is a normal distribution with zero mean and variance θ, the resulting estimate is identical to the OLS estimate. GLS estimates are maximum likelihood estimates when ε follows a multivariate normal distribution with a known covariance matrix.
+Ridge regression[13][14][15] and other forms of penalized estimation, such as Lasso regression,[5] deliberately introduce bias into the estimation of β in order to reduce the variability of the estimate. The resulting estimates generally have lower mean squared error than the OLS estimates, particularly when multicollinearity is present or when overfitting is a problem. They are generally used when the goal is to predict the value of the response variable y for values of the predictors x that have not yet been observed. These methods are not as commonly used when the goal is inference, since it is difficult to account for the bias.
+Least absolute deviation (LAD) regression is a robust estimation technique in that it is less sensitive to the presence of outliers than OLS (but is less efficient than OLS when no outliers are present). It is equivalent to maximum likelihood estimation under a Laplace distribution model for ε.[16]
+Adaptive estimation. If we assume that error terms are independent of the regressors, 
+
+
+
+
+ε
+
+i
+
+
+⊥
+
+
+x
+
+
+i
+
+
+
+
+{\displaystyle \varepsilon _{i}\perp \mathbf {x} _{i}}
+
+, then the optimal estimator is the 2-step MLE, where the first step is used to non-parametrically estimate the distribution of the error term.[17]
+Other estimation techniques[edit]
+ Comparison of the Theil–Sen estimator (black) and simple linear regression (blue) for a set of points with outliers.
+Bayesian linear regression applies the framework of Bayesian statistics to linear regression. (See also Bayesian multivariate linear regression.) In particular, the regression coefficients β are assumed to be random variables with a specified prior distribution.  The prior distribution can bias the solutions for the regression coefficients, in a way similar to (but more general than) ridge regression or lasso regression.  In addition, the Bayesian estimation process produces not a single point estimate for the "best" values of the regression coefficients but an entire posterior distribution, completely describing the uncertainty surrounding the quantity.  This can be used to estimate the "best" coefficients using the mean, mode, median, any quantile (see quantile regression), or any other function of the posterior distribution.
+Quantile regression focuses on the conditional quantiles of y given X rather than the conditional mean of y given X. Linear quantile regression models a particular conditional quantile, for example the conditional median, as a linear function βTx of the predictors.
+Mixed models are widely used to analyze linear regression relationships involving dependent data when the dependencies have a known structure. Common applications of mixed models include analysis of data involving repeated measurements, such as longitudinal data, or data obtained from cluster sampling. They are generally fit as parametric models, using maximum likelihood or Bayesian estimation. In the case where the errors are modeled as normal random variables, there is a close connection between mixed models and generalized least squares.[18] Fixed effects estimation is an alternative approach to analyzing this type of data.
+Principal component regression (PCR)[7][8] is used when the number of predictor variables is large, or when strong correlations exist among the predictor variables. This two-stage procedure first reduces the predictor variables using principal component analysis then uses the reduced variables in an OLS regression fit. While it often works well in practice, there is no general theoretical reason that the most informative linear function of the predictor variables should lie among the dominant principal components of the multivariate distribution of the predictor variables. The partial least squares regression is the extension of the PCR method which does not suffer from the mentioned deficiency.
+Least-angle regression[6] is an estimation procedure for linear regression models that was developed to handle high-dimensional covariate vectors, potentially with more covariates than observations.
+The Theil–Sen estimator is a simple robust estimation technique that chooses the slope of the fit line to be the median of the slopes of the lines through pairs of sample points. It has similar statistical efficiency properties to simple linear regression but is much less sensitive to outliers.[19]
+Other robust estimation techniques, including the α-trimmed mean approach[citation needed], and L-, M-, S-, and R-estimators have been introduced.[citation needed]
+Applications[edit]
+See also: Linear least squares § Applications
+Linear regression is widely used in biological, behavioral and social sciences to describe possible relationships between variables. It ranks as one of the most important tools used in these disciplines.
+
+Trend line[edit]
+Main article: Trend estimation
+A trend line represents a trend, the long-term movement in time series data after other components have been accounted for. It tells whether a particular data set (say GDP, oil prices or stock prices) have increased or decreased over the period of time. A trend line could simply be drawn by eye through a set of data points, but more properly their position and slope is calculated using statistical techniques like linear regression. Trend lines typically are straight lines, although some variations use higher degree polynomials depending on the degree of curvature desired in the line.
+Trend lines are sometimes used in business analytics to show changes in data over time. This has the advantage of being simple. Trend lines are often used to argue that a particular action or event (such as training, or an advertising campaign) caused observed changes at a point in time. This is a simple technique, and does not require a control group, experimental design, or a sophisticated analysis technique. However, it suffers from a lack of scientific validity in cases where other potential changes can affect the data.
+
+Epidemiology[edit]
+Early evidence relating tobacco smoking to mortality and morbidity came from observational studies employing regression analysis. In order to reduce spurious correlations when analyzing observational data, researchers usually include several variables in their regression models in addition to the variable of primary interest. For example, in a regression model in which cigarette smoking is the independent variable of primary interest and the dependent variable is lifespan measured in years, researchers might include education and income as additional independent variables, to ensure that any observed effect of smoking on lifespan is not due to those other socio-economic factors. However, it is never possible to include all possible confounding variables in an empirical analysis. For example, a hypothetical gene might increase mortality and also cause people to smoke more. For this reason, randomized controlled trials are often able to generate more compelling evidence of causal relationships than can be obtained using regression analyses of observational data. When controlled experiments are not feasible, variants of regression analysis such as instrumental variables regression may be used to attempt to estimate causal relationships from observational data.
+
+Finance[edit]
+The capital asset pricing model uses linear regression as well as the concept of beta for analyzing and quantifying the systematic risk of an investment. This comes directly from the beta coefficient of the linear regression model that relates the return on the investment to the return on all risky assets.
+
+Economics[edit]
+Main article: Econometrics
+Linear regression is the predominant empirical tool in economics.  For example, it is used to predict consumption spending,[20] fixed investment spending, inventory investment, purchases of a country's exports,[21] spending on imports,[21] the demand to hold liquid assets,[22] labor demand,[23] and labor supply.[23]
+
+Environmental science[edit]
+This section needs expansion. You can help by adding to it. (January 2010)
+Linear regression finds application in a wide range of environmental science applications. In Canada, the Environmental Effects Monitoring Program uses statistical analyses on fish and benthic surveys to measure the effects of pulp mill or metal mine effluent on the aquatic ecosystem.[24]
+
+Machine learning[edit]
+Linear regression plays an important role in the field of artificial intelligence such as machine learning. The linear regression algorithm is one of the fundamental supervised machine-learning algorithms due to its relative simplicity and well-known properties.[25]
+
+History[edit]
+Least squares linear regression, as a means of finding a good rough linear fit to a set of points was performed by Legendre (1805) and Gauss (1809) for the prediction of planetary movement. Quetelet was responsible for making the procedure well-known and for using it extensively in the social sciences.[26]
+
+See also[edit]
+
+
+Mathematics portal
+
+Analysis of variance
+Blinder–Oaxaca decomposition
+Censored regression model
+Cross-sectional regression
+Curve fitting
+Empirical Bayes methods
+Errors and residuals
+Lack-of-fit sum of squares
+Line fitting
+Linear classifier
+Linear equation
+Logistic regression
+M-estimator
+Multivariate adaptive regression splines
+Nonlinear regression
+Nonparametric regression
+Normal equations
+Projection pursuit regression
+Segmented linear regression
+Stepwise regression
+Structural break
+Support vector machine
+Truncated regression model
+
+References[edit]
+Citations[edit]
+
+
+^ David A. Freedman (2009). Statistical Models: Theory and Practice. Cambridge University Press. p. 26. A simple regression equation has on the right hand side an intercept and an explanatory variable with a slope coefficient. A multiple regression e right hand side, each with its own slope coefficient
+
+^ Rencher, Alvin C.; Christensen, William F. (2012), "Chapter 10, Multivariate regression – Section 10.1, Introduction", Methods of Multivariate Analysis, Wiley Series in Probability and Statistics, 709 (3rd ed.), John Wiley & Sons, p. 19, ISBN 9781118391679.
+
+^ Hilary L. Seal (1967). "The historical development of the Gauss linear model". Biometrika. 54 (1/2): 1–24. doi:10.1093/biomet/54.1-2.1. JSTOR 2333849.
+
+^ Yan, Xin (2009), Linear Regression Analysis: Theory and Computing, World Scientific, pp. 1–2, ISBN 9789812834119, Regression analysis ... is probably one of the oldest topics in mathematical statistics dating back to about two hundred years ago. The earliest form of the linear regression was the least squares method, which was published by Legendre in 1805, and by Gauss in 1809 ... Legendre and Gauss both applied the method to the problem of determining, from astronomical observations, the orbits of bodies about the sun.
+
+^ a b Tibshirani, Robert (1996). "Regression Shrinkage and Selection via the Lasso". Journal of the Royal Statistical Society, Series B. 58 (1): 267–288. JSTOR 2346178.
+
+^ a b Efron, Bradley; Hastie, Trevor; Johnstone, Iain; Tibshirani, Robert (2004). "Least Angle Regression". The Annals of Statistics. 32 (2): 407–451. arXiv:math/0406456. doi:10.1214/009053604000000067. JSTOR 3448465.
+
+^ a b Hawkins, Douglas M. (1973). "On the Investigation of Alternative Regressions by Principal Component Analysis". Journal of the Royal Statistical Society, Series C. 22 (3): 275–286. JSTOR 2346776.
+
+^ a b Jolliffe, Ian T. (1982). "A Note on the Use of Principal Components in Regression". Journal of the Royal Statistical Society, Series C. 31 (3): 300–303. JSTOR 2348005.
+
+^ Berk, Richard A. (2007). "Regression Analysis: A Constructive Critique". Criminal Justice Review. 32 (3): 301–302. doi:10.1177/0734016807304871.
+
+^ Warne, Russell T. (2011). "Beyond multiple regression: Using commonality analysis to better understand R2 results". Gifted Child Quarterly. 55 (4): 313–318. doi:10.1177/0016986211422217.
+
+^ Brillinger, David R. (1977). "The Identification of a Particular Nonlinear Time Series System". Biometrika. 64 (3): 509–515. doi:10.1093/biomet/64.3.509. JSTOR 2345326.
+
+^ Lange, Kenneth L.; Little, Roderick J. A.; Taylor, Jeremy M. G. (1989). "Robust Statistical Modeling Using the t Distribution" (PDF). Journal of the American Statistical Association. 84 (408): 881–896. doi:10.2307/2290063. JSTOR 2290063.
+
+^ Swindel, Benee F. (1981). "Geometry of Ridge Regression Illustrated". The American Statistician. 35 (1): 12–15. doi:10.2307/2683577. JSTOR 2683577.
+
+^ Draper, Norman R.; van Nostrand; R. Craig (1979). "Ridge Regression and James-Stein Estimation: Review and Comments". Technometrics. 21 (4): 451–466. doi:10.2307/1268284. JSTOR 1268284.
+
+^ Hoerl, Arthur E.; Kennard, Robert W.; Hoerl, Roger W. (1985). "Practical Use of Ridge Regression: A Challenge Met". Journal of the Royal Statistical Society, Series C. 34 (2): 114–120. JSTOR 2347363.
+
+^ Narula, Subhash C.; Wellington, John F. (1982). "The Minimum Sum of Absolute Errors Regression: A State of the Art Survey". International Statistical Review. 50 (3): 317–326. doi:10.2307/1402501. JSTOR 1402501.
+
+^ Stone, C. J. (1975). "Adaptive maximum likelihood estimators of a location parameter". The Annals of Statistics. 3 (2): 267–284. doi:10.1214/aos/1176343056. JSTOR 2958945.
+
+^ Goldstein, H. (1986). "Multilevel Mixed Linear Model Analysis Using Iterative Generalized Least Squares". Biometrika. 73 (1): 43–56. doi:10.1093/biomet/73.1.43. JSTOR 2336270.
+
+^ Theil, H. (1950). "A rank-invariant method of linear and polynomial regression analysis. I, II, III". Nederl. Akad. Wetensch., Proc. 53: 386–392, 521–525, 1397–1412. MR 0036489.; Sen, Pranab Kumar (1968). "Estimates of the regression coefficient based on Kendall's tau". Journal of the American Statistical Association. 63 (324): 1379–1389. doi:10.2307/2285891. JSTOR 2285891. MR 0258201..
+
+^ Deaton, Angus (1992). Understanding Consumption. Oxford University Press. ISBN 978-0-19-828824-4.
+
+^ a b Krugman, Paul R.; Obstfeld, M.; Melitz, Marc J. (2012). International Economics: Theory and Policy (9th global ed.). Harlow: Pearson. ISBN 9780273754091.
+
+^ Laidler, David E. W. (1993). The Demand for Money: Theories, Evidence, and Problems (4th ed.). New York: Harper Collins. ISBN 978-0065010985.
+
+^ a b Ehrenberg; Smith (2008). Modern Labor Economics (10th international ed.). London: Addison-Wesley. ISBN 9780321538963.
+
+^ EEMP webpage Archived 2011-06-11 at the Wayback Machine
+
+^ "Linear Regression (Machine Learning)" (PDF). University of Pittsburgh.
+
+^ 
+Stigler, Stephen M. (1986). The History of Statistics: The Measurement of Uncertainty before 1900. Cambridge: Harvard. ISBN 0-674-40340-1.
+
+
+Sources[edit]
+
+Cohen, J., Cohen P., West, S.G., & Aiken, L.S. (2003). Applied multiple regression/correlation analysis for the behavioral sciences. (2nd ed.) Hillsdale, NJ: Lawrence Erlbaum Associates
+Charles Darwin. The Variation of Animals and Plants under Domestication. (1868) (Chapter XIII describes what was known about reversion in Galton's time. Darwin uses the term "reversion".)
+Draper, N.R.; Smith, H. (1998). Applied Regression Analysis (3rd ed.). John Wiley. ISBN 978-0-471-17082-2.
+Francis Galton. "Regression Towards Mediocrity in Hereditary Stature," Journal of the Anthropological Institute, 15:246-263 (1886). (Facsimile at: [1])
+Robert S. Pindyck and Daniel L. Rubinfeld (1998, 4h ed.). Econometric Models and Economic Forecasts, ch. 1 (Intro, incl. appendices on Σ operators & derivation of parameter est.) & Appendix 4.3 (mult. regression in matrix form).
+
+Further reading[edit]
+Pedhazur, Elazar J (1982). Multiple regression in behavioral research: Explanation and prediction (2nd ed.). New York: Holt, Rinehart and Winston. ISBN 978-0-03-041760-3.
+Mathieu Rouaud, 2013: Probability, Statistics and Estimation Chapter 2: Linear Regression, Linear Regression with Error Bars and Nonlinear Regression.
+National Physical Laboratory (1961). "Chapter 1: Linear Equations and Matrices: Direct Methods". Modern Computing Methods. Notes on Applied Science. 16 (2nd ed.). Her Majesty's Stationery Office.
+External links[edit]
+
+
+
+Wikiversity has learning resources about Linear regression
+
+
+
+
+The Wikibook R Programming has a page on the topic of: Linear Models
+
+
+
+
+Wikimedia Commons has media related to Linear regression.
+
+Least-Squares Regression, PhET Interactive simulations, University of Colorado at Boulder
+DIY Linear Fit
+
+vteLeast squares and regression analysisComputational statistics
+Least squares
+Linear least squares
+Non-linear least squares
+Iteratively reweighted least squares
+Correlation and dependence
+Pearson product-moment correlation
+Rank correlation (Spearman's rho
+Kendall's tau)
+Partial correlation
+Confounding variable
+Regression analysis
+Ordinary least squares
+Partial least squares
+Total least squares
+Ridge regression
+Regression as a statistical modelLinear regression
+Simple linear regression
+Ordinary least squares
+Generalized least squares
+Weighted least squares
+General linear model
+Predictor structure
+Polynomial regression
+Growth curve (statistics)
+Segmented regression
+Local regression
+Non-standard
+Nonlinear regression
+Nonparametric
+Semiparametric
+Robust
+Quantile
+Isotonic
+Non-normal errors
+Generalized linear model
+Binomial
+Poisson
+Logistic
+Decomposition of variance
+Analysis of variance
+Analysis of covariance
+Multivariate AOV
+Model exploration
+Stepwise regression
+Model selection
+Mallows's Cp
+AIC
+BIC
+Model specification
+Regression validation
+Background
+Mean and predicted response
+Gauss–Markov theorem
+Errors and residuals
+Goodness of fit
+Studentized residual
+Minimum mean-square error
+Frisch–Waugh–Lovell theorem
+Design of experiments
+Response surface methodology
+Optimal design
+Bayesian design
+Numerical approximation
+Numerical analysis
+Approximation theory
+Numerical integration
+Gaussian quadrature
+Orthogonal polynomials
+Chebyshev polynomials
+Chebyshev nodes
+Applications
+Curve fitting
+Calibration curve
+Numerical smoothing and differentiation
+System identification
+Moving least squares
+
+Regression analysis category
+Statistics category
+ Mathematics portal
+Statistics outline
+Statistics topics
+
+vteStatistics
+Outline
+Index
+Descriptive statisticsContinuous dataCenter
+Mean
+arithmetic
+geometric
+harmonic
+Median
+Mode
+Dispersion
+Variance
+Standard deviation
+Coefficient of variation
+Percentile
+Range
+Interquartile range
+Shape
+Central limit theorem
+Moments
+Skewness
+Kurtosis
+L-moments
+Count data
+Index of dispersion
+Summary tables
+Grouped data
+Frequency distribution
+Contingency table
+Dependence
+Pearson product-moment correlation
+Rank correlation
+Spearman's ρ
+Kendall's τ
+Partial correlation
+Scatter plot
+Graphics
+Bar chart
+Biplot
+Box plot
+Control chart
+Correlogram
+Fan chart
+Forest plot
+Histogram
+Pie chart
+Q–Q plot
+Run chart
+Scatter plot
+Stem-and-leaf display
+Radar chart
+Violin plot
+Data collectionStudy design
+Population
+Statistic
+Effect size
+Statistical power
+Optimal design
+Sample size determination
+Replication
+Missing data
+Survey methodology
+Sampling
+stratified
+cluster
+Standard error
+Opinion poll
+Questionnaire
+Controlled experiments
+Scientific control
+Randomized experiment
+Randomized controlled trial
+Random assignment
+Blocking
+Interaction
+Factorial experiment
+Adaptive Designs
+Adaptive clinical trial
+Up-and-Down Designs
+Stochastic approximation
+Observational Studies
+Cross-sectional study
+Cohort study
+Natural experiment
+Quasi-experiment
+Statistical inferenceStatistical theory
+Population
+Statistic
+Probability distribution
+Sampling distribution
+Order statistic
+Empirical distribution
+Density estimation
+Statistical model
+Model specification
+Lp space
+Parameter
+location
+scale
+shape
+Parametric family
+Likelihood (monotone)
+Location–scale family
+Exponential family
+Completeness
+Sufficiency
+Statistical functional
+Bootstrap
+U
+V
+Optimal decision
+loss function
+Efficiency
+Statistical distance
+divergence
+Asymptotics
+Robustness
+Frequentist inferencePoint estimation
+Estimating equations
+Maximum likelihood
+Method of moments
+M-estimator
+Minimum distance
+Unbiased estimators
+Mean-unbiased minimum-variance
+Rao–Blackwellization
+Lehmann–Scheffé theorem
+Median unbiased
+Plug-in
+Interval estimation
+Confidence interval
+Pivot
+Likelihood interval
+Prediction interval
+Tolerance interval
+Resampling
+Bootstrap
+Jackknife
+Testing hypotheses
+1- & 2-tails
+Power
+Uniformly most powerful test
+Permutation test
+Randomization test
+Multiple comparisons
+Parametric tests
+Likelihood-ratio
+Score/Lagrange multiplier
+Wald
+Specific tests
+Z-test (normal)
+Student's t-test
+F-test
+Goodness of fit
+Chi-squared
+G-test
+Kolmogorov–Smirnov
+Anderson–Darling
+Lilliefors
+Jarque–Bera
+Normality (Shapiro–Wilk)
+Likelihood-ratio test
+Model selection
+Cross validation
+AIC
+BIC
+Rank statistics
+Sign
+Sample median
+Signed rank (Wilcoxon)
+Hodges–Lehmann estimator
+Rank sum (Mann–Whitney)
+Nonparametric anova
+1-way (Kruskal–Wallis)
+2-way (Friedman)
+Ordered alternative (Jonckheere–Terpstra)
+Bayesian inference
+Bayesian probability
+prior
+posterior
+Credible interval
+Bayes factor
+Bayesian estimator
+Maximum posterior estimator
+CorrelationRegression analysisCorrelation
+Pearson product-moment
+Partial correlation
+Confounding variable
+Coefficient of determination
+Regression analysis
+Errors and residuals
+Regression validation
+Mixed effects models
+Simultaneous equations models
+Multivariate adaptive regression splines (MARS)
+Linear regression
+Simple linear regression
+Ordinary least squares
+General linear model
+Bayesian regression
+Non-standard predictors
+Nonlinear regression
+Nonparametric
+Semiparametric
+Isotonic
+Robust
+Heteroscedasticity
+Homoscedasticity
+Generalized linear model
+Exponential families
+Logistic (Bernoulli) / Binomial / Poisson regressions
+Partition of variance
+Analysis of variance (ANOVA, anova)
+Analysis of covariance
+Multivariate ANOVA
+Degrees of freedom
+Categorical / Multivariate / Time-series / Survival analysisCategorical
+Cohen's kappa
+Contingency table
+Graphical model
+Log-linear model
+McNemar's test
+Multivariate
+Regression
+Manova
+Principal components
+Canonical correlation
+Discriminant analysis
+Cluster analysis
+Classification
+Structural equation model
+Factor analysis
+Multivariate distributions
+Elliptical distributions
+Normal
+Time-seriesGeneral
+Decomposition
+Trend
+Stationarity
+Seasonal adjustment
+Exponential smoothing
+Cointegration
+Structural break
+Granger causality
+Specific tests
+Dickey–Fuller
+Johansen
+Q-statistic (Ljung–Box)
+Durbin–Watson
+Breusch–Godfrey
+Time domain
+Autocorrelation (ACF)
+partial (PACF)
+Cross-correlation (XCF)
+ARMA model
+ARIMA model (Box–Jenkins)
+Autoregressive conditional heteroskedasticity (ARCH)
+Vector autoregression (VAR)
+Frequency domain
+Spectral density estimation
+Fourier analysis
+Wavelet
+Whittle likelihood
+SurvivalSurvival function
+Kaplan–Meier estimator (product limit)
+Proportional hazards models
+Accelerated failure time (AFT) model
+First hitting time
+Hazard function
+Nelson–Aalen estimator
+Test
+Log-rank test
+ApplicationsBiostatistics
+Bioinformatics
+Clinical trials / studies
+Epidemiology
+Medical statistics
+Engineering statistics
+Chemometrics
+Methods engineering
+Probabilistic design
+Process / quality control
+Reliability
+System identification
+Social statistics
+Actuarial science
+Census
+Crime statistics
+Demography
+Econometrics
+Jurimetrics
+National accounts
+Official statistics
+Population statistics
+Psychometrics
+Spatial statistics
+Cartography
+Environmental statistics
+Geographic information system
+Geostatistics
+Kriging
+
+Category
+ Mathematics portal
+Commons
+ WikiProject
+
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Linear_regression&oldid=973459538"
+Categories: Single-equation methods (econometrics)Estimation theoryParametric statisticsHidden categories: Webarchive template wayback linksWikipedia articles needing clarification from May 2018Wikipedia articles needing clarification from March 2012All articles with unsourced statementsArticles with unsourced statements from June 2018Articles to be expanded from January 2010All articles to be expandedArticles using small message boxes
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+In other projects
+
+
+
+
+Wikimedia Commons
+
+
+
+
+
+Languages
+
+
+
+
+العربيةAsturianuCatalàČeštinaDeutschEestiΕλληνικάEspañolEuskaraفارسیFrançaisGalego한국어ՀայերենHrvatskiBahasa IndonesiaItalianoעבריתMagyarМакедонски日本語Norsk bokmålPolskiPortuguêsРусскийSimple EnglishSlovenščinaСрпски / srpskiSuomiSvenskaУкраїнськаTiếng Việt粵語中文
+Edit links
+
+
+
+
+
+
+ This page was last edited on 17 August 2020, at 09:56 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

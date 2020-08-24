@@ -1,0 +1,1093 @@
+
+
+
+
+Empirical risk minimization - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Empirical risk minimization
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+Part of a series onMachine learninganddata mining
+Problems
+Classification
+Clustering
+Regression
+Anomaly detection
+AutoML
+Association rules
+Reinforcement learning
+Structured prediction
+Feature engineering
+Feature learning
+Online learning
+Semi-supervised learning
+Unsupervised learning
+Learning to rank
+Grammar induction
+
+
+Supervised learning(classification • regression) 
+Decision trees
+Ensembles
+Bagging
+Boosting
+Random forest
+k-NN
+Linear regression
+Naive Bayes
+Artificial neural networks
+Logistic regression
+Perceptron
+Relevance vector machine (RVM)
+Support vector machine (SVM)
+
+
+Clustering
+BIRCH
+CURE
+Hierarchical
+k-means
+Expectation–maximization (EM)
+DBSCAN
+OPTICS
+Mean-shift
+
+
+Dimensionality reduction
+Factor analysis
+CCA
+ICA
+LDA
+NMF
+PCA
+PGD
+t-SNE
+
+
+Structured prediction
+Graphical models
+Bayes net
+Conditional random field
+Hidden Markov
+
+
+Anomaly detection
+k-NN
+Local outlier factor
+
+
+Artificial neural network
+Autoencoder
+Deep learning
+DeepDream
+Multilayer perceptron
+RNN
+LSTM
+GRU
+Restricted Boltzmann machine
+GAN
+SOM
+Convolutional neural network
+U-Net
+
+
+Reinforcement learning
+Q-learning
+SARSA
+Temporal difference (TD)
+
+
+Theory
+Bias–variance dilemma
+Computational learning theory
+Empirical risk minimization
+Occam learning
+PAC learning
+Statistical learning
+VC theory
+
+
+Machine-learning venues
+NeurIPS
+ICML
+ML
+JMLR
+ArXiv:cs.LG
+
+
+Glossary of artificial intelligence
+Glossary of artificial intelligence
+
+
+Related articles
+List of datasets for machine-learning research
+Outline of machine learning
+
+vte
+Empirical risk minimization (ERM) is a principle in statistical learning theory which defines a family of learning algorithms and is used to give theoretical bounds on their performance. The core idea is that we cannot know exactly how well an algorithm will work in practice (the true "risk") because we don't know the true distribution of data that the algorithm will work on, but we can instead measure its performance on a known set of training data (the "empirical" risk). 
+
+Contents
+
+1 Background
+2 Empirical risk minimization
+3 Properties
+
+3.1 Computational complexity
+
+
+4 See also
+5 References
+6 Further reading
+
+
+Background[edit]
+Consider the following situation, which is a general setting of many supervised learning problems. We have two spaces of objects 
+
+
+
+X
+
+
+{\displaystyle X}
+
+ and 
+
+
+
+Y
+
+
+{\displaystyle Y}
+
+ and would like to learn a function 
+
+
+
+ 
+h
+:
+X
+→
+Y
+
+
+{\displaystyle \ h:X\to Y}
+
+ (often called hypothesis) which outputs an object 
+
+
+
+y
+∈
+Y
+
+
+{\displaystyle y\in Y}
+
+, given 
+
+
+
+x
+∈
+X
+
+
+{\displaystyle x\in X}
+
+. To do so, we have at our disposal a training set of 
+
+
+
+n
+
+
+{\displaystyle n}
+
+ examples 
+
+
+
+ 
+(
+
+x
+
+1
+
+
+,
+
+y
+
+1
+
+
+)
+,
+…
+,
+(
+
+x
+
+n
+
+
+,
+
+y
+
+n
+
+
+)
+
+
+{\displaystyle \ (x_{1},y_{1}),\ldots ,(x_{n},y_{n})}
+
+ where 
+
+
+
+
+x
+
+i
+
+
+∈
+X
+
+
+{\displaystyle x_{i}\in X}
+
+ is an input and 
+
+
+
+
+y
+
+i
+
+
+∈
+Y
+
+
+{\displaystyle y_{i}\in Y}
+
+ is the corresponding response that we wish to get from 
+
+
+
+ 
+h
+(
+
+x
+
+i
+
+
+)
+
+
+{\displaystyle \ h(x_{i})}
+
+.
+To put it more formally, we assume that there is a joint probability distribution 
+
+
+
+P
+(
+x
+,
+y
+)
+
+
+{\displaystyle P(x,y)}
+
+ over 
+
+
+
+X
+
+
+{\displaystyle X}
+
+ and 
+
+
+
+Y
+
+
+{\displaystyle Y}
+
+, and that the training set consists of 
+
+
+
+n
+
+
+{\displaystyle n}
+
+ instances 
+
+
+
+ 
+(
+
+x
+
+1
+
+
+,
+
+y
+
+1
+
+
+)
+,
+…
+,
+(
+
+x
+
+n
+
+
+,
+
+y
+
+n
+
+
+)
+
+
+{\displaystyle \ (x_{1},y_{1}),\ldots ,(x_{n},y_{n})}
+
+ drawn i.i.d. from 
+
+
+
+P
+(
+x
+,
+y
+)
+
+
+{\displaystyle P(x,y)}
+
+. Note that the assumption of a joint probability distribution allows us to model uncertainty in predictions (e.g. from noise in data) because 
+
+
+
+y
+
+
+{\displaystyle y}
+
+ is not a deterministic function of 
+
+
+
+x
+
+
+{\displaystyle x}
+
+, but rather a random variable with conditional distribution 
+
+
+
+P
+(
+y
+
+|
+
+x
+)
+
+
+{\displaystyle P(y|x)}
+
+ for a fixed 
+
+
+
+x
+
+
+{\displaystyle x}
+
+.
+We also assume that we are given a non-negative real-valued loss function 
+
+
+
+L
+(
+
+
+
+y
+^
+
+
+
+,
+y
+)
+
+
+{\displaystyle L({\hat {y}},y)}
+
+ which measures how different the prediction 
+
+
+
+
+
+
+y
+^
+
+
+
+
+
+{\displaystyle {\hat {y}}}
+
+ of a hypothesis is from the true outcome 
+
+
+
+y
+.
+
+
+{\displaystyle y.}
+
+ The risk associated with hypothesis 
+
+
+
+h
+(
+x
+)
+
+
+{\displaystyle h(x)}
+
+ is then defined as the expectation of the loss function:
+
+
+
+
+
+R
+(
+h
+)
+=
+
+E
+
+[
+L
+(
+h
+(
+x
+)
+,
+y
+)
+]
+=
+∫
+L
+(
+h
+(
+x
+)
+,
+y
+)
+
+d
+P
+(
+x
+,
+y
+)
+.
+
+
+{\displaystyle R(h)=\mathbf {E} [L(h(x),y)]=\int L(h(x),y)\,dP(x,y).}
+
+
+A loss function commonly used in theory is the 0-1 loss function: 
+
+
+
+L
+(
+
+
+
+y
+^
+
+
+
+,
+y
+)
+=
+
+
+{
+
+
+
+1
+
+
+
+
+ If 
+
+
+
+
+
+
+y
+^
+
+
+
+≠
+y
+
+
+
+
+0
+
+
+
+
+ If 
+
+
+
+
+
+
+y
+^
+
+
+
+=
+y
+
+
+
+
+
+
+
+
+{\displaystyle L({\hat {y}},y)={\begin{cases}1&{\mbox{ If }}\quad {\hat {y}}\neq y\\0&{\mbox{ If }}\quad {\hat {y}}=y\end{cases}}}
+
+.
+The ultimate goal of a learning algorithm is to find a hypothesis 
+
+
+
+
+h
+
+∗
+
+
+
+
+{\displaystyle h^{*}}
+
+ among a fixed class of functions 
+
+
+
+
+
+H
+
+
+
+
+{\displaystyle {\mathcal {H}}}
+
+ for which the risk 
+
+
+
+R
+(
+h
+)
+
+
+{\displaystyle R(h)}
+
+ is minimal:
+
+
+
+
+
+
+h
+
+∗
+
+
+=
+arg
+⁡
+
+min
+
+h
+∈
+
+
+H
+
+
+
+
+R
+(
+h
+)
+.
+
+
+{\displaystyle h^{*}=\arg \min _{h\in {\mathcal {H}}}R(h).}
+
+
+Empirical risk minimization[edit]
+In general, the risk 
+
+
+
+R
+(
+h
+)
+
+
+{\displaystyle R(h)}
+
+ cannot be computed because the distribution 
+
+
+
+P
+(
+x
+,
+y
+)
+
+
+{\displaystyle P(x,y)}
+
+ is unknown to the learning algorithm (this situation is referred to as agnostic learning). However, we can compute an approximation, called empirical risk, by averaging the loss function on the training set:
+
+
+
+
+
+
+
+R
+
+emp
+
+
+(
+h
+)
+=
+
+
+1
+n
+
+
+
+∑
+
+i
+=
+1
+
+
+n
+
+
+L
+(
+h
+(
+
+x
+
+i
+
+
+)
+,
+
+y
+
+i
+
+
+)
+.
+
+
+{\displaystyle \!R_{\text{emp}}(h)={\frac {1}{n}}\sum _{i=1}^{n}L(h(x_{i}),y_{i}).}
+
+
+The empirical risk minimization principle[1] states that the learning algorithm should choose a hypothesis 
+
+
+
+
+
+
+h
+^
+
+
+
+
+
+{\displaystyle {\hat {h}}}
+
+ which minimizes the empirical risk:
+
+
+
+
+
+
+
+
+h
+^
+
+
+
+=
+arg
+⁡
+
+min
+
+h
+∈
+
+
+H
+
+
+
+
+
+R
+
+emp
+
+
+(
+h
+)
+.
+
+
+{\displaystyle {\hat {h}}=\arg \min _{h\in {\mathcal {H}}}R_{\text{emp}}(h).}
+
+
+Thus the learning algorithm defined by the ERM principle consists in solving the above optimization problem.
+
+Properties[edit]
+This section needs expansion. You can help by adding to it. (February 2010)
+Computational complexity[edit]
+Empirical risk minimization for a classification problem with a 0-1 loss function is known to be an NP-hard problem even for such a relatively simple class of functions as linear classifiers.[2] Though, it can be solved efficiently when the minimal empirical risk is zero, i.e. data is linearly separable.
+In practice, machine learning algorithms cope with that either by employing a convex approximation to the 0-1 loss function (like hinge loss for SVM), which is easier to optimize, or by imposing assumptions on the distribution 
+
+
+
+P
+(
+x
+,
+y
+)
+
+
+{\displaystyle P(x,y)}
+
+ (and thus stop being agnostic learning algorithms to which the above result applies).
+
+See also[edit]
+Maximum likelihood estimation
+M-estimator
+References[edit]
+
+
+^ V. Vapnik (1992). [http://papers.nips.cc/paper/506-principles-of-risk-minimization-for-learning-theory.pdf Principles of Risk Minimization
+for Learning Theory.]
+
+^ V. Feldman, V. Guruswami, P. Raghavendra and Yi Wu (2009). Agnostic Learning of Monomials by Halfspaces is Hard. (See the paper and references therein)
+
+
+Further reading[edit]
+Vapnik, V. (2000). The Nature of Statistical Learning Theory. Information Science and Statistics. Springer-Verlag. ISBN 978-0-387-98780-4.
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Empirical_risk_minimization&oldid=926149186"
+Categories: Machine learningHidden categories: Articles to be expanded from February 2010All articles to be expandedArticles using small message boxes
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+עבריתРусскийУкраїнська中文
+Edit links
+
+
+
+
+
+
+ This page was last edited on 14 November 2019, at 15:11 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,348 @@
+
+
+
+
+Data loss - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Data loss
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+Data loss is an error condition in information systems in which information is destroyed by failures (like failed spindle motors or head crashes on hard drives) or neglect (like mishandling, careless handling or storage under unsuitable conditions) in storage, transmission, or processing. Information systems implement backup and disaster recovery equipment and processes to prevent data loss or restore lost data.[1] Data loss can also occur if the physical medium containing the data is lost or stolen. 
+Data loss is distinguished from data unavailability, which may arise from a network outage. Although the two have substantially similar consequences for users, data unavailability is temporary, while data loss may be permanent. Data loss is also distinct from data breach, an incident where data falls into the wrong hands, although the term data loss has been used in those incidents.[2]
+
+Contents
+
+1 Types
+2 Cost
+3 Prevention
+4 Data recovery
+
+4.1 Initial steps upon data loss
+
+
+5 See also
+6 References
+7 External links
+
+
+Types[edit]
+Procedural
+Intentional Action
+Intentional deletion of a file or program
+Unintentional Action
+Accidental deletion of a file or program
+Misplacement of CDs or Memory sticks
+Administration errors
+Inability to read unknown file format
+Failure
+Power failure, resulting in data in volatile memory not being saved to permanent memory.
+Hardware failure, such as a head crash in a hard disk.
+A software crash or freeze, resulting in data not being saved.
+Software bugs or poor usability, such as not confirming a file delete command.
+Business failure (vendor bankruptcy), where data is stored with a software vendor using Software-as-a-service and SaaS data escrow has not been provisioned.
+Data corruption, such as file system corruption or database corruption.
+Disaster
+Natural disaster, earthquake, flood, tornado, etc.
+Fire
+Crime
+Theft, hacking, SQL injection, sabotage, etc.
+A malicious act, such as a worm, virus, Ransomware, hacking or theft of physical media.
+Studies show hardware failure and human error are the two most common causes of data loss, accounting for roughly three quarters of all incidents.[3] Another cause of data loss is a natural disaster, which is a greater risk dependent on where the hardware is located. While the probability of data loss due to natural disaster is small, the only way to prepare for such an event is to store backup data in a separate physical location. As such, the best backup plans always include at least one copy being stored off-site.[4]
+
+Cost[edit]
+The cost of a data loss event is directly related to the value of the data and the length of time that it is unavailable yet needed. For an enterprise in particular, the definition of cost extends beyond the financial and can also include time.
+Consider:
+
+The cost of continuing without the data
+The cost of recreating the data
+The cost of notifying users in the event of a compromise
+Prevention[edit]
+The frequency of data loss and the impact can be greatly mitigated by taking proper precautions, those of which necessary can vary depending on the type of data loss. For example, multiple power circuits with battery backup and a generator only protect against power failures, though using an Uninterruptable Power Supply can protect drive against sudden power spikes. Similarly, using a journaling file system and RAID storage only protect against certain types of software and hardware failure.[5]
+For hard disk drives, which are a physical storage medium, ensuring minimal vibration and movement will help protect against damaging the components internally, as can maintaining a suitable drive temperature.[6]
+Regular data backups are an important asset to have when trying to recover after a data loss event, but they do not prevent user errors or system failures. As such, a data backup plan needs to be established and run in unison with a disaster recovery plan in order to lower risk.[7]
+
+Data recovery[edit]
+Main article: Data Recovery
+ Media that's suffered a catastrophic electronic failure requires data recovery in order to salvage its contents.
+Data recovery is often performed by specialized commercial services that have developed often proprietary methods to recover data from physically damaged media. Service costs at data recovery labs are usually dependent on type of damage and type of storage medium, as well as the required security or cleanroom procedures.
+File system corruption can frequently be repaired by the user or the system administrator. For example, a deleted file is typically not immediately overwritten on disk, but more often simply has its entry deleted from the file system index. In such a case, the deletion can be easily reversed.
+Successful recovery from data loss generally requires implementation of an effective backup strategy. Without an implemented backup strategy, recovery requires reinstallation of programs and regeneration of data. Even with an effective backup strategy, restoring a system to the precise state it was in prior to the Data Loss Event is extremely difficult. Some level of compromise between granularity of recoverability and cost is necessary. Furthermore, a Data Loss Event may not be immediately apparent. An effective backup strategy must also consider the cost of maintaining the ability to recover lost data for long periods of time.
+A highly effective backup system would have duplicate copies of every file and program that were immediately accessible whenever a Data Loss Event was noticed. However, in most situations, there is an inverse correlation between the value of a unit of data and the length of time it takes to notice the loss of that data. Taking this into consideration, many backup strategies decrease the granularity of restorability as the time increases since the potential Data Loss Event. By this logic, recovery from recent Data Loss Events is easier and more complete than recovery from Data Loss Events that happened further in the past.
+Recovery is also related to the type of Data Loss Event. Recovering a single lost file is substantially different from recovering an entire system that was destroyed in a disaster. An effective backup regimen has some proportionality between the magnitude of Data Loss and the magnitude of effort required to recover. For example, it should be far easier to restore the single lost file than to recover the entire system.
+
+Initial steps upon data loss[edit]
+If data loss occurs, a successful recovery must ensure that the deleted data is not over-written. For this reason — one should avoid all write operations to the affected storage device. This includes not starting the system to which the affected device is connected. This is because many operating systems create temporary files in order to boot, and these may overwrite areas of lost data — rendering it unrecoverable. Viewing web pages has the same effect — potentially overwriting lost files with the temporary HTML and image files created when viewing a web page. File operations such as copying, editing, or deleting should also be avoided.
+Upon realizing data loss has occurred, it is often best to shut down the computer and remove the drive in question from the unit. Re-attach this drive to a secondary computer with a write blocker device and then attempt to recover lost data. If possible, create an image of the drive in order to establish a secondary copy of the data. This can then be tested on, with recovery attempted, abolishing the risk of harming the source data.[citation needed]
+
+See also[edit]
+Data spill
+Data truncation
+List of data recovery software
+References[edit]
+
+
+^ Constantine., Photopoulos (2008). Managing catastrophic loss of sensitive data : a guide for IT and security professionals. Rockland, Mass.: Syngress. ISBN 9781597492393. OCLC 228148168.
+
+^ "Data Spill Management Guide". asd.gov.au. December 24, 2014. Retrieved January 23, 2015. A data spill is sometimes referred to as unintentional information disclosure or a data leak.
+
+^ The cost of lost data - Graziadio Business Report
+
+^ Leopando, Jonathan (2 April 2013). "World Backup Day: The 3-2-1 Rule". TrendLabs Security Intelligence Blog. Trend Micro. Retrieved 29 April 2015.
+
+^ "Preventing data loss in a perilous digital age". TechRadar. Retrieved 2018-10-26.
+
+^ Connor, Chris (2 November 2013). "Data Loss Prevention: 10 Tips to Prevent Hard Drive Failure". Data Storage Digest. Retrieved 29 April 2015.
+
+^ Leonard, Prisley (14 June 2017). "Backup Software, Professional Backup Solution can prevent data loss". minitool.com. Retrieved 25 October 2018.
+
+
+External links[edit]
+Data Loss Prevention
+Some Data Loss Event
+vteData
+Analysis
+Archaeology
+Cleansing
+Collection
+Compression
+Corruption
+Curation
+Degradation
+Editing
+ETL
+Farming
+Format management
+Fusion
+Integration
+Integrity
+Library
+Loss
+Management
+Migration
+Mining
+Pre-processing
+Preservation
+Protection (privacy)
+Recovery
+Reduction
+Retention
+Quality
+Science
+Scraping
+Scrubbing
+Security
+Stewardship
+Storage
+Validation
+Warehouse
+Wrangling/munging
+
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Data_loss&oldid=956578705"
+Categories: Computer dataData recoveryHidden categories: All articles with unsourced statementsArticles with unsourced statements from October 2018
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+DeutschفارسیHrvatskiSimple EnglishSvenska
+Edit links
+
+
+
+
+
+
+ This page was last edited on 14 May 2020, at 03:57 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,551 @@
+
+
+
+
+TensorFlow - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TensorFlow
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+
+
+TensorFlowDeveloper(s)Google Brain Team[1]Initial releaseNovember 9, 2015; 4 years ago (2015-11-09)Stable release2.2.0[2]
+   / May 6, 2020; 3 months ago (2020-05-06)
+Repositorygithub.com/tensorflow/tensorflowWritten inPython, C++, CUDAPlatformLinux, macOS, Windows, Android, JavaScript[3]TypeMachine learning libraryLicenseApache License 2.0Websitewww.tensorflow.org
+TensorFlow is a free and open-source software library for dataflow and differentiable programming  across a range of tasks. It is a symbolic math library, and is also used for machine learning applications such as neural networks.[4] It is used for both research and production at Google.‍[4]:min 0:15/2:17 [5]:p.2 [4]:0:26/2:17
+TensorFlow was developed by the Google Brain team for internal Google use. It was released under the Apache License 2.0 on November 9, 2015.[1][6]
+
+Contents
+
+1 History
+
+1.1 DistBelief
+1.2 TensorFlow
+1.3 Tensor processing unit (TPU)
+1.4 Edge TPU
+1.5 TensorFlow Lite
+1.6 Pixel Visual Core (PVC)
+1.7 Applications
+1.8 Machine Learning Crash Course (MLCC)
+1.9 TensorFlow 2.0
+
+
+2 Features
+3 Applications
+4 See also
+5 References
+6 Bibliography
+7 External links
+
+
+History[edit]
+DistBelief[edit]
+Starting in 2011, Google Brain built DistBelief as a proprietary machine learning system based on deep learning neural networks. Its use grew rapidly across diverse Alphabet companies in both research and commercial applications.[5][7] Google assigned multiple computer scientists, including Jeff Dean, to simplify and refactor the codebase of DistBelief into a faster, more robust application-grade library, which became TensorFlow.[8] In 2009, the team, led by Geoffrey Hinton, had implemented generalized backpropagation and other improvements which allowed generation of neural networks with substantially higher accuracy, for instance a 25% reduction in errors in speech recognition.[9]
+
+TensorFlow[edit]
+TensorFlow is Google Brain's second-generation system. Version 1.0.0 was released on February 11, 2017.[10]  While the reference implementation runs on single devices, TensorFlow can run on multiple CPUs and GPUs (with optional CUDA and SYCL extensions for general-purpose computing on graphics processing units).[11] TensorFlow is available on 64-bit Linux, macOS, Windows, and mobile computing platforms including Android and iOS.
+Its flexible architecture allows for the easy deployment of computation across a variety of platforms (CPUs, GPUs, TPUs), and from desktops to clusters of servers to mobile and edge devices.
+TensorFlow computations are expressed as stateful dataflow graphs. The name TensorFlow derives from the operations that such neural networks perform on multidimensional data arrays, which are referred to as tensors. During the Google I/O Conference in June 2016, Jeff Dean stated that 1,500 repositories on GitHub mentioned TensorFlow, of which only 5 were from Google.[12]
+In December 2017, developers from Google, Cisco, RedHat, CoreOS, and CaiCloud introduced Kubeflow at a conference. Kubeflow allows operation and deployment of TensorFlow on Kubernetes.
+In March 2018, Google announced TensorFlow.js version 1.0 for machine learning in JavaScript.[13]
+In Jan 2019, Google announced TensorFlow 2.0.[14] It became officially available in Sep 2019.[15]
+In May 2019, Google announced TensorFlow Graphics for deep learning in computer graphics.[16]
+
+Tensor processing unit (TPU)[edit]
+Main article: Tensor processing unit
+In May 2016, Google announced its Tensor processing unit (TPU), an application-specific integrated circuit (ASIC, a hardware chip) built specifically for machine learning and tailored for TensorFlow. A TPU is a programmable AI accelerator designed to provide high throughput of low-precision arithmetic (e.g., 8-bit), and oriented toward using or running models rather than training them. Google announced they had been running TPUs inside their data centers for more than a year, and had found them to deliver an order of magnitude better-optimized performance per watt for machine learning.[17]
+In May 2017, Google announced the second-generation, as well as the availability of the TPUs in Google Compute Engine.[18] The second-generation TPUs deliver up to 180 teraflops of performance, and when organized into clusters of 64 TPUs, provide up to 11.5 petaflops.
+In May 2018, Google announced the third-generation TPUs delivering up to 420 teraflops of performance and 128 GB high bandwidth memory (HBM). Cloud TPU v3 Pods offer 100+ petaflops of performance and 32 TB HBM.[19]
+In February 2018, Google announced that they were making TPUs available in beta on the Google Cloud Platform.[20]
+
+Edge TPU[edit]
+In July 2018, the Edge TPU was announced. Edge TPU is Google’s purpose-built ASIC chip designed to run TensorFlow Lite machine learning (ML) models on small client computing devices such as smartphones[21] known as edge computing.
+
+TensorFlow Lite[edit]
+In May 2017, Google announced a software stack specifically for mobile development, TensorFlow Lite.[22]  In January 2019, TensorFlow team released a developer preview of the mobile GPU inference engine with OpenGL ES 3.1 Compute Shaders on Android devices and Metal Compute Shaders on iOS devices.[23] In May 2019, Google announced that their TensorFlow Lite Micro (also known as TensorFlow Lite for Microcontrollers) and ARM's uTensor would be merging.[24]
+
+Pixel Visual Core (PVC)[edit]
+In October 2017, Google released the Google Pixel 2 which featured their Pixel Visual Core (PVC), a fully programmable image, vision and AI processor for mobile devices. The PVC supports TensorFlow for machine learning (and Halide for image processing).
+
+Applications[edit]
+Google officially released RankBrain on October 26, 2015, backed by TensorFlow.
+Google also released Colaboratory, which is a TensorFlow Jupyter notebook environment that requires no setup to use.[25]
+
+Machine Learning Crash Course (MLCC)[edit]
+On March 1, 2018, Google released its Machine Learning Crash Course (MLCC). Originally designed to help equip Google employees with practical artificial intelligence and machine learning fundamentals, Google rolled out its free TensorFlow workshops in several cities around the world before finally releasing the course to the public.[26]
+
+TensorFlow 2.0[edit]
+As TensorFlow's market share among research papers was declining to the advantage of PyTorch[27] TensorFlow Team announced a release of a new major version of the library in September 2019. TensorFlow 2.0 introduced many changes, the most significant being TensorFlow eager, which changed the automatic differentiation scheme from the static computational graph, to the "Define-by-Run" scheme originally made popular by Chainer and later PyTorch.[28] Other major changes included removal of old libraries, cross-compatibility between trained models on different versions of TensorFlow, and significant improvements to the performance on GPU.[29][non-primary source needed]
+
+Features[edit]
+TensorFlow provides stable Python (for version 3.7 across all platforms)[30] and C APIs;[31] and without API backwards compatibility guarantee: C++, Go, Java,[32] JavaScript[3] and Swift (early release).[33][34]  Third-party packages are available for C#,[35][36] Haskell,[37] Julia,[38] MATLAB,[39] R,[40] Scala,[41] Rust,[42] OCaml,[43] and Crystal.[44]
+"New language support should be built on top of the C API. However, [..] not all functionality is available in C yet."[45] Some more functionality is provided by the Python API.
+
+Applications[edit]
+Original photo (left) and with TensorFlow neural style applied (right)
+Among the applications for which TensorFlow is the foundation, are automated image-captioning software, such as DeepDream.[46]
+
+
+See also[edit]
+Comparison of deep learning software
+Differentiable programming
+References[edit]
+
+
+^ a b "Credits". TensorFlow.org. Retrieved November 10, 2015.
+
+^ "TensorFlow Release". Retrieved May 16, 2020.
+
+^ a b "TensorFlow.js". Retrieved June 28, 2018.
+
+^ a b c "TensorFlow: Open source machine learning" "It is machine learning software being used for various kinds of perceptual and language understanding tasks" — Jeffrey Dean, minute 0:47 / 2:17 from YouTube clip
+
+^ a b Dean, Jeff; Monga, Rajat;  et al. (November 9, 2015). "TensorFlow: Large-scale machine learning on heterogeneous systems" (PDF). TensorFlow.org. Google Research. Retrieved November 10, 2015.
+
+^ Metz, Cade (November 9, 2015). "Google Just Open Sourced TensorFlow, Its Artificial Intelligence Engine". Wired. Retrieved November 10, 2015.
+
+^ Perez, Sarah (November 9, 2015). "Google Open-Sources The Machine Learning Tech Behind Google Photos Search, Smart Reply And More". TechCrunch. Retrieved November 11, 2015.
+
+^ Oremus, Will (November 9, 2015). "What Is TensorFlow, and Why Is Google So Excited About It?". Slate. Retrieved November 11, 2015.
+
+^ Ward-Bailey, Jeff (November 25, 2015). "Google chairman: We're making 'real progress' on artificial intelligence". CSMonitor. Retrieved November 25, 2015.
+
+^ "Tensorflow Release 1.0.0".
+
+^ Metz, Cade (November 10, 2015). "TensorFlow, Google's Open Source AI, Points to a Fast-Changing Hardware World". Wired. Retrieved November 11, 2015.
+
+^ Machine Learning: Google I/O 2016 Minute 07:30/44:44  accessdate=2016-06-05
+
+^ TensorFlow (March 30, 2018). "Introducing TensorFlow.js: Machine Learning in Javascript". Medium. Retrieved May 24, 2019.
+
+^ TensorFlow (January 14, 2019). "What's coming in TensorFlow 2.0". Medium. Retrieved May 24, 2019.
+
+^ TensorFlow (September 30, 2019). "TensorFlow 2.0 is now available!". Medium. Retrieved November 24, 2019.
+
+^ TensorFlow (May 9, 2019). "Introducing TensorFlow Graphics: Computer Graphics Meets Deep Learning". Medium. Retrieved May 24, 2019.
+
+^ Jouppi, Norm. "Google supercharges machine learning tasks with TPU custom chip". Google Cloud Platform Blog. Retrieved May 19, 2016.
+
+^ "Build and train machine learning models on our new Google Cloud TPUs". Google. May 17, 2017. Retrieved May 18, 2017.
+
+^ "Cloud TPU". Google Cloud. Retrieved May 24, 2019.
+
+^ "Cloud TPU machine learning accelerators now available in beta". Google Cloud Platform Blog. Retrieved February 12, 2018.
+
+^ Kundu, Kishalaya (July 26, 2018). "Google Announces Edge TPU, Cloud IoT Edge at Cloud Next 2018". Beebom. Retrieved February 2, 2019.
+
+^ "Google's new machine learning framework is going to put more AI on your phone".
+
+^ TensorFlow (January 16, 2019). "TensorFlow Lite Now Faster with Mobile GPUs (Developer Preview)". Medium. Retrieved May 24, 2019.
+
+^ "uTensor and Tensor Flow Announcement | Mbed". os.mbed.com. Retrieved May 24, 2019.
+
+^ "Colaboratory – Google". research.google.com. Retrieved November 10, 2018.
+
+^ "Machine Learning Crash Course with TensorFlow APIs".
+
+^ He, Horace (October 10, 2019). "The State of Machine Learning Frameworks in 2019". The Gradient. Retrieved May 22, 2020.
+
+^ He, Horace (October 10, 2019). "The State of Machine Learning Frameworks in 2019". The Gradient. Retrieved July 6, 2020.
+
+^ "TensorFlow 2.0 is now available!". TensorFlow Blog. September 30, 2019. Retrieved May 22, 2020.
+
+^ "All symbols in TensorFlow | TensorFlow". TensorFlow. Retrieved February 18, 2018.
+
+^ "TensorFlow Version Compatibility | TensorFlow". TensorFlow. Retrieved May 10, 2018. Some API functions are explicitly marked as "experimental" and can change in backward incompatible ways between minor releases. These include other languages
+
+^ "API Documentation". Retrieved June 27, 2018.
+
+^ TensorFlow (April 26, 2018). "Introducing Swift For TensorFlow". Medium. Retrieved August 14, 2019. not just a TensorFlow API wrapper written in Swift
+
+^ "Swift for TensorFlow". Retrieved June 28, 2018. Swift for TensorFlow is an early stage research project. It has been released to enable open source development and is not yet ready for general use by machine learning developers. The API is subject to change at any time.
+
+^ Icaza, Miguel de (February 17, 2018). "TensorFlowSharp: TensorFlow API for .NET languages". Retrieved February 18, 2018.
+
+^ Chen, Haiping (December 11, 2018). "TensorFlow.NET: .NET Standard bindings for TensorFlow". Retrieved December 11, 2018.
+
+^ "haskell: Haskell bindings for TensorFlow". tensorflow. February 17, 2018. Retrieved February 18, 2018.
+
+^ Malmaud, Jon (August 12, 2019). "A Julia wrapper for TensorFlow". Retrieved August 14, 2019. operations like sin, * (matrix multiplication), .* (element-wise multiplication), etc [..]. Compare to Python, which requires learning specialized namespaced functions like tf.matmul.
+
+^ "A MATLAB wrapper for TensorFlow Core". November 3, 2019. Retrieved February 13, 2020.
+
+^ "tensorflow: TensorFlow for R". RStudio. February 17, 2018. Retrieved February 18, 2018.
+
+^ Platanios, Anthony (February 17, 2018). "tensorflow_scala: TensorFlow API for the Scala Programming Language". Retrieved February 18, 2018.
+
+^ "rust: Rust language bindings for TensorFlow". tensorflow. February 17, 2018. Retrieved February 18, 2018.
+
+^ Mazare, Laurent (February 16, 2018). "tensorflow-ocaml: OCaml bindings for TensorFlow". Retrieved February 18, 2018.
+
+^ "fazibear/tensorflow.cr". GitHub. Retrieved October 10, 2018.
+
+^ "TensorFlow in other languages | TensorFlow Core". TensorFlow. Retrieved August 14, 2019.
+
+^ Byrne, Michael (November 11, 2015). "Google Offers Up Its Entire Machine Learning Library as Open-Source Software". Vice. Retrieved November 11, 2015.
+
+
+Bibliography[edit]
+
+Géron, Aurélien (October 15, 2019). Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow (2nd ed.). O'Reilly Media. p. 856. ISBN 9781492032632.
+Ramsundar, Bharath; Zadeh, Reza Bosagh (March 23, 2018). TensorFlow for Deep Learning (1st ed.). O'Reilly Media. p. 256. ISBN 9781491980446.
+Hope, Tom; Resheff, Yehezkel S.; Lieder, Itay (August 27, 2017). Learning TensorFlow: A Guide to Building Deep Learning Systems (1st ed.). O'Reilly Media. p. 242. ISBN 9781491978504.
+Shukla, Nishant (February 12, 2018). Machine Learning with TensorFlow (1st ed.). Manning Publications. p. 272. ISBN 9781617293870.
+
+External links[edit]
+Official website
+vteDeep learning softwareOpen-source
+Apache SINGA
+Caffe
+Deeplearning4j
+DeepSpeed
+Dlib
+Keras
+Microsoft Cognitive Toolkit
+ML.NET
+MXNet
+OpenNN
+PyTorch
+TensorFlow
+Theano
+Torch
+ONNX
+Proprietary
+Maple
+Neural Designer
+Wolfram Mathematica
+Apple Core ML
+
+Category
+Comparison
+
+vteGoogle free and open-source software (FOSS)SoftwareApplications
+Chromium
+OpenRefine
+Tesseract
+Programming languages
+Dart
+Go
+Sawzall
+Frameworks anddevelopment tools
+AMP
+Angular
+AngularJS
+Beam
+Blockly
+Closure Tools
+Cpplint
+FlatBuffers
+Flutter
+Gears
+Gerrit
+Guava
+gRPC
+Gson
+Guetzli
+Guice
+gVisor
+Kubernetes
+LevelDB
+libvpx
+Polymer
+TensorFlow
+Operating systems
+AOSP
+Chromium OS
+Fuchsia
+gLinux
+Goobuntu
+Related
+Code-in
+Open Source Security Foundation
+Summer of Code
+
+vteDifferentiable computingGeneral
+Differentiable programming
+Neural Turing machine
+Differentiable neural computer
+Automatic differentiation
+Neuromorphic engineering
+Concepts
+Gradient descent
+Cable theory
+Cluster analysis
+Regression analysis
+Pattern recognition
+Adversarial machine learning
+Computational learning theory
+Programming languages
+Python
+Julia
+Application
+Machine learning
+Artificial neural network
+Scientific computing
+Artificial Intelligence
+Hardware
+TPU
+VPU
+Memristor
+SpiNNaker
+Software library
+TensorFlow
+PyTorch
+ImplementationAudio-visual
+AlexNet
+WaveNet
+Human image synthesis
+HWR
+OCR
+Speech synthesis
+Speech recognition
+Facial recognition system
+Verbal
+Word2vec
+Transformer
+BERT
+NMT
+Project Debater
+Watson
+Decisional
+AlphaGo
+Q-learning
+SARSA
+OpenAI Five
+People
+Alex Graves
+Ian Goodfellow
+Yoshua Bengio
+Geoffrey Hinton
+Yann LeCun
+Andrew Ng
+Demis Hassabis
+
+ Portals
+Computer programming
+Technology
+ Category
+Artificial neural networks
+Machine learning
+
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=TensorFlow&oldid=973548855"
+Categories: Applied machine learningData mining and machine learning softwareDeep learningFree software programmed in C++Free software programmed in PythonFree statistical softwareGoogle softwareOpen-source artificial intelligencePython scientific librariesSoftware using the Apache license2015 softwareHidden categories: Use mdy dates from November 2017All pages needing factual verificationWikipedia articles needing factual verification from August 2020Official website different in Wikidata and Wikipedia
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+In other projects
+
+
+
+
+Wikimedia Commons
+
+
+
+
+
+Languages
+
+
+
+
+العربيةবাংলাBân-lâm-gúCatalàDeutschEestiΕλληνικάEspañolفارسیFrançais한국어Italianoעבריתമലയാളം日本語Norsk bokmålଓଡ଼ିଆPolskiPortuguêsРусскийSvenskaไทยTürkçeУкраїнськаTiếng Việt中文
+Edit links
+
+
+
+
+
+
+ This page was last edited on 17 August 2020, at 20:53 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+

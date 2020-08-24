@@ -1,0 +1,692 @@
+
+
+
+
+Data fusion - Wikipedia
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Data fusion
+
+From Wikipedia, the free encyclopedia
+
+
+
+Jump to navigation
+Jump to search
+ Fusion of the data from two sources (dimensions #1 & #2) can yield a classifier superior to any classifiers based on dimension #1 or dimension #2 alone.
+Data fusion is the process of integrating multiple data sources to produce more consistent, accurate, and useful information than that provided by any individual data source. Advances in Data Fusion are provided by the International Society of Information Fusion (ISIF) at www.isif.org.
+Data fusion processes are often categorized as low, intermediate, or high, depending on the processing stage at which fusion takes place.[1] Low-level data fusion combines several sources of raw data to produce new raw data. The expectation is that fused data is more informative and synthetic than the original inputs.
+For example, sensor fusion is also known as (multi-sensor) data fusion and is a subset of information fusion.
+The concept of data fusion has origins in the evolved capacity of humans and animals to incorporate information from multiple senses to improve their ability to survive. For example, a combination of sight, touch, smell, and taste may indicate whether a substance is edible.[2]
+
+Contents
+
+1 The JDL/DFIG model
+2 Geospatial applications
+3 Data integration
+
+3.1 Application areas
+
+
+4 From multiple traffic sensing modalities
+5 Decision fusion
+6 For enhanced contextual awareness
+7 See also
+8 References
+
+8.1 Sources
+
+
+9 Bibliography
+10 External links
+
+
+The JDL/DFIG model[edit]
+ Joint Director of the Labs (JDL)/Data Fusion Information Group (DFIG) Model
+In the mid-1980s, the Joint Directors of Laboratories formed the Data Fusion Subpanel (which later became known as the Data Fusion Group).  With the advent of the World Wide Web, data fusion thus included data, sensor, and information fusion. The JDL/DFIG introduced a model of data fusion that divided the various processes.  Currently, the six levels with the Data Fusion Information Group (DFIG) model are:
+Level 0: Source Preprocessing (or Data Assessment)
+Level 1: Object Assessment
+Level 2: Situation Assessment
+Level 3: Impact Assessment (or Threat Refinement)
+Level 4: Process Refinement (or Resource Management)
+Level 5: User Refinement (or Cognitive Refinement)
+Level 6: Mission Refinement (or Mission Management)
+Although the JDL Model (Level 1–4) is still in use today, it is often criticized for its implication that the levels necessarily happen in order and also for its lack of adequate representation of the potential for a human-in-the-loop. The DFIG model (Level 0–5) explored the implications of situation awareness, user refinement, and mission management.[3] Despite these shortcomings, the JDL/DFIG models are useful for visualizing the data fusion process, facilitating discussion and common understanding,[4] and important for systems-level information fusion design.[3]
+[5]
+
+Geospatial applications[edit]
+In the geospatial (GIS) domain, data fusion is often synonymous with data integration.  In these applications, there is often a need to combine diverse data sets into a unified (fused) data set which includes all of the data points and time steps from the input data sets.  The fused data set is different from a simple combined superset in that the points in the fused data set contain attributes and metadata which might not have been included for these points in the original data set.
+A simplified example of this process is shown below where data set "α" is fused with data set β to form the fused data set δ.  Data points in set "α" have spatial coordinates X and Y and attributes A1 and A2.  Data points in set β have spatial coordinates X and Y and attributes B1 and B2.  The fused data set contains all points and attributes. 
+
+
+
+Input Data Set α
+Input Data Set β
+Fused Data Set δ
+
+
+
+
+
+Point
+
+X
+
+Y
+
+A1
+
+A2
+
+
+α1
+
+10
+
+10
+
+M
+
+N
+
+
+α2
+
+10
+
+30
+
+M
+
+N
+
+
+α3
+
+30
+
+10
+
+M
+
+N
+
+
+α4
+
+30
+
+30
+
+M
+
+N
+
+
+
+
+
+Point
+
+X
+
+Y
+
+B1
+
+B2
+
+
+β1
+
+20
+
+20
+
+Q
+
+R
+
+
+β2
+
+20
+
+40
+
+Q
+
+R
+
+
+β3
+
+40
+
+20
+
+Q
+
+R
+
+
+β4
+
+40
+
+40
+
+Q
+
+R
+
+
+
+
+
+Point
+
+X
+
+Y
+
+A1
+
+A2
+
+B1
+
+B2
+
+
+δ1
+
+10
+
+10
+
+M
+
+N
+
+Q?
+
+R?
+
+
+δ2
+
+10
+
+30
+
+M
+
+N
+
+Q?
+
+R?
+
+
+δ3
+
+30
+
+10
+
+M
+
+N
+
+Q?
+
+R?
+
+
+δ4
+
+30
+
+30
+
+M
+
+N
+
+Q?
+
+R?
+
+
+δ5
+
+20
+
+20
+
+M?
+
+N?
+
+Q
+
+R
+
+
+δ6
+
+20
+
+40
+
+M?
+
+N?
+
+Q
+
+R
+
+
+δ7
+
+40
+
+20
+
+M?
+
+N?
+
+Q
+
+R
+
+
+δ8
+
+40
+
+40
+
+M?
+
+N?
+
+Q
+
+R
+
+
+In a simple case where all attributes are uniform across the entire analysis domain, the attributes may be simply assigned: M?, N?, Q?, R? to M, N, Q, R.  In a real application, attributes are not uniform and some type of interpolation is usually required to properly assign attributes to the data points in the fused set.
+
+ Visualization of fused data sets for rock lobster tracks in the Tasman Sea.  Image generated using Eonfusion software by Myriax Pty. Ltd.
+In a much more complicated application, marine animal researchers use data fusion to combine animal tracking data with bathymetric, meteorological, sea surface temperature (SST) and animal habitat data to examine and understand habitat utilization and animal behavior in reaction to external forces such as weather or water temperature.  Each of these data sets exhibit a different spatial grid and sampling rate so a simple combination would likely create erroneous assumptions and taint the results of the analysis.  But through the use of data fusion, all data and attributes are brought together into a single view in which a more complete picture of the environment is created.  This enables scientists to identify key locations and times and form new insights into the interactions between the environment and animal behaviors.
+In the figure at right, rock lobsters are studied off the coast of Tasmania.  Hugh Pederson of the University of Tasmania used data fusion software to fuse southern rock lobster tracking data (color-coded for in yellow and black for day and night, respectively) with bathymetry and habitat data to create a unique 4D picture of rock lobster behavior.
+
+Data integration[edit]
+See also: Truth discovery
+In applications outside of the geospatial domain, differences in the usage of the terms Data integration and Data fusion apply.  In areas such as business intelligence, for example, data integration is used to describe the combining of data, whereas data fusion is integration followed by reduction or replacement. Data integration might be viewed as set combination wherein the larger set is retained, whereas fusion is a set reduction technique with improved confidence.
+
+Application areas[edit]
+
+Bioinformatics
+Biometrics
+Business intelligence
+Business performance management
+Cheminformatics
+Quantitative structure-activity relationship
+Discovery science
+Geospatial information systems
+Intelligence services
+Intelligent transport systems
+Loyalty card
+Oceanography
+Soil mapping
+Wireless sensor networks
+
+From multiple traffic sensing modalities[edit]
+The data from the different sensing technologies can be combined in intelligent ways to determine the traffic state accurately. A Data fusion based approach that utilizes the road side collected acoustic, image and sensor data has been shown to combine the advantages of the different individual methods.[6]
+
+Decision fusion[edit]
+In many cases, geographically-dispersed sensors are severely energy- and bandwidth-limited. Therefore, the raw data concerning a certain phenomenon are often summarized in a few bits from each sensor. When inferring on a binary event (i.e., 
+
+
+
+
+
+
+H
+
+
+
+0
+
+
+
+
+{\displaystyle {\mathcal {H}}_{0}}
+
+  or 
+
+
+
+
+
+
+H
+
+
+
+1
+
+
+
+
+{\displaystyle {\mathcal {H}}_{1}}
+
+ ), in the extreme case only binary decisions are sent from sensors to a Decision Fusion Center (DFC) and combined in order to obtain improved classification performance.[7][8][9]
+
+For enhanced contextual awareness[edit]
+With a multitude of built-in sensors including motion sensor, environmental sensor, position sensor, a modern mobile device typically gives mobile applications access to a number of sensory data which could be leveraged to enhance the contextual awareness. Using signal processing and data fusion techniques such as feature generation, feasibility study and principal component analysis (PCA) such sensory data will greatly improve the positive rate of classifying the motion and contextual relevant status of the device.[10] Many context-enhanced information techniques are provided by Snidaro, et al. [11].[12]
+
+See also[edit]
+
+Data assimilation
+Data munging
+Image fusion
+Information integration
+Integrative level
+Meta-analysis
+Sensor fusion
+
+References[edit]
+
+
+^ Klein, Lawrence A. (2004). Sensor and data fusion: A tool for information assessment and decision making. SPIE Press. p. 51. ISBN 978-0-8194-5435-5.
+
+^ Hall, David L.; Llinas, James (1997). "An introduction to multisensor data fusion" (PDF). Proceedings of the IEEE. 85 (1): 6–23. doi:10.1109/5.554205. ISSN 0018-9219.
+
+^ a b Blasch, Erik P.; Bossé, Éloi; Lambert, Dale A. (2012). High-Level Information Fusion Management and System Design. Norwood, MA: Artech House Publishers. ISBN 978-1-6080-7151-7.
+
+^ Liggins, Martin E.; Hall, David L.; Llinas, James (2008). Multisensor Data Fusion, Second Edition: Theory and Practice (Multisensor Data Fusion). CRC. ISBN 978-1-4200-5308-1.
+
+^ Blasch, E., Steinberg, A., Das, S., Llinas, J., Chong, C.-Y., Kessler, O., Waltz, E., White, F." (2013). Revisiting the JDL model for information Exploitation. International Conference on Information Fusion.CS1 maint: multiple names: authors list (link)
+
+^ Joshi, V., Rajamani, N., Takayuki, K., Prathapaneni, Subramaniam, L. V. (2013). Information Fusion Based Learning for Frugal Traffic State Sensing. Proceedings of the Twenty-Third International Joint Conference on Artificial Intelligence.CS1 maint: multiple names: authors list (link)
+
+^ Ciuonzo, D.; Papa, G.; Romano, G.; Salvo Rossi, P.; Willett, P. (2013-09-01). "One-Bit Decentralized Detection With a Rao Test for Multisensor Fusion". IEEE Signal Processing Letters. 20 (9): 861–864. arXiv:1306.6141. Bibcode:2013ISPL...20..861C. doi:10.1109/LSP.2013.2271847. ISSN 1070-9908.
+
+^ Ciuonzo, D.; Salvo Rossi, P. (2014-02-01). "Decision Fusion With Unknown Sensor Detection Probability". IEEE Signal Processing Letters. 21 (2): 208–212. arXiv:1312.2227. Bibcode:2014ISPL...21..208C. doi:10.1109/LSP.2013.2295054. ISSN 1070-9908.
+
+^ Ciuonzo, D.; De Maio, A.; Salvo Rossi, P. (2015-09-01). "A Systematic Framework for Composite Hypothesis Testing of Independent Bernoulli Trials". IEEE Signal Processing Letters. 22 (9): 1249–1253. Bibcode:2015ISPL...22.1249C. doi:10.1109/LSP.2015.2395811. ISSN 1070-9908.
+
+^ Guiry, John J.; van de Ven, Pepijn; Nelson, John (2014-03-21). "Multi-Sensor Fusion for Enhanced Contextual Awareness of Everyday Activities with Ubiquitous Devices". Sensors. 14 (3): 5687–5701. doi:10.3390/s140305687. PMC 4004015. PMID 24662406.
+
+^ Snidaro, Laurao; et, al. (2016). Context-Enhanced Information Fusion:Boosting Real-World Performance with Domain Knowledge. Switzerland, AG: Springer. ISBN 978-3-319-28971-7.
+
+^ Haghighat, Mohammad; Abdel-Mottaleb, Mohamed; Alhalabi, Wadee (2016). "Discriminant Correlation Analysis: Real-Time Feature Level Fusion for Multimodal Biometric Recognition". IEEE Transactions on Information Forensics and Security. 11 (9): 1984–1996. doi:10.1109/TIFS.2016.2569061.
+
+
+Sources[edit]
+General references
+Hall, Dave L.; Llinas, James (1997). "Introduction to Multisensor Data Fusion". Proceedings of the IEEE. 85 (1): 6–23. doi:10.1109/5.554205.
+Blasch, Erik; Kadar, Ivan; Salerno, John; Kokar, Mieczyslaw M.; Das, Subrata; Powell, Gerald M.; Corkill, Daniel D.; Ruspini, Enrique H. (2006). "Issues and Challenges in Situation Assessment (Level 2 Fusion)" (PDF). Journal of Advances in Information Fusion. 1 (2). Archived from the original (PDF) on 2015-05-27.
+Bibliography[edit]
+Hall, David L.; McMullen, Sonya A. H. (2004). Mathematical Techniques in Multisensor Data Fusion, Second Edition. Norwood, MA: Artech House, Inc. ISBN 978-1-5805-3335-5.
+Mitchell, H. B. (2007). Multi-sensor Data Fusion – An Introduction. Berlin: Springer-Verlag. ISBN 978-3-540-71463-7.
+Das, S. (2008). High-Level Data Fusion. Norwood, MA: Artech House Publishers. ISBN 978-1-59693-281-4.
+External links[edit]
+
+
+
+Look up data fusion in Wiktionary, the free dictionary.
+
+Discriminant Correlation Analysis (DCA)
+Sensordata Fusion, An Introduction
+International Society of Information Fusion
+Sensor Fusion for Nanopositioning
+
+vteData
+Analysis
+Archaeology
+Cleansing
+Collection
+Compression
+Corruption
+Curation
+Degradation
+Editing
+ETL
+Farming
+Format management
+Fusion
+Integration
+Integrity
+Library
+Loss
+Management
+Migration
+Mining
+Pre-processing
+Preservation
+Protection (privacy)
+Recovery
+Reduction
+Retention
+Quality
+Science
+Scraping
+Scrubbing
+Security
+Stewardship
+Storage
+Validation
+Warehouse
+Wrangling/munging
+
+
+
+
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Data_fusion&oldid=955800340"
+Categories: Data analysisHidden categories: CS1 maint: multiple names: authors listPages using div col with small parameter
+
+
+
+
+
+
+Navigation menu
+
+
+
+
+Personal tools
+
+
+
+
+Not logged inTalkContributionsCreate accountLog in
+
+
+
+
+
+
+Namespaces
+
+
+
+
+ArticleTalk
+
+
+
+
+
+
+Variants
+
+
+
+
+
+
+
+
+
+
+
+
+Views
+
+
+
+
+ReadEditView history
+
+
+
+
+
+
+More
+
+
+
+
+
+
+
+
+
+Search
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navigation
+
+
+
+
+Main pageContentsCurrent eventsRandom articleAbout WikipediaContact usDonateWikipedia store
+
+
+
+
+
+Contribute
+
+
+
+
+HelpCommunity portalRecent changesUpload file
+
+
+
+
+
+Tools
+
+
+
+
+What links hereRelated changesUpload fileSpecial pagesPermanent linkPage informationCite this pageWikidata item
+
+
+
+
+
+Print/export
+
+
+
+
+Download as PDFPrintable version
+
+
+
+
+
+Languages
+
+
+
+
+DeutschFrançaisРусскийУкраїнська
+Edit links
+
+
+
+
+
+
+ This page was last edited on 9 May 2020, at 21:53 (UTC).
+Text is available under the Creative Commons Attribution-ShareAlike License;
+additional terms may apply.  By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+
+Privacy policy
+About Wikipedia
+Disclaimers
+Contact Wikipedia
+Mobile view
+Developers
+Statistics
+Cookie statement
+
+
+
+
+
+
+
+
+
+
