@@ -83,7 +83,7 @@ def clinicas_mas_pda():
     fig = make_subplots(rows=1, cols=1)
     #graficas
 
-    for i in range(0,8):
+    for i in range(0,10):
         fig.add_trace(go.Bar(x=top_UMF.index, y=top_UMF[top_UMF.columns[i]],name=top_UMF.columns[i],), row=1,col=1)
 
     #ejes
@@ -130,14 +130,14 @@ def edad_sexo():
         for j in range(0,2):
             #sexos
             fig.add_trace(go.Scatter(x=derecho_2020_edad.index, y=derecho_2020_edad[edades_2[i][j][0]],name='F'), row=i+1,col=j+1)
-            fig.add_trace(go.Scatter(x=derecho_2020.index, y=derecho_2020_edad[edades_2[i][j][1]],name='M'), row=i+1,col=j+1)
+            fig.add_trace(go.Scatter(x=derecho_2020_edad.index, y=derecho_2020_edad[edades_2[i][j][1]],name='M'), row=i+1,col=j+1)
 
             #ejes
             fig.update_yaxes(title_text="asegurados", row=i+1, col=j+1)
             fig.update_xaxes(title_text="mes", row=i+1, col=j+1)
             
     #tamaño
-    fig.update_layout(height=600, width=1000, title_text="derechohabientes por edad y sexo")
+    fig.update_layout(height=600, width=1000, title_text="derechohabientes por edad y sexo",showlegend=True)
 
     return fig.show()
   

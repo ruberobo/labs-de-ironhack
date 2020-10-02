@@ -81,7 +81,7 @@ def coronavirus():
     coronavirus=modelo.predict(np.array([lista]))
 
     if coronavirus[0]==0:
-        return 'lo más probabl es que usted no tenga coronavirus'
+        return 'lo más probable es que usted no tenga coronavirus'
     else:
         return 'Puede que usted tenga coronavirus, cuidese mucho y quedese en casa'
 

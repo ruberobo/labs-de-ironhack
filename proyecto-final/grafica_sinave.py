@@ -19,7 +19,7 @@ def sector_salud(url):
     sinave= pd.read_csv(url)
 
     fig= px.pie(values = sinave['sector'].value_counts().head(10), names= (sinave['sector'].value_counts().head(10)).index)
-    
+    fig.update_layout(title_text="casos asociados a covid_19 al 30 septiembre 2020 IMSS",)
     
     return fig.show()
     
@@ -149,7 +149,7 @@ def casos_mes(url):
     fig.update_xaxes(title_text="mes", row=1, col=1)
 
     #titulo
-    fig.update_layout(height=600, width=1000, title_text="pacientes al 28 septiembre 2020 IMSS",)
+    fig.update_layout(height=600, width=1000, title_text="pacientes al 30 septiembre 2020 IMSS",)
     
     return fig.show()
 
